@@ -1,1 +1,2 @@
-# Let's Buy - A one stop shop all of the college merch
+# Let's Buy
+## Streamlined college e-commerce: Simplifying merch buying and selling for students.
