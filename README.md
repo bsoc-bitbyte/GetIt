@@ -1,14 +1,86 @@
-# GetIt
 
-## Build Setup
+ <div align="center">
+
+# 🛒 GETIT
+</div>
+Streamlined college e-commerce: Simplifying merch buying and selling for students.
+
+
+## ✨FEATURES
+
+- Clubs can sell
+- Buy the merch you like
+- Automatic payments for sellers no need for manual verification
+- Seller reports
+
+
+
+
+---
+## 📱 Tech Stack 
+
+[![My Skills](https://skills.thijs.gg/icons?i=vue,nuxt,nodejs)](https://skills.thijs.gg)
+### FRONTEND:
+- [VUE] (https://vuejs.org/guide/introduction.html)
+- [NUXT](https://nuxt.com/docs)
+
+### BACKEND: 
+
+TO BE UPDATED
+
+
+## 🔰 GETTING STARTED
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### [![My Skills](https://skills.thijs.gg/icons?i=nodejs)](https://skills.thijs.gg)PREREQUISITS
+
+The following software is required to be installed on your system:
+
+* Node 16.x
+* Npm 8.x
+
+Type the following commands in the terminal to verify your node and npm versions
 
 ```bash
-# install dependencies
-$ npm install
+node -v
+npm -v
+```
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+### ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) BASIC SETUP
 
+
+#### Follow the steps mentioned below to setup the project locally on your computer
+
+1. Fork the repository by clicking on `Fork` option on top right of the main repository.
+2. Open Command Prompt/Terminal on your local computer.
+3. Clone the forked repository by adding your own GitHub username in place of `<username>`.
+
+```bash
+    git clone https://github.com/<username>/resource-sharing/
+```
+4. Navigate to the resource-sharing directory.
+
+```bash
+    cd resource-sharing
+```
+
+5. Install all resource-sharing dependencies. 
+
+```bash
+    npm install
+```
+    
+6. Run the website locally.
+
+```bash
+    npm run dev
+```
+
+7. Access the live development server at [localhost:5173](http://localhost:5173).
+
+8. Build Setup
+```
 # build for production and launch server
 $ npm run build
 $ npm run start
@@ -67,3 +139,15 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+## 🎨DESIGN 
+- [![My Skills](https://skills.thijs.gg/icons?i=figma)](https://skills.thijs.gg) 
+ 
+ - FIGMA LINK FOR THE PROJECT(https://www.figma.com/file/w8rDGcgxgDUGzxOzvFX8Eq/Untitled?type=design&node-id=0-1&t=YsftuOHwePR2R58Z-0)
+
+
+
+## HOW TO CONTRIBUTE ?
+
+The [Contributing.md](https://github.com/bsoc-bitbyte/GetIt/blob/main/CONTRIBUTING.md) contains the step-by-step procedure for contributing for this project.
+
