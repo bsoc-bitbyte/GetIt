@@ -1,4 +1,98 @@
-# GetIt
+
+<div align="center">
+
+# 🛒 GETIT
+</div>
+    
+Streamlined college e-commerce: Simplifying merch buying and selling for students.
+
+
+## 🌟INTRODUCTION
+
+
+
+
+Welcome to our e-commerce website, your one-stop destination for exclusive merchandise tailored specifically for students of **PDPM IIITDMJ**. We are thrilled to bring you a wide range of products that showcase your college pride and allow you to represent your alma mater in style. Whether you're a freshman just starting your journey or a seasoned senior ready to graduate, our collection has something for everyone. From trendy apparel and accessories to unique gifts and study essentials, we've carefully curated a selection that captures the spirit of **PDPM IIITDMJ**. With high-quality materials, attention to detail, and designs that resonate with student life, our merchandise is sure to become your favorite go-to for all things college-related. Browse through our virtual aisles, shop with ease, and join us in celebrating your college experience with pride and passion.
+
+
+
+
+
+
+## ✨FEATURES
+
+- Clubs can sell their merch on the platform
+- Buy the merch you like 
+- Automatic payments for sellers no need for manual verification
+- Seller reports
+
+
+## 💻DEVELOPED WITH
+
+* [Visual Studio Code](https://code.visualstudio.com/) - A source code editor developed by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring
+
+
+---
+
+
+## 🔰 GETTING STARTED
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### PREREQUISITS
+
+The following software is required to be installed on your system:
+
+* Node 8.x
+* Npm 3.x
+
+Type the following commands in the terminal to verify your node and npm versions
+
+```bash
+node -v
+npm -v
+```
+
+
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+## 📱 Tech Stack ![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82) ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+
+[![My Skills](https://skills.thijs.gg/icons?i=vue,nuxt,nodejs)](https://skills.thijs.gg)
+### FRONTEND:
+- VUE (https://vuejs.org/guide/introduction.html)
+- NUXT(https://nuxt.com/docs)
+
+### BACKEND: 
+
+TO BE UPDATED
+
+
+## 🎨DESIGN 
+- [![My Skills](https://skills.thijs.gg/icons?i=figma)](https://skills.thijs.gg) 
+ 
+  
+## HOW TO CONTRIBUTE ?
+
+The [Contributing.md](https://github.com/bsoc-bitbyte/GetIt/blob/main/CONTRIBUTING.md) contains the step-by-step procedure for contributing for this project.
+
+
+## PRODUCT PREVIEW
+ - FIGMA LINK FOR THE PROJECT(https://www.figma.com/file/w8rDGcgxgDUGzxOzvFX8Eq/Untitled?type=design&node-id=0-1&t=YsftuOHwePR2R58Z-0)
+
+</br>
+</br>
+
+ ![image](https://github.com/bsoc-bitbyte/GetIt/assets/117551967/90fe6b06-3515-481c-af34-d92da8faac92)
+
+</br>
+</br>
+
+![image](https://github.com/bsoc-bitbyte/GetIt/assets/117551967/1875a09c-9e69-43ed-a995-d53aed03109f)
+
+
+</br>
+</br>
 
 ## Build Setup
 
@@ -66,4 +160,5 @@ More information about the usage of this directory in [the documentation](https:
 
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+
