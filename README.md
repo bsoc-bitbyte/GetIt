@@ -20,7 +20,7 @@ Streamlined college e-commerce: Simplifying merch buying and selling for student
 
 [![My Skills](https://skills.thijs.gg/icons?i=vue,nuxt,nodejs)](https://skills.thijs.gg)
 ### FRONTEND:
-- [VUE] (https://vuejs.org/guide/introduction.html)
+- [VUE](https://vuejs.org/guide/introduction.html)
 - [NUXT](https://nuxt.com/docs)
 
 ### BACKEND: 
