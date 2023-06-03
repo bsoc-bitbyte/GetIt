@@ -56,15 +56,15 @@ npm -v
 3. Clone the forked repository by adding your own GitHub username in place of `<username>`.
 
 ```bash
-    git clone https://github.com/<username>/resource-sharing/
+    git clone https://github.com/<username>/Getit/
 ```
-4. Navigate to the resource-sharing directory.
+4. Navigate to the Getit directory.
 
 ```bash
-    cd resource-sharing
+    cd Getit
 ```
 
-5. Install all resource-sharing dependencies. 
+5. Install all Getit dependencies. 
 
 ```bash
     npm install
