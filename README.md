@@ -64,7 +64,19 @@ npm -v
     cd Getit
 ```
 
-5. Build Setup
+5. Install all Getit dependencies. 
+
+```bash
+    npm install
+```
+
+6. Run the website locally.
+
+```bash
+    npm run dev
+```
+
+7. Build Setup
 ```
 # build for production and launch server:3000
 $ npm run build
