@@ -76,9 +76,10 @@ npm -v
     npm run dev
 ```
 
-7. Build Setup
+
+
+## Build for production guidelines
 ```
-# build for production and launch server:3000
 $ npm run build
 $ npm run start
 
