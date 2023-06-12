@@ -1,6 +1,6 @@
 <template>
 
-<body>
+<section>
   <div class="content-box">
     <div class="catch-line-outer">
         <div class="catch-line-inner">
@@ -45,7 +45,7 @@
           <img src="../assets/images/37. order-delivered-3.png" alt="" />
       </div>
   </div>
-</body>
+</section>
 </template>
 
 <style scoped>
@@ -58,7 +58,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body {
+section {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -359,22 +359,22 @@ background: url(../assets/images/google-icon.png);
   .img-box-outer{
     display: none;
   }
-  body{
-    width: 1vh;
-    height: 1vh;
+  section{
+    width: 62vh;
+    height: 109vh;
   }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px) {
-  body{
+  section{
     margin: 0;
     padding: 0;
   }
 
   .content-box{
-    left: 53.38%;
-    top: 10.09%;
-    width: 348px;
+    left: -0.62%;
+    top: 1.09%;
+    width: 364px;
   }
 
   .img-box-outer{
