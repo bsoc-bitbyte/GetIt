@@ -174,7 +174,7 @@ section .img-box-outer .img-box-inner img {
   height: 48.49px;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.25);
-  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  /* filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); */
   border-radius: 12px;
 }
 .username input[type=text]::placeholder{
@@ -212,7 +212,7 @@ color: #181818;
   height: 48.49px;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.25);
-  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  /* filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); */
   border-radius: 12px;
 }
 .email input[type=email]::placeholder{
@@ -249,7 +249,7 @@ color: #181818;
   height: 48.49px;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.25);
-  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  /* filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25)); */
   border-radius: 12px;
 }
 .password input[type=password]::placeholder{
