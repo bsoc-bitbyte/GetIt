@@ -10,9 +10,9 @@
         <li class="pages"><a href="#">Home</a></li>
         <li class="pages"><a href="#">Shop</a></li>
         <li class="pages"><a href="#">About Us</a></li>
-        <li class="get_it"><a href="#"><img src="get_it.png"><span>GetIt</span></a></li> 
+        <li class="get_it"><a href="#"><img src="../assets/get_it.png"><span>GetIt</span></a></li> 
         <li class="pages"><a href="#" class="sign_in">Sign In</a></li>
-        <li class="cart"><a href="#">Cart <img src="cart.png"></a></li>                
+        <li class="cart"><a href="#">Cart <img src="../assets/cart.png"></a></li>                
     </ul>
     </div>
     
