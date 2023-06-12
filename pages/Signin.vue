@@ -47,7 +47,7 @@
     </div>
     <div class="img-box-outer">
         <div class="img-box-inner">
-            <img src="../assets/images/37. order-delivered-3.png" alt="" />
+            <img src="../assets/37.order-delivered-3.png" alt="" />
         </div>
     </div>
 </section>
@@ -311,7 +311,7 @@ color: #FFFFFf;
   left: 36.86px;
   top: 6.45px;
 
-background: url(../assets/images/google-icon.png);
+background: url(../assets/google-icon.png);
 }
 
 .optional-sign-in{
