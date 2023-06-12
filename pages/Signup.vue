@@ -1,58 +1,51 @@
 <template>
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="content-box">
 
-      <div class="catch-line-outer">
-          <div class="catch-line-inner">
-              <p>"Gear Up, Sign Up, Shop Now!"</p>
-          </div>
-      </div>
-      <div class="username">
-        <p>Username</p>
-        <input type="text" name=""  placeholder="Enter your name"/>
-      </div>
-      <div class="email">
-        <p>Email</p>
-        <input type="email" name="" placeholder="Enter your email"/>
-      </div>
-      <div class="password">
-        <p>Password</p>
-        <input type="password" name="" placeholder="*************"/>
-      </div>
-      <div class="sign-up">
+<body>
+  <div class="content-box">
+    <div class="catch-line-outer">
+        <div class="catch-line-inner">
+            <p>"Gear Up, Sign Up, Shop Now!"</p>
+        </div>
+    </div>
+    <div class="username">
+      <p>Username</p>
+      <input type="text" name=""  placeholder="Enter your name"/>
+    </div>
+    <div class="email">
+      <p>Email</p>
+      <input type="email" name="" placeholder="Enter your email"/>
+    </div>
+    <div class="password">
+      <p>Password</p>
+      <input type="password" name="" placeholder="*************"/>
+    </div>
+    <div class="sign-up">
+      <a href="#">
         <button type="submit" id="Sign-up">
           <p>Sign up</p>
         </button>
-      </div>
-      <div class="sign-up-google">
-        <button type="submit" id="submit-google">
-          <div class="google-img">
-          </div>
-          <p>Sign up with Google</p>
-        </button>
-      </div>
-      <div class="optional-sign-in">
-        <p>
-          <span class="account-text">Dont have an account?</span>
-          <span class="sign-in-text">Sign in</span>
-        </p>
-      </div>
+      </a>
     </div>
-    <div class="img-box-outer">
-        <div class="img-box-inner">
-            <img src="../assets/images/37. order-delivered-3.png" alt="" />
+    <div class="sign-up-google">
+      <button type="submit" id="submit-google">
+        <div class="google-img">
         </div>
+        <a href="#">Sign up with Google</a>
+      </button>
     </div>
-  </body>
-  </html>
+    <div class="optional-sign-in">
+      <p>
+        <span class="account-text">Dont have an account?</span>
+        <a href="#">Sign in</a>
+      </p>
+    </div>
+  </div>
+  <div class="img-box-outer">
+      <div class="img-box-inner">
+          <img src="../assets/images/37. order-delivered-3.png" alt="" />
+      </div>
+  </div>
+</body>
 </template>
 
 <style scoped>
@@ -279,7 +272,7 @@ color: #181818;
   box-shadow: 0px 4px 10px rgba(233, 68, 75, 0.25);
   border-radius: 12px;
   cursor: pointer;
-  padding: 10px;
+  padding: 12px;
 }
 
 #Sign-up p{
@@ -331,7 +324,7 @@ background: url(../assets/images/google-icon.png);
   padding: 10px;
   top: 570px;
 }
-.optional-sign-in p > span:nth-child(1){
+.optional-sign-in p > span{
 
   font-family: 'Poppins';
   font-style: normal;
@@ -344,7 +337,7 @@ background: url(../assets/images/google-icon.png);
   color: #595959;
 }
 
-.optional-sign-in p > span:nth-child(2){
+.optional-sign-in p > a{
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
