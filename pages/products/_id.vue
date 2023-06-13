@@ -106,7 +106,9 @@
                 class="font-medium md:text-xs lg:text-sm text-gray-400"> {{ product[main].category }}</b></p>
     </div>
 
-</div></template>
+</div>
+
+</template>
 
 <script>
 export default {
