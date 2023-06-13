@@ -7,11 +7,11 @@
     </label>
 
     <ul class="nav-links" > 
-        <li class="pages"><a href="#">Home</a></li>
-        <li class="pages"><a href="#">Shop</a></li>
-        <li class="pages"><a href="#">About Us</a></li>
+        <li class="nav-link"><a href="#">Home</a></li>
+        <li class="nav-link"><a href="#">Shop</a></li>
+        <li class="nav-link"><a href="#">About Us</a></li>
         <li class="get_it"><a href="#"><img src="../assets/get_it.png"><span>GetIt</span></a></li> 
-        <li class="pages"><a href="#" class="sign_in">Sign In</a></li>
+        <li class="nav-link"><a href="#" class="sign_in">Sign In</a></li>
         <li class="cart"><a href="#">Cart <img src="../assets/cart.png"></a></li>                
     </ul>
     </div>
@@ -129,7 +129,7 @@ a.sign_in {
 
 /*hover effects*/
 
-.pages a:hover  {
+.nav-link a:hover  {
   border-bottom: solid 3px rgb(49, 46, 46) ;
   border-radius: 2px;
   transition: ease-in;
@@ -245,7 +245,7 @@ a.sign_in {
     padding: 12px 52px;
   }
 
-  .pages:hover {
+  .nav-link:hover {
     background-color: #CFD8DC;
   }
   
@@ -293,7 +293,7 @@ a.sign_in {
     transition-duration: 0.5s;
   }
   
-  .pages a:hover  {
+  .nav-link a:hover  {
     border-bottom: none;
   }  
 
@@ -316,7 +316,7 @@ a.sign_in {
     height: 100%;
   }
 
-  li.pages {
+  li.nav-link {
     left: 0;
     padding-left: 30px;
     
