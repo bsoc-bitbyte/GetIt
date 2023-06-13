@@ -1,355 +1,125 @@
 <template>
-    <div id="body">
-        <div id="upper">
-            <div id="circles">
-                <span class="dot" id="black"></span>
-                <span class="dot" id="blue"></span>
-                <span class="dot" id="green"></span>
-                <span class="dot" id="skin"></span>
+    <div class="lg:m-8 mb-20 md:m-5 md:mt-8 m-3 mt-5">
+        <h1 class="text-2xl font-medium sm:visible max-sm:my-4 md:invisible">{{ product[main].title }}</h1>
+        <div class="md:flex flex-row mb-5">
+            <div class="md:flex md:flex-col flex flex-row md:mt-24">
+                <div
+                    class="lg:w-3.5 lg:m-2.5 Lg:mt-20  ring-4 ring-white lg:h-3.5 md:w-2.5 md:h-2.5 md:m-1.5 h-3.5 w-3.5 m-3 bg-black rounded-full">
+                </div>
+                <div
+                    class="lg:w-3.5 lg:m-2.5 lg:h-3.5 ring-4 ring-gray-300 md:w-2.5 md:h-2.5 md:m-1.5 h-3.5 w-3.5 m-3 bg-blue-300 rounded-full">
+                </div>
+                <div
+                    class="lg:w-3.5 lg:m-2.5 lg:h-3.5 ring-4 ring-white md:w-2.5 md:h-2.5 md:m-1.5 h-3.5 w-3.5 m-3 bg-green-300 rounded-full">
+                </div>
+                <div
+                    class="lg:w-3.5 lg:m-2.5 lg:h-3.5 ring-4 ring-white md:w-2.5 md:h-2.5 md:m-1.5 h-3.5 w-3.5 m-3 bg-red-300 rounded-full">
+                </div>
             </div>
-
-            <img :src="product.image" />
-
-
-
-            <div id="rightpane">
-                <div id="title">
-                    <h1>{{ product.title }}</h1>
-                    <img
+            <div class="flex flex-col md:w-1/2">
+                <img class="ml-6 w-9/12 float-left rounded-xl mr-15" :src="product[main].image" />
+                <div class="flex flex-row mt-6 mb-10 md:w-11/12 ml-4">
+                    <img class="w-4 h-4 mr-2 lg:mt-12 md:mt-7 mt-8"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU"
+                        @click="i > 0 ? i-- : i = 11">
+                    <img class="w-1/6  mr-4" :src="product[i].image" @click="main = i">
+                    <img class="w-1/6  mr-4" :src="product[i + 1].image" @click="main = i + 1">
+                    <img class="w-1/6  mr-4" :src="product[i + 2].image" @click="main = i + 2">
+                    <img class="w-1/6" :src="product[i + 3].image" @click="main = i + 3">
+                    <img class="w-4 h-4 ml-2 lg:mt-12 md:mt-7 transform rotate-180 mt-8"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU"
+                        @click="i < 12 ? i++ : i = 0">
+                </div>
+            </div>
+            <div class="lg:mt-18 flex flex-col md:mt-7 md:w-1/2">
+                <div class="flex flex-row">
+                    <h1 class="lg:text-2xl lg:mr-20 md:font-medium lg:font-medium md:text-xl  mr-10">{{ product[main].title }}
+                    </h1>
+                    <img class="w-4 h-4 md:mt-2"
                         src="https://static.vecteezy.com/system/resources/thumbnails/001/505/003/small/share-icon-free-vector.jpg">
                 </div>
-                <p id="TPC">TPC</p>
-                <div id="rating">
-                    <p>4.8<span>&starf;</span>| 15 Ratings</p>
-                    <div class="line"></div>
+                <p class="text-sm font-medium text-gray-400 mt-1 mb-2">TPC</p>
+                <div class="text-xs font-medium flex flex-row">
+                    <p class="flex flex-row">4.8
+                    <div class="text-green-500 w-3 h-3 flex flex-row mb-2">&starf;</div>| 15 Ratings</p>
+                    <br>
                 </div>
+                <hr class="h-px  bg-gray-300 border-0 dark:bg-gray-700">
 
-                <p id="price"><b></b> ${{ product.price }}</p>
-                <p id="choose">Choose a Size</p>
-                <div id="radio">
-                    <p class="Size"><input type="radio" name="Size" class="size" value="Small" id="Small">Small</p>
-                    <p class="Size"><input type="radio" name="Size" class="size" value="Medium" id="Medium">Medium</p>
-                    <p class="Size"><input type="radio" name="Size" class="size" value="Large" id="Large">Large</p>
-                    <p class="Size"><input type="radio" name="Size" class="size" value="Extra Large" id="Extra">Extra Large
-                    </p>
-                    <p class="Size"><input type="radio" name="Size" class="size" value="XXL" id="XXL">XXL</p>
+
+                <p class="lg:mt-7 lg:text-3xl font-medium mt-4 text-2xl"><b></b> ${{ product[main].price }}</p>
+                <p class="lg:mt-5 text-sm text-gray-400 font-medium lg:mb-2 pb-.5 mt-4 mb-2">Choose a Size</p>
+                <div class="">
+                    <div
+                        class="rounded-full float-left bg-gray-100 text-gray-500 font-medium py-1 px-2  text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
+                        <input type="radio" name="Size" value="Small" class="peer/small" id="Small"><label for="small"
+                            class="peer-checked/small:text-pink-500">
+                            <p class="ml-1">Small</p>
+                        </label></div>
+                    <div
+                        class="rounded-full float-left bg-gray-100 text-gray-500 font-medium  px-2 py-1 text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
+                        <input type="radio" name="Size" value="Medium" class="peer/medium" id="Medium"><label for="medium"
+                            class="peer-checked/medium:text-pink-500">
+                            <p class="ml-1">Medium</p>
+                        </label></div>
+                    <div
+                        class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
+                        <input type="radio" name="Size" value="Large" class="peer/large" id="Large"><label for="large"
+                            class="peer-checked/large:text-pink-500">
+                            <p class="ml-1">Large</p>
+                        </label></div>
+                    <div
+                        class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
+                        <input type="radio" name="Size" value="Extra Large" class="peer/extra" id="Extra"><label for="extra"
+                            class="peer-checked/extra:text-pink-500">
+                            <p class="ml-1">Extra Large</p>
+                        </label></div>
+                    <div
+                        class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
+                        <input type="radio" name="Size" value="XXL" class="peer/xxl" id="XXL"><label for="xxl"
+                            class="peer-checked/xxl:text-pink-500">
+                            <p class="ml-1">XXL</p>
+                        </label></div>
                 </div>
-                <div class="line"></div>
-                <div id="buttons">
-                    <button id="cart"><img src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
-                        <p>Add To Cart</p>
+                <hr class="h-px lg:my-8 my-5 bg-gray-300 border-0 dark:bg-gray-700">
+                <div class="flex flex-row lg:mt-7 mt-1 sm:mb-5">
+                    <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-1"><img
+                            class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
+                        <p class="text-xs text-white ">Add To Cart</p>
                     </button>
-                    <button id="buy"><img src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
-                        <p>Buy Now</p>
+                    <button class="lg:ml-9  md:ml-5 rounded-full bg-rose-600 flex flex-row py-2 lg:px-14 px-8 sm:ml-3"><img
+                            class="w-4 h-4 mr-1 filter invert"
+                            src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
+                        <p class="text-xs text-white ">Buy Now</p>
                     </button>
                 </div>
             </div>
         </div>
-        <div i="image_row">
-            <img id="arrow1" class="arrow"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU">
-            <img class="images" :src="product.image">
-            <img class="images" :src="product.image">
-            <img class="images" :src="product.image">
-            <img class="images" :src="product.image">
-            <img id="arrow2" class="arrow"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU">
-        </div>
-        <div id="Line"></div>
-        <div>
 
-            <p class="bottom"><b class="heading">Product Description</b><b class="text">{{ product.description }}</b> </p>
-            <p class="bottom"><b class="heading">Product Details</b><b class="text"> {{ product.category }}</b></p>
-        </div>
+    <hr class="h-0.5 mt-12 bg-gray-300 border-0 dark:bg-gray-700">
+    <div>
 
+        <p class="lg:mt-3.5 mt-2"><b class="lg:text-2xl md:text-xl font-medium lg:mb-3 flex">Product Description</b><b
+                class="font-medium md:text-xs lg:text-sm text-gray-400">{{ product[main].description }}</b> </p>
+        <p class="lg:mt-3.5 md:mt-2"><b
+                class="lg:text-2xl md:text-xl font-medium text-gray-700 mt-6 lg:mb-3 flex">Product Details</b><b
+                class="font-medium md:text-xs lg:text-sm text-gray-400"> {{ product[main].category }}</b></p>
     </div>
-</template>
+
+</div></template>
 
 <script>
 export default {
     async asyncData({ params }) {
         const productId = params.id;
-
-        const response = await fetch(`https://fakestoreapi.com/products/2`);
+        const response = await fetch(`https://fakestoreapi.com/products/`);
         const product = await response.json();
         console.log(product);
-        return { product };
+        return {
+            i: 0,
+            main: 0,
+            product
+        };
     },
-
 }
-
-
 </script>
-
-<style scoped>
-body {
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    margin-bottom: 30vh;
-}
-
-#upper {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5vh;
-}
-
-img {
-    width: 38%;
-    float: left;
-    border-radius: 3vh;
-    margin-right: 12%;
-}
-
-#rightpane {
-
-    margin-top: 7%;
-    display: flex;
-    flex-direction: column;
-}
-
-#title {
-    display: flex;
-    flex-direction: row;
-}
-
-#title img {
-    width: 3vb;
-    height: 3vh;
-    margin-right: 0%;
-    margin-top: 2.3%;
-
-}
-
-#title h1 {
-    font-size: 4.2vh;
-    font-weight: 500;
-    margin-right: 30%;
-}
-
-#TPC {
-    font-size: 2.7vh;
-    font-weight: 500;
-    color: darkgray;
-}
-
-#rating {
-    font-size: 1.7vh;
-    font-weight: 500;
-}
-
-#rating span {
-    font-size: 150%;
-    color: rgb(48, 232, 41);
-}
-
-#price {
-    margin-top: 5%;
-    font-size: 7vh;
-    font-weight: 500;
-}
-
-.line {
-    width: 100%;
-    background-color: gainsboro;
-    height: .2%;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-}
-
-#choose {
-    margin-top: 1.5vh;
-    font-size: 2.5vh;
-    color: darkgray;
-    font-weight: 500;
-    margin-bottom: 2%;
-}
-
-#radio {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5%;
-}
-
-.Size {
-
-    margin-right: 5%;
-    padding-top: .5vh;
-    background-color: rgba(236, 239, 233, 0.974);
-    padding-bottom: .5vh;
-    border-radius: 1vh;
-    padding-left: 1vh;
-    padding-right: 1vh;
-    color: gray;
-    font-size: 1.8vh;
-    display: flex;
-    flex-direction: row;
-}
-
-.size {
-
-    margin-right: 1vh;
-    font-weight: 500;
-
-
-}
-
-.radio {
-    padding-top: 10vh;
-}
-
-#cart img {
-    width: 5vh;
-    height: 3vh;
-    border-radius: 0%;
-    color: aquamarine;
-    margin-right: -.05vh;
-    padding-left: 2vh;
-    -webkit-filter: invert(100%);
-    filter: invert(100%);
-}
-
-#buy img {
-    width: 5vh;
-    height: 3vh;
-    border-radius: 0%;
-    color: aquamarine;
-    margin-right: -1vh;
-    padding-left: 2vh;
-    -webkit-filter: invert(100%);
-    filter: invert(100%);
-}
-
-#buttons {
-
-    margin-top: 10%;
-}
-
-#cart {
-    margin-left: 2vh;
-    margin-right: 6vh;
-    width: 39%;
-    border-color: #f20e61;
-    background-color: #f50c46;
-    border-radius: 4vh;
-    padding: 1.5vh;
-    display: inline;
-    padding-left: 5vh;
-    padding-right: 5vh;
-}
-
-#cart p {
-
-    font-size: 2vh;
-    font-weight: 500;
-    color: white;
-    margin-left: 1vh;
-}
-
-#buy {
-    margin-left: 2vh;
-    margin-right: 6vh;
-    width: 39%;
-    border-color: black;
-    background-color: #f50c46;
-    border-radius: 4vh;
-    padding: 1.5vh;
-    display: inline;
-    padding-left: 5vh;
-    padding-right: 5vh;
-}
-
-#buy p {
-    font-size: 2vh;
-    font-weight: 500;
-    color: white;
-    margin-left: -2vh;
-}
-
-#Line {
-    width: 100%;
-    background-color: gainsboro;
-    height: .5vh;
-    margin-top: 35vh;
-}
-
-.bottom {
-    margin-top: 3.5vh;
-
-}
-
-.heading {
-    font-size: 3vh;
-    font-weight: 700;
-    display: flex;
-    margin-bottom: 3vh;
-}
-
-.text {
-    color: darkgray;
-    font-weight: 500;
-    font-size: 2vh;
-}
-
-#circles {
-    display: flex;
-    flex-direction: column;
-    margin-top: 35vh;
-    margin-right: 2vh;
-}
-
-.dot {
-    height: 15px;
-    width: 15px;
-    background-color: black;
-    border-radius: 50%;
-
-    margin: 1.5vh;
-}
-
-#blue {
-    background-color: aqua;
-}
-
-#green {
-    background-color: aquamarine;
-}
-
-#skin {
-    background-color: bisque;
-}
-
-#image_row {
-    margin: 2vh;
-    display: flex;
-    flex-direction: row;
-    width: 40%;
-}
-
-.arrow {
-    width: 3vb;
-    margin-right: 2vh;
-    margin-top: 4vh;
-}
-
-.images {
-    width: 13vh;
-    height: 13vh;
-    margin-bottom: 15vh;
-    margin-right: 3.3vh;
-
-}
-
-#arrow1 {
-    margin-left: 6.5vh;
-}
-
-#arrow2 {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
-
-.Newsmall {
-    background-color: aqua;
-}</style>
