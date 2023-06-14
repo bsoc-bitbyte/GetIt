@@ -116,7 +116,6 @@ export default {
         const product = await response.json();
         console.log(product);
         return {
-           
             product
         };
     },
