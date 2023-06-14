@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="flex flex-col md:w-1/2">
-                <img class="ml-6 w-9/12 float-left rounded-xl mr-15" :src="product[main].image" />
+                <img class="ml-6 w-9/12 float-left rounded-xl mr-15 -mt-7" :src="product[main].image" />
                 <div class="flex flex-row mt-6 mb-10 md:w-11/12 ml-4">
                     <img class="w-4 h-4 mr-2 lg:mt-12 md:mt-7 mt-8"
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU"
@@ -82,8 +82,8 @@
                         </label></div>
                 </div>
                 <hr class="h-px lg:my-8 my-5 bg-gray-300 border-0 dark:bg-gray-700">
-                <div class="flex flex-row lg:mt-7 mt-1 sm:mb-5">
-                    <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-1"><img
+                <div class="flex flex-row lg:mt-7 mt-1 sm:mb-5 content-center">
+                    <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-8 max-sm:ml-4"><img
                             class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
                         <p class="text-xs text-white ">Add To Cart</p>
                     </button>
