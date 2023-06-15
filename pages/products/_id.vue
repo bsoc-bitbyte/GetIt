@@ -1,6 +1,6 @@
 <template>
     <div class="lg:m-8 mb-20 md:m-5 md:mt-8 m-3 mt-5">
-        <h1 class="text-2xl font-medium sm:visible max-sm:my-4 md:invisible">{{ product.title }}</h1>
+        <h1 class="text-2xl font-medium sm:visible max-sm:my-4 md:invisible">{{ product[main].title }}</h1>
         <div class="md:flex flex-row mb-5">
             <div class="md:flex md:flex-col flex flex-row md:mt-24">
                 <div
@@ -17,23 +17,23 @@
                 </div>
             </div>
             <div class="flex flex-col md:w-1/2">
-                <img class="ml-6 w-9/12 float-left rounded-xl mr-15" :src="product.image" />
+                <img class="ml-6 w-9/12 float-left rounded-xl mr-15" :src="product[main].image" />
                 <div class="flex flex-row mt-6 mb-10 md:w-11/12 ml-4">
                     <img class="w-4 h-4 mr-2 lg:mt-12 md:mt-7 mt-8"
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU"
-                        >
-                    <img class="w-1/6  mr-4" :src="product.image">
-                    <img class="w-1/6  mr-4" :src="product.image">
-                    <img class="w-1/6  mr-4" :src="product.image">
-                    <img class="w-1/6" :src="product.image">
+                        @click="i > 0 ? i-- : i = 11">
+                    <img class="w-1/6  mr-4" :src="product[i].image">
+                    <img class="w-1/6  mr-4" :src="product[i+1].image">
+                    <img class="w-1/6  mr-4" :src="product[i+2].image">
+                    <img class="w-1/6" :src="product[i+3].image">
                     <img class="w-4 h-4 ml-2 lg:mt-12 md:mt-7 transform rotate-180 mt-8"
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwFYGl859TlHkUrVFmrAvNWAOtPby6ZgWMg&usqp=CAU"
-                        >
+                        @click="i < 12 ? i++ : i = 0">
                 </div>
             </div>
             <div class="lg:mt-16 flex flex-col md:mt-7 md:w-1/2">
                 <div class="flex flex-row">
-                    <h1 class="lg:text-2xl lg:mr-20 md:font-medium lg:font-medium md:text-xl  mr-10">{{ product.title }}
+                    <h1 class="lg:text-2xl lg:mr-20 md:font-medium lg:font-medium md:text-xl  mr-10">{{ product[main].title }}
                     </h1>
                     <img class="w-4 h-4 md:mt-2"
                         src="https://static.vecteezy.com/system/resources/thumbnails/001/505/003/small/share-icon-free-vector.jpg">
@@ -47,7 +47,7 @@
                 <hr class="h-px  bg-gray-300 border-0 dark:bg-gray-700">
 
 
-                <p class="lg:mt-7 lg:text-3xl font-medium mt-4 text-2xl"><b></b> ${{ product.price }}</p>
+                <p class="lg:mt-7 lg:text-3xl font-medium mt-4 text-2xl"><b></b> ${{ product[main].price }}</p>
                 <p class="lg:mt-5 text-sm text-gray-400 font-medium lg:mb-2 pb-.5 mt-4 mb-2">Choose a Size</p>
                 <div class="">
                     <div
@@ -100,10 +100,10 @@
     <div>
 
         <p class="lg:mt-3.5 mt-2"><b class="lg:text-2xl md:text-xl font-medium lg:mb-3 flex">Product Description</b><b
-                class="font-medium md:text-xs lg:text-sm text-gray-400">{{ product.description }}</b> </p>
+                class="font-medium md:text-xs lg:text-sm text-gray-400">{{ product[main].description }}</b> </p>
         <p class="lg:mt-3.5 md:mt-2"><b
                 class="lg:text-2xl md:text-xl font-medium text-gray-700 mt-6 lg:mb-3 flex">Product Details</b><b
-                class="font-medium md:text-xs lg:text-sm text-gray-400"> {{ product.category }}</b></p>
+                class="font-medium md:text-xs lg:text-sm text-gray-400"> {{ product[main].category }}</b></p>
     </div>
 
 </div></template>
@@ -112,10 +112,12 @@
 export default {
     async asyncData({ params }) {
         const productId = params.id;
-        const response = await fetch(`https://fakestoreapi.com/products/2`);
+        const response = await fetch(`https://fakestoreapi.com/products/`);
         const product = await response.json();
         console.log(product);
         return {
+            i: 0,
+            main:1,
             product
         };
     },
