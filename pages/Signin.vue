@@ -48,7 +48,7 @@
         <div class="optional-sign-in mt-[0.7rem]">
           <p class = "flex justify-center">
             <span class="account-text tracking-wide">Already have an account?</span>
-            <a href="#" class="text-red-500 hover:underlined tracking-wide">Sign up for free</a>
+            <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wide">Sign up for free</nuxt-link>
           </p>
         </div>
       </div>

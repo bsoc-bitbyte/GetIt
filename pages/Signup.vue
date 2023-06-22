@@ -1,5 +1,5 @@
 <template>
-  <div class="main  md:flex  bg-gray-100 md:justify-evenly py-[2rem] px-[0.1rem]">
+  <div class="main  md:flex h-screen bg-gray-100 md:justify-evenly py-[2rem] px-[0.1rem]">
     <div class="left-panel mt-[6.9rem] hidden md:block">
       <img src="../assets/37.order-delivered-3.png" class = "w-80 h-80 border-1 border-gray-400 md:order-2" alt="delivery-img">
     </div>
@@ -47,7 +47,7 @@
         <div class="optional-sign-in mt-[0.7rem]">
           <p class = "flex justify-center">
             <span class="account-text tracking-wide">Already have an account? </span>
-            <a href="#" class="text-red-500 hover:underlined tracking-wide">Sign in</a>
+            <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wide">Sign in</nuxt-link>
           </p>
         </div>
       </div>
