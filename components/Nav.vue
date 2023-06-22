@@ -8,7 +8,7 @@
 
     <ul class="nav-links" > 
         <li class="nav-link"><a href="#">Home</a></li>
-        <li class="nav-link"><a href="#">Shop</a></li>
+        <li class="nav-link"><nuxt-link to="/products/_id">Shop</nuxt-link></li>
         <li class="nav-link"><a href="#">About Us</a></li>
         <li class="get_it"><a href="#"><img src="../assets/get_it.png"><span>GetIt</span></a></li> 
         <li class="nav-link"><nuxt-link to="/Signin" class="sign_in">Sign In</nuxt-link></li>
