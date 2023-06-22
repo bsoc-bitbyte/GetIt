@@ -1,5 +1,5 @@
 <template>
-  <div class="main  md:flex  bg-gray-100 md:justify-evenly py-[2rem] px-[0.1rem]" style="height: 100vh">
+  <div class="main  md:flex  bg-gray-100 md:justify-evenly pt-[2rem] px-[0.1rem]" style="height: 100vh">
     <div class="left-panel mt-[5rem] hidden md:block">
       <img src="../assets/37.order-delivered-3.png" class = "w-80 h-80 border-1 border-gray-400 md:order-2" alt="delivery-img">
     </div>
