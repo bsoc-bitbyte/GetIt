@@ -1,5 +1,5 @@
 <template>
-  <div class="main  md:flex  bg-gray-100 md:justify-evenly pt-[2rem] px-[0.1rem] h-screen">
+  <div class="main  md:flex  bg-gray-100 md:justify-evenly pt-[2rem] px-[0.1rem] zoom">
     <div class="left-panel mt-[5rem] hidden md:block">
       <img src="../assets/37.order-delivered-3.png" class = "w-80 h-80 border-1 border-gray-400 md:order-2" alt="delivery-img">
     </div>
@@ -66,5 +66,10 @@
 .main{
   font-family: 'Poppins', sans-serif;
   font-smooth: always;  
+}
+@media screen and (min-height: 977px){
+  .zoom{
+      min-height: 100vh
+  }
 }
 </style>
