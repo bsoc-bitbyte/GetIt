@@ -1,0 +1,11 @@
+**/migrations
+**/__pycache__
+.pytest_cache
+.DS_Store
+.vscode/*
+.idea
+db.sqlite3
+.venv
+venv
+.env
+.vscode
