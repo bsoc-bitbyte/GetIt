@@ -1,3 +1,4 @@
+
 <div align="center">
 
 # 🛒 GETIT
@@ -31,6 +32,9 @@ TO BE UPDATED
 ## 🔰 GETTING STARTED
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+## Frontend
+
 
 ### [![My Skills](https://skills.thijs.gg/icons?i=nodejs)](https://skills.thijs.gg)PREREQUISITS
 
@@ -87,6 +91,22 @@ $ npm run start
 $ npm run generate
 ```
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+## Backend
+- **Framework** - [Django](https://www.djangoproject.com/)
+- **Language** - Python 3.10
+## Local Setup
+Make sure you are using `python 3.10`. 	
+
+- Change your working directory to `core`
+- Create a new file in the same directory named: `.env` and copy all the content from `.env.template`
+- Add a random string for `DJANGO_SECRET` or generate it online.
+- Create a virtual environment: `$ python -m virtualenv .venv`
+- Activate the virtual environment: `$ source .venv/bin/activate` (On windows: `> ./.venv/Scripts/activate`)
+- Install the dependencies: `$ pip install -r requirements.txt`
+- Make Migrations: `$ python manage.py makemigrations` (This commands generates migrations which would be used to update database schemas)
+- Migrate the DB: `$ python manage.py migrate`
+- Run server: `$ python manage.py runserver`
 
 ## Special Directories
 
@@ -147,4 +167,5 @@ More information about the usage of this directory in [the documentation](https:
 ## HOW TO CONTRIBUTE ?
 
 The [Contributing.md](https://github.com/bsoc-bitbyte/GetIt/blob/main/CONTRIBUTING.md) contains the step-by-step procedure for contributing for this project.
+
 
