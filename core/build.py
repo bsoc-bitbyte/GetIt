@@ -1,6 +1,10 @@
 import os
+import sys
 import subprocess
 import random
+
+def in_venv():
+    return sys.prefix != sys.base_prefix
 
 # Copy content from .env.template to .env
 try :
@@ -17,16 +21,11 @@ try :
     # Create and activate virtual environment
     subprocess.run (['python3', '-m', 'venv', '.venv'])
 
-    if (os.path.exists('.venv')) :
-        if os.name == 'nt' : # Windows
-            subprocess.run (['venv\\Scripts\\activate.bat'])
-
-        else : # Unix based system
-            subprocess.run (['source', 'venv/bin/activate'],shell=True)
-        print("Virtual environment activated!")
-    else :
-        print ('Virtual environment not found!')
-        exit ()
+    if in_venv():
+        print('Using Virtualenv')
+    else:
+        print('Not using Virtualenv')
+        exit()
 
     # Print the python version
     subprocess.run (['python3', '--version'])
