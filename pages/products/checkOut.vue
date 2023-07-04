@@ -4,7 +4,7 @@
     <form @submit = "submitForm" class = "py-[3rem]">
       <hr>
 
-    <div class="flex-items min-[1020px]:flex min-[1020px]:justify-around">
+    <div class="flex-items max-[1029px]:flex-col max-[1019px]:items-center min-[1020px]:flex min-[1020px]:justify-around">
       <div class="main1">
         <div class="heading text-[3rem] font-extrabold cursor-crosshair py-[0.5rem] subpixel-antialiased tracking-wider">
         <div class = "">Checkout</div>
@@ -18,40 +18,40 @@
        <div class="name min-[1020px]:flex">
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="firstName" class = "min-[1020px]:block subpixel-antialiased tracking-wider">FirstName</label>
-          <input type=" text" id="fn" v-model.trim.lazy="formValue.firstName" class="pl-[0.69rem] min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "First Name" id="fn" v-model.trim.lazy="formValue.firstName" class="pl-[0.69rem] min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="lastName" class = "min-[1020px]:block subpixel-antialiased tracking-wider">LastName</label>
-          <input type="text" id="ln" v-model.trim.lazy="formValue.lastName" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem] rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "Last Name" id="ln" v-model.trim.lazy="formValue.lastName" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
        </div>
         <div class="remaining-credentials">
           <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="email" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Email Address</label>
-          <input type="email" id="email" v-model.trim.lazy="formValue.email" class="pl-[0.69rem] w-full rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="email" placeholder = "Email" id="email" v-model.trim.lazy="formValue.email" class="pl-[0.69rem] w-full rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="hosteladdress" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Hostel Address</label>
-          <input type="text" id="hostel" v-model.trim.lazy="formValue.hosteladdress" class="pl-[0.69rem] w-full rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "Address" id="hostel" v-model.trim.lazy="formValue.hosteladdress" class="pl-[0.69rem] w-full rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class="min-[1020px]:flex">
           <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="roll" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Roll Number</label>
-          <input type="text" id="roll" v-model.trim.lazy="formValue.roll" class="pl-[0.69rem]  min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "Roll" id="roll" v-model.trim.lazy="formValue.roll" class="pl-[0.69rem]  min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="branch" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Branch</label>
-          <input type="text" id="branch" v-model.trim.lazy="formValue.branch" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem] rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "Branch" id="branch" v-model.trim.lazy="formValue.branch" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         </div>
         <div class="w-full min-[1020px]:flex">
           <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="checked" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Club Member</label>
-          <input type="text" id="branch" v-model.trim.lazy="formValue.checked" class="pl-[0.69rem]  min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "Club Member" id="branch" v-model.trim.lazy="formValue.clubmember" class="pl-[0.69rem]  min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="phone" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Phone</label>
-          <input type="tel" id="phone" v-model.trim.number.lazy="formValue.phone" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem]   rounded-[0.69rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="tel" placeholder = "Phone Number" id="phone" v-model.trim.number.lazy="formValue.phone" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         </div>
         <div class="check2 pt-[2rem]">
@@ -101,12 +101,12 @@
             </label>
             </div>
             <div class = "py-[1.5rem]">
-            <textarea id="ordercomment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.69rem]" />
+            <textarea id="ordercomment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.69rem] w-full h-[6rem]" />
             </div>
          </div>
          <div>
           <input type="checkbox" id = "checked" v-model.trim.lazy="formValue.checked" true-value = "yes" false-value = "no">
-          <label for="checked" class = "TEXT text-s text-gray-400 tracking-wider">Please check to acknowledge our Privacy & <br> Terms policy</label>
+          <label for="checked" class = "TEXT text-s text-gray-400 tracking-wider">Please check to acknowledge our Privacy & Terms policy</label>
          </div>
          <div class="submitbutton py-[1rem] flex  justify-center ">
           <button type = "submit" class = "btn py-[1rem] px-[6.69rem] bg-orange-600 rounded-3xl text-white font-bold tracking-wider" @click="submitForm" >Checkout
@@ -131,7 +131,7 @@
         hosteladdress: '',
         roll: '',
         branch: '',
-        clubmember: 'no',
+        clubmember: '',
         phone: null,
         checked:'',
         comment:"",
