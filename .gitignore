@@ -1,3 +1,5 @@
+node_modules
+.nuxt
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
@@ -88,3 +90,15 @@ sw.*
 
 # Vim swap files
 *.swp
+
+**/migrations
+**/__pycache__
+.pytest_cache
+.DS_Store
+.vscode/*
+.idea
+db.sqlite3
+.venv
+venv
+.env
+.vscode
