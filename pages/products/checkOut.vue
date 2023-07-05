@@ -31,8 +31,8 @@
           <input type="email" placeholder = "Email" id="email" v-model.trim.lazy="formValue.email" class="pl-[0.69rem] w-full rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
-          <label for="hosteladdress" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Hostel Address</label>
-          <input type="text" placeholder = "Address" id="hostel" v-model.trim.lazy="formValue.hosteladdress" class="pl-[0.69rem] w-full rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
+          <label for="hostel-address" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Hostel Address</label>
+          <input type="text" placeholder = "Address" id="hostel" v-model.trim.lazy="formValue.hostel_address" class="pl-[0.69rem] w-full rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class="min-[1020px]:flex">
           <div class = "TEXT py-[0.5rem] px-[0.1rem]">
@@ -47,7 +47,7 @@
         <div class="w-full min-[1020px]:flex">
           <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="checked" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Club Member</label>
-          <input type="text" placeholder = "Club Member" id="branch" v-model.trim.lazy="formValue.clubmember" class="pl-[0.69rem]  min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
+          <input type="text" placeholder = "Club Member" id="branch" v-model.trim.lazy="formValue.club_member" class="pl-[0.69rem]  min-[1020px]:mr-[0.5rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         <div class = "TEXT py-[0.5rem] px-[0.1rem]">
           <label for="phone" class = "min-[1020px]:block subpixel-antialiased tracking-wider">Phone</label>
@@ -73,7 +73,7 @@
             </p>
           </div>
           <div class="dropdown-btn">
-            <button class="dropbtn">
+            <button class="drop-btn">
               <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png"/>
             </button>
           </div>
@@ -85,7 +85,7 @@
               <h3 class = "TEXT2 text-[1.69rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
             </div>
             <div class="dropdown-btn">
-            <button class="dropbtn">
+            <button class="drop-btn">
               <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png"/>
             </button>
           </div>
@@ -101,14 +101,14 @@
             </label>
             </div>
             <div class = "py-[1.5rem]">
-            <textarea id="ordercomment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.69rem] w-full h-[6rem]" />
+            <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.69rem] w-full h-[6rem]" />
             </div>
          </div>
          <div>
           <input type="checkbox" id = "checked" v-model.trim.lazy="formValue.checked" true-value = "yes" false-value = "no">
           <label for="checked" class = "TEXT text-s text-gray-400 tracking-wider">Please check to acknowledge our Privacy & Terms policy</label>
          </div>
-         <div class="submitbutton py-[1rem] flex  justify-center ">
+         <div class="submit-button py-[1rem] flex  justify-center ">
           <button type = "submit" class = "btn py-[1rem] px-[6.69rem] bg-orange-600 rounded-3xl text-white font-bold tracking-wider" @click="submitForm" >Checkout
           </button>
          </div>
@@ -128,10 +128,10 @@
         firstName: '',
         lastName: '',
         email: '',
-        hosteladdress: '',
+        hostel_address: '',
         roll: '',
         branch: '',
-        clubmember: '',
+        club_member: '',
         phone: null,
         checked:'',
         comment:"",
