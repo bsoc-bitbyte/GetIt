@@ -74,68 +74,29 @@
           <div
             class="rounded-full float-left bg-gray-100 text-gray-500 font-medium py-1 px-2 lg:text-sm text-xs flex flex-row lg:mr-4 md:mr-2 m-1"
           >
-            <input
-              type="radio"
-              name="Size"
-              value="small"
-              class="peer/small"
-              id="small"
-              checked
-            /><label for="small" class="peer-checked/small:text-pink-500"
-              ><p class="ml-1">Small</p></label
-            >
+            <input type="radio" name="Size" value="small" class="peer/small" id="small" checked />
+            <label for="small" class="peer-checked/small:text-pink-500" ><p class="ml-1">Small</p></label>
           </div>
           <div
             class="rounded-full float-left bg-gray-100 text-gray-500 font-medium px-2 py-1 text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
           >
-            <input
-              type="radio"
-              name="Size"
-              value="medium"
-              class="peer/medium"
-              id="medium"
-            /><label for="medium" class="peer-checked/medium:text-pink-500"
-              ><p class="ml-1">Medium</p></label
-            >
+            <input type="radio"  name="Size" value="medium" class="peer/medium"  id="medium" /><label for="medium" class="peer-checked/medium:text-pink-500"><p class="ml-1">Medium</p></label >
           </div>
           <div
             class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
           >
-            <input
-              type="radio"
-              name="Size"
-              value="large"
-              class="peer/large"
-              id="large"
-            /><label for="large" class="peer-checked/large:text-pink-500"
-              ><p class="ml-1">Large</p></label
-            >
+            <input type="radio"  name="Size"  value="large"  class="peer/large"  id="large" /><label for="large" class="peer-checked/large:text-pink-500" ><p class="ml-1">Large</p></label >
           </div>
           <div
             class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
           >
-            <input
-              type="radio"
-              name="Size"
-              value="extra"
-              class="peer/extra"
-              id="extra"
-            /><label for="extra" class="peer-checked/extra:text-pink-500"
-              ><p class="ml-1">Extra Large</p></label
-            >
+            <input  type="radio" name="Size"  value="extra" class="peer/extra" id="extra"  /><label for="extra" class="peer-checked/extra:text-pink-500"  ><p class="ml-1">Extra Large</p></label  >
           </div>
           <div
             class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
           >
-            <input
-              type="radio"
-              name="Size"
-              value="XXL"
-              class="peer/XXL"
-              id="XXL"
-            />
-            <label for="XXL" class="peer-checked/XXL:text-pink-500"
-              ><p class="ml-1">XXL</p></label
+            <input  type="radio"  name="Size"  value="XXL"  class="peer/XXL"  id="XXL"  />
+            <label for="XXL" class="peer-checked/XXL:text-pink-500" ><p class="ml-1">XXL</p></label
             >
           </div>
         </div>
