@@ -1,7 +1,7 @@
 <template>
 
   <div class = "parent mx-[0.25rem]">
-    <form @submit = "submitForm" class = "py-[3rem]">
+    <form @submit = "submitForm" class = "py-[6rem]">
       <hr>
 
     <div class="flex-items max-[1029px]:flex-col max-[1019px]:items-center min-[1020px]:flex min-[1020px]:justify-around min-[1020px]:mt-[6rem]">
@@ -63,7 +63,7 @@
         </div>
         </div>
         <div class="right-panel mx-[0.5rem] pt-[2rem] min-[1020px]:mt-[5rem]">
-         <div class="review-panel flex justify-between shadow-xl min-[1020px]:px-[2.69rem] py-[2rem]">
+         <div class="review-panel flex justify-between min-[1020px]:shadow-xl min-[1020px]:px-[2.69rem] py-[2rem]">
           <div class="flex-col">
             <h3 class="TEXT2 tracking-wider font-bold">
               Order Review
@@ -78,11 +78,11 @@
             </button>
           </div>
          </div>
-        <div class="main3 shadow-xl pt-[2rem] mt-[2rem] pb-[3rem] md:px-[2.69rem]">
+        <div class="main3 min-[1020px]:shadow-xl pt-[2rem] mt-[2rem] pb-[3rem] min-[1020px]:px-[2.69rem]">
           <div class = "my-[2.5rem] divide-gray-400/[.4]">
           <div class="billing-summary-dropdown flex justify-between">
             <div>
-              <h3 class = "TEXT2 text-[1.69rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
+              <h3 class = "TEXT2 text-[1rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
             </div>
             <div class="dropdown-btn">
             <button class="drop-btn">
@@ -97,11 +97,11 @@
           </div>
           <div class = "py-[1rem]">
             <div>
-              <label for="comment" class = "tracking-wider heading">Order Comment
+              <label for="comment" class = "comment tracking-wider heading text-gray-200">Order Comment
             </label>
             </div>
-            <div class = "py-[1.5rem]">
-            <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.69rem] w-full h-[6rem]" />
+            <div class = "pb-[1.5rem]">
+            <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.25rem] w-full h-[6rem]" />
             </div>
          </div>
          <div>
@@ -109,7 +109,7 @@
           <label for="checked" class = "TEXT text-s text-gray-400 tracking-wider">Please check to acknowledge our Privacy & Terms policy</label>
          </div>
          <div class="submit-button py-[1rem] flex  justify-center ">
-          <button type = "submit" class = "btn py-[1rem] px-[6.69rem] bg-orange-600 rounded-3xl text-white font-bold tracking-wider" @click="submitForm" >Checkout
+          <button type = "submit" class = "btn py-[1rem] px-[6.69rem] rounded-3xl " @click="submitForm" >Checkout
           </button>
          </div>
         </div>
@@ -165,12 +165,25 @@
   font-smooth: always;
 }
 .TEXT2{
-  font-family: Open-Sans, sans-serif;
+  font-family: Inter, sans-serif;
   color:black;
   font-smooth: always;
 
 }
 .heading{
   font-family: poppins, sans-serif;
+}
+.btn{
+  background-color: rgba(234, 69, 76, 1);
+  color: #FFF;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+font-smooth: always;
+}
+.comment{
+  color:rgba(130, 130, 130, 1)
 }
 </style>
