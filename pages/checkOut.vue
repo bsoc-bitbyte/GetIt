@@ -1,7 +1,7 @@
 <template>
 
   <div class = "parent mx-[0.25rem]">
-    <form @submit = "submitForm" class = "pb-[3rem] mt-[1rem] max-[1019px]:pt-[3rem]">
+    <form @submit = "submitForm" class = "pb-[3rem] pt-[1rem] max-[1029px]:pt-[3rem]">
       <hr>
 
     <div class="flex-items max-[1029px]:flex-col max-[1019px]:items-center min-[1020px]:flex min-[1020px]:justify-around min-[1020px]:mt-[6rem]">
@@ -54,10 +54,10 @@
           <input type="tel" placeholder = "Phone Number" id="phone" v-model.trim.number.lazy="formValue.phone" class="pl-[0.69rem] w-full min-[1020px]:w-[17rem] rounded-[0.4rem] py-[0.2rem] border-2 border-gray-200">
         </div>
         </div>
-        <div class="check2 pt-[2rem]">
-          <input type="checkbox" v-model.trim.lazy="formValue.consent" true-value = "yes" false-value = "no">
-          <label for="check2" class = "text-s subpixel-antialiased tracking-wider text-slate-800">Save the data for future use</label>
-        </div>
+       <div class = "check2 pt-[1rem]">
+          <input type="checkbox" id = "check2" v-model.trim.lazy="formValue.consent" true-value = "yes" false-value = "no">
+          <label for="check2" class = "check2 text-s tracking-wider">Save the data for future use</label>
+         </div>
         </div>
          </div>
         </div>
@@ -68,7 +68,7 @@
             <h3 class="TEXT2 tracking-wider font-bold">
               Order Review
             </h3>
-            <p class = "text-slate-400 subpixel-antialiased tracking-wider">
+            <p class = "text-slate-600 subpixel-antialiased tracking-wider">
               {{ count}} items in cart
             </p>
           </div>
@@ -101,12 +101,12 @@
             </label>
             </div>
             <div class = "pb-[1.5rem]">
-            <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 rounded-[0.25rem] w-full h-[6rem]" />
+            <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy = "formValue.comment" class = "border-2 border-gray-300 pl-[0.69rem] rounded-[0.25rem] w-full h-[6rem]" />
             </div>
          </div>
          <div>
           <input type="checkbox" id = "checked" v-model.trim.lazy="formValue.checked" true-value = "yes" false-value = "no">
-          <label for="checked" class = "TEXT text-s text-gray-400 tracking-wider">Please check to acknowledge our Privacy & Terms policy</label>
+          <label for="checked" class = "text-s text-slate-600 tracking-wider">Please check to acknowledge our Privacy & Terms policy</label>
          </div>
          <div class="submit-button py-[1rem] flex  justify-center ">
           <button type = "submit" class = "btn py-[1rem] px-[6.69rem] rounded-3xl " @click="submitForm" >Checkout
