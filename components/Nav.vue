@@ -12,7 +12,7 @@
         <li class="nav-link"><a href="#">About Us</a></li>
         <li class="get_it"><a href="#"><img src="../assets/get_it.png"><span>GetIt</span></a></li> 
         <li class="nav-link"><nuxt-link to="/Signin" class="sign_in">Sign In</nuxt-link></li>
-        <li class="cart"><a href="#">Cart <img src="../assets/cart.png"></a></li>                
+        <li class="cart"><nuxt-link to="/cart">Cart <img src="../assets/cart.png"></nuxt-link></li>                
     </ul>
     </div>
     
