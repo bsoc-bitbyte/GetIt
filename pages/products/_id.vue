@@ -82,7 +82,7 @@
                         </label></div>
                 </div>
                 <hr class="h-px lg:my-8 my-5 bg-gray-300 border-0 dark:bg-gray-700">
-                <div class="flex flex-row lg:mt-7 mt-1 sm:mb-5 content-center">
+                <div class=" fixed bottom-0 mx-20 mb-4 flex flex-row lg:mt-7 mt-1 sm:mb-5 content-center">
                     <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-8 max-sm:ml-4"><img
                             class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
                         <p class="text-xs text-white ">Add To Cart</p>
