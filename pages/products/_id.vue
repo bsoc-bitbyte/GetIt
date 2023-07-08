@@ -81,18 +81,19 @@
                             <p class="ml-1">XXL</p>
                         </label></div>
                 </div>
-                <hr class="h-px lg:my-8 my-5 bg-gray-300 border-0 dark:bg-gray-700">
-                <div class=" fixed bottom-0 mx-20 mb-4 flex flex-row lg:mt-7 mt-1 sm:mb-5 content-center">
-                    <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-8 max-sm:ml-4"><img
-                            class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
-                        <p class="text-xs text-white ">Add To Cart</p>
-                    </button>
-                    <button class="lg:ml-9  md:ml-5 rounded-full bg-rose-600 flex flex-row py-2 lg:px-14 px-8 sm:ml-3"><img
-                            class="w-4 h-4 mr-1 filter invert"
-                            src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
-                        <p class="text-xs text-white ">Buy Now</p>
-                    </button>
-                </div>
+                <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-gray-300 md:border-0 md:dark:bg-gray-700 ">
+                <div class=" fixed bottom-0 mx-20 mb-4 flex flex-row sm:mb-5 content-center md:relative  ">
+    <button class=" font-bold ml-3 rounded-full bg-rose-600 flex flex-row py-2 px-6 mr-8 max-sm:ml-4 hover:bg-green-900 ">
+        <img class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
+        <p class="text-xs text-white">Add To Cart</p>
+    </button>
+    <button class=" font-bold md:ml-5 rounded-full bg-rose-600 flex flex-row py-2 px-8 sm:ml-3 hover:bg-green-900">
+        <img class="w-4 h-4 mr-1 filter invert" src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
+        <p class="text-xs text-white">Buy Now</p>
+    </button>
+</div>
+
+
             </div>
         </div>
 
