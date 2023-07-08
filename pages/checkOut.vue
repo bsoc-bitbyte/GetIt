@@ -1,7 +1,7 @@
 <template>
 
   <div class = "parent mx-[0.25rem]">
-    <form @submit = "submitForm" class = "py-[6rem]">
+    <form @submit = "submitForm" class = "pb-[3rem] mt-[1rem] max-[1019px]:pt-[3rem]">
       <hr>
 
     <div class="flex-items max-[1029px]:flex-col max-[1019px]:items-center min-[1020px]:flex min-[1020px]:justify-around min-[1020px]:mt-[6rem]">
