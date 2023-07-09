@@ -3,11 +3,13 @@
 
         <div class="cart h-full w-full bg-white-100 ">
 
-            <h1 class="py-8 px-12 text-black-500 text-4xl">Shopping Cart</h1>
-
+            <div class="items-left" style=" width: 35rem; margin-left: auto; margin-right: auto;">
+                <h3 class=" flex font-Poppins text-xl font-bold py-8 px-12 " style="width: 19.417rem;">Shopping Cart</h3>
+            </div>    
+            
             <div class=" flex-col items-center justify-around h-full w-full  ">
 
-                <div id="selected_prod1" class="flex justify-evenly border-2 item_1 rounded-lg mt-24" style="width: 70%; height: 8rem; margin-left: auto; margin-right: auto;">
+                <div id="selected_prod1" class=" h-32 flex justify-evenly border-2 item_1 rounded-lg mt-8" style=" width: 35rem; margin-left: auto; margin-right: auto;">
 
                     <div class="image_div flex items-center justify-center"> 
 
@@ -15,11 +17,11 @@
 
                     </div>
 
-                    <div class="prod_Description w-32 h-28 mt-6 flex-col justify-center ">
+                    <div class="prod_Description w-40 h-28 mt-6 flex-col justify-center ">
 
-                        <h3 id="prod_Name" class=""> PRODUCT NAME </h3>
-                        <h4 id="prod_Price" class="">69$</h4>
-                        <p id="prod_Size" class="">Size : M </p>
+                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;"> PRODUCT NAME </h3>
+                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">69$</h4>
+                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">Size : M </p>
 
                     </div>
 
@@ -39,7 +41,7 @@
 
                 </div>
 
-                <div id="selected_prod1" class="flex justify-evenly border-2 item_1 rounded-lg mt-24" style="width: 70%; height: 8rem; margin-left: auto; margin-right: auto;">
+                <div id="selected_prod1" class=" h-32 flex justify-evenly border-2 item_1 rounded-lg mt-8" style=" width: 35rem; margin-left: auto; margin-right: auto;">
 
                     <div class="image_div flex items-center justify-center"> 
 
@@ -47,11 +49,11 @@
 
                     </div>
 
-                    <div class="prod_Description w-32 h-28 mt-6 flex-col justify-center ">
+                    <div class="prod_Description w-40 h-28 mt-6 flex-col justify-center ">
 
-                        <h3 id="prod_Name" class=""> PRODUCT NAME </h3>
-                        <h4 id="prod_Price" class="">69$</h4>
-                        <p id="prod_Size" class="">Size : M </p>
+                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;"> PRODUCT NAME </h3>
+                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">69$</h4>
+                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">Size : M </p>
 
                     </div>
 
@@ -71,7 +73,7 @@
 
                 </div>
 
-                <div id="selected_prod1" class="flex justify-evenly border-2 item_1 rounded-lg mt-24" style="width: 70%; height: 8rem; margin-left: auto; margin-right: auto;">
+                <div id="selected_prod1" class=" h-32 flex justify-evenly border-2 item_1 rounded-lg mt-8" style=" width: 35rem; margin-left: auto; margin-right: auto;">
 
                     <div class="image_div flex items-center justify-center"> 
 
@@ -79,11 +81,43 @@
 
                     </div>
 
-                    <div class="prod_Description w-32 h-28 mt-6 flex-col justify-center ">
+                    <div class="prod_Description w-40 h-28 mt-6 flex-col justify-center ">
 
-                        <h3 id="prod_Name" class=""> PRODUCT NAME </h3>
-                        <h4 id="prod_Price" class="">69$</h4>
-                        <p id="prod_Size" class="">Size : M </p>
+                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;"> PRODUCT NAME </h3>
+                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">69$</h4>
+                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">Size : M </p>
+
+                    </div>
+
+                    <div class="Quantity flex justify-evenly w-28 h-28 mt-2 "> 
+
+                        <button onclick="" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black rounded-lg border-2  bg-slate-300">-</button>
+
+                        <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 text-black "> 1 </p>
+
+                        <button onclick="" class="flex items-center justify-cente p-2 w-8 h-8 mt-10 text-black rounded-lg border-2  bg-slate-300">+</button>
+
+                    </div>
+
+                    <div class="close_btn flex-row justify-end w-8 ">
+                        <button class="flex-row justify-end ml-8 mt-2">X</button>
+                    </div>
+
+                </div>
+
+                <div id="selected_prod1" class=" h-32 flex justify-evenly border-2 item_1 rounded-lg mt-8" style=" width: 35rem; margin-left: auto; margin-right: auto;">
+
+                    <div class="image_div flex items-center justify-center"> 
+
+                        <img src="../assets/get_it.png" alt="Image description" class="w-24 h-24 object-cover">
+
+                    </div>
+
+                    <div class="prod_Description w-40 h-28 mt-6 flex-col justify-center ">
+
+                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;"> PRODUCT NAME </h3>
+                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">69$</h4>
+                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">Size : M </p>
 
                     </div>
 
@@ -116,17 +150,17 @@
 
             </div>
 
-            <div class="Bill flex items-center justify-center w-full h-76 bg-white-100 mt-4"> 
+            <div class="Bill flex items-center justify-center w-full bg-white-100 mt-4" style="height: 21rem;"> 
 
-                <div class=" w-3/5 h-full border-2 bg-white-100"> 
+                <div class=" w-3/5 h-full border-2 bg-white-100" style="width: 26.75rem"> 
 
-                    <h3 class="font-medium text-xl my-4 ml-4 ">Subtotal :</h3>
-                    
-                    <h3 class="font-medium text-xl my-4 ml-4">Discount :</h3>
-                    
-                    <h3 class="font-medium text-xl my-4 ml-4">Tax :</h3>
-                    
-                    <h3 class="font-medium text-xl my-4 ml-4">Total :</h3>
+                    <h3 class="font-medium text-2xl h-1/6 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-weight: 800; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Subtotal :</h3>
+                    <hr class="w-11/12 ml-2">
+                    <h3 class="font-medium text-2xl h-1/6 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-weight: 800; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Discount :</h3>
+                    <hr class="w-11/12 ml-2">
+                    <h3 class="font-medium text-2xl h-1/6 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-weight: 800; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Tax :</h3>
+                    <hr class="w-11/12 ml-2">
+                    <h3 class="font-medium text-2xl h-1/6 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-weight: 800; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Total :</h3>
 
                 </div>
 
@@ -134,7 +168,7 @@
 
             <div class="Checkout button flex items-center justify-center text-center text-white w-full mt-8">
 
-                <btn class="checkout_Btn bg-rose-600 w-3/5 p-2 rounded-lg" >Checkout</btn>
+                <btn class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C;  width: 26.75rem; height: 3.45813rem;">Checkout</btn>
 
             </div>
         </div>
