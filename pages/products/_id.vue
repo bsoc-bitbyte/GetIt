@@ -82,15 +82,16 @@
                         </label></div>
                 </div>
                 <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-gray-300 md:border-0 md:dark:bg-gray-700 ">
-                <div class=" fixed bottom-0 mx-20 mb-4 flex flex-row sm:mb-5 content-center md:relative  ">
-    <button class=" font-bold ml-3 rounded-full bg-rose-600 flex flex-row py-2 px-6 mr-8 max-sm:ml-4 hover:bg-green-900 ">
-        <img class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
-        <p class="text-xs text-white">Add To Cart</p>
+                <div class=" justify-center w-full fixed bottom-0 mx-17  mb-4 flex flex-row sm:mb-1 content-center md:relative  ">
+    <button class=" px-3 w-28 text-gray-900 rounded-none flex-none items-center font-bold md:rounded-full bg-rose-600 flex flex-row md:py-0 md:px-3 mr-8 hover:bg-green-900 ">
+        <img class="w-4 h-3 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
+        <p class=" flex-none text-[12px] text-white sm:text-xs">Add To Cart</p>
     </button>
-    <button class=" font-bold md:ml-5 rounded-full bg-rose-600 flex flex-row py-2 px-8 sm:ml-3 hover:bg-green-900">
-        <img class="w-4 h-4 mr-1 filter invert" src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
-        <p class="text-xs text-white">Buy Now</p>
-    </button>
+    <button class="flex-none items-center rounded-none font-bold md:ml-5 rounded-full bg-rose-600 flex flex-row md:rounded-full py-1 px-4 sm:ml-3 hover:bg-green-900">
+    <img class="w-3 h-3 mr-1 filter invert" src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
+    <p class="text-[12px] text-white sm:text-xs">Buy Now</p>
+</button>
+
 </div>
 
 
