@@ -1,5 +1,6 @@
 <template>
-  <div class="main  md:flex  bg-gray-100 md:justify-evenly py-[2rem] px-[0.1rem]">
+  <div class="page w-full:bg-gray-100">
+    <div class="main  md:flex md:justify-evenly pt-[1rem] px-[0.1rem]">
     <div class="left-panel mt-[5rem] hidden md:block">
       <img src="../assets/37.order-delivered-3.png" class = "w-80 h-80 border-1 border-gray-400 md:order-2" alt="delivery-img">
     </div>
@@ -47,24 +48,25 @@
         </div>
         <div class="optional-sign-in mt-[0.7rem]">
           <p class = "flex justify-center">
-            <span class="account-text tracking-wide">Already have an account?</span>
+            <span class="account-text tracking-wide">Dont have an account?</span>
             <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wide">Sign up for free</nuxt-link>
           </p>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
   export default {
-    name:'signinTailwind'
+    name:'Signin'
   }
 </script>
 
 <style scoped>
 .main{
   font-family: 'Poppins', sans-serif;
-  font-smooth: always;  
+  font-smooth: always;
 }
 </style>
