@@ -82,17 +82,16 @@
                         </label></div>
                 </div>
                 <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-gray-300 md:border-0 md:dark:bg-gray-700 ">
-                <div class=" justify-center w-full fixed bottom-0 mx-17  mb-4 flex flex-row sm:mb-1 content-center md:relative  ">
-    <button class=" px-3 w-28 text-gray-900 rounded-none flex-none items-center font-bold md:rounded-full bg-rose-600 flex flex-row md:py-0 md:px-3 mr-8 hover:bg-green-900 ">
+                <div class=" shadow-[0px_40px_70px_4px_rgba(0,0,0,0.56)] md:shadow-none md:border-0 m-0 justify-center md:justify-start w-full fixed bottom-0 mx-0 mb-0 flex flex-row md:justify-left sm:mb-0 md:relative gap-0">
+    <button class=" pl-[5rem] md:px-4 border-black-700 border-1 mr-0 ml-6 md:ml-0 text-center pr-0 md:py-0 min-w-full md:min-w-0 bg-white px-5 rounded-none font-black flex-none flex items-center justify-center md:rounded-full md:bg-rose-600 flex flex-row md:py-2 md:px-3 md:font-normal md:hover:bg-green-900">
         <img class="w-4 h-3 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
-        <p class=" flex-none text-[12px] text-white sm:text-xs">Add To Cart</p>
+        <p class="  flex-none text-[12px] text-center text-black md:text-white sm:text-xs pl-8 md:pl-0 ">Add To Cart</p>
+    </button><button class=" pl-[4rem] md:px-4 ml-0 mr-3 ml-0 py-3 md:py-0 min-w-full text-center md:min-w-0 bg-orange-600 font-bold flex-none items-center rounded-none md:ml-5 rounded-full md:bg-rose-600 flex flex-row md:rounded-full md:font-normal py-1 px-4 sm:ml-3 md:hover:bg-green-900">
+        <img class="w-3 h-3 mr-1 filter invert" src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
+        <p class="text-[12px] text-white sm:text-xs">Buy Now</p>
     </button>
-    <button class="flex-none items-center rounded-none font-bold md:ml-5 rounded-full bg-rose-600 flex flex-row md:rounded-full py-1 px-4 sm:ml-3 hover:bg-green-900">
-    <img class="w-3 h-3 mr-1 filter invert" src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
-    <p class="text-[12px] text-white sm:text-xs">Buy Now</p>
-</button>
-
 </div>
+
 
 
             </div>
