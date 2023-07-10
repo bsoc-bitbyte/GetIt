@@ -61,7 +61,7 @@
                 class="peer/small"
                 id="small"
                 checked
-              /><label for="small" class="peer-checked/small:text-pink-500"
+              /><label for="small" class="peer-checked"
                 ><p class="ml-1">Small</p></label
               >
             </div>
@@ -74,7 +74,7 @@
                 value="medium"
                 class="peer/medium"
                 id="medium"
-              /><label for="medium" class="peer-checked/medium:text-pink-500"
+              /><label for="medium" class="peer-checked"
                 ><p class="ml-1">Medium</p></label
               >
             </div>
@@ -87,7 +87,7 @@
                 value="large"
                 class="peer/large"
                 id="large"
-              /><label for="large" class="peer-checked/large:text-pink-500"
+              /><label for="large" class="peer-checked"
                 ><p class="ml-1">Large</p></label
               >
             </div>
@@ -100,7 +100,7 @@
                 value="extra"
                 class="peer/extra"
                 id="extra"
-              /><label for="extra" class="peer-checked/extra:text-pink-500"
+              /><label for="extra" class="peer-checked"
                 ><p class="ml-1">Extra Large</p></label
               >
             </div>
@@ -114,7 +114,7 @@
                 class="peer/XXL"
                 id="XXL"
               />
-              <label for="XXL" class="peer-checked/XXL:text-pink-500"
+              <label for="XXL" class="peer-checked"
                 ><p class="ml-1">XXL</p></label
               >
             </div>
