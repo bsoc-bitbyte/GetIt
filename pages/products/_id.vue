@@ -49,38 +49,78 @@
 
                 <p class="lg:mt-7 lg:text-3xl font-medium mt-4 text-2xl"><b></b> ${{ product[main].price }}</p>
                 <p class="lg:mt-5 text-sm text-gray-400 font-medium lg:mb-2 pb-.5 mt-4 mb-2">Choose a Size</p>
+                
                 <div class="">
-                    <div
-                        class="rounded-full float-left bg-gray-100 text-gray-500 font-medium py-1 px-2  text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
-                        <input type="radio" name="Size" value="Small" class="peer/small" id="Small"><label for="small"
-                            class="peer-checked/small:text-pink-500">
-                            <p class="ml-1">Small</p>
-                        </label></div>
-                    <div
-                        class="rounded-full float-left bg-gray-100 text-gray-500 font-medium  px-2 py-1 text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
-                        <input type="radio" name="Size" value="Medium" class="peer/medium" id="Medium"><label for="medium"
-                            class="peer-checked/medium:text-pink-500">
-                            <p class="ml-1">Medium</p>
-                        </label></div>
-                    <div
-                        class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
-                        <input type="radio" name="Size" value="Large" class="peer/large" id="Large"><label for="large"
-                            class="peer-checked/large:text-pink-500">
-                            <p class="ml-1">Large</p>
-                        </label></div>
-                    <div
-                        class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
-                        <input type="radio" name="Size" value="Extra Large" class="peer/extra" id="Extra"><label for="extra"
-                            class="peer-checked/extra:text-pink-500">
-                            <p class="ml-1">Extra Large</p>
-                        </label></div>
-                    <div
-                        class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs flex flex-row lg:mr-4 md:mr-2 m-1">
-                        <input type="radio" name="Size" value="XXL" class="peer/xxl" id="XXL"><label for="xxl"
-                            class="peer-checked/xxl:text-pink-500">
-                            <p class="ml-1">XXL</p>
-                        </label></div>
-                </div>
+            <div
+              class="rounded-full float-left bg-gray-100 text-gray-500 font-medium py-1 px-2 lg:text-sm text-xs flex flex-row lg:mr-4 md:mr-2 m-1"
+            >
+              <input
+                type="radio"
+                name="Size"
+                value="small"
+                class="peer/small"
+                id="small"
+                checked
+              /><label for="small" class="peer-checked"
+                ><p class="ml-1">Small</p></label
+              >
+            </div>
+            <div
+              class="rounded-full float-left bg-gray-100 text-gray-500 font-medium px-2 py-1 text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
+            >
+              <input
+                type="radio"
+                name="Size"
+                value="medium"
+                class="peer/medium"
+                id="medium"
+              /><label for="medium" class="peer-checked"
+                ><p class="ml-1">Medium</p></label
+              >
+            </div>
+            <div
+              class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
+            >
+              <input
+                type="radio"
+                name="Size"
+                value="large"
+                class="peer/large"
+                id="large"
+              /><label for="large" class="peer-checked"
+                ><p class="ml-1">Large</p></label
+              >
+            </div>
+            <div
+              class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
+            >
+              <input
+                type="radio"
+                name="Size"
+                value="extra"
+                class="peer/extra"
+                id="extra"
+              /><label for="extra" class="peer-checked"
+                ><p class="ml-1">Extra Large</p></label
+              >
+            </div>
+            <div
+              class="rounded-full float-left bg-gray-100 text-gray-500 py-1 px-2 font-medium text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
+            >
+              <input
+                type="radio"
+                name="Size"
+                value="XXL"
+                class="peer/XXL"
+                id="XXL"
+              />
+              <label for="XXL" class="peer-checked"
+                ><p class="ml-1">XXL</p></label
+              >
+            </div>
+          </div>
+                
+                
                 <hr class="h-px lg:my-8 my-5 bg-gray-300 border-0 dark:bg-gray-700">
                 <div class="flex flex-row lg:mt-7 mt-1 sm:mb-5 content-center">
                     <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-8 max-sm:ml-4"><img
@@ -123,3 +163,4 @@ export default {
     },
 }
 </script>
+
