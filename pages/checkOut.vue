@@ -1,10 +1,10 @@
 <template>
-  <div class="main flex-col min-[1200px]:items-center min-[1200px]:ml-[8rem] mt-[6rem] justify-start">
+  <div class="main flex-col min-[1200px]:justify-center mt-[6rem] justify-start pr-[0rem] min-[1200px]:pl-[8rem]">
     <hr>
     <div class="max-[1199px]:py-[0.5rem] min-[1200px]:py-[0rem] tracking-wider">
-          <h2 class = "heading font-extrabold text-[3rem] font-bold min-[1200px]:ml-[0rem] tracking-wider">Checkout</h2>
+          <h2 class = "heading font-extrabold text-[3rem] font-bold min-[1200px]:ml-[0rem] tracking-wider pr-[0rem]">Checkout</h2>
     </div>
-    <div class = "parent">
+    <div class = "parent pr-[0rem]">
       <form @submit = "submitForm" class = "pb-[2rem] pt-[0rem] max-[1199px]:pt-[3rem]">
       <div class="flex-items max-[1199px]:flex-col max-[1199px]:items-center min-[1200px]:flex min-[1200px]:justify-start min-[1200px]:mt-[2rem]">
         <div class="main1 min-[1200px]:shadow-lg">
@@ -62,13 +62,13 @@
           </div>
           </div>
           <div class="right-panel mx-[0.5rem] max-[1199px]:pt-[0.25rem] min-[1200px]:pt-[1rem]">
-           <div class="review-panel flex justify-between min-[1200px]:shadow-lg min-[1200px]:px-[2.69rem] min-[1200px]:pb-[2rem] max-[1199px]:py-[1rem] min-[1200px]:mt-[2rem]">
+           <div class="review-panel flex justify-between min-[1200px]:shadow-lg min-[1200px]:px-[2rem] min-[1200px]:pb-[2rem] max-[1199px]:py-[1rem] min-[1200px]:mt-[2rem]">
             <div class="flex-col">
               <h3 class="TEXT2 tracking-wider font-bold items-center">
                 Order Review
               </h3>
               <p class = "text-slate-600 subpixel-antialiased tracking-wider">
-                {{ count}} items in cart
+                {{ count }} items in cart
               </p>
             </div>
             <div class="dropdown-btn">
@@ -77,7 +77,7 @@
               </button>
             </div>
            </div>
-          <div class="main3 min-[1200px]:shadow-lg pt-[2rem] mt-[1rem] pb-[1rem] min-[1200px]:px-[1.69rem] max-[1199px]:pt-[0rem]">
+          <div class="main3 min-[1200px]:shadow-lg pt-[2rem] mt-[1rem] pb-[1rem] min-[1200px]:px-[2rem] max-[1199px]:pt-[0rem]">
             <div class = "my-[2.5rem] divide-gray-400/[.4]">
             <div class="billing-summary-dropdown flex justify-between">
               <div>
@@ -108,7 +108,7 @@
             <label for="checked" class = "text-s text-slate-600 tracking-wider">Please check to acknowledge our Privacy & Terms policy</label>
            </div>
            <div class="submit-button pt-[1rem] flex  justify-center ">
-            <button type = "submit" class = "btn py-[1rem] min-[1200px]:px-[6.69rem] rounded-3xl max-[1199px]:w-full" @click="submitForm" >Checkout
+            <button type = "submit" class = "btn py-[1rem] min-[1200px]:px-[6rem] rounded-3xl max-[1199px]:w-full" @click="submitForm" >Checkout
             </button>
            </div>
           </div>
@@ -187,13 +187,19 @@
     color:rgba(130, 130, 130, 1)
   }
   .main{
-    position: inherit;
+    position: static;
     left:0;
     top:0;
     right:0;
     bottom:0;
     width:100%;
     height:100%;
+    overflow-x: hidden;
+  }
+  .parent{
+    overflow-x: hidden;
+    right:0;
+    left:0;
   }
   .box{
     accent-color: rgba(0, 176, 39, 1);
