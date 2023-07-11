@@ -121,18 +121,17 @@
           </div>
                 
                 
-                <hr class="h-px lg:my-8 my-5 bg-gray-300 border-0 dark:bg-gray-700">
-                <div class="flex flex-row lg:mt-7 mt-1 sm:mb-5 content-center">
-                    <button class="ml-3 rounded-full bg-rose-600 flex flex-row py-2 lg:px-12 lg:mr-5 px-6 mr-8 max-sm:ml-4"><img
-                            class="w-4 h-4 mr-1 filter invert" src="https://cdn-icons-png.flaticon.com/512/711/711895.png">
-                        <p class="text-xs text-white ">Add To Cart</p>
-                    </button>
-                    <button class="lg:ml-9  md:ml-5 rounded-full bg-rose-600 flex flex-row py-2 lg:px-14 px-8 sm:ml-3"><img
-                            class="w-4 h-4 mr-1 filter invert"
-                            src="https://icon-library.com/images/current-icon/current-icon-1.jpg">
-                        <p class="text-xs text-white ">Buy Now</p>
-                    </button>
-                </div>
+          <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-gray-300 md:border-0 md:dark:bg-gray-700 ">
+                <div class=" bg-white shadow-[0px_40px_70px_4px_rgba(0,0,0,0.56)] md:shadow-none md:border-0 m-0 justify-center md:justify-start w-full fixed bottom-0 mx-0 mb-0 flex flex-row md:justify-left sm:mb-0 md:relative gap-0s">
+    <button class="  gap-0 md:mr-[15%] md:px-[7%] pl-[44%] mr-0  md:ml-0 text-center pr-0 md:py-0 min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none flex items-center  md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
+        <img class=" visible md:invisible w-4 h-3 mr-0  filter px-0" src="../../assets/cart01.png">
+        <img class=" invisible md:visible w-5 h-5 mr-0 md:mr-1 md:-ml-[15px] filter" src="../../assets/cart02.png">
+        <p class="flex-none text-[12px] md:text-[15px] text-center text-black md:text-white sm:text-xs pl-0 md:pl-0 ">Add To Cart</p>
+    </button><button class="pl-[15%] md:px-[7%] md:py-4 ml-0 py-3 md:py-0 min-w-[92%] text-center md:min-w-0 bg-[#EA454C] font-bold flex-none items-center rounded-none  rounded-full md:bg-[#EA454C] flex flex-row md:rounded-full md:font-normal py-1 sm:ml-3 md:mr-[0%]">
+        <img class="w-4 h-4 mr-1 filter" src="../../assets/lightning.png">
+        <p class=" text-[12px] md:text-[15px] pr-2 pl-2 text-white sm:text-xs">Buy Now</p>
+    </button>
+</div>
             </div>
         </div>
 
