@@ -96,7 +96,7 @@
               <li>
                 <span class="flex"><a
                     class="flex-1 ml-1 font-serif whitespace-nowrap items-center p-2 pl-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700"
-                    href="#">Cart<img class="max-w-none h-7 w-8 -mt-1 inline-block"
+                    href="#">10 Items<img class="max-w-none h-7 w-8 -mt-1 inline-block"
                       src="https://static.thenounproject.com/png/5645-200.png" /></a></span>
               </li>
             </ul>
