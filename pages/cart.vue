@@ -50,7 +50,7 @@
 
             <div class="girl_img w-full h-1/2 flex items-center justify-center mt-32 ">
 
-                <img class="h-full w-1/2 block" src="../assets/cart_girl.png" style=" margin-left: auto; margin-right: auto;">
+                <img class="h-full block" src="../assets/cart_girl.png" style=" margin-left: auto; margin-right: auto; width: 43%;">
 
             </div>
 
