@@ -1,6 +1,5 @@
 <template>
-  <div class="main flex-col min-[1200px]:justify-center mt-[6rem] justify-start pr-[0rem] min-[1200px]:pl-[8rem]">
-    <hr>
+  <div class="main  mt-[6rem] justify-start pr-[0rem] min-[1200px]:flex-col min-[1200px]:items-center min-[1200px]:pl-[10rem]">
     <div class="max-[1199px]:py-[0.5rem] min-[1200px]:py-[0rem] tracking-wider">
           <h2 class = "heading font-extrabold text-[3rem] font-bold min-[1200px]:ml-[0rem] tracking-wider pr-[0rem]">Checkout</h2>
     </div>
@@ -202,6 +201,6 @@
     left:0;
   }
   .box{
-    accent-color: rgba(0, 176, 39, 1);
+    accent-color: rgb(35, 162, 63);
   }
   </style>
