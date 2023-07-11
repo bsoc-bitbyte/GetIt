@@ -4,7 +4,7 @@
         <div class="cart h-full w-full bg-white-100 ">
 
             <div class="items-left" style=" width: 35rem; margin-left: auto; margin-right: auto;">
-                <h3 class=" flex font-Poppins text-xl font-bold py-8 px-12 " style="width: 19.417rem; top: 1rem;">Shopping Cart</h3>
+                <h3 class=" flex font-Poppins text-xl font-bold pl-0 px-12 " style="width: 19.417rem; top: 1rem;">Shopping Cart</h3>
             </div>    
             
             <div class=" flex-col items-center justify-around h-full w-full " 
@@ -28,7 +28,7 @@
 
                     <div class="Quantity flex justify-evenly w-28 h-28 mt-2 "> 
 
-                        <button onclick="" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
+                        <button onclick="" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
 
                         <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 " style="color: #C3C6C9; "> 1 </p>
 
@@ -46,15 +46,15 @@
 
         </div>
 
-        <div class="billing h-full w-full flex-col items-center justify-center ">
+        <div class="billing h-full w-full flex-col mb-32 items-center justify-center ">
 
             <div class="girl_img w-full h-1/2 flex items-center justify-center mt-32 ">
 
-                <img class="h-full w-3/5 block" src="../assets/cart_girl.png" style=" margin-left: auto; margin-right: auto;">
+                <img class="h-full w-1/2 block" src="../assets/cart_girl.png" style=" margin-left: auto; margin-right: auto;">
 
             </div>
 
-            <div class="Bill flex items-center justify-center w-full h-70 bg-white-100 mt-4"> 
+            <div class="Bill flex items-center justify-center w-full h-70 bg-white-100 mt-16"> 
 
                 <div class=" w-3/5 h-full border-2 bg-white-100" style="width: 26.75rem"> 
                     <div class="flex">
