@@ -4,7 +4,6 @@ django-cors-headers==4.1.0
 django-extensions==3.2.1
 django-filter==22.1
 djangorestframework==3.14.0
-djangorestframework-jsonapi==6.0.0
 djangorestframework-simplejwt==5.2.2
 exceptiongroup==1.1.2
 inflection==0.5.1
