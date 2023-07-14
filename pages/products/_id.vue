@@ -144,8 +144,8 @@
 <script>
 
 export default {
-  layout: 'default',
-  async asyncData({ params }) {
+    layout: 'default',
+    async asyncData({ params }) {
     const productId = params.id;
     const response = await fetch(`https://fakestoreapi.com/products/`);
     const product = await response.json();
