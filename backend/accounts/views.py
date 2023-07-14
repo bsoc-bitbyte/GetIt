@@ -20,7 +20,6 @@ class RetrieveUpdateLoggedInAccountView(APIView):
         serializer = AccountSerializer(request.user)
         return Response(serializer.data)
 
-
     def put(self, request):
         # let update be partial
         serializer = AccountSerializer(request.user, data=request.data, partial=True)
