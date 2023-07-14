@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Account
 
+
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
@@ -24,7 +25,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
         if not password:
             raise serializers.ValidationError('Password is required')
-        
+
         account = self.Meta.model(**validated_data)
         account.set_password(password)
         account.save()
