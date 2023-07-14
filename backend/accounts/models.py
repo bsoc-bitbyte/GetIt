@@ -1,7 +1,6 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-
-# Create your models here.
 
 
 class MyAccountManager(BaseUserManager):
@@ -39,11 +38,13 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+    phone_regex = RegexValidator(regex=r'^(\+91)?\d{10}$', message="Invalid phone number")
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=50, blank=True)
-    address = models.CharField(max_length=128, blank=True)
+    phone_number = models.CharField(max_length=13, validators=[phone_regex], blank=True)
+    address = models.CharField(max_length=128,  blank=True)
 
     # required
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -51,7 +52,7 @@ class Account(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
