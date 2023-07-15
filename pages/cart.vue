@@ -1,16 +1,16 @@
 <template>
     <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 m-4 md:m-16">
 
-        <div class="cart h-full w-full bg-white-100 ">
+        <div class="cart flex flex-col h-full w-full bg-white-100 items-center">
 
-            <div class="items-left w-[25rem] md:w-[35rem]" style=" margin-left: auto; margin-right: auto;">
-                <h3 class=" flex font-Poppins text-xl font-bold pl-0 px-12 " style="width: 19.417rem; top: 1rem;">Shopping Cart</h3>
+            <div class="flex w-full md:w-[35rem] justify-left" >
+                <h3 class="font-Poppins text-xl font-bold pl-0 px-12" style="top: 1rem;">Shopping Cart</h3>
             </div>    
             
-            <div class=" flex-col items-center justify-around h-full w-full " 
-                v-for=" (product, index ) in products" :key=" index " >
+            <div class="products flex justify-center h-full w-full md:w-[35rem]"
+                v-for=" (product, index ) in products" :key=" index ">
                 
-                <div id="selected_prod1" class=" h-32 w-[25rem] md:w-[35rem] flex justify-between md:justify-evenly border-2 item_1 rounded-lg mt-8" style="margin-left: auto; margin-right: auto;">
+                <div id="selected_prod1" class=" h-32 w-[25rem] md:w-[35rem] flex justify-between md:justify-evenly border-2 item_1 rounded-lg mt-8" >
 
                     <div class="image_div flex items-center justify-center"> 
 
@@ -36,7 +36,7 @@
 
                     </div>
 
-                    <div class="close_btn flex-row justify-end w-8 ">
+                    <div class="close_btn flex-row justify-end w-5 md:w-8 ">
                         <button class="flex-row justify-end ml-0 md:ml-8 mt-2">X</button>
                     </div>
 
@@ -46,7 +46,7 @@
 
         </div>
 
-        <div class="billing h-full w-full flex-col mb-2 md:mb-32  items-center justify-center ">
+        <div class="billing h-full w-full flex flex-col mb-2 md:mb-32  items-center justify-center ">
 
             <div class="girl_img w-0 md:w-full h-1/2 flex items-center justify-center mt-16 md:mt-32 ">
 
