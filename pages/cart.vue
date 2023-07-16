@@ -4,7 +4,7 @@
         <div class="cart flex flex-col h-full w-full bg-white-100 items-center justify-center">
 
             <div class="flex w-full lg:w-[30rem] xl:w-[35rem] justify-right" >
-                <h3 class="font-Poppins text-xl font-bold pl-0 px-12" style="top: 1rem;">Shopping Cart</h3>
+                <h3 class="font-Poppins text-xl font-bold pl-0 px-12 mt-[1rem]">Shopping Cart</h3>
             </div>    
             
             <div class="products flex justify-center h-full w-full"
@@ -50,7 +50,7 @@
 
             <div class="girl_img w-0 md:w-full h-1/2 flex items-center justify-center ">
 
-                <img class="h-full block w-60 lg:w-3/5 xl:w-5/12 2xl:w-3/12" src="../assets/cart_girl.png">
+                <img class="h-full block w-60 lg:w-3/5 xl:w-[19rem]" src="../assets/cart_girl.png">
 
             </div>
 
