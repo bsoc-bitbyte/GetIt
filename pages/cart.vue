@@ -1,16 +1,16 @@
 <template>
-    <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 mt-0 md:mt-16 lg:mt-40 m-4 lg:m-16">
+    <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 mt-0 md:mt-16 lg:mt-20 xl:mt-32 m-4 lg:m-10 xl:m-16">
 
         <div class="cart flex flex-col h-full w-full bg-white-100 items-center justify-center">
 
-            <div class="flex w-full lg:w-[35rem] justify-right" >
+            <div class="flex w-full lg:w-[30rem] xl:w-[35rem] justify-right" >
                 <h3 class="font-Poppins text-xl font-bold pl-0 px-12" style="top: 1rem;">Shopping Cart</h3>
             </div>    
             
             <div class="products flex justify-center h-full w-full"
                 v-for=" (product, index ) in products" :key=" index ">
                 
-                <div id="selected_prod1" class=" h-32 w-[25rem] lg:w-[35rem] flex justify-between md:justify-evenly border-2 item_1 rounded-lg mt-8" >
+                <div id="selected_prod1" class=" h-32 w-[25rem] lg:w-[30rem] xl:w-[35rem] flex justify-between md:justify-evenly border-2 item_1 rounded-lg mt-8" >
 
                     <div class="image_div flex items-center justify-center"> 
 
@@ -50,13 +50,13 @@
 
             <div class="girl_img w-0 md:w-full h-1/2 flex items-center justify-center ">
 
-                <img class="h-full block w-60 lg:w-6/12" src="../assets/cart_girl.png">
+                <img class="h-full block w-60 lg:w-3/5 xl:w-5/12 2xl:w-3/12" src="../assets/cart_girl.png">
 
             </div>
 
             <div class="Bill flex items-center justify-center w-full h-70 bg-white-100 mt-16"> 
 
-                <div class="h-full border-2 bg-white-100 w-[25rem] md:w-[20rem] lg:w-[26.75rem]"> 
+                <div class="h-full border-2 bg-white-100 w-[25rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]"> 
                     <div class="flex">
                         <h3 class="font-medium text-2xl h-1/6 w-1/2 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-weight: 800; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Subtotal :</h3>
                         <div class="font-Mulish text-lg text-center w-1/2 font-bold leading-6 ml-35 mt-6" style="color: #C3C6C9;"> 900$ </div>
@@ -83,7 +83,7 @@
 
             <div class="Checkout button flex items-center justify-center text-center text-white w-full mt-8">
 
-                <btn class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg w-[25.3rem] md:w-[20rem] lg:w-[26.5rem]" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C; height: 3.45813rem;">Checkout</btn>
+                <btn class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg w-[25.3rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C; height: 3.45813rem;">Checkout</btn>
 
             </div>
         </div>
