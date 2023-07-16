@@ -1,5 +1,5 @@
 <template>
-    <div class="main h-full flex items-center justify-center bg-white-100 m-16">
+    <div class="main h-full flex items-center justify-center bg-white-100 m-16 max-lg:-mt-6 -mt-14">
 
         <div class="cart h-full w-full bg-white-100 ">
 
@@ -83,7 +83,8 @@
 
             <div class="Checkout button flex items-center justify-center text-center text-white w-full mt-8">
 
-                <btn class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C;  width: 26.75rem; height: 3.45813rem;">Checkout</btn>
+                <nuxt-link to="/checkOut" class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg"
+                        style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C;  width: 26.75rem; height: 3.45813rem;">Checkout</nuxt-link>
 
             </div>
         </div>
