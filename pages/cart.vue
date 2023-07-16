@@ -1,5 +1,5 @@
 <template>
-    <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 mt-0 md:mt-16 lg:mt-20 xl:mt-32 m-4 lg:m-10 xl:m-16">
+    <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 mt-3 lg:mt-0 xl:mt-8 m-4 lg:m-10 xl:m-16">
 
         <div class="cart flex flex-col h-full w-full bg-white-100 items-center justify-center">
 
