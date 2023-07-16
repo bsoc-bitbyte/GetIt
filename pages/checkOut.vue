@@ -1,5 +1,5 @@
 <template>
-  <div class="main  mt-[4rem] justify-start pr-[0rem] flex-col justify-center min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]">
+  <div class="main  mt-[2rem] justify-start pr-[0rem] flex-col justify-center min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]">
     <div class="max-[1239px]:py-[0.5rem] min-[1240px]:py-[0rem] tracking-wider">
           <h2 class = "heading font-extrabold text-[3rem] font-bold min-[1240px]:ml-[2rem] tracking-wider pr-[0rem]">Checkout</h2>
     </div>
