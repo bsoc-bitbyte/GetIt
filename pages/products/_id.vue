@@ -41,7 +41,7 @@
               
               <img  class="max-w-lg mx-auto w-full mb-8 h-full rounded-xl object-contain aspect-square"
           :src="product[main].image" /> 
-           <div class="mx-auto flex sm:hidden mb-4">
+           <div class="mx-auto flex md:hidden mb-4">
             <div
   @click="selectColor('black')"
   :class="[
