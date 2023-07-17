@@ -1,5 +1,5 @@
 <template>
-  <div class="main  min-[1120px]:flex bg-white min-[1120px]:justify-evenly py-[2rem] px-[0.1rem] mt-[3rem] max-[1119px]:pb-[2rem]">
+  <div class="main  min-[1120px]:-mt-4 min-[1120px]:flex bg-white min-[1120px]:justify-evenly py-[2rem] px-[0.1rem] mt-[3rem] max-[1119px]:pb-[2rem]">
     <div class="left-panel mt-[5.5rem] max-[1119px]:hidden min-[1120px]:block">
       <img src="../assets/37.order-delivered-3.png" class = "w-[34rem] h-[32rem] border-1 border-gray-400 min-[1120px]:order-1" alt="delivery-img">
     </div>
@@ -8,7 +8,7 @@
         <div class="credentials - container min-[1120px]:order-2 min-[1120px]:mt-[2rem]">
         <div class="catch-line-outer">
             <div class="catch-line-inner">
-              <p class = "text-gray-500 font-semibold py-[2rem]">"Gear Up, Sign Up, Shop Now!"</p>
+              <p class = "text-gray-500 font-semibold py-[2rem] max-[1023px]:-mt-10">"Gear Up, Sign Up, Shop Now!"</p>
             </div>
       </div>
      <div class="credentials">
