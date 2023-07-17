@@ -1,7 +1,7 @@
 <template>
   <div class="poppins-paragraph lg:m-8 mb-20 md:m-5 md:mt-8 m-3 mt-5">
        <div class="md:flex flex-row mb-5">
-        <div class="md:flex md:flex-col md:mt-24">
+        <div class="md:flex md:flex-col md:mt-24 invisible md:visible">
           <div
   @click="selectColor('black')"
   :class="[
@@ -40,7 +40,39 @@
             <div class="flex flex-col h-3/2 md:w-2/5 gap-6 md:mb-0 mb-8">
               
               <img  class="max-w-lg mx-auto w-full mb-8 h-full rounded-xl object-contain aspect-square"
-          :src="product[main].image" />
+          :src="product[main].image" /> 
+           <div class="mx-auto flex sm:hidden mb-4">
+            <div
+  @click="selectColor('black')"
+  :class="[
+    'lg:w-3.5 lg:m-2.5 lg:mt-20 lg:h-3.5 md:w-2.5 md:h-2.5 bg-black md:m-1.5 h-3.5 w-3.5 m-3 rounded-full',
+    { 'custom-ring': selectedColor === 'black' }
+  ]"
+></div>
+<div
+  @click="selectColor('blue')"
+  :class="[
+    'lg:w-3.5 lg:m-2.5 lg:h-3.5 md:w-2.5 md:h-2.5 md:m-1.5 bg-[#ABC6D6] h-3.5 w-3.5 m-3 rounded-full',
+    { 'custom-ring': selectedColor === 'blue' }
+  ]"
+></div>
+<div
+  @click="selectColor('green')"
+  :class="[
+    'lg:w-3.5 lg:m-2.5 lg:h-3.5 ring-grey md:w-2.5 md:h-2.5 md:m-1.5 bg-[#58D7C4] h-3.5 w-3.5 m-3 rounded-full',
+    { 'custom-ring': selectedColor === 'green' }
+  ]"
+></div>
+<div
+  @click="selectColor('red')"
+  :class="[
+    'lg:w-3.5 lg:m-2.5 lg:h-3.5 ring-grey md:w-2.5 md:h-2.5 md:m-1.5 bg-[#F2CEC6] h-3.5 w-3.5 m-3 rounded-full',
+    { 'custom-ring': selectedColor === 'red' }
+  ]"
+></div>
+              </div>
+
+              
                     <div class="flex flex-row items-center justify-between gap-2">
                 <img
                   class="w-4 h-4 mr-2 my-auto"
