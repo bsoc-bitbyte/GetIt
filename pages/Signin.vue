@@ -1,5 +1,5 @@
 <template>
-  <div class="main min-[1120px]:flex min-[1120px]:justify-evenly py-[2rem] md:py-[0rem] px-[0.1rem] md:-mt-[3rem] mt-[0rem]">
+  <div class="main min-[1120px]:flex min-[1120px]:justify-evenly py-[2rem] md:py-[0rem] px-[0.1rem] md:mt-[2rem] mt-[1rem]">
     <div class="left-panel mt-[5.5rem] max-[1119px]:hidden min-[1120px]:block">
       <img src="../assets/37.order-delivered-3.png" class = "w-[34rem] h-[32rem] border-1 border-gray-400 min-[1120px]:order-1" alt="delivery-img">
     </div>
