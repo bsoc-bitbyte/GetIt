@@ -4,7 +4,7 @@
             <div v-if="showFilteroptions" class="sidebar h-[20px] md:h-[544px] w-[40px] md:w-[317px] m-4 md:border-r-2">
                 <div class="flex h-[30px] w-full top-[24px] relative cursor-pointer" @click="dropDown">
                     <img class=" h-[28px] w-[28px] left-[22px] relative" src="../assets/image 66.png">
-                    <div class="font-Poppins font-semibold text-xl leading-6 left-[70px] relative">
+                    <div class="font-Poppins font-semibold text-xl leading-6 left-[40px] md:left-[70px] relative">
                         Filters
                     </div>
                 </div>
