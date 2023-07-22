@@ -185,7 +185,25 @@
   
   </div>
 </template>
-  
+<style>
+.poppins-paragraph {
+  font-family: 'Poppins', sans-serif;
+}
+#small , #medium , #large , #extra , #XXL{
+  accent-color: #EA454C;
+}
+.custom-ring {
+  box-shadow: 0 0 0 4px rgba(169, 169, 169, 0.5);
+  outline: 4px solid rgba(169, 169, 169, 0.5);
+}
+.image-container {
+  display: inline-block;
+}
+.broader-darker {
+  transform: scaleX(1.4);
+  transform: scaleY(1.2);
+ }
+</style>
 <script>
   export default {
     async asyncData({ params }) {
