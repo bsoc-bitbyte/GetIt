@@ -2,12 +2,23 @@ from django.db import models
 
 # Create your models here.
 
+category_choices = [
+    ('clothing','Clothing'),
+    ('rsvp','RSVP'),
+]
+
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField(max_length=600, blank=True)
-    category = models.CharField(max_length=100)
+    description = models.TextField(max_length=600, 
+                                   blank=True)
+    category = models.CharField(max_length=100, 
+                                choices=category_choices)
     primary_variant = models.OneToOneField(
-        'ProductVariation', on_delete=models.CASCADE, default=None, null=True)
+        'ProductVariation', 
+        on_delete=models.CASCADE, 
+        default=None, 
+        null=True,
+        blank=True,)
     
     # Need to add Primary Variant and seller Id
     created_at = models.DateTimeField(auto_now_add=True)
@@ -18,24 +29,27 @@ class Product(models.Model):
     
 
 class ProductVariation(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    color_id = models.ForeignKey('ProductColor', on_delete=models.CASCADE)
-    size_id = models.ForeignKey('ProductSize', on_delete=models.CASCADE)
+    Product = models.ForeignKey(Product, 
+                                on_delete=models.CASCADE, 
+                                related_name='product_variations')
+    ProductColor = models.ForeignKey('ProductColor', 
+                                     on_delete=models.CASCADE)
+    ProductSize = models.ForeignKey('ProductSize', 
+                                    on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField()
-    cover_image = models.ForeignKey('ProductImage', on_delete=models.CASCADE, default=None, null=True)
+    cover_image = models.ForeignKey('ProductImage', 
+                                    on_delete=models.CASCADE, 
+                                    default=None, null=True,
+                                    blank=True,)
     is_active = models.BooleanField(default=True)
 
-    required = ['product_id', 'color_id', 'size_id', 'price', 'quantity']
-
     def __str__(self):
-        return f'{self.product_id.name} {self.color_id.color} {self.size_id.size}'
+        return f'{self.Product.name} {self.ProductColor.color} {self.ProductSize.size}'
 
 
 class ProductColor(models.Model):
     color = models.CharField(max_length=100, unique=True)
-
-    required = ['color']
 
     def __str__(self):
         return self.color
@@ -43,17 +57,17 @@ class ProductColor(models.Model):
 class ProductSize(models.Model):
     size = models.CharField(max_length=100, unique=True)
 
-    required = ['size']
-
     def __str__(self):
         return self.size
     
 
 class ProductImage(models.Model):
-    product_variation_id = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
+    product_variation_id = models.ForeignKey(ProductVariation, 
+                                             on_delete=models.CASCADE,
+                                             related_name='product_images')
     image = models.ImageField(upload_to='product_images')
 
     required = ['image']
 
     def __str__(self):
-        return f'{self.product_variation_id.product_id.name} {self.product_variation_id.color_id.color} {self.product_variation_id.size_id.size}'
+        return f'{self.product_variation_id.Product.name} {self.product_variation_id.ProductColor.color} {self.product_variation_id.ProductSize.size}'
