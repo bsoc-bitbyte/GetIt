@@ -23,11 +23,11 @@
         </div>
      </div>
         <div class="remember-forgot py-[1.0rem] flex justify-between">
-          <div class="remember-me">
+          <div class="remember-me hil">
             <input type="checkbox" name="check" id="checkbox" true-value = "yes" false-value = "no" v-model.trim.lazy="credentials.rememberMe">
             <label for="checkbox" class = " subpixel-antialiased font-bold text-slate-800 cursor-pointer">Remember me</label>
           </div>
-          <div class="forgot-password">
+          <div class="forgot-password hir">
             <a href="#" class = "font-bold subpixel-antialiased tracking-wide text-slate-800">Forgot password</a>
           </div>
         </div>
@@ -96,5 +96,33 @@
 }
 .signin{
   background-color:rgba(234, 69, 76, 1);
+}
+@media (max-width: 344px) {
+  .hil{
+    margin-left: -20px !important;
+  }
+  .hir
+  {
+    margin-right: -20px !important;
+  }
+  
+}
+@media (max-width: 300px) {
+  .hil{
+    margin-left: -20px !important;
+  }
+  .hir
+  {
+    margin-right: -40px !important;
+  }
+}
+@media (max-width: 281px) {
+  .hil{
+    margin-left: -30px !important;
+  }
+  .hir
+  {
+    margin-right: -43px !important;
+  }
 }
 </style>
