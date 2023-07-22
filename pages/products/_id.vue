@@ -1,4 +1,5 @@
 <template>
+
   <div class="lg:m-8 mb-20 md:m-5 md:mt-8 m-3 mt-5">
         <h1 class="text-2xl font-medium sm:visible max-sm:my-4 md:invisible">{{ product[main].title }}</h1>
         <div class="md:flex flex-row mb-5">
@@ -186,7 +187,6 @@
 </template>
   
 <script>
-  //import { mapMutations } from 'vuex';
   export default {
     async asyncData({ params }) {
         const response = await fetch(`https://fakestoreapi.com/products/`);
@@ -199,7 +199,6 @@
         };
     },
     methods: {
-      //...mapMutations(['addToCart']),
       addToCartClick(item) {
           this.$store.commit('addToCart',item);
           
@@ -233,8 +232,7 @@
             iconPack:'material',
             icon : 'warning'
         })
-      }
-
+      } 
        */
     }
   }
