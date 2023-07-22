@@ -7,43 +7,46 @@
                 <h3 class=" flex font-Poppins text-xl font-bold pl-0 px-12 " style="width: 19.417rem; top: 1rem;">Shopping Cart</h3>
             </div>    
             
-            <div class=" flex-col items-center justify-around h-full w-full " 
-                v-for=" (product, index ) in products" :key=" index " >
-                
-                <div id="selected_prod1" class=" h-32 flex justify-evenly border-2 item_1 rounded-lg mt-8" style=" width: 35rem; margin-left: auto; margin-right: auto;">
+            <div v-if="$store.state.cart.length > 0">
+                <p>You have {{$store.state.cart.length}} in your cart. You can checkout now </p>
+                <div class=" flex-col items-center justify-around h-full w-full " 
+                    v-for="item in $store.state.cart" :key="item.id" >              
+                    <div id="selected_prod1" class=" h-32 flex justify-evenly border-2 item_1 rounded-lg mt-8" style=" width: 35rem; margin-left: auto; margin-right: auto;">
 
-                    <div class="image_div flex items-center justify-center"> 
+                        <div class="image_div flex items-center justify-center"> 
 
-                        <img src="../assets/get_it.png" alt="Image description" class="w-24 h-24 object-cover">
+                            <img :src="item.image" alt="Image description" class="w-24 h-24 object-cover">
+
+                        </div>
+
+                        <div class="prod_Description w-40 h-28 mt-6 flex-col justify-center ">
+
+                            <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;">{{ item.title }}</h3>
+                            <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ item.price }}</h4>
+                            <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">{{ item.size }}</p>
+
+                        </div>
+
+                        <div class="Quantity flex justify-evenly w-28 h-28 mt-2 "> 
+
+                            <button onclick="" class="flex items-center justify-center p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
+
+                            <p id="count" class="flex items-center justify-center p-2 h-8 mt-10 " style="color: #C3C6C9; "> 1 </p>
+
+                            <button onclick="" class="flex items-center justify-center p-2 w-8 h-8 mt-10 text-black rounded-lg border-2 "  style="background-color: #EEF1F4;">+</button>
+
+                        </div>
+
+                        <div class="close_btn flex-row justify-end w-8 ">
+                            <button @click.prevent="removeFromCart(item)" class="flex-row justify-end ml-8 mt-2">X</button>
+                        </div>
 
                     </div>
-
-                    <div class="prod_Description w-40 h-28 mt-6 flex-col justify-center ">
-
-                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;">{{ product.ProductName }}</h3>
-                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ product.ProductPrice }}</h4>
-                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">{{ product.ProductSize }}</p>
-
-                    </div>
-
-                    <div class="Quantity flex justify-evenly w-28 h-28 mt-2 "> 
-
-                        <button onclick="" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
-
-                        <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 " style="color: #C3C6C9; "> 1 </p>
-
-                        <button onclick="" class="flex items-center justify-cente p-2 w-8 h-8 mt-10 text-black rounded-lg border-2 "  style="background-color: #EEF1F4;">+</button>
-
-                    </div>
-
-                    <div class="close_btn flex-row justify-end w-8 ">
-                        <button class="flex-row justify-end ml-8 mt-2">X</button>
-                    </div>
-
                 </div>
             </div>
-            
-
+            <div v-else class="navbar-dropdown is-boxed is-right">
+                <p>Your Cart is Empty. Take a look on our awesome products and add them to your cart</p>
+            </div>
         </div>
 
         <div class="billing h-full w-full flex-col mb-32 items-center justify-center ">
@@ -94,17 +97,44 @@
 
 <script>
     export default {
-        data: () => {
-            return {
-                products: [
-                    {ProductName: 'Product1', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product2', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product3', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product4', ProductPrice: '69$', ProductSize: 'M'}
-                ]
+        methods: {
+            removeFromCart(item) {
+                this.$store.commit('removeFromCart', item);
+                
+                this.$toast.show('Removed from Cart',{
+                    theme: "bubble", 
+                    position: "top-right", 
+                    duration : 2000,
+                    type:'error',
+                    iconPack:'material',
+                    icon : 'remove_shopping_cart'
+                })
+                
+                
             }
-        },
-    name:'cart'
-  }
+            /*
+             decreasedQ{
+                this.$toast.show('Reduced the quantity',{
+                    theme: "bubble", 
+                    position: "top-right", 
+                    duration : 2000,
+                    type:'info',
+                    iconPack:'material',
+                    icon : 'info'
+                })
+             }
+             increasedQ{
+                this.$toast.show('Increased the quantity',{
+                    theme: "bubble", 
+                    position: "top-right", 
+                    duration : 2000,
+                    type:'info',
+                    iconPack:'material',
+                    icon : 'info'
+                })
+             }
+             */
+        }
+    }
 </script>
 
