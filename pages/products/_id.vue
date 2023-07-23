@@ -196,7 +196,7 @@
         <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-[#CFCFCF] md:border-0">
 
               <div class="md:flex bg-white shadow-[0px_40px_70px_4px_rgba(0,0,0,0.56)] md:shadow-none md:border-0 m-0 justify-center md:justify-start w-full fixed bottom-0 mx-0 mb-0 flex flex-row md:justify-left sm:mb-0 md:relative gap-0s">
-                <button class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 md:py-0 min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
+                <button @click="addToCartClick(product[main])" class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 md:py-0 min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
                   <div class="flex items-center justify-center md:justify-start ">
   <div class="flex items-center -ml-[15px]">
     <img class="invisible md:visible -pr-[2px] w-5 h-4 mr-0 md:mr-0 md:mt-0 md:mb-0" src="../../assets/cart02.png">
@@ -276,6 +276,32 @@ export default {
     selectColor(color) {
       this.selectedColor = color;
     },
+    addToCartClick(item) {
+          this.$store.commit('addToCart',item); 
+      }
+      /*
+      requestColor {
+        this.$toast.show('Please select the color',{
+            theme: "toasted-primary", 
+            position: "bottom-center", 
+            duration : 2000,
+            type:'warning',
+            iconPack:'material',
+            icon : 'warning'
+        })
+      }
+      requestSize {
+        this.$toast.show('Please select the size',{
+            theme: "toasted-primary", 
+            position: "bottom-center", 
+            duration : 2000,
+            type:'warning',
+            iconPack:'material',
+            icon : 'warning'
+        })
+      }
+
+       */
   },
 };
 </script>

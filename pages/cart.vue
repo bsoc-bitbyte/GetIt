@@ -1,5 +1,5 @@
 <template>
-    <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 mt-3 lg:mt-0 xl:mt-8 m-4 lg:m-10 xl:m-16">
+    <div class="main h-full flex flex-col md:flex-row items-start justify-center bg-white-100 mt-3 lg:mt-0 xl:mt-8 m-4 lg:m-10 xl:m-16">
 
         <div class="cart flex flex-col h-full w-full bg-white-100 items-center justify-center">
 
@@ -7,40 +7,46 @@
                 <h3 class="font-Poppins text-xl font-bold pl-0 px-12 mt-[1rem]">Shopping Cart</h3>
             </div>    
             
-            <div class="products flex justify-center h-full w-full"
-                v-for=" (product, index ) in products" :key=" index ">
+            <div v-if="$store.state.cart.length > 0">
+                <p>You have {{ nofItmes }} in your cart. You can checkout now </p>
+                <div class="products flex justify-center h-full w-full"
+                    v-for="item in $store.state.cart" :key="item.id">
                 
                 <div id="selected_prod1" class=" h-32 w-[25rem] lg:w-[30rem] xl:w-[35rem] flex justify-between md:justify-evenly border-2 item_1 rounded-lg mt-8" >
 
                     <div class="image_div flex items-center justify-center"> 
 
-                        <img src="../assets/get_it.png" alt="Image description" class="w-24 h-24 object-cover">
+                        <img :src="item.image" alt="Image description" class="w-24 h-24 object-cover">
 
                     </div>
 
                     <div class="prod_Description w-20 lg:w-40 h-28 mt-6 flex-col justify-center ">
 
-                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;">{{ product.ProductName }}</h3>
-                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ product.ProductPrice }}</h4>
-                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">{{ product.ProductSize }}</p>
+                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;">{{ item.title }}</h3>
+                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ item.price }}$ X {{ item.quantity }} = {{ item.totalPrice }}$</h4>
+                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">{{ item.size }}</p>
 
                     </div>
 
                     <div class="Quantity flex justify-evenly w-28 h-28 mt-2 "> 
 
-                        <button onclick="" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
+                        <button @click="decreaseQ(item)" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
 
-                        <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 " style="color: #C3C6C9; "> 1 </p>
+                        <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 " style="color: #C3C6C9; "> {{ item.quantity }} </p>
 
-                        <button onclick="" class="flex items-center justify-cente p-2 w-8 h-8 mt-10 text-black rounded-lg border-2 "  style="background-color: #EEF1F4;">+</button>
+                        <button @click="increaseQ(item)" class="flex items-center justify-cente p-2 w-8 h-8 mt-10 text-black rounded-lg border-2 "  style="background-color: #EEF1F4;">+</button>
 
                     </div>
 
                     <div class="close_btn flex-row justify-end w-5 md:w-8 ">
-                        <button class="flex-row justify-end ml-0 md:ml-8 mt-2">X</button>
+                        <button @click.prevent="removeFromCart(item)" class="flex-row justify-end ml-0 md:ml-8 mt-2">X</button>
                     </div>
 
                 </div>
+                </div>
+            </div>
+            <div v-else class="navbar-dropdown is-boxed is-right h-full w-full">
+                <p>Your Cart is Empty. Take a look on our awesome products and add them to your cart</p>
             </div>
             
 
@@ -94,17 +100,31 @@
 
 <script>
     export default {
-        data: () => {
-            return {
-                products: [
-                    {ProductName: 'Product1', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product2', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product3', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product4', ProductPrice: '69$', ProductSize: 'M'}
-                ]
+        name:'cart',
+        computed : {
+            nofItmes() {
+                if(this.$store.state.cart.length===1) {
+                return '1 item';
+                } else if(this.$store.state.cart.length>1) {
+                return 'this.$store.state.cart.length items';
+                }
             }
         },
-    name:'cart'
+        methods: {
+            removeFromCart(item) {
+                this.$store.commit('removeFromCart', item);
+            },           
+            decreaseQ(item){
+                if(item.quantity===1) {
+                    this.$store.commit('removeFromCart', item);
+                } else if(item.quantity>1) {
+                    this.$store.commit('decreaseQuantity', item);
+                }
+            },
+            increaseQ(item){
+                this.$store.commit('increaseQuantity', item);
+            } 
+        }
   }
 </script>
 
