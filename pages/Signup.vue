@@ -48,8 +48,8 @@
         </div>
         <div class="optional-sign-in mt-[0.7rem] hi">
           <p class = "flex justify-center hi">
-            <span class="account-text tracking-wider">Already have an account? </span>
-            <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wider">Sign in</nuxt-link>
+            <span class="account-text tracking-wider dha">Already have an account? </span>
+            <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wider suf">Sign in</nuxt-link>
           </p>
         </div>
       </div>
@@ -122,6 +122,24 @@
     margin-left: 16px !important;
     /* justify-content: center;
     text-align: center; */
+  }
+  .dha
+  {
+    display: inline-block;
+    /* font-size:larger; */
+    margin-left: -48px !important;
+    margin-right: -20px !important;
+    text-align: center !important;
+    
+  }
+
+  .suf
+  {
+    display: inline-block;
+    /* font-size:larger; */
+    margin-left: -48px !important;
+    margin-right: 5px !important;
+    text-align: center !important;
   }
   /* .hil{
     margin-left: 16px !important;
