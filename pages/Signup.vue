@@ -46,8 +46,8 @@
 
           </button>
         </div>
-        <div class="optional-sign-in mt-[0.7rem]">
-          <p class = "flex justify-center">
+        <div class="optional-sign-in mt-[0.7rem] hi">
+          <p class = "flex justify-center hi">
             <span class="account-text tracking-wider">Already have an account? </span>
             <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wider">Sign in</nuxt-link>
           </p>
@@ -103,5 +103,28 @@
 }
 .signup{
   background-color:rgba(234, 69, 76, 1)
+}
+
+@media (max-width: 325px) {
+  /* .hil{
+    margin-left: -20px !important;
+  }
+  .hir
+  {
+    margin-right: -40px !important;
+  } */
+  .hi
+  {
+    display: flex;
+    flex-direction: column !important;
+    gap: 5px;
+    /* margin-left: 25px !important; */
+    margin-left: 16px !important;
+    /* justify-content: center;
+    text-align: center; */
+  }
+  /* .hil{
+    margin-left: 16px !important;
+  } */
 }
 </style>
