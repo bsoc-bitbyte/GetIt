@@ -97,7 +97,7 @@
 .signin{
   background-color:rgba(234, 69, 76, 1);
 }
-@media (max-width: 344px) {
+@media (max-width: 420px) {
   .hil{
     margin-left: -20px !important;
   }
@@ -107,7 +107,7 @@
   }
   
 }
-@media (max-width: 325px) {
+@media (max-width: 420px) {
   /* .hil{
     margin-left: -20px !important;
   }
