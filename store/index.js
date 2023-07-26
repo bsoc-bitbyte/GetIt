@@ -12,29 +12,24 @@ export const getters = {
 }
 export const mutations = 	{
   addToCart(state, item) {
-    let found = state.cart.find(product => product.id == item.id);
+    let found = state.cart.find(product => {
+      return ((product.id === item.id) && (product.color === item.color)&& (product.size === item.size))
+    });
 
     if (found) {
-      if(found.quantity<5) {
-        found.quantity++;
-        found.totalPrice = found.quantity*found.price;
-      } else {
-        this.$toast.show('Sorry, Seller MAX limit <br>  is 5 only ',{
-          theme: "toasted-primary", 
-          position: "bottom-center", 
-          duration : 3000,
-          type:'error',
-          iconPack:'material',
-          icon : 'warning'
-        })
-      }
-        
+      found.quantity++;
+      found.totalPrice = found.quantity*found.price;  
     } else {
-      state.cart.push(item);
-      item.quantity=1;
-      item.totalPrice=item.price.toFixed(2);
+      let temp=item.id+"_"+item.color+"_"+item.size;
+      let totalP=item.price.toFixed(2);
+      state.cart.push({
+        ...item,
+        pid: temp,
+        quantity: 1,
+        totalPrice:totalP,
+      });
     }
-    
+    this.commit('saveCart');
     this.$toast.show('Added to Cart',{
       theme: "toasted-primary", 
       position: "bottom-center", 
@@ -43,13 +38,13 @@ export const mutations = 	{
       iconPack:'material',
       icon : 'add_shopping_cart'
     })
-    this.commit('saveCart');
   },
   removeFromCart(state, item) {
     let index = state.cart.indexOf(item);
     if (index > -1) {  
       state.cart.splice(index, 1);
     }
+    this.commit('saveCart');
     this.$toast.show('Removed from Cart',{
       theme: "toasted-primary", 
       position: "bottom-center", 
@@ -58,13 +53,13 @@ export const mutations = 	{
       iconPack:'material',
       icon : 'remove_shopping_cart'
     })
-    this.commit('saveCart');
   },
   increaseQuantity(state,item) {
-    let found = state.cart.find(product => product.id == item.id);
-    if(found.quantity<5) {
+    let found = state.cart.find(product => product.pid == item.pid);
+    if(found) {
       found.quantity++;
       found.totalPrice = found.quantity*found.price;
+      this.commit('saveCart');
       this.$toast.show('Increased the Quantity',{
         theme: "toasted-primary", 
         position: "bottom-center", 
@@ -73,23 +68,14 @@ export const mutations = 	{
         iconPack:'material',
         icon : 'check'
       })
-    } else {
-      this.$toast.show('Sorry, Seller MAX limit <br> is 5 only ',{
-        theme: "toasted-primary", 
-        position: "bottom-center", 
-        duration : 3000,
-        type:'info',
-        iconPack:'material',
-        icon : 'warning'
-      })
     }
-    this.commit('saveCart');
   },
   decreaseQuantity(state,item) {
-    let found = state.cart.find(product => product.id == item.id);
+    let found = state.cart.find(product => product.pid == item.pid);
     if(found.quantity>1) {
       found.quantity--;
       found.totalPrice =found.quantity*found.price.toFixed(2);
+      this.commit('saveCart');
       this.$toast.show('Decreased the Quantity',{
         theme: "toasted-primary", 
         position: "bottom-center", 
@@ -99,7 +85,6 @@ export const mutations = 	{
         icon : 'check'
       })
     } 
-    this.commit('saveCart');
   },
   saveCart(state) {
     if(process.browser) {

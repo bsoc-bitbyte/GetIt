@@ -130,12 +130,13 @@
             <input
               type="radio"
               name="Size"
-              value="small"
+              value="S"
               class="peer/small"
               id="small"
               checked
+              v-model="selectedSize"
             /><label for="small" class="peer-checked"
-              ><p class="ml-1">Small</p></label
+              ><p class="ml-1">S</p></label
             >
           </div>
           <div
@@ -144,11 +145,12 @@
             <input
               type="radio"
               name="Size"
-              value="medium"
+              value="M"
               class="peer/medium"
               id="medium"
-            /><label for="medium" class="peer-checked0"
-              ><p class="ml-1">Medium</p></label
+              v-model="selectedSize"
+            /><label for="medium" class="peer-checked"
+              ><p class="ml-1">M</p></label
             >
           </div>
           <div
@@ -157,11 +159,12 @@
             <input
               type="radio"
               name="Size"
-              value="large"
+              value="L"
               class="peer/large"
               id="large"
+              v-model="selectedSize"
             /><label for="large" class="peer-checked"
-              ><p class="ml-1">Large</p></label
+              ><p class="ml-1">L</p></label
             >
           </div>
           <div
@@ -170,11 +173,12 @@
             <input
               type="radio"
               name="Size"
-              value="extra"
+              value="XL"
               class="peer/extra"
               id="extra"
+              v-model="selectedSize"
             /><label for="extra" class="peer-checked"
-              ><p class="ml-1">Extra Large</p></label
+              ><p class="ml-1">XL</p></label
             >
           </div>
           <div
@@ -186,6 +190,7 @@
               value="XXL"
               class="peer/XXL"
               id="XXL"
+              v-model="selectedSize"
             />
             <label for="XXL" class="peer-checked"><p class="ml-1">XXL</p></label
             >
@@ -260,11 +265,11 @@ export default {
       i: 0,
       main: 1,
       product: [],
-      selectedColor: null,
+      selectedColor: 'black',
+      selectedSize: 'S'
     };
   },
   async asyncData({ params }) {
-    const productId = params.id;
     const response = await fetch(`https://fakestoreapi.com/products/`);
     const product = await response.json();
     console.log(product);
@@ -273,12 +278,19 @@ export default {
     };
   },
   methods: {
-    selectColor(color) {
+    selectColor(color,item) {
       this.selectedColor = color;
+      
+    },
+    selectSize(item) {
+      item.size=this.selectedSize;
     },
     addToCartClick(item) {
+          let temp=this.selectedColor;
+          item.color=temp.charAt(0).toUpperCase()+ temp.slice(1);
+          item.size=this.selectedSize;
           this.$store.commit('addToCart',item); 
-      }
+    }
       /*
       requestColor {
         this.$toast.show('Please select the color',{

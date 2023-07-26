@@ -7,9 +7,9 @@
                 <div class="flex w-full md: lg:w-[30rem] xl:w-[35rem] " >
                     <h3 class="font-Poppins text-xl font-bold pl-0 px-1 mt-[1rem]">Shopping Cart</h3>
                 </div>
-                <p>You have {{ nofItmes }} in your cart. You can checkout now </p>
+                <p>You have {{ nofItems}} in your cart. You can checkout now </p>
                 <div class="products flex justify-center h-full w-full"
-                    v-for="item in $store.state.cart" :key="item.id">
+                    v-for="item in $store.state.cart" :key="item.pid">
                 
                 <div id="selected_prod1" class=" h-32 w-[25rem] lg:w-[30rem] xl:w-[35rem] flex  border-2 item_1 rounded-lg mt-8" >
 
@@ -23,7 +23,7 @@
 
                         <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6 line-clamp-3" style="color: #271819;">{{ item.title }}</h3>
                         <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ item.price }}$</h4>
-                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">{{ item.size }}</p>
+                        <p id="prod_Size" class="font-Mulish text-base font-medium leading-6" style="color: #271819;">Color: {{ item.color }}  Size: {{ item.size }}</p>
 
                     </div>
 
@@ -104,11 +104,13 @@
     export default {
         name:'cart',
         computed : {
-            nofItmes() {
+            nofItems() {
                 if(this.$store.state.cart.length===1) {
-                return '1 item';
+                    let tempItems=this.$store.state.cart.length+" item";
+                    return tempItems;
                 } else if(this.$store.state.cart.length>1) {
-                return 'this.$store.state.cart.length items';
+                    let tempItems=this.$store.state.cart.length+" items";
+                    return tempItems;
                 }
             }
         },
