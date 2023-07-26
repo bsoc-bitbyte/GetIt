@@ -22,13 +22,13 @@
           <input type="password"  class = "px-[1rem] border-2 h-[2.69rem] border-black-300 max-[1119px]:w-full min-[1120px]:w-[35rem] rounded-lg" v-model.trim.lazy = "credentials.password" name="" placeholder="***********"/>
         </div>
      </div>
-        <div class="remember-forgot py-[1.0rem] flex justify-between">
-          <div class="remember-me">
+        <div class="remember-forgot py-[1.0rem] flex justify-between hi">
+          <div class="remember-me hil">
             <input type="checkbox" name="check" id="checkbox" true-value = "yes" false-value = "no" v-model.trim.lazy="credentials.rememberMe">
             <label for="checkbox" class = " subpixel-antialiased font-bold text-slate-800 cursor-pointer">Remember me</label>
           </div>
-          <div class="forgot-password">
-            <a href="#" class = "font-bold subpixel-antialiased tracking-wide text-slate-800">Forgot password</a>
+          <div class="forgot-password hir">
+            <a href="#" class = "font-bold subpixel-antialiased tracking-wide text-slate-800 fp">Forgot password ?</a>
           </div>
         </div>
         <div class="sign-in  pt-[1rem] pb-[0rem]">
@@ -47,10 +47,10 @@
 
           </button>
         </div>
-        <div class="optional-sign-in mt-[0.7rem]">
-          <p class = "flex justify-center">
-            <span class="account-text tracking-wider">Don't have an account?</span>
-            <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wider">Sign up for free</nuxt-link>
+        <div class="optional-sign-in mt-[0.7rem] hi">
+          <p class = "flex justify-center hi">
+            <span class="account-text tracking-wider dha">Don't have an account?</span>
+            <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wider suf">Sign up for free</nuxt-link>
           </p>
         </div>
       </div>
@@ -97,4 +97,68 @@
 .signin{
   background-color:rgba(234, 69, 76, 1);
 }
+@media (max-width: 420px) {
+  .hil{
+    margin-left: -20px !important;
+  }
+  .hir
+  {
+    margin-right: -20px !important;
+  }
+  
+}
+@media (max-width: 420px) {
+  /* .hil{
+    margin-left: -20px !important;
+  }
+  .hir
+  {
+    margin-right: -40px !important;
+  } */
+  .hi
+  {
+    display: flex;
+    flex-direction: column !important;
+    gap: 5px;
+    /* margin-left: 25px !important; */
+    /* margin-left: 0px !important; */
+    /* justify-content: center; */
+    text-align: center;
+  }
+  .dha
+  {
+    display: inline-block;
+    /* font-size:larger; */
+    margin-left: -30px !important;
+    margin-right: -40px !important;
+    text-align: center !important;
+    
+  }
+  .suf
+  {
+    display: inline-block;
+    /* font-size:larger; */
+    margin-left: -48px !important;
+    margin-right: -45px !important;
+    text-align: center !important;
+  }
+  .fp
+  {
+    margin-left: -25px !important;
+    text-align: center;
+    
+  }
+  /* .hil{
+    margin-left: 16px !important;
+  } */
+}
+/* @media (max-width: 281px) {
+  .hil{
+    margin-left: -30px !important;
+  }
+  .hir
+  {
+    margin-right: -43px !important;
+  }
+} */
 </style>
