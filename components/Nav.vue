@@ -11,7 +11,7 @@
             <a class="py-0.5 hover:border-b-2 hover:border-black" href="#">Home</a>
           </li>
           <li class="text-[#271819] font-sans w-[10.5%] top-[-5px] mr-[.5%] inline-block  py-[19px]">
-            <nuxt-link class=" py-0.5 hover:border-b-2 hover:border-black" to="/products/_id">Shop</nuxt-link>
+            <nuxt-link class=" py-0.5 hover:border-b-2 hover:border-black" to="/shop">Shop</nuxt-link>
           </li>
           <li class="text-[#271819] font-sans w-[10.5%] top-[-5px]  inline-block  py-[19px]">
             <a class=" py-0.5 hover:border-b-2 hover:border-black " href="#">About Us</a>
@@ -79,7 +79,7 @@
                 <li>
                   <nuxt-link
                     class=" flex font-serif items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700"
-                    to="/products/_id"><span class="flex-1 ml-12 whitespace-nowrap">Shop</span></nuxt-link>
+                    to="/shop"><span class="flex-1 ml-12 whitespace-nowrap">Shop</span></nuxt-link>
                 </li>
                 <li>
                   <a href="#"
