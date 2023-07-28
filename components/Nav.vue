@@ -46,7 +46,7 @@
         </ul>
       </div>
       <div class="hidden"><a href="#">GetIt</a></div>
-      <hr class="h-px lg:my-4 my-5 bg-gray-400 border-0 dark:bg-gray-400" />
+      <hr class="h-px lg:my-4 my-5 bg-gray-400 border-0" />
     </div>
 
     <div class="lg:hidden pb-14">
@@ -61,7 +61,7 @@
             </svg>
           </div>
           <aside v-show="isShow" class="fixed top-0 left-0 shadow-xl z-40 w-60 h-full">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-200 ">
               <svg class="h-5 w-5 text-black" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
                 v-on:click="isShow = !isShow">
@@ -72,29 +72,29 @@
               <ul class="space-y-2 text-xl font-medium mt-7 ">
                 <li>
                   <a href="#"
-                    class="flex font-serif items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
+                    class="flex font-serif items-center p-2 text-gray-900 rounded-lg hover:bg-gray-300 ">
                     <span class="flex-1 ml-12 whitespace-nowrap">Home</span>
                   </a>
                 </li>
                 <li>
                   <nuxt-link
-                    class=" flex font-serif items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700"
+                    class=" flex font-serif items-center p-2 text-gray-900 rounded-lg hover:bg-gray-300 "
                     to="/products/_id"><span class="flex-1 ml-12 whitespace-nowrap">Shop</span></nuxt-link>
                 </li>
                 <li>
                   <a href="#"
-                    class="flex items-center font-serif p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
+                    class="flex items-center font-serif p-2 text-gray-900 rounded-lg hover:bg-gray-300 ">
                     <span class="flex-1 ml-12 whitespace-nowrap">About Us</span>
                   </a>
                 </li>
                 <li>
                   <nuxt-link
-                    class="flex font-serif items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700"
+                    class="flex font-serif items-center p-2 text-gray-900 rounded-lg hover:bg-gray-300 "
                     to="/Signin"><span class="flex-1 ml-12 whitespace-nowrap">Sign In</span></nuxt-link>
                 </li>
                 <li>
                   <span class="flex"><nuxt-link
-                      class="flex-1  font-serif whitespace-nowrap items-center p-2 pl-14 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700"
+                      class="flex-1  font-serif whitespace-nowrap items-center p-2 pl-14 text-gray-900 rounded-lg hover:bg-gray-300 "
                       to="/cart">10 Items<img class="max-w-none h-7 w-8 -mt-1 inline-block"
                         src="https://static.thenounproject.com/png/5645-200.png" /></nuxt-link></span>
                 </li>
