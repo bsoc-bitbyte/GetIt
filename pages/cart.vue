@@ -91,7 +91,7 @@
 
             <div class="Checkout button flex items-center justify-center text-center text-white w-full mt-8">
 
-                <nuxt-link to="/checkOut" class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg w-[25.3rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C; height: 3.45813rem;">Checkout</nuxt-link>
+                <nuxt-link :to="this.$store.state.cart.length > 0 ? '/checkOut' : ''" class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg w-[25.3rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C; height: 3.45813rem;">Checkout</nuxt-link>
 
             </div>
         </div>
