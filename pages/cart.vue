@@ -1,46 +1,54 @@
 <template>
-    <div class="main h-full flex flex-col md:flex-row items-center justify-center bg-white-100 mt-3 lg:mt-0 xl:mt-8 m-4 lg:m-10 xl:m-16">
+    <div class="main h-full flex flex-col md:flex-row items-start justify-center bg-white-100 mt-3 lg:mt-0 xl:mt-8 m-4 lg:m-10 xl:m-16">
 
-        <div class="cart flex flex-col h-full w-full bg-white-100 items-center justify-center">
-
-            <div class="flex w-full lg:w-[30rem] xl:w-[35rem] justify-right" >
-                <h3 class="font-Poppins text-xl font-bold pl-0 px-12 mt-[1rem]">Shopping Cart</h3>
-            </div>    
+        <div class="cart flex flex-col h-auto w-auto lg:w-[35rem] xl:w-[35rem] bg-white-100 items-center justify-center md:items-start">
             
-            <div class="products flex justify-center h-full w-full"
-                v-for=" (product, index ) in products" :key=" index ">
+            <div v-if="$store.state.cart.length > 0">
+                <div class="flex w-full lg:w-[30rem] xl:w-[35rem] " >
+                    <h3 class="font-Poppins text-xl font-bold pl-0 px-1 mt-[1rem]">Shopping Cart</h3>
+                </div>
+                <p>You have {{ nofItems}} in your cart. You can checkout now </p>
+                <div class="products flex justify-center h-full w-full"
+                    v-for="item in $store.state.cart" :key="item.pid">
                 
-                <div id="selected_prod1" class=" h-32 w-[25rem] lg:w-[30rem] xl:w-[35rem] flex justify-between md:justify-evenly border-2 item_1 rounded-lg mt-8" >
+                <div id="selected_prod1" class=" h-auto w-auto lg:w-[30rem] xl:w-[35rem] flex  border-2 item_1 rounded-lg mt-8 sm:px-0" >
 
                     <div class="image_div flex items-center justify-center"> 
 
-                        <img src="../assets/get_it.png" alt="Image description" class="w-24 h-24 object-cover">
+                        <img :src="item.image" alt="Image description" class="w-24 lg:w-28 lg:h-28 lg:mx-2 mx-1 h-24 object-cover">
 
                     </div>
 
-                    <div class="prod_Description w-20 lg:w-40 h-28 mt-6 flex-col justify-center ">
+                    <div class="prod_Description w-40 px-1 lg:w-60 h-32 mt-3 flex-col sm-35">
 
-                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6" style="color: #271819;">{{ product.ProductName }}</h3>
-                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ product.ProductPrice }}</h4>
-                        <p id="prod_Size" class="font-Mulish text-lg font-semibold leading-12" style="color: #271819;">{{ product.ProductSize }}</p>
-
-                    </div>
-
-                    <div class="Quantity flex justify-evenly w-28 h-28 mt-2 "> 
-
-                        <button onclick="" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
-
-                        <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 " style="color: #C3C6C9; "> 1 </p>
-
-                        <button onclick="" class="flex items-center justify-cente p-2 w-8 h-8 mt-10 text-black rounded-lg border-2 "  style="background-color: #EEF1F4;">+</button>
+                        <h3 id="prod_Name" class="font-Poppins text-lg font-semibold leading-6 line-clamp-3" style="color: #271819;">{{ item.title }}</h3>
+                        <h4 id="prod_Price" class="font-Mulish text-lg font-bold leading-6" style="color: #C3C6C9;">{{ item.price }}$</h4>
+                        <p id="prod_Size" class="font-Mulish text-base lg:text-lg font-semibold leading-6 lg:leading-8" style="color: #271819;">{{ item.size }}-{{ item.color }}</p>
 
                     </div>
 
-                    <div class="close_btn flex-row justify-end w-5 md:w-8 ">
-                        <button class="flex-row justify-end ml-0 md:ml-8 mt-2">X</button>
+                    <div class="Quantity flex justify-evenly w-28 lg:w-32 lg:ml-10 h-28 mt-7 ">
+
+                        <button @click="decreaseQ(item)" class="flex items-center justify-cente p-2 w-7 h-8 mt-10 text-black text-center rounded-lg border-2 " style="background-color: #EEF1F4;">-</button>
+
+                        <p id="count" class="flex items-center justify-cente p-2 h-8 mt-10 sm:w-4 " style="color: #C3C6C9; "> {{ item.quantity }} </p>
+
+                        <button @click="increaseQ(item)" class="flex items-center justify-cente p-2 w-8 h-8 mt-10 text-black rounded-lg border-2 "  style="background-color: #EEF1F4;">+</button>
+
+                    </div>
+
+                    <div class="close_btn flex-row justify-end w-5 md:w-8 sm:w-2">
+                        <button @click.prevent="removeFromCart(item)" class="flex-row justify-end ml-0  mt-2">X</button>
                     </div>
 
                 </div>
+                </div>
+            </div>
+            <div v-else class="navbar-dropdown is-boxed is-right h-full w-full">
+                <div class="flex w-full md: lg:w-[30rem] xl:w-[35rem] " >
+                    <h3 class="font-Poppins text-xl font-bold pl-0 px-1 mt-[1rem]">Shopping Cart</h3>
+                </div>
+                <p>Your Cart is Empty. Take a look on our awesome products and add them to your cart</p>
             </div>
             
 
@@ -83,7 +91,7 @@
 
             <div class="Checkout button flex items-center justify-center text-center text-white w-full mt-8">
 
-                <nuxt-link to="/checkOut" class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg w-[25.3rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C; height: 3.45813rem;">Checkout</nuxt-link>
+                <nuxt-link :to="this.$store.state.cart.length > 0 ? '/checkOut' : ''" class="checkout_Btn p-2 py-4 rounded-lg font-medium text-lg w-[25.3rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]" style="font-family: Poppins; font-style: normal; letter-spacing: 0.03rem; background-color: #EA454C; height: 3.45813rem;">Checkout</nuxt-link>
 
             </div>
         </div>
@@ -94,17 +102,33 @@
 
 <script>
     export default {
-        data: () => {
-            return {
-                products: [
-                    {ProductName: 'Product1', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product2', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product3', ProductPrice: '69$', ProductSize: 'M'},
-                    {ProductName: 'Product4', ProductPrice: '69$', ProductSize: 'M'}
-                ]
+        name:'cart',
+        computed : {
+            nofItems() {
+                if(this.$store.state.cart.length===1) {
+                    let tempItems=this.$store.state.cart.length+" item";
+                    return tempItems;
+                } else if(this.$store.state.cart.length>1) {
+                    let tempItems=this.$store.state.cart.length+" items";
+                    return tempItems;
+                }
             }
         },
-    name:'cart'
+        methods: {
+            removeFromCart(item) {
+                this.$store.commit('removeFromCart', item);
+            },           
+            decreaseQ(item){
+                if(item.quantity===1) {
+                    this.$store.commit('removeFromCart', item);
+                } else if(item.quantity>1) {
+                    this.$store.commit('decreaseQuantity', item);
+                }
+            },
+            increaseQ(item){
+                this.$store.commit('increaseQuantity', item);
+            } 
+        }
   }
 </script>
 

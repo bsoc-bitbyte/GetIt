@@ -130,12 +130,13 @@
             <input
               type="radio"
               name="Size"
-              value="small"
+              value="S"
               class="peer/small"
               id="small"
               checked
+              v-model="selectedSize"
             /><label for="small" class="peer-checked"
-              ><p class="ml-1">Small</p></label
+              ><p class="ml-1">S</p></label
             >
           </div>
           <div
@@ -144,11 +145,12 @@
             <input
               type="radio"
               name="Size"
-              value="medium"
+              value="M"
               class="peer/medium"
               id="medium"
-            /><label for="medium" class="peer-checked0"
-              ><p class="ml-1">Medium</p></label
+              v-model="selectedSize"
+            /><label for="medium" class="peer-checked"
+              ><p class="ml-1">M</p></label
             >
           </div>
           <div
@@ -157,11 +159,12 @@
             <input
               type="radio"
               name="Size"
-              value="large"
+              value="L"
               class="peer/large"
               id="large"
+              v-model="selectedSize"
             /><label for="large" class="peer-checked"
-              ><p class="ml-1">Large</p></label
+              ><p class="ml-1">L</p></label
             >
           </div>
           <div
@@ -170,11 +173,12 @@
             <input
               type="radio"
               name="Size"
-              value="extra"
+              value="XL"
               class="peer/extra"
               id="extra"
+              v-model="selectedSize"
             /><label for="extra" class="peer-checked"
-              ><p class="ml-1">Extra Large</p></label
+              ><p class="ml-1">XL</p></label
             >
           </div>
           <div
@@ -186,6 +190,7 @@
               value="XXL"
               class="peer/XXL"
               id="XXL"
+              v-model="selectedSize"
             />
             <label for="XXL" class="peer-checked"><p class="ml-1">XXL</p></label
             >
@@ -196,7 +201,7 @@
         <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-[#CFCFCF] md:border-0">
 
               <div class="md:flex bg-white shadow-[0px_40px_70px_4px_rgba(0,0,0,0.56)] md:shadow-none md:border-0 m-0 justify-center md:justify-start w-full fixed bottom-0 mx-0 mb-0 flex flex-row md:justify-left sm:mb-0 md:relative gap-0s">
-                <button class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 md:py-0 min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
+                <button @click="addToCartClick(product[main])" class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 md:py-0 min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
                   <div class="flex items-center justify-center md:justify-start ">
   <div class="flex items-center -ml-[15px]">
     <img class="invisible md:visible -pr-[2px] w-5 h-4 mr-0 md:mr-0 md:mt-0 md:mb-0" src="../../assets/cart02.png">
@@ -260,11 +265,11 @@ export default {
       i: 0,
       main: 1,
       product: [],
-      selectedColor: null,
+      selectedColor: 'black',
+      selectedSize: 'S'
     };
   },
   async asyncData({ params }) {
-    const productId = params.id;
     const response = await fetch(`https://fakestoreapi.com/products/`);
     const product = await response.json();
     console.log(product);
@@ -273,9 +278,42 @@ export default {
     };
   },
   methods: {
-    selectColor(color) {
+    selectColor(color,item) {
       this.selectedColor = color;
+      
     },
+    selectSize(item) {
+      item.size=this.selectedSize;
+    },
+    addToCartClick(item) {
+          let temp=this.selectedColor;
+          item.color=temp.charAt(0).toUpperCase()+ temp.slice(1);
+          item.size=this.selectedSize;
+          this.$store.commit('addToCart',item); 
+    }
+      /*
+      requestColor {
+        this.$toast.show('Please select the color',{
+            theme: "toasted-primary", 
+            position: "bottom-center", 
+            duration : 2000,
+            type:'warning',
+            iconPack:'material',
+            icon : 'warning'
+        })
+      }
+      requestSize {
+        this.$toast.show('Please select the size',{
+            theme: "toasted-primary", 
+            position: "bottom-center", 
+            duration : 2000,
+            type:'warning',
+            iconPack:'material',
+            icon : 'warning'
+        })
+      }
+
+       */
   },
 };
 </script>
