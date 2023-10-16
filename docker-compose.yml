@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  backend:
+    # restart: always
+    container_name: django
+    build:
+      context: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=35%fnl)_3v67^9os3%5bo+vv)$l&a6k#_&21i-xl7%_%#sa5(v
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
