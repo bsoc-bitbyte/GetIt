@@ -29,6 +29,5 @@ class Ticket (models.Model) :
     status = models.CharField(max_length=100,
                               choices=status_enums)
     
-
     def __str__(self):
         return f'{self.event.title} {self.buyer.first_name} {self.buyer.last_name}'
