@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'events',
+    'tickets',
 ]
 
 REST_FRAMEWORK = {

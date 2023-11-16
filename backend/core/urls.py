@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/token/', include('auth.urls')),
     path('api/accounts/', include('accounts.urls')),
     path('api/events/', include('events.urls')),
+    path('api/tickets/', include('tickets.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
