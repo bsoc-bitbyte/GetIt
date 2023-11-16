@@ -19,7 +19,7 @@ class AccountSerializer(serializers.ModelSerializer):
             'date_joined': {'read_only': True},
             'last_login': {'read_only': True},
             }
-
+    
     def create(self, validated_data):
         password = validated_data.pop('password', None)
 
