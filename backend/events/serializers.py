@@ -10,3 +10,7 @@ class EventSerializer(serializers.ModelSerializer) :
             'updated_at': {'read_only': True},
             }
     
+class EventFormSerializer(serializers.ModelSerializer) :
+    class Meta:
+        model = Event
+        fields = '__all__'

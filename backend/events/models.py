@@ -39,3 +39,17 @@ class Event (models.Model) :
 
     def __str__(self):
         return self.title
+    
+
+class Event_Form (models.Model) :
+    event = models.OneToOneField(
+        'events.Event',
+        on_delete=models.CASCADE,
+        default=None,
+        null=False,
+        blank=False,
+    )
+    form_fields = models.JSONField(default=dict)
+
+    def __str__(self):
+        return self.event.title
