@@ -130,7 +130,7 @@
     margin-left: -48px !important;
     margin-right: -20px !important;
     text-align: center !important;
-    
+
   }
 
   .suf
