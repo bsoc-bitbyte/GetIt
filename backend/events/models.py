@@ -8,7 +8,7 @@ event_type_choices = [
 ]   
 class Event (models.Model) :
     title = models.CharField(max_length=200)
-    organizer_id = models.OneToOneField(
+    organizer = models.OneToOneField(
         'accounts.Account',
         on_delete=models.CASCADE,
         default=None,
@@ -47,6 +47,7 @@ class Event_Form (models.Model) :
         default=None,
         null=False,
         blank=False,
+        related_name='event_form',
     )
     form_fields = models.JSONField(default=dict)
 
