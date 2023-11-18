@@ -28,10 +28,6 @@ class Ticket (models.Model) :
     purchase_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100,
                               choices=status_enums)
-
-    Class Meta:
-        unique_together = [['event', 'buyer']]
-    
     
 
     def __str__(self):
