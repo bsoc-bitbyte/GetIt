@@ -39,7 +39,6 @@ class Event (models.Model) :
 
     def __str__(self):
         return self.title
-    
 
 class Event_Form (models.Model) :
     event = models.OneToOneField(
