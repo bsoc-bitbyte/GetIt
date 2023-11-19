@@ -2,12 +2,12 @@ name: API Tests
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ develop, main ]
     paths:
       - backend/**
       - .github/workflows/api-build.yml
   pull_request:
-    branches: [ develop ]
+    branches: [ develop, main ]
     paths:
       - backend/**
       - .github/workflows/api-build.yml
