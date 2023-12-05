@@ -38,9 +38,9 @@
     </div>
           <div class="flex flex-col w-full justify-between md:flex-row">
             <div class="flex flex-col h-3/2 md:w-2/5 gap-6 md:mb-0 mb-8">
-              
+
               <img  class="max-w-lg mx-auto w-full mb-8 h-full rounded-xl object-contain aspect-square"
-          :src="product[main].image" /> 
+          :src="product[main].image" />
            <div class="mx-auto flex md:hidden mb-4">
             <div
   @click="selectColor('black')"
@@ -72,7 +72,7 @@
 ></div>
               </div>
 
-              
+
                     <div class="flex flex-row items-center justify-between gap-2">
                 <img
                   class="w-4 h-4 mr-2 my-auto"
@@ -122,7 +122,7 @@
               <hr class="h-px bg-[#CFCFCF] border-0">
               <p class="lg:mt-7 lg:text-3xl  mt-4 text-2xl text-[#271819] font-extrabold md:font-extrabold font- "><b></b> ${{ product[main].price }}</p>
               <p class="lg:mt-5 text-sm text-[#B9BBBF] font-medium lg:mb-2 pb-.5 mt-4 mb-2">Choose a Size</p>
-              
+
               <div class="">
           <div
             class="rounded-full float-left bg-gray-100 text-gray-500 font-medium py-1 px-2 lg:text-sm text-xs flex flex-row lg:mr-4 md:mr-2 m-1"
@@ -196,8 +196,8 @@
             >
           </div>
         </div>
-              
-              
+
+
         <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-[#CFCFCF] md:border-0">
 
               <div class="md:flex bg-white shadow-[0px_40px_70px_4px_rgba(0,0,0,0.56)] md:shadow-none md:border-0 m-0 justify-center md:justify-start w-full fixed bottom-0 mx-0 mb-0 flex flex-row md:justify-left sm:mb-0 md:relative gap-0s">
@@ -280,7 +280,7 @@ export default {
   methods: {
     selectColor(color,item) {
       this.selectedColor = color;
-      
+
     },
     selectSize(item) {
       item.size=this.selectedSize;
@@ -289,13 +289,13 @@ export default {
           let temp=this.selectedColor;
           item.color=temp.charAt(0).toUpperCase()+ temp.slice(1);
           item.size=this.selectedSize;
-          this.$store.commit('addToCart',item); 
+          this.$store.commit('addToCart',item);
     }
       /*
       requestColor {
         this.$toast.show('Please select the color',{
-            theme: "toasted-primary", 
-            position: "bottom-center", 
+            theme: "toasted-primary",
+            position: "bottom-center",
             duration : 2000,
             type:'warning',
             iconPack:'material',
@@ -304,8 +304,8 @@ export default {
       }
       requestSize {
         this.$toast.show('Please select the size',{
-            theme: "toasted-primary", 
-            position: "bottom-center", 
+            theme: "toasted-primary",
+            position: "bottom-center",
             duration : 2000,
             type:'warning',
             iconPack:'material',
@@ -317,4 +317,3 @@ export default {
   },
 };
 </script>
-

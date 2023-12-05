@@ -105,7 +105,7 @@
   {
     margin-right: -20px !important;
   }
-  
+
 }
 @media (max-width: 420px) {
   /* .hil{
@@ -132,7 +132,7 @@
     margin-left: -30px !important;
     margin-right: -40px !important;
     text-align: center !important;
-    
+
   }
   .suf
   {
@@ -146,7 +146,7 @@
   {
     margin-left: -25px !important;
     text-align: center;
-    
+
   }
   /* .hil{
     margin-left: 16px !important;
