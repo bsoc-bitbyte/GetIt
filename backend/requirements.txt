@@ -20,3 +20,4 @@ sqlparse==0.4.4
 tomli==2.0.1
 typing_extensions==4.6.3
 tzdata==2022.6
+stripe
