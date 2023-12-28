@@ -8,7 +8,7 @@
         <ul
           class="flex flex-row content-center font-sans pl-[2%] pr-[2%] whitespace-nowrap text-xl border-b-[solid] border-b-[#474747]">
           <li class="text-[#271819] w-[10.5%] top-[-5px] inline-block mr-[.5%] py-[19px]">
-            <a class="py-0.5 hover:border-b-2 hover:border-black" href="#">Home</a>
+            <nuxt-link class="py-0.5 hover:border-b-2 hover:border-black" to="/">Home</nuxt-link>
           </li>
           <li class="text-[#271819] font-sans w-[10.5%] top-[-5px] mr-[.5%] inline-block  py-[19px]">
             <nuxt-link class=" py-0.5 hover:border-b-2 hover:border-black" to="/products/_id">Shop</nuxt-link>
