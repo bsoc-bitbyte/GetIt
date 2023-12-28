@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-sm rounded-lg overflow-hidden shadow-lg hover:scale-[1.1] transition cursor-pointer ">
-        <img class="w-full rounded-lg" :src="img_url" alt="Sunset in the mountains">
+        <img class="w-full rounded-lg" src="../assets/hackbyte.webp" alt="Sunset in the mountains">
         <div class="px-4 pt-4 flex flex-row justify-between">
             <div class="font-bold text-2xl">{{ title }}</div>
             <span class="bg-[#ea454c] rounded-full px-3 py-1 text-sm font-semibold text-white">Rs. {{ ticket_price }}</span>
