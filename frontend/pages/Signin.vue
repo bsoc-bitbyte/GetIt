@@ -75,7 +75,10 @@
     methods:{
       submitForm(e) {
       e.preventDefault();
-      console.log(this.credentials);
+      this.$store.dispatch('auth/login',this.credentials)
+      .then(() => {
+        this.$router.push('/')
+      })
     }
     }
   }

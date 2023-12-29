@@ -13,11 +13,13 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/toast": "^3.3.1",
     "core-js": "^3.25.3",
+    "js-cookie": "^3.0.5",
     "nuxt": "^2.15.8",
     "nuxt-material-design-icons-iconfont": "^1.0.2",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.10",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.3.3",
