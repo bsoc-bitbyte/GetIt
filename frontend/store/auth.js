@@ -46,7 +46,7 @@ export const actions = {
       'accounts/',
       { first_name, last_name, email, password }
     )
-    if (process.env.NODE_ENV == 'production) {
+    if (process.env.NODE_ENV == 'production') {
       console.log(response)
     }
   },
