@@ -1,4 +1,5 @@
 from django.db import models
+from products.models import ProductImage
 
 # Create your models here.
 
@@ -30,7 +31,7 @@ class Event (models.Model) :
     )
     event_type = models.CharField(max_length=100,
                                   choices=event_type_choices)
-
+    cover_image = models.ImageField(upload_to='event_cover_images/', default='event_cover_images/default.jpg')
     location = models.CharField(max_length=200)
     ticket_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -4,8 +4,8 @@ from django.db import models
 
 status_enums = [
     ('pending','Pending'),
-    ('approved','Approved'),
-    ('rejected','Rejected'),
+    ('purchased','Purchased'),
+    ('failed','Purchase Failed'),
     ('cancelled','Cancelled'),
 ]
 
