@@ -139,7 +139,7 @@
                     Privacy & Terms policy</label>
                 </div>
                 <div class="submit-button pt-[1rem] flex  justify-center ">
-                  <button type="submit" class="btn py-[1rem] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full"
+                  <button type="submit" class="btn bg-#ea454c py-[1rem] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full"
                     @click="submitForm">Checkout
                   </button>
                 </div>

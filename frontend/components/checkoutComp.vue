@@ -5,7 +5,7 @@
             <div id="payment-element" />
             <button id="submit" :class="{ 'cursor-not-allowed': isLoading }"
                 :style="{ backgroundColor: isLoading ? 'rgba(234, 69, 76, 0.5)' : 'rgba(234, 69, 76, 1)' }"
-                class="py-[1rem] mt-[10px] ml-[15px] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full" :disabled="isLoading"> Pay now
+                class="py-[1rem] text-[white] md:font-bold mt-[10px] ml-[0.2em] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full" :disabled="isLoading"> Pay now
             </button>
             <sr-messages :messages="messages" />
         </form>
@@ -34,6 +34,7 @@ export default {
 
         const { clientSecret, error: backendError } = await this.createPaymentIntent({
             payment_method_types: ['card'],
+            ticket_id: 1,
             amount: 10000,
             currency: 'inr',
         });
