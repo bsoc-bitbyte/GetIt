@@ -3,8 +3,9 @@
         <form id="payment-form" @submit.prevent="handleSubmit">
             <div id="link-authentication-element" />
             <div id="payment-element" />
-            <button id="submit" :disabled="isLoading">
-                Pay now
+            <button id="submit" :class="{ 'cursor-not-allowed': isLoading }"
+                :style="{ backgroundColor: isLoading ? 'rgba(234, 69, 76, 0.5)' : 'rgba(234, 69, 76, 1)' }"
+                class="py-[1rem] mt-[10px] ml-[15px] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full" :disabled="isLoading"> Pay now
             </button>
             <sr-messages :messages="messages" />
         </form>
@@ -14,7 +15,7 @@
 <script>
 export default {
     name: 'CheckoutComp',
-    props : {
+    props: {
         ticket_price: {
             type: Number,
             required: true,
@@ -28,12 +29,12 @@ export default {
             messages: [],
         }
     },
-   async mounted() {
+    async mounted() {
         this.stripe = Stripe('pk_test_51OK0jxSCqTflNj8ZV0Ia9yT26uoVr6bopgfSrnlkhpUTZsBX8oyUTXg4YbYlbOOjdcXqraA71vtKPbOpMyIGeNF800MpWzhMHB'); // Use environment variable in production
 
         const { clientSecret, error: backendError } = await this.createPaymentIntent({
             payment_method_types: ['card'],
-            amount:  10000,
+            amount: 10000,
             currency: 'inr',
         });
         console.log("clientSecret", clientSecret);
@@ -42,7 +43,7 @@ export default {
         }
         this.messages.push(`Client secret returned.`);
 
-        this.elements = this.stripe.elements({clientSecret})
+        this.elements = this.stripe.elements({ clientSecret })
         const paymentElement = this.elements.create('payment');
         paymentElement.mount("#payment-element");
         const linkAuthenticationElement = this.elements.create("linkAuthentication");
@@ -53,7 +54,7 @@ export default {
 
         async createPaymentIntent(requestData) {
             console.log("requestData", requestData);
-            let clientSecret,backendError ;
+            let clientSecret, backendError;
 
             try {
                 const response = await this.$axios.post('/api/tickets/create-payment-intent/', requestData);
@@ -66,7 +67,7 @@ export default {
             }
             return { clientSecret, backendError };
         },
-        async handleSubmit () {
+        async handleSubmit() {
             if (this.isLoading) {
                 return;
             }
@@ -74,7 +75,7 @@ export default {
             this.isLoading = true;
 
             const { error } = await this.stripe.confirmPayment({
-                elements : this.elements,
+                elements: this.elements,
                 confirmParams: {
                     return_url: `${window.location.origin}/return`
                 }
@@ -83,7 +84,7 @@ export default {
             if (error.type === "card_error" || error.type === "validation_error") {
                 this.messages.push(error.message);
             } else {
-               this.messages.push("An unexpected error occured.");
+                this.messages.push("An unexpected error occured.");
             }
 
             this.isLoading = false;
