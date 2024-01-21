@@ -12,6 +12,7 @@ class EventSerializer(serializers.ModelSerializer) :
             'phone',
             'date',
             'time',
+            'cover_image',
             'event_type',
             'location',
             'ticket_price',

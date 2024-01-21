@@ -14,6 +14,9 @@ export default {
     ],
     style: [
       { cssText: 'body { font-family: "Poppins", sans-serif; }' }
+    ],
+    script: [
+      { src: 'https://js.stripe.com/v3/' }
     ]
   },
 
@@ -47,7 +50,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://backend-getit.onrender.com/api/',
+    baseURL: process.env.NODE_ENV == 'production' ? 'https://backend-getit.onrender.com/api/' : 'http://localhost:8000/api/',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
