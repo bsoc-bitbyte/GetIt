@@ -20,13 +20,11 @@ class CreatePaymentIntent(APIView):
 
     def post(self, request, *args, **kwargs):
         amount = request.data.get('amount')
-        print(request.data)
-
         try :
             intent = stripe.PaymentIntent.create(
                 amount=amount,
                 currency='inr',
-                payment_method_types=['card','upi'],
+                payment_method_types=['card'],
                 metadata={
                     'ticket_id': request.data.get('ticket_id')
                 }

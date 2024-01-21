@@ -15,6 +15,7 @@
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
     "nuxt-material-design-icons-iconfont": "^1.0.2",
+    "nuxt-stripe-module": "^3.2.0",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
