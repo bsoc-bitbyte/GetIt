@@ -25,8 +25,11 @@ def stripe_webhook(request) :
     if event['type'] == 'payment_intent.succeeded':
         payment_intent = event['data']['object']
         ticket_id = payment_intent['metadata']['ticket_id']
-        ticket = Ticket.objects.get(id=ticket_id)
-        ticket.update(status='purchased')
-        ticket.save()
+        try :
+            ticket = Ticket.objects.get(id=ticket_id)
+            ticket.status = "purchased"
+            ticket.save()
+        except Exception as e:
+            return HttpResponse(status=400)
 
     return HttpResponse(status=200) 
