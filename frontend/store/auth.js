@@ -46,7 +46,9 @@ export const actions = {
       'accounts/',
       { first_name, last_name, email, password }
     )
-    console.log(response)
+    if (process.env.NODE_ENV == 'production') {
+      console.log(response)
+    }
   },
 
   // given the current refresh token, refresh the user's access token to prevent expiry

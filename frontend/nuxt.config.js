@@ -26,7 +26,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/vuex-persist', ssr: false }
+    { src: '~/plugins/vuex-persist', ssr: false },
+    { src: '~/plugins/local-storage', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -48,10 +49,8 @@ export default {
     'nuxt-material-design-icons-iconfont',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://127.0.0.1:8000/',
+    baseURL: process.env.NODE_ENV == 'production' ? 'https://backend-getit.onrender.com/api/' : 'http://localhost:8000/api/',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
