@@ -34,7 +34,8 @@
             </a>
           </li>
           <li class="text-[#271819] font-sans w-[15.5%]  top-[-5px] inline-block -ml-12 pl-[9%] py-[19px] mr-[1%]">
-            <nuxt-link class=" py-0.5 ml-[28%] hover:border-b-2  hover:border-black" to="/Signin">Sign In</nuxt-link>
+            <nuxt-link v-if="isAuth" class=" py-0.5 ml-[28%] hover:border-b-2  hover:border-black" to="/" @click.native="handleLogout">Sign Out</nuxt-link>
+            <nuxt-link v-else class=" py-0.5 ml-[28%] hover:border-b-2  hover:border-black" to="/Signin">Sign in</nuxt-link>
           </li>
           <li class="mt-5 ml-[4.5%]">
             <nuxt-link
@@ -132,5 +133,15 @@ export default {
       isShow: false,
     };
   },
+  computed: {
+    isAuth() {
+      return this.$store.getters['auth/isAuthenticated']
+    }
+  },
+  methods: {
+    handleLogout() {
+      this.$store.dispatch('auth/logout')
+    }
+  }
 };
 </script>

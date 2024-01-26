@@ -75,7 +75,13 @@
     methods:{
       submitForm(e){
         e.preventDefault();
-        console.log(this.credentials);
+        if(this.checker()){
+          this.$store.dispatch('auth/register',this.credentials).then(()=>{
+            this.$router.push('/Signin');
+          }).catch((err)=>{
+              console.log(err);
+          })
+        }
       },
       checker(){
        if(this.credentials.password_check!==this.credentials.password){
