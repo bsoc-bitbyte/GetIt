@@ -22,7 +22,10 @@ ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000', ]
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000',
+                         'https://merch-site.netlify.app',
+                         'https://deploy-preview-*--merch-site.netlify.app'
+                         ]
 
 # Application definition
 
