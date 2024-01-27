@@ -9,15 +9,6 @@ def in_venv():
 
 # Copy content from .env.template to .env
 try:
-
-    # Generate a random secret key
-    django_secret = ''.join(random.SystemRandom().choice(
-        'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50))
-
-    with open('.env', 'w') as env:
-        env.write('\n')
-        env.write('DJANGO_SECRET=' + "'" + django_secret + "'")
-
     # Check for venv
     if in_venv():
         print('Using Virtualenv')
