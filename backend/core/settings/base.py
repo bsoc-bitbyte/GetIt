@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,7 +16,7 @@ STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'default')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', 'default')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', "False").lower == 'true'
+DEBUG = os.environ.get('DEBUG') != 'False'
 
 ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
@@ -97,16 +96,6 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-        # dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    }
-}
-
-DATABASES['default'] = dj_database_url.parse(os.environ.get("DATABASE_URL"))
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
