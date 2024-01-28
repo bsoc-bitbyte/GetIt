@@ -27,6 +27,9 @@ try:
     # Make Migrations
     print('Making migrations...')
     subprocess.run(['python3', 'manage.py', 'makemigrations', 'accounts'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'products'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'events'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'tickets'])
     subprocess.run(['python3', 'manage.py', 'makemigrations'])
     print("Migrations made!")
 
