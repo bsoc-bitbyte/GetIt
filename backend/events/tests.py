@@ -47,7 +47,8 @@ def authenticated_client(test_user):
 
 
 @pytest.mark.django_db
-def testCreateEventView_validEventDetails_authenticatedUser_shouldCreateEvent(test_user, authenticated_client):
+def testEventCreation_withValidDetails_byAuthenticatedUser_shouldCreateEvent(
+        test_user, authenticated_client):
     # Arrange
     event_data_copy = event_data.copy()
     event_data_copy['organizer'] = test_user.id
@@ -75,7 +76,8 @@ def testCreateEventView_validEventDetails_authenticatedUser_shouldCreateEvent(te
                           ('location', ''),
                           ('ticket_price', 'invalid_ticket_price'),
                           ('ticket_price', '')])
-def testCreateEventView_invalidEventDetails_authenticatedUser_shouldNotCreateEvent(test_user, authenticated_client, field, invalid_value):
+def testEventCreation_withInvalidDetails_byAuthenticatedUser_shouldNotCreateEvent(
+        test_user, authenticated_client, field, invalid_value):
     # Arrange
     event_data_copy = event_data.copy()
     event_data_copy['organizer'] = test_user.id
@@ -90,7 +92,7 @@ def testCreateEventView_invalidEventDetails_authenticatedUser_shouldNotCreateEve
 
 
 @pytest.mark.django_db
-def testCreateEventView_unauthenticatedUser_shouldThrowForbidden(test_user):
+def testEventCreation_withValidDetails_byUnauthenticatedUser_shouldNotCreateEvent(test_user):
     # Arrange
     unauthenticated_client = APIClient()
     event_data_copy = event_data.copy()
@@ -105,7 +107,7 @@ def testCreateEventView_unauthenticatedUser_shouldThrowForbidden(test_user):
 
 
 @pytest.mark.django_db
-def testRetrieveEventView_validEventId_shouldRetrieveEvent(test_user, test_event):
+def testEventRetrieval_withValidEventId_byAuthenticatedUser_shouldRetrieveEvent(test_event):
     # Arrange
     unauthenticated_client = APIClient()
 
@@ -118,7 +120,7 @@ def testRetrieveEventView_validEventId_shouldRetrieveEvent(test_user, test_event
 
 
 @pytest.mark.django_db
-def testRetrieveEventView_invalidEventId_shouldThrowNotFound(test_user, test_event):
+def testEventRetrieval_withInvalidEventId_shouldThrowNotFound(test_event):
     # Arrange
     unauthenticated_client = APIClient()
 
@@ -130,7 +132,7 @@ def testRetrieveEventView_invalidEventId_shouldThrowNotFound(test_user, test_eve
 
 
 @pytest.mark.django_db
-def testListEventsView_shouldListEvents(test_user, test_event):
+def testListEventsView_shouldListEvents(test_event):
     # Arrange
     unauthenticated_client = APIClient()
 
@@ -144,7 +146,8 @@ def testListEventsView_shouldListEvents(test_user, test_event):
 
 
 @pytest.mark.django_db
-def testUpdateEventView_validEventId_requestingUserIsOwner_shouldUpdateEvent(test_user, authenticated_client, test_event):
+def testEventUpdate_withValidEventId_byOwner_shouldUpdateEvent(
+        test_user, authenticated_client, test_event):
     # Arrange
     event_data_copy = event_data.copy()
     event_data_copy['title'] = 'updated title'
@@ -152,7 +155,8 @@ def testUpdateEventView_validEventId_requestingUserIsOwner_shouldUpdateEvent(tes
     event_data_copy['date'] = '2021-01-02'
 
     # Act
-    response = authenticated_client.put(f'/api/events/{test_event.id}/', event_data_copy, format='json')
+    response = authenticated_client.put(f'/api/events/{test_event.id}/',
+                                        event_data_copy, format='json')
 
     # Assert
     assert response.status_code == status.HTTP_200_OK
@@ -161,7 +165,8 @@ def testUpdateEventView_validEventId_requestingUserIsOwner_shouldUpdateEvent(tes
 
 
 @pytest.mark.django_db
-def testUpdateEventView_validEventId_requestingUserIsNotOwner_shouldThrowForbidden(authenticated_client):
+def testEventUpdate_withValidEventId_byNonOwner_shouldThrowForbidden(
+        authenticated_client):
     # Arrange 
     account_data_copy = account_data.copy()
     account_data_copy['email'] = 'changed@email.com'
@@ -182,14 +187,16 @@ def testUpdateEventView_validEventId_requestingUserIsNotOwner_shouldThrowForbidd
 
 
 @pytest.mark.django_db
-def testUpdateEventView_invalidEventId_shouldThrowNotFound(authenticated_client, test_user, test_event):
+def testEventUpdate_withInvalidEventId_shouldThrowNotFound(
+        test_user, authenticated_client, test_event):
     # Arrange
-    event_data_copy = event_data.copy() 
+    event_data_copy = event_data.copy()
     event_data_copy['title'] = 'updated title'
     event_data_copy['organizer'] = test_user.id
 
     # Act
-    response = authenticated_client.put(f'/api/events/{test_event.id + 1}/', event_data_copy, format='json')
+    response = authenticated_client.put(f'/api/events/{test_event.id + 1}/',
+                                        event_data_copy, format='json')
 
     # Assert
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -197,7 +204,7 @@ def testUpdateEventView_invalidEventId_shouldThrowNotFound(authenticated_client,
 
 
 @pytest.mark.django_db
-def testDeleteEventView_validEventId_requestingUserIsOwner_shouldDeleteEvent(test_user, authenticated_client, test_event):
+def testEventDelete_withValidEventId_byOwner_shouldDeleteEvent(authenticated_client, test_event):
     # Arrange
     # Act
     response = authenticated_client.delete(f'/api/events/{test_event.id}/')
@@ -208,7 +215,8 @@ def testDeleteEventView_validEventId_requestingUserIsOwner_shouldDeleteEvent(tes
 
 
 @pytest.mark.django_db
-def testDeleteEventView_validEventId_requestingUserIsNotOwner_shouldThrowNotAuthorized(authenticated_client):
+def testEventDelete_withValidEventId_byNonOwner_shouldThrowForbidden(
+        authenticated_client):
     # Arrange   
     account_data_copy = account_data.copy()
     account_data_copy['email'] = 'new@email.com'
@@ -227,7 +235,7 @@ def testDeleteEventView_validEventId_requestingUserIsNotOwner_shouldThrowNotAuth
 
 
 @pytest.mark.django_db
-def testDeleteEventView_invalidEventId_shouldThrowNotFound(authenticated_client, test_user, test_event):
+def testEventDelete_withInvalidEventId_shouldThrowNotFound(authenticated_client, test_event):
     # Arrange
     # Act
     response = authenticated_client.delete(f'/api/events/{test_event.id + 1}/')
