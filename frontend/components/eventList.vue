@@ -6,7 +6,7 @@
         <p class="text-lg font-bold text-black truncate block capitalize">{{title}}</p>
 <span class="text-gray-400 mr-3 uppercase text-xs">{{location}}</span>
         <div class="flex items-center">
-          <p class="text-lg font-semibold text-black cursor-auto my-3">₹{{ticket_price}}</p>
+          <p class="text-lg rounded-full bg-green-500/10 px-5 py-2 text-green-700 font-semibold cursor-auto my-3 ">₹{{ticket_price}}</p>
           <div class="ml-auto">{{ date }}</div>
         </div>
       </div>

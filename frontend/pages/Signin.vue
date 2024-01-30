@@ -33,13 +33,13 @@
         </div>
         <div class="sign-in  pt-[1rem] pb-[0rem]">
           <a href="#">
-            <button type="submit" id="Sign-in" class = "signin w-full h-[3.25rem] rounded-[1.25rem]">
+            <button type="submit" id="Sign-in" class = "signin w-full h-[3.25rem] rounded-[1.25rem]" onclick=(submitForm)>
               <p class = "text-white hover:border-slate-500 py-[0rem]">Sign in</p>
             </button>
           </a>
         </div>
         <div class="sign-up-google  py-[0.5rem]">
-          <button type="submit" id="submit-google" class = "hover:border-blue-600 mt-[1rem] border-2 border-slate-300 w-full bg-white-500 h-[3.25rem] rounded-[1.25rem]">
+          <button type="submit" id="submit-google" class = "hover:border-blue-600 mt-[1rem] border-2 border-slate-300 w-full bg-white-500 h-[3.25rem] rounded-[1.25rem]" onclick={submitForm}>
             <div class="google-img inline-flex items-center">
               <img src="../assets/google-icon.png" alt="" class = "w-[1.5rem]">
               <a href="#" class = "ml-[0.3rem] tracking-wider">Sign in with Google</a>
