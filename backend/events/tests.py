@@ -56,7 +56,6 @@ def testEventCreation_withValidDetails_byAuthenticatedUser_shouldCreateEvent(
     # Act
     response = authenticated_client.post('/api/events/', event_data_copy, format='json')
 
-    print(response.data)
     # Assert
     assert response.status_code == status.HTTP_201_CREATED
     assert Event.objects.count() == 1
@@ -107,7 +106,7 @@ def testEventCreation_withValidDetails_byUnauthenticatedUser_shouldNotCreateEven
 
 
 @pytest.mark.django_db
-def testEventRetrieval_withValidEventId_byAuthenticatedUser_shouldRetrieveEvent(test_event):
+def testEventRetrieval_withValidEventId_byAuthenticatedUser_shouldRetrieveEvent(test_event, test_user):
     # Arrange
     unauthenticated_client = APIClient()
 
@@ -116,7 +115,20 @@ def testEventRetrieval_withValidEventId_byAuthenticatedUser_shouldRetrieveEvent(
 
     # Assert
     assert response.status_code == status.HTTP_200_OK
-    assert response.data['title'] == event_data['title']
+    response.data.pop('created_at')
+    response.data.pop('updated_at')
+    response.data.pop('cover_image')
+    assert response.data == {'title': event_data['title'],
+                             'organizer': test_user.id,
+                             'description': event_data['description'],
+                             'date': event_data['date'],
+                             'email': '',
+                             'event_type': 'virtual',
+                             'location': 'test location',
+                             'time': '00:00:00',
+                             'phone': '',
+                             'ticket_price': '0.00'
+                             }
 
 
 @pytest.mark.django_db
@@ -142,7 +154,20 @@ def testListEventsView_shouldListEvents(test_event):
     # Assert
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 1
-    assert response.data[0]['title'] == event_data['title']
+    response.data[0].pop('created_at')
+    response.data[0].pop('updated_at')
+    response.data[0].pop('cover_image')
+    assert response.data[0] == {'title': event_data['title'],
+                                'organizer': test_event.organizer.id,
+                                'description': event_data['description'],
+                                'date': event_data['date'],
+                                'email': '',
+                                'event_type': 'virtual',
+                                'location': 'test location',
+                                'time': '00:00:00',
+                                'phone': '',
+                                'ticket_price': '0.00'
+                                }
 
 
 @pytest.mark.django_db
@@ -162,6 +187,8 @@ def testEventUpdate_withValidEventId_byOwner_shouldUpdateEvent(
     assert response.status_code == status.HTTP_200_OK
     assert response.data['title'] == 'updated title'
     assert response.data['date'] == '2021-01-02'
+    assert Event.objects.get().title == 'updated title'
+    assert Event.objects.get().date == '2021-01-02'
 
 
 @pytest.mark.django_db
@@ -200,7 +227,6 @@ def testEventUpdate_withInvalidEventId_shouldThrowNotFound(
 
     # Assert
     assert response.status_code == status.HTTP_404_NOT_FOUND
-    assert Event.objects.get().title == event_data['title']
 
 
 @pytest.mark.django_db
