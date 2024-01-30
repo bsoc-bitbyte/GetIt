@@ -9,6 +9,7 @@ Streamlined college e-commerce: Simplifying merch buying and selling for student
 ## ✨FEATURES
 
 - Clubs can sell
+- Sell Tickets for the event
 - Buy the merch you like
 - Automatic payments for sellers no need for manual verification
 - Seller reports
@@ -26,8 +27,7 @@ Streamlined college e-commerce: Simplifying merch buying and selling for student
 
 ### BACKEND: 
 
-TO BE UPDATED
-
+- [DJANGO REST FRAMEWORK](https://www.django-rest-framework.org/)
 
 ## 🔰 GETTING STARTED
 
@@ -66,7 +66,9 @@ npm -v
 
 ```bash
     cd Getit
+    cd frontend
 ```
+
 
 5. Install all Getit dependencies. 
 
@@ -81,91 +83,25 @@ npm -v
 ```
 
 
-
-## Build for production guidelines
-```
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
-
 ## Backend
 - **Framework** - [Django](https://www.djangoproject.com/)
 - **Language** - Python 3.10
 ## Local Setup
 Make sure you are using `python 3.10`. 	
 
-- Change your working directory to `core`
-- Create a new file in the same directory named: `.env` and copy all the content from `.env.template`
-- Add a random string for `DJANGO_SECRET` or generate it online.
-- Create a virtual environment: `$ python -m virtualenv .venv`
-- Activate the virtual environment: `$ source .venv/bin/activate` (On windows: `> ./.venv/Scripts/activate`)
-- Install the dependencies: `$ pip install -r requirements.txt`
-- Make Migrations: `$ python manage.py makemigrations` (This commands generates migrations which would be used to update database schemas)
-- Migrate the DB: `$ python manage.py migrate`
-- Run server: `$ python manage.py runserver`
+- Change your working directory to `backend`
+- Now just run `./run.sh`
+- Hurray! The backend is up and running!!!
 
-## Special Directories
+#### Note : Use seperate env files for backend and frontend to run the project. Need help! Let us know to help you with the .env.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
-
-## 🎨DESIGN 
-- [![My Skills](https://skills.thijs.gg/icons?i=figma)](https://skills.thijs.gg) 
-
- - FIGMA LINK FOR THE PROJECT(https://www.figma.com/file/w8rDGcgxgDUGzxOzvFX8Eq/Untitled?type=design&node-id=0-1&t=YsftuOHwePR2R58Z-0)
 
 
 
 ## HOW TO CONTRIBUTE ?
 
 The [Contributing.md](https://github.com/bsoc-bitbyte/GetIt/blob/main/CONTRIBUTING.md) contains the step-by-step procedure for contributing for this project.
+
+FIGMA LINK FOR THE PROJECT(https://www.figma.com/file/w8rDGcgxgDUGzxOzvFX8Eq/Untitled?type=design&node-id=0-1&t=YsftuOHwePR2R58Z-0)
 
 
