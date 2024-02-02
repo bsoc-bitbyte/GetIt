@@ -5,7 +5,7 @@
         <img
           :src="event.cover_image"
           alt="hero image"
-          class="max-h-[80vh]  object-cover object-center"
+          class="w-[100vw] h-[80vh] "
         />
 
         <div class="flex w-full flex-col gap-8 p-5 md:p-10">

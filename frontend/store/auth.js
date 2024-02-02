@@ -46,7 +46,6 @@ export const actions = {
       email,
       password,
     });
-    console.log("hhhh");
     if (process.env.NODE_ENV == "production") {
       console.log(response);
     }
@@ -73,4 +72,5 @@ export const getters = {
   isAuthenticated: (state) => {
     return state.access && state.access !== "";
   },
+
 };

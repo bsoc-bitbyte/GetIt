@@ -67,23 +67,23 @@
                 <div class="h-full border-2 bg-white-100 w-[25rem] md:w-[20rem] lg:w-[24rem] xl:w-[26.75rem]"> 
                     <div class="flex">
                         <h3 class="font-medium md:font-extrabold text-2xl h-1/6 w-1/2 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Subtotal :</h3>
-                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> 900₹</div>
+                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6">₹{{ $store.getters['getPrice'] }}</div>
                     </div>
                     <hr class="w-11/12 ml-2">
                     <div class="flex"> 
                         <h3 class="font-medium md:font-extrabold text-2xl h-1/6 w-1/2 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-style: 
                         normal; line-height: normal; letter-spacing: 0.04125rem;">Discount :</h3>
-                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> 0₹</div>
+                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> ₹0</div>
                     </div>
                     <hr class="w-11/12 ml-2">
                     <div class="flex"> 
-                        <h3 class="font-medium md:font-extrabold text-2xl h-1/6 my-2 w-1/2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Tax :</h3>
-                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> 5₹</div>
+                        <h3 class="font-medium md:font-extrabold text-2xl h-1/6 my-2 w-1/2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Dilevery fee:</h3>
+                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> ₹0</div>
                     </div>
                     <hr class="w-11/12 ml-2">
                     <div class="flex"> 
                         <h3 class="font-medium md:font-extrabold text-2xl h-1/6 w-1/2 my-2 mt-6 ml-8 text-black font-Poppins " style="font-family: Poppins; font-style: normal; line-height: normal; letter-spacing: 0.04125rem;">Total :</h3>
-                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> 905₹</div>
+                        <div class="font-Mulish text-lg text-[#81858b] md:text-[#C3C6C9] text-center w-1/2 font-bold leading-6 ml-35 mt-6"> ₹{{ $store.getters['getPrice'] }}</div>
                     </div>    
                 </div>
 

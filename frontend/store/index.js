@@ -16,10 +16,17 @@ export const getters = {
 
     return qty;
   },
+  getPrice(state){
+    var price = 0;
+    state.cart.forEach((item) => {
+      price += item.quantity*item.ticket_price;
+    });
+
+    return price;
+  },
 };
 export const mutations = {
   addToCart(state, item) {
-    console.log(item,state)
     let found = state.cart.find((product) => {
       return product.title === item.title;
     });
