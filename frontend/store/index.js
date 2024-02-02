@@ -8,6 +8,14 @@ export const getters = {
   cartCount(state) {
     return state.cart.length;
   },
+  getQty(state){
+    var qty = 0;
+    state.cart.forEach((item) => {
+      qty += item.quantity;
+    });
+
+    return qty;
+  },
 };
 export const mutations = {
   addToCart(state, item) {
@@ -15,6 +23,8 @@ export const mutations = {
     let found = state.cart.find((product) => {
       return product.title === item.title;
     });
+
+
 
     if (found) {
       found.quantity++;
@@ -54,6 +64,7 @@ export const mutations = {
       icon: "remove_shopping_cart",
     });
   },
+ 
   increaseQuantity(state, item) {
     let found = state.cart.find((product) => product.pid == item.pid);
     if (found) {

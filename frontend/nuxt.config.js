@@ -48,6 +48,9 @@ export default {
     '@nuxtjs/toast',
     'nuxt-material-design-icons-iconfont',
   ],
+  router: {
+    middleware: ['auth'],
+  },
 
   axios: {
     baseURL: process.env.NODE_ENV == 'production' ? 'https://backend-getit.onrender.com/api/' : 'http://localhost:8000/api/',

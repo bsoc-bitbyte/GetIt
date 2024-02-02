@@ -31,7 +31,7 @@
               </p>
             </div>
           </div>
-          <button @click="addToCartClick(event)" class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 md:py-0 w-[15vw]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
+          <button @click="addToCartClick(event)" class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 w-[15vw]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex-row md:py-2 md:font-normal">
                   <div class="flex items-center justify-center md:justify-start ">
   <div class="flex items-center -ml-[15px]">
     <img class="invisible md:visible -pr-[2px] w-5 h-4 mr-0 md:mr-0 md:mt-0 md:mb-0" src="../../assets/cart02.png">

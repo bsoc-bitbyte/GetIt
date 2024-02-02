@@ -43,7 +43,6 @@ export default {
       try {
         const response = await this.$axios.get('events/');
         this.eventLists = response.data;
-        console.log(response.data[0])
      
       } catch (error) {
         console.error('Error fetching event data', error);

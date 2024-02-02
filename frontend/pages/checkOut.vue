@@ -1,6 +1,6 @@
 <template>
   <div
-    class="main  mt-[2rem] justify-start pr-[0rem] flex-col justify-center min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]">
+    class="main  mt-[2rem] justify-start pr-[0rem] flex-col  min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]">
     <div v-if="isCheckoutVisible" class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
       @click="isCheckoutVisible = false"></div>
 
@@ -9,7 +9,7 @@
       <checkoutComp v-if="isCheckoutVisible" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-8 z-50" :ticket_price="price" />
     </transition>
     <div class="max-[1239px]:py-[0.5rem] min-[1240px]:py-[0rem] tracking-wider">
-      <h2 class="heading font-extrabold text-[3rem] font-bold min-[1240px]:ml-[2rem] tracking-wider pr-[0rem]">Checkout
+      <h2 class="heading font-extrabold text-[3rem] min-[1240px]:ml-[2rem] tracking-wider pr-[0rem]">Checkout
       </h2>
     </div>
     <div class="parent pr-[0rem]">

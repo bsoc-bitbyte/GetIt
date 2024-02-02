@@ -16,8 +16,8 @@
           <li class="text-[#271819] font-sans w-[10.5%] top-[-5px]  inline-block  py-[19px]">
             <a class=" py-0.5 hover:border-b-2 hover:border-black " href="#">About Us</a>
           </li>
-          <li class="font-[bold] font-sans text-[50px] ml-[11%] mx-[15%]  my-0 font-bold">
-            <a href="#"><img class="max-w-none h-6 w-6  inline-block h-[60px] w-[65px]"
+          <li class="font-[bold] text-[50px] ml-[11%] mx-[15%]  my-0 font-bold">
+            <a href="#"><img class="max-w-none  inline-block h-[60px] w-[65px]"
                 src="https://raw.githubusercontent.com/bsoc-bitbyte/GetIt/10a0fcc39d52d116428dd49505ead2f597e7a30e/assets/get_it.png" /><span
                 class="absolute top-[33px]">GetIt</span></a>
           </li>
@@ -40,7 +40,7 @@
           <li class="mt-5 ml-[4.5%]">
             <nuxt-link
               class="pl-[11%] pr-[11%] font-sans text-sm py-[12%] pb-[17%] hover:bg-gray-100  border-[solid] border-2 border-gray-400"
-              to="/cart">Cart
+              to="/cart">{{ $store.getters['getQty'] }}  Items
               <img class="max-w-none h-7 w-8 inline-block fill-black"
                 src="https://static.thenounproject.com/png/5645-200.png"></nuxt-link>
           </li>
@@ -103,7 +103,7 @@
             </div>
           </aside>
 
-          <div class="font-[bold] font-sans text-black text-[38px] -mt-2 ml-2 my-0 font-bold">
+          <div class="font-sans text-black text-[38px] -mt-2 ml-2 my-0 font-bold">
             <span>GetIt</span>
           </div>
           <li class=" list-none -mt-16">
@@ -131,17 +131,20 @@ export default {
   data() {
     return {
       isShow: false,
+      qty: 0,
+      
     };
   },
   computed: {
     isAuth() {
       return this.$store.getters['auth/isAuthenticated']
     }
+    
   },
   methods: {
     handleLogout() {
       this.$store.dispatch('auth/logout')
     }
-  }
+  },
 };
 </script>

@@ -103,7 +103,7 @@
               </div>
           </div>
 
-          <div class="mt-8 md:mt-0 lg:mt-16 flex flex-col md:mt-7 md:w-1/2">
+          <div class="mt-8 lg:mt-16 flex flex-col md:mt-7 md:w-1/2">
               <div class="flex flex-row">
                   <h1 class="lg:text-2xl lg:mr-20 md:text-xl font-extrabold md:font-extrabold  mr-10">{{ product[main].title }}
                   </h1>
@@ -140,7 +140,7 @@
             >
           </div>
           <div
-            class="rounded-full  text-[#726C6C] float-left bg-gray-100 text-gray-500 font-medium px-2 py-1 text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
+            class="rounded-full  text-[#726C6C] float-left bg-gray-100  font-medium px-2 py-1 text-xs lg:text-sm flex flex-row lg:mr-4 md:mr-2 m-1"
           >
             <input
               type="radio"
@@ -201,7 +201,7 @@
         <hr class="invisible md:visible md:h-px md:lg:my-8 md:my-5 md:bg-[#CFCFCF] md:border-0">
 
               <div class="md:flex bg-white shadow-[0px_40px_70px_4px_rgba(0,0,0,0.56)] md:shadow-none md:border-0 m-0 justify-center md:justify-start w-full fixed bottom-0 mx-0 mb-0 flex flex-row md:justify-left sm:mb-0 md:relative gap-0s">
-                <button @click="addToCartClick(product[main])" class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0 md:py-0 min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none flex md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2 md:px-3 md:font-normal">
+                <button @click="addToCartClick(product[main])" class="  gap-0 md:mr-[7%] md:px-[12%] pl-[40%] mr-0 items-center justify-center text-center pr-0  min-w-[88%]  md:min-w-0 bg-white rounded-none font-black flex-none  md:rounded-full md:bg-[#EA454C] flex flex-row md:py-2  md:font-normal">
                   <div class="flex items-center justify-center md:justify-start ">
   <div class="flex items-center -ml-[15px]">
     <img class="invisible md:visible -pr-[2px] w-5 h-4 mr-0 md:mr-0 md:mt-0 md:mb-0" src="../../assets/cart02.png">
@@ -212,7 +212,7 @@
 
 
 
-                </button><button class="pl-[15%] md:px-[12%] md:py-4 ml-0 py-3 md:py-0 min-w-[92%] text-center md:min-w-0 bg-[#EA454C] font-bold flex-none items-center rounded-none  rounded-full md:bg-[#EA454C] flex flex-row md:rounded-full md:font-normal py-1 sm:ml-3 md:mr-[0%]">
+                </button><button class="pl-[15%] md:px-[12%] md:py-4 ml-0 py-3  min-w-[92%] text-center md:min-w-0 bg-[#EA454C] font-bold flex-none items-center rounded-none   md:bg-[#EA454C] flex flex-row md:rounded-full md:font-normal sm:ml-3 md:mr-[0%]">
                     <img class="w-4 h-4 mr-[1px] md:mr-[3px]  filter" src="../../assets/lightning.png" >
                     <p class=" poppins-paragraph text-[12px] md:text-[14px] pr-2 pl-2 text-white md:font-extrabold font-extrabold sm:text-xs font-poppins">Buy Now</p>
 

@@ -88,7 +88,7 @@
               <button
                 type="submit"
                 id="Sign-up"
-                class="signup w-full h-[3.25rem] rounded-[1.25rem] backdrop-blur-lg"
+                class="signup w-full h-[3.25rem] rounded-[1.25rem] backdrop-blur-lg" onclick=(submitForm)
               >
                 <p class="text-white hover:border-slate-500 tracking-wider">
                   Sign Up
@@ -108,7 +108,7 @@
                   alt=""
                   class="w-[1.5rem]"
                 />
-                <a href="#" class="ml-[0.3rem] tracking-wide tracking-wider"
+                <a href="#" class="ml-[0.3rem] tracking-wider"
                   >Sign up with Google</a
                 >
               </div>
@@ -119,11 +119,8 @@
               <span class="account-text tracking-wider dha"
                 >Already have an account?
               </span>
-              <nuxt-link
-                to="/Signin"
-                class="text-red-500 hover:underlined tracking-wider suf"
-                >Sign in</nuxt-link
-              >
+              <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wider suf">Sign up for free</nuxt-link>
+              
             </p>
           </div>
         </div>
@@ -142,8 +139,9 @@ export default {
         email: "",
         password: "",
         password_check: "",
-        errorMessage: "",
+        
       },
+      errorMessage: "",
     };
   },
   methods: {
