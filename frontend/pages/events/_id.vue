@@ -1,11 +1,11 @@
 <template>
     <div>
     <section class="flex justify-center bg-primary-50 bg-dotted-pattern bg-contain">
-      <div class="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl ">
+      <div class="grid grid-cols-1 md:grid-cols-2 w-[90vw]">
         <img
           :src="event.cover_image"
           alt="hero image"
-          class="w-[100vw] h-[80vh] "
+          class="w-[90vw] h-[75vh] "
         />
 
         <div class="flex w-full flex-col gap-8 p-5 md:p-10">
