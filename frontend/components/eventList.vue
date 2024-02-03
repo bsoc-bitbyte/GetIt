@@ -1,7 +1,7 @@
 <template>
-  <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-      <img class="w-72 h-96" :src="img_url" />
-      <div class="px-4 py-3 w-72 ">
+  <div class="w-96 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+      <img class="w-96 h-80 object-fill" :src="img_url" />
+      <div class="px-4 py-3 w-96 ">
         
         <p class="text-lg font-bold text-black truncate block capitalize">{{title}}</p>
 <span class="text-gray-400 mr-3 uppercase text-xs">{{location}}</span>
