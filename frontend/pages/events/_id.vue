@@ -27,7 +27,7 @@
               </div>
 
               <p class="text-sm ml-2 mt-2 sm:mt-0" v-if="event.organizer">
-               by <span class="text-primary-500">{{ event.organizer }}</span>
+               by <span class="text-primary-500 font-bold">{{ event.organizer }}</span>
               </p>
             </div>
           </div>
