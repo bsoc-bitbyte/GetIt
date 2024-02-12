@@ -1,20 +1,31 @@
 from django.conf import settings
-from rest_framework import viewsets 
+from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import stripe
 from .models import Ticket
 from .serializers import TicketSerializer
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsTicketOwner
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
-# Create your views here.
+class TicketCreateListRetrieveViewSet(mixins.CreateModelMixin,
+                                      mixins.ListModelMixin,
+                                      mixins.RetrieveModelMixin,
+                                      viewsets.GenericViewSet):
 
-class TicketViewSet(viewsets.ModelViewSet):
-    queryset = Ticket.objects.all()
+    def get_queryset(self):
+        # Allows to view only user's tickets when listing
+        if self.action == 'list':
+            return Ticket.objects.filter(buyer=self.request.user)
+        else:
+            return Ticket.objects.all()
+
     serializer_class = TicketSerializer
+    permission_classes = (IsAuthenticated, IsTicketOwner)
 
 class CreatePaymentIntent(APIView):
 
