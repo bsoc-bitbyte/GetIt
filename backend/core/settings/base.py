@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'django_filters',
+    'drf_yasg',
     'core',
     'accounts',
     'products',
@@ -137,6 +138,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {}
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
