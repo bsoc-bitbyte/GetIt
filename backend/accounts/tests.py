@@ -83,7 +83,7 @@ def testRetrieveLoggedInAccountView_userLoggedIn_returnsAccountDetails(api_clien
 
 
 @pytest.mark.django_db
-def testRetrieveLoggedInAccountView_userNotLoggedIn_returnsForbidden():
+def testRetrieveLoggedInAccountView_userNotLoggedIn_returnsUnauthorized():
     # Arrange
     client = APIClient()
 
