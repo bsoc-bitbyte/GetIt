@@ -4,11 +4,8 @@ from .models import Product,ProductVariation,ProductColor,ProductSize,ProductIma
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin) :
-    list_display = ("name","description","category",'primary_variant',"created_at","updated_at")
-    fields = ("name","description","category","primary_variant",)
-
-class ProductVariationAdmin(admin.ModelAdmin) :
-    list_display = ("Product","ProductSize","ProductColor","price","quantity")
+    list_display = ("name","description","category",'color', 'size', 'price',"created_at","updated_at")
+    fields = ("name","description","category", "color", "size", "price")
 
 class ProductColorAdmin(admin.ModelAdmin) :
     list_display = ("color",)
@@ -17,11 +14,10 @@ class ProductSizeAdmin(admin.ModelAdmin) :
     list_display = ("size",)
 
 class ProductImageAdmin(admin.ModelAdmin) :
-    list_display = ("product_variation_id","image")
+    list_display = ("product","image")
 
 
 admin.site.register(Product,ProductAdmin)
-admin.site.register(ProductVariation,ProductVariationAdmin)
 admin.site.register(ProductColor,ProductColorAdmin)
 admin.site.register(ProductSize,ProductSizeAdmin)
 admin.site.register(ProductImage,ProductImageAdmin)
