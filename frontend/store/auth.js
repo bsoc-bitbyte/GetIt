@@ -21,7 +21,7 @@ export const mutations = {
     }
   },
 
-  // clear our the state, essentially logging out the user
+  // clear out the state, essentially logging out the user
   [AUTH_MUTATIONS.LOGOUT](state) {
     state.access = null;
     state.refresh = null;
@@ -72,5 +72,4 @@ export const getters = {
   isAuthenticated: (state) => {
     return state.access && state.access !== "";
   },
-
 };
