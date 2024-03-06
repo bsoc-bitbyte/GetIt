@@ -153,6 +153,7 @@
 </template>
 <script>
 import checkoutComp from '@/components/checkoutComp.vue';
+import { mapGetters } from 'vuex'; // Import mapGetters from Vuex
 
 export default {
   name: 'checkOut',
@@ -186,7 +187,19 @@ export default {
       this.count++;
     }
   },
-  components: { checkoutComp }
+  components: { checkoutComp },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated']), // Map isAuthenticated getter from auth module
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // Check if user is authenticated
+      if (!vm.isAuthenticated) {
+        // If not authenticated, redirect to login page
+        next('/signin');
+      }
+    });
+  }
 }
 </script>
 <style scoped>

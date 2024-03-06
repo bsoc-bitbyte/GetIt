@@ -3,6 +3,7 @@ export default ({ store }) => {
     window.onNuxtReady(() => {
       // Load cart data from localStorage, if available
       const cartData = localStorage.getItem('cart');
+     
       if (cartData) {
         store.commit('setCart', JSON.parse(cartData));
       }

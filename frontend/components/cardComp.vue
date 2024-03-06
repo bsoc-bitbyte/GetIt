@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col items-center flex space-around ">
+  <div class="flex-col items-center flex space-around">
     <div
       class=" hover:border-2 hover:border-slate-300 mx-[3.8rem] mt-[10rem] w-[17rem] h-[17rem] md:w-[25rem] md:h-[30rem]  border-2 rounded-sm justify-center">
     </div>
