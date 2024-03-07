@@ -196,6 +196,8 @@ export default {
         "comment": this.formValue.comment,
         "price": this.price,
         "prod_name": "needs to be added dynamically",
+        "prod_type": "ticket",
+        "prod_id": "1", // either the event id or the product id not the ticket id
 
       }
       this.createUPIGateway(data);
