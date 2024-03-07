@@ -83,7 +83,7 @@ def testRetrieveLoggedInAccountView_userLoggedIn_returnsAccountDetails(api_clien
 
 
 @pytest.mark.django_db
-def testRetrieveLoggedInAccountView_userNotLoggedIn_returnsForbidden():
+def testRetrieveLoggedInAccountView_userNotLoggedIn_returnsUnauthorized():
     # Arrange
     client = APIClient()
 
@@ -91,7 +91,7 @@ def testRetrieveLoggedInAccountView_userNotLoggedIn_returnsForbidden():
     response = client.get('/api/accounts/me/', format='json')
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
 @pytest.mark.django_db
@@ -111,7 +111,7 @@ def testUpdateLogInAccountView_userLoggedIn_updateSuccesful(api_client, field):
 
 
 @pytest.mark.django_db
-def testUpdateLogInAccountView_userNotLoggedIn_returnsForbidden():
+def testUpdateLogInAccountView_userNotLoggedIn_returnsUnauthorized():
     # Arrange
     client = APIClient()
 
@@ -119,4 +119,4 @@ def testUpdateLogInAccountView_userNotLoggedIn_returnsForbidden():
     response = client.put('/api/accounts/me/', {}, format='json')
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED

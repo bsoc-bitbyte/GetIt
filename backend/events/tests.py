@@ -101,7 +101,7 @@ def testEventCreation_withValidDetails_byUnauthenticatedUser_shouldNotCreateEven
     response = unauthenticated_client.post('/api/events/', event_data_copy, format='json')
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
     assert Event.objects.count() == 0
 
 
@@ -188,7 +188,7 @@ def testEventUpdate_withValidEventId_byOwner_shouldUpdateEvent(
     assert response.data['title'] == 'updated title'
     assert response.data['date'] == '2021-01-02'
     assert Event.objects.get().title == 'updated title'
-    assert Event.objects.get().date == '2021-01-02'
+    assert Event.objects.get().date.strftime('%Y-%m-%d') == '2021-01-02'
 
 
 @pytest.mark.django_db

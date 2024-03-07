@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 status_enums = [
     ('pending','Pending'),
     ('purchased','Purchased'),
@@ -27,7 +25,8 @@ class Ticket (models.Model) :
     response = models.JSONField(default=dict)
     purchase_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100,
-                              choices=status_enums)
+                              choices=status_enums,
+                              default='pending')
     
     def __str__(self):
         return f'{self.event.title} {self.buyer.first_name} {self.buyer.last_name}'
