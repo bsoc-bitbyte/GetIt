@@ -1,7 +1,5 @@
 from rest_framework import permissions
 
-from .models import Event
-
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """

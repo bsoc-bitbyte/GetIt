@@ -3,7 +3,7 @@ from django.conf import settings
 import requests
 from accounts.models import Account
 from accounts.views import get_account
-from rest_framework import viewsets 
+from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
@@ -11,6 +11,8 @@ import stripe
 from .models import Ticket
 from .serializers import TicketSerializer
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsTicketOwner
 import uuid
 from django.db import transaction
 import logging
@@ -18,15 +20,25 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 UPI_API_KEY = os.environ.get('UPI_API_KEY')
 
 
-# Create your views here.
+class TicketCreateListRetrieveViewSet(mixins.CreateModelMixin,
+                                      mixins.ListModelMixin,
+                                      mixins.RetrieveModelMixin,
+                                      viewsets.GenericViewSet):
 
-class TicketViewSet(viewsets.ModelViewSet):
-    queryset = Ticket.objects.all()
+    def get_queryset(self):
+        # Allows to view only user's tickets when listing
+        if self.action == 'list':
+            return Ticket.objects.filter(buyer=self.request.user)
+        else:
+            return Ticket.objects.all()
+
     serializer_class = TicketSerializer
+    permission_classes = (IsAuthenticated, IsTicketOwner)
 
 class CreatePaymentIntent(APIView):
 

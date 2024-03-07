@@ -1,9 +1,9 @@
 from django.urls import path,include
 from rest_framework.routers import DefaultRouter
-from .views import CreateUPIGateway, TicketViewSet, CreatePaymentIntent
+from .views import CreateUPIGateway, TicketCreateListRetrieveViewSet, CreatePaymentIntent
 
 router = DefaultRouter()
-router.register('', TicketViewSet, basename='ticket')
+router.register('', TicketCreateListRetrieveViewSet, basename='ticket')
 
 urlpatterns = [
     path('create-payment-intent/', CreatePaymentIntent.as_view(), name='create-payment-intent'),
