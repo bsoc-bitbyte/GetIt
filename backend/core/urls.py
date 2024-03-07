@@ -24,6 +24,8 @@ urlpatterns = [
     path('api/token/', include('auth.urls')),
     path('api/accounts/', include('accounts.urls')),
     path('api/events/', include('events.urls')),
+    path('api/orders/', include('orders.urls')),
+    path('api/products/', include('products.urls')),
     path('api/tickets/', include('tickets.urls')),
     path('api/stripe/webhook/', stripe_webhook, name='stripe-webhook'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
