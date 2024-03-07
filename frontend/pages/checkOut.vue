@@ -13,7 +13,7 @@
       </h2>
     </div>
     <div class="parent pr-[0rem]">
-      <form @submit="submitForm" class="pb-[2rem] pt-[0rem] max-[1239px]:pt-[3rem]">
+      <form  class="pb-[2rem] pt-[0rem] max-[1239px]:pt-[3rem]" @submit.prevent>
         <div
           class="flex-items max-[1239px]:flex-col max-[1239px]:items-center min-[1240px]:flex min-[1240px]:justify-start min-[1240px]:mt-[2rem]">
           <div class="main1 min-[1240px]:shadow-lg min-[1240px]:mr-[10rem] min-[1240px]:ml-[2rem]">
@@ -87,7 +87,7 @@
             </div>
           </div>
           <div
-            class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem]">
+            class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem] ">
             <div
               class="review-panel flex justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
               <div class="flex-col">
@@ -95,11 +95,11 @@
                   Order Review
                 </h3>
                 <p class="text-slate-600 subpixel-antialiased tracking-wider">
-                  {{ count }} items in cart
+                  {{ $store.getters['getQty'] }}  items in cart
                 </p>
               </div>
               <div class="dropdown-btn">
-                <button class="drop-btn">
+                <button class="drop-btn" v-on:click="toggleDropdown">
                   <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
                 </button>
               </div>
@@ -107,32 +107,36 @@
             <div
               class="main3 min-[1240px]:shadow-lg pt-[2rem] mt-[1rem] pb-[1rem] min-[1240px]:px-[2rem] max-[1239px]:pt-[0rem]">
               <div class="my-[2.5rem] divide-gray-400/[.4]">
-                <div class="billing-summary-dropdown flex justify-between">
-                  <div>
-                    <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
+                <div class="billing-summary-dropdown flex justify-between flex-col">
+                    <div class="flex justify-between">
+                      <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
+                      <div class="dropdown-btn">
+                        <button class="drop-btn" @click="toggleDropdown">
+                          <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
+                        </button>
+                      </div>
+                    </div>
+                    <div v-if="isOpen" class="dropdown-content" style="">
+                      <div class="px-2">
+                        <div class="block p text-gray-600 w-full text-sm">
+                          <option>Standard shipping - ₹00.00</option>
+                        </div>
+                        <div class="block p text-gray-600 w-full text-sm">
+                          <option>Standard Discount- ₹00.00</option>
+                        </div>
+                        <div class="block p text-gray-600 w-full text-sm">
+                          <option>Total Product Price- ₹{{ $store.getters.getPrice }}</option>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="dropdown-btn">
-                    <button class="drop-btn">
-                      <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
-                    </button>
-                  </div>
-                </div>
                 <hr>
                 <div class="main1 flex justify-between">
                   <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased py-[1rem] tracking-wider">Grand Total</h3>
-                  <h3 class="py-[1rem] tracking-wider">Rs. {{ price }}</h3>
+                  <h3 class="py-[1rem] tracking-wider">₹{{ $store.getters['getPrice'] }}</h3>
                 </div>
-                <div class="max-[1239px]:py-[0rem] min-[1240px]:py-[1rem]">
-                  <div>
-                    <label for="comment" class="comment tracking-wider heading text-gray-200">Order Comment
-                    </label>
-                  </div>
-                  <div class="max-[1239px]:pb-[0.5rem] min-[1240px]:pb-[1.5rem]">
-                    <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy="formValue.comment"
-                      class="border-2 border-gray-300 pl-[0.69rem] rounded-[0.25rem] w-full h-[6rem]" />
-                  </div>
-                </div>
-                <div class="pt-[1rem]">
+                
+                <div class="pt-[1rem] invisible ">
                   <input type="checkbox" id="checked" v-model.trim.lazy="formValue.checked" true-value="yes"
                     false-value="no" class="box">
                   <label for="checked" class="text-s text-slate-600 tracking-wider">Please check to acknowledge our
@@ -140,7 +144,8 @@
                 </div>
                 <div class="submit-button pt-[1rem] flex  justify-center ">
                   <button type="submit" class="btn bg-#ea454c py-[1rem] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full"
-                    @click="submitForm">Checkout
+                    @click="submitForm"
+                    >Checkout
                   </button>
                 </div>
               </div>
@@ -154,6 +159,13 @@
 <script>
 import checkoutComp from '@/components/checkoutComp.vue';
 import { mapGetters } from 'vuex'; // Import mapGetters from Vuex
+import { ref } from 'vue';
+
+const isOpen = ref(false);
+
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value;
+};
 
 export default {
   name: 'checkOut',
@@ -178,12 +190,22 @@ export default {
       laoding: false
     };
   },
+  setup() {
+    const isOpen = ref(false);
+
+    const toggleDropdown = () => {
+      isOpen.value = !isOpen.value;
+    };
+
+    return { isOpen, toggleDropdown };
+  },
   methods: {
     submitForm(e) {
       e.preventDefault();
       this.loading = true;
       let email = this.$store.getters['auth/userEmail'];
       console.log("email", email)
+      console.log(this.formValue)
       const data = {
         "first_name": this.formValue.firstName,
         "last_name": this.formValue.lastName,
