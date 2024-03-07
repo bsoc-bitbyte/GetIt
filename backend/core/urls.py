@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/events/', include('events.urls')),
     path('api/tickets/', include('tickets.urls')),
     path('api/stripe/webhook/', stripe_webhook, name='stripe-webhook'),
+    path('api/upi/webhook/', include('upi.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
