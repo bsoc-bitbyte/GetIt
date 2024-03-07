@@ -12,3 +12,7 @@ class TicketSerializer(serializers.ModelSerializer) :
             'purchase_date',
             'status',
         ]
+
+        extra_kwargs = {
+            'status': {'read_only': True},
+            }
