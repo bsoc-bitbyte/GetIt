@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import AccountSerializer
 from .models import Account
+from django.shortcuts import get_object_or_404
+
 
 
 class CreateAccountView(CreateAPIView):
@@ -27,3 +29,8 @@ class RetrieveUpdateLoggedInAccountView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+
+
+def get_account(email) :
+    return get_object_or_404(Account, email=email)
