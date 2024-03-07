@@ -101,7 +101,7 @@ def testEventCreation_withValidDetails_byUnauthenticatedUser_shouldNotCreateEven
     response = unauthenticated_client.post('/api/events/', event_data_copy, format='json')
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
     assert Event.objects.count() == 0
 
 
