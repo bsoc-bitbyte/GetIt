@@ -30,12 +30,15 @@ export const mutations = {
     let found = state.cart.find((product) => {
       return product.title === item.title;
     });
-
-
-
     if (found) {
-      found.quantity++;
-      found.totalPrice = found.quantity * found.ticket_price;
+      this.$toast.show("Item already added to Cart", {
+        theme: "toasted-primary",
+        position: "bottom-center",
+        duration: 2000,
+        type: "error",
+        iconPack: "material",
+        icon: "add_shopping_cart",
+      });
     } else {
       let temp = item.title;
       let totalP = item.ticket_price;
@@ -45,17 +48,20 @@ export const mutations = {
         quantity: 1,
         totalPrice: totalP,
       });
+      this.$toast.show("Added to Cart", {
+        theme: "toasted-primary",
+        position: "bottom-center",
+        duration: 2000,
+        type: "success",
+        iconPack: "material",
+        icon: "add_shopping_cart",
+      });
     }
     this.commit("saveCart");
-    this.$toast.show("Added to Cart", {
-      theme: "toasted-primary",
-      position: "bottom-center",
-      duration: 2000,
-      type: "success",
-      iconPack: "material",
-      icon: "add_shopping_cart",
-    });
+    
   },
+
+
   removeFromCart(state, item) {
     let index = state.cart.indexOf(item);
     if (index > -1) {
@@ -73,21 +79,60 @@ export const mutations = {
   },
  
   increaseQuantity(state, item) {
-    let found = state.cart.find((product) => product.pid == item.pid);
-    if (found) {
-      found.quantity++;
-      found.totalPrice = found.quantity * found.ticket_price;
-      console.log(found.ticket_price, found.quantity);
-      this.commit("saveCart");
-      this.$toast.show("Increased the Quantity", {
-        theme: "toasted-primary",
-        position: "bottom-center",
-        duration: 2000,
-        type: "info",
-        iconPack: "material",
-        icon: "check",
-      });
+    if(!item.pid){
+          let found = state.cart.find((product) => {
+            return product.title === item.title;
+          });
+          if (found) {
+                this.$toast.show("Item already added to Cart", {
+                  theme: "toasted-primary",
+                  position: "bottom-center",
+                  duration: 2000,
+                  type: "error",
+                  iconPack: "material",
+                  icon: "add_shopping_cart",
+                });
+          } 
+          else {
+                let temp = item.title;
+                let totalP = item.ticket_price;
+                state.cart.push({
+                  ...item,
+                  pid: temp,
+                  quantity: 1,
+                  totalPrice: totalP,
+                });
+                this.$toast.show("Added to Cart", {
+                  theme: "toasted-primary",
+                  position: "bottom-center",
+                  duration: 2000,
+                  type: "success",
+                  iconPack: "material",
+                  icon: "add_shopping_cart",
+                });
+          }
+          this.commit("saveCart");
+
     }
+    else{
+      let found = state.cart.find((product) => product.pid == item.pid);
+      if (found) {
+          found.quantity++;
+          found.totalPrice = found.quantity * found.ticket_price;
+          console.log(found.ticket_price, found.quantity);
+          
+          this.commit("saveCart");
+          this.$toast.show("Increased the Quantity", {
+            theme: "toasted-primary",
+            position: "bottom-center",
+            duration: 2000,
+            type: "success",
+            iconPack: "material",
+            icon: "check",
+          });
+    }
+    }
+    
   },
   decreaseQuantity(state, item) {
     let found = state.cart.find((product) => product.pid == item.pid);
@@ -99,7 +144,7 @@ export const mutations = {
         theme: "toasted-primary",
         position: "bottom-center",
         duration: 2000,
-        type: "info",
+        type: "success",
         iconPack: "material",
         icon: "check",
       });
