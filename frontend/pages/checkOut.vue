@@ -111,8 +111,8 @@
                     <div class="flex justify-between">
                       <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
                       <div class="dropdown-btn">
-                        <button class="drop-btn" @click="toggleDropdown">
-                          <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
+                        <button class="drop-btn" @click="toggleDropdown" :class="{'rotate-180': isOpen}">
+                          <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" class="inline-block w-4 h-4 ml-1 transform transition"/>
                         </button>
                       </div>
                     </div>
@@ -185,7 +185,7 @@ export default {
         consent: 'no'
       },
       count: 0,
-      price: 1,
+      price: this.$store.getters['getPrice'],
       isCheckoutVisible: false,
       laoding: false
     };
@@ -209,18 +209,18 @@ export default {
       const data = {
         "first_name": this.formValue.firstName,
         "last_name": this.formValue.lastName,
-        "email": "priyanshmehta61@gmail.com",
+        "email": this.formValue.email,
         "hostel_address": this.formValue.hostel_address,
         "roll": this.formValue.roll,
         "branch": this.formValue.branch,
         "club_member": this.formValue.club_member,
         "phone": this.formValue.phone,
         "consent": this.formValue.consent,
-        "comment": this.formValue.comment,
-        "price": this.price,
+        "comment": "fdsdf",
+        "price": this.$store.getters['getPrice'],
         "prod_name": "needs to be added dynamically",
         "prod_type": "ticket",
-        "prod_id": "1", // either the event id or the product id not the ticket id
+        "prod_id": "2", // either the event id or the product id not the ticket id
 
       }
       this.createUPIGateway(data);
@@ -317,4 +317,10 @@ export default {
 .box {
   accent-color: rgb(35, 162, 63);
 }
+.dropdown-title svg {
+  transition: transform 0.3s;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);}
 </style>
