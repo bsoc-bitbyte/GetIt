@@ -1,4 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 import stripe
 
@@ -35,3 +36,36 @@ def stripe_webhook(request) :
             return HttpResponse(status=400)
 
     return HttpResponse(status=200) 
+
+
+@csrf_exempt
+@require_POST
+def upi_webhook(request) :
+
+    data = request.POST
+
+    amount = data.get('amount')
+    txn_id = data.get('txn_id')
+    status = data.get('status')
+    created_at = data.get('created_at')
+
+    prod_type = data.get('prod_type')
+
+    if prod_type == 'ticket' :
+        ticket_id = data.get('ticket_id')
+        try :
+            ticket = Ticket.objects.get(id=ticket_id)
+            
+            if status == 'success' :
+                ticket.status = 'purchased'
+                ticket.save()
+            else :
+                ticket.status = 'failed'
+                ticket.save()
+        except Exception as e:
+            return HttpResponse(status=400)
+    
+    return HttpResponse(status=200)
+
+
+    

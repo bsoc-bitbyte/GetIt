@@ -173,15 +173,49 @@ export default {
         consent: 'no'
       },
       count: 0,
-      price: 0,
-      isCheckoutVisible: false
+      price: 1,
+      isCheckoutVisible: false,
+      laoding: false
     };
   },
   methods: {
     submitForm(e) {
       e.preventDefault();
-      this.isCheckoutVisible = true;
-      console.log(this.formValue);
+      this.loading = true;
+      let email = this.$store.getters['auth/userEmail'];
+      console.log("email", email)
+      const data = {
+        "first_name": this.formValue.firstName,
+        "last_name": this.formValue.lastName,
+        "email": "priyanshmehta61@gmail.com",
+        "hostel_address": this.formValue.hostel_address,
+        "roll": this.formValue.roll,
+        "branch": this.formValue.branch,
+        "club_member": this.formValue.club_member,
+        "phone": this.formValue.phone,
+        "consent": this.formValue.consent,
+        "comment": this.formValue.comment,
+        "price": this.price,
+        "prod_name": "needs to be added dynamically",
+        "prod_type": "ticket",
+        "prod_id": "1", // either the event id or the product id not the ticket id
+
+      }
+      this.createUPIGateway(data);
+
+    },
+
+    async createUPIGateway(requestData) {
+      
+      // make a request to the backend to get gateway 
+      try {
+        const response = await this.$axios.post('/tickets/create-upi-gateway/', requestData);
+        const redirect_url = response['data']['data']['payment_url']
+        window.location.href = redirect_url;
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      
     },
     increase() {
       this.count++;
