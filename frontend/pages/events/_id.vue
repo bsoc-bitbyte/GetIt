@@ -23,11 +23,11 @@
       <div class="flex items-center gap-4">
         <span class="font-semibold text-[#2e191a] text-xl">₹{{ event.ticket_price }}</span>
         <span class="rounded-md bg-[#ffcccfc2] px-2 font-bold text-[#fa4750] text-xs">
-          50%
+          10%
         </span>
       </div>
       <span class="font-semibold text-[#776f70] text-xs">
-        <s>₹{{ (2 * event.ticket_price).toFixed(2)}}</s>
+        <s>₹{{ (1.1 * event.ticket_price).toFixed(2)}}</s>
       </span>
     </div>
 

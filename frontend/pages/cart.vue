@@ -51,12 +51,12 @@
             <option>Standard shipping - ₹00.00</option>
           </div>
         </div>
-        <div>
+        <!-- <div>
           <label class="font-medium inline-block mb-1 text-sm uppercase mt-3">Discount</label>
           <div class="block p text-gray-600 w-full text-sm">
             <option>Standard Discount- ₹00.00</option>
           </div>
-        </div>
+        </div> -->
         <div class="flex justify-between mt-16 mb-5">
           <span class="font-semibold text-sm uppercase">Items {{ $store.getters['getQty'] }}  </span>
           <span class="font-semibold text-sm">₹{{ $store.getters['getPrice'] }}</span>
@@ -79,27 +79,23 @@
                 <div class="shrink-0">
                   <img class="h-24 w-24 max-w-full rounded-lg object-cover" :src="item.cover_image" alt="" />
                 </div>
-
                 <div class="relative flex flex-1 flex-col justify-between">
                   <div class="sm:col-gap-5 sm:grid sm:grid-cols-2">
                     <div class="pr-8 sm:pr-5">
                       <p class="text-base font-semibold text-gray-700">{{ item.title }}</p>
                       <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">{{ item.location }}</p>
                     </div>
-
                     <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
                       <p class="shrink-0 w-20 text-base font-semibold text-gray-700 sm:order-2 sm:ml-8 sm:text-right">₹{{ item.totalPrice }}</p>
-
                       <div class="sm:order-1">
                         <div class="mx-auto flex h-8 items-stretch text-gray-600">
                           <button @click="decreaseQ(item)" class="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-[#EA454C]  hover:text-white">-</button>
                           <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{{ item.quantity }} </div>
-                          <button @click="increaseQ(item)" class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-[#EA454C]  hover:text-white">+</button>
+                          <button @click="increaseQ(item)"   class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-[#EA454C]  hover:text-white">+</button>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div class="absolute top-0 right-0 flex sm:bottom-0 sm:top-auto">
                     <button @click.prevent="removeFromCart(item)" type="button" class="flex rounded p-2 text-center text-gray-500 transition-all duration-200 ease-in-out focus:shadow hover:text-gray-700">
                       <svg  class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -177,7 +173,10 @@
                 }
             },
             increaseQ(item){
-                this.$store.commit('increaseQuantity', item);
+              if(item.quantity===1){
+                return
+              }
+              this.$store.commit('increaseQuantity', item);
             } 
         }
   }

@@ -89,20 +89,38 @@
           <div
             class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem] ">
             <div
-              class="review-panel flex justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
+              class="review-panel flex flex-col justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
               <div class="flex-col">
-                <h3 class="TEXT2 tracking-wider font-bold items-center">
+                <div class="flex justify-between"><h3 class="TEXT2 tracking-wider font-bold items-center">
                   Order Review
-                </h3>
+                </h3><div class="dropdown-btn">
+                <button class="drop-btn" @click="toggleDropdowncart" :class="{'rotate-180': isOpencart}">
+                  <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
+                </button>
+              </div></div>
                 <p class="text-slate-600 subpixel-antialiased tracking-wider">
                   {{ $store.getters['getQty'] }}  items in cart
                 </p>
               </div>
-              <div class="dropdown-btn">
-                <button class="drop-btn" v-on:click="toggleDropdown">
-                  <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
-                </button>
-              </div>
+              
+              <ul v-if="isOpencart" class="" v-for="item in $store.state.cart" :key="item.pid">
+              <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+                <div class="shrink-0">
+                  <img class="h-24 w-24 max-w-full rounded-lg object-cover" :src="item.cover_image" alt="" />
+                </div>
+                <div class="relative flex flex-1 flex-col justify-between">
+                  <div class="sm:col-gap-5 sm:grid sm:grid-cols-2">
+                    <div class="pr-8 sm:pr-5">
+                      <p class="text-base font-semibold text-gray-700">{{ item.title }}</p>
+                      <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">{{ item.location }}</p>
+                    </div>
+                    <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                      <p class="shrink-0 w-20 text-base font-semibold text-gray-700 sm:order-2 sm:ml-8 sm:text-right">₹{{ item.totalPrice }}</p>
+                    </div>
+                  </div>
+                </div>
+              </li> 
+            </ul>
             </div>
             <div
               class="main3 min-[1240px]:shadow-lg pt-[2rem] mt-[1rem] pb-[1rem] min-[1240px]:px-[2rem] max-[1239px]:pt-[0rem]">
@@ -122,10 +140,10 @@
                           <option>Standard shipping - ₹00.00</option>
                         </div>
                         <div class="block p text-gray-600 w-full text-sm">
-                          <option>Standard Discount- ₹00.00</option>
+                          <option>Standard Discount- ₹{{ .1*$store.getters.getPrice }}</option>
                         </div>
                         <div class="block p text-gray-600 w-full text-sm">
-                          <option>Total Product Price- ₹{{ $store.getters.getPrice }}</option>
+                          <option>Total Product Price- ₹{{ 1.1*$store.getters.getPrice }}</option>
                         </div>
                       </div>
                     </div>
@@ -161,11 +179,16 @@ import checkoutComp from '@/components/checkoutComp.vue';
 import { mapGetters } from 'vuex'; // Import mapGetters from Vuex
 import { ref } from 'vue';
 
-const isOpen = ref(false);
+// const isOpen = ref(false);
+// const isOpencart = ref(false); 
 
-const toggleDropdown = () => {
-  isOpen.value = !isOpen.value;
-};
+// const toggleDropdown = () => {
+//   isOpen.value = !isOpen.value;
+// };
+
+// const toggleDropdowncart = () => {
+//   isOpencart.value = !isOpencart.value;
+// };
 
 export default {
   name: 'checkOut',
@@ -181,7 +204,6 @@ export default {
         club_member: '',
         phone: null,
         checked: '',
-        comment: "",
         consent: 'no'
       },
       count: 0,
@@ -192,33 +214,35 @@ export default {
   },
   setup() {
     const isOpen = ref(false);
+  const isOpencart = ref(false); 
 
-    const toggleDropdown = () => {
-      isOpen.value = !isOpen.value;
-    };
+  const toggleDropdown = () => {
+    isOpen.value = !isOpen.value;
+  };
 
-    return { isOpen, toggleDropdown };
+  const toggleDropdowncart = () => {
+    isOpencart.value = !isOpencart.value;
+  };
+    return { isOpen, toggleDropdown , isOpencart,toggleDropdowncart};
   },
   methods: {
     submitForm(e) {
       e.preventDefault();
       this.loading = true;
       let email = this.$store.getters['auth/userEmail'];
-      console.log("email", email)
-      console.log(this.formValue)
+      console.log(this.$store.state.cart[0])
       const data = {
         "first_name": this.formValue.firstName,
         "last_name": this.formValue.lastName,
-        "email": this.formValue.email,
+        "email": email,
         "hostel_address": this.formValue.hostel_address,
         "roll": this.formValue.roll,
         "branch": this.formValue.branch,
         "club_member": this.formValue.club_member,
         "phone": this.formValue.phone,
         "consent": this.formValue.consent,
-        "comment": "fdsdf",
         "price": this.$store.getters['getPrice'],
-        "prod_name": "needs to be added dynamically",
+        "prod_name": this.$store.state.cart[0].title,
         "prod_type": "ticket",
         "prod_id": "2", // either the event id or the product id not the ticket id
 
