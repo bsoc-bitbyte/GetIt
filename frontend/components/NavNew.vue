@@ -12,7 +12,7 @@
                 <!-- Nav Links -->
                 <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                     <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/">Home</nuxt-link></li>
-                    <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/events">Events</nuxt-link></li>
+                    <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/eventList">Events</nuxt-link></li>
                 </ul>
 
                 <div class="flex gap-6 font-semibold font-heading items-center">
