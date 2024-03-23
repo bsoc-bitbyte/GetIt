@@ -1,4 +1,6 @@
-export default {
+import { defineNuxtConfig } from 'nuxt3'
+
+export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'GetIt',
@@ -11,9 +13,6 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins&display=swap' }
-    ],
-    style: [
-      { cssText: 'body { font-family: "Poppins", sans-serif; }' }
     ],
     script: [
       { src: 'https://js.stripe.com/v3/' }
@@ -53,7 +52,7 @@ export default {
   },
 
   axios: {
-    baseURL: process.env.NODE_ENV == 'production' ? 'https://backend-getit.onrender.com/api/' : 'http://localhost:8000/api/',
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://backend-getit.onrender.com/api/' : 'http://localhost:8000/api/',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -66,4 +65,4 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
-}
+})
