@@ -36,28 +36,76 @@ export const mutations = {
 export const actions = {
   async login({ commit, dispatch }, { email, password }) {
     // make an API call to login the user with an email address and password
-    const { data } = await this.$axios.post("token/", { email, password });
-    console.log(data);
-    // commit the user and tokens to the state
-    commit(AUTH_MUTATIONS.SET_PAYLOAD,{
-      access: data.access,
-      refresh: data.refresh,
-      user : {
-        email : email,
+    console.log("inside login")
+    let response = null;
+    try {
+      response = await this.$axios.post("token/", { email, password });
+      if (response.status == 200) {
+        commit(AUTH_MUTATIONS.SET_PAYLOAD, {
+          access: response.data.access,
+          refresh: response.data.refresh,
+          user: {
+            email: email,
+          }
+        }
+        );
+        this.$toast.show("Logged In Successfully", {
+          theme: "toasted-primary",
+          position: "bottom-center",
+          duration: 2000,
+          type: "success",
+          iconPack: "material",
+          icon: "login",
+        });
       }
+
     }
-    );
+    catch (error) {
+      this.$toast.show(error.response.data.detail, {
+        theme: "toasted-primary",
+        position: "bottom-center",
+        duration: 2000,
+        type: "error",
+        iconPack: "material",
+        icon: "login",
+      });
+      throw error;
+    }
   },
 
-  async register({ commit }, { username, email, password }) {
-    let first_name = username;
-    let last_name = username;
-    const response = await this.$axios.post("accounts/", {
-      first_name,
-      last_name,
-      email,
-      password,
-    });
+  async register({ commit }, { username, phone_number, email, password }) {
+    let first_name = username.split(" ")[0];
+    let last_name = username.split(" ")[1];
+    try {
+      const response = await this.$axios.post("accounts/", {
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        password,
+      });
+      if (response.status == 201 || response.status == 200) {
+        this.$toast.show("Registered Successfully", {
+          theme: "toasted-primary",
+          position: "bottom-center",
+          duration: 2000,
+          type: "success",
+          iconPack: "material",
+          icon: "login",
+        });
+      }
+    }
+    catch (error) {
+      this.$toast.show(error.response.data.detail, {
+        theme: "toasted-primary",
+        position: "bottom-center",
+        duration: 2000,
+        type: "error",
+        iconPack: "material",
+        icon: "login",
+      });
+      throw error;
+    }
     if (process.env.NODE_ENV == "production") {
       console.log(response);
     }

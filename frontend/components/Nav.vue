@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <nav>
     <div class="max-lg:hidden m-4 ml-8 mr-8 top-0">
       <div>
@@ -144,7 +144,8 @@ export default {
   methods: {
     handleLogout() {
       this.$store.dispatch('auth/logout')
+      
     }
   },
 };
-</script>
+</script> -->
