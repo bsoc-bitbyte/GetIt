@@ -1,4 +1,5 @@
 from django.db import models
+from events.models import Event
 
 status_enums = [
     ('pending','Pending'),
@@ -30,7 +31,8 @@ class Ticket (models.Model) :
                               default='pending')
     
     @staticmethod
-    def create_ticket(event, buyer, response):
+    def create_ticket(event_id, buyer, response):
+        event = Event.objects.get(id=event_id)
         ticket = Ticket()
         ticket.event = event
         ticket.buyer = buyer

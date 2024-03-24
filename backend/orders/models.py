@@ -1,5 +1,5 @@
 from django.db import models
-from products.models import Product
+from tickets.models import Ticket
 from accounts.models import Account
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -26,7 +26,7 @@ class Order(models.Model):
         return order
 
     def __str__(self):
-        return f"Order #{self.id} - {self.product.name}"
+        return f"Order #{self.id}"
     
 
 class OrderItem(models.Model):
@@ -34,16 +34,17 @@ class OrderItem(models.Model):
         Order, related_name='order_items', on_delete=models.CASCADE)
     
     ## for generic reference to product and tickets
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     total = models.DecimalField(max_digits=10, decimal_places=2)
 
     @staticmethod
-    def create_order_item(order, content_type, quantity):
+    def create_order_item(order, ticket, quantity):
         order_item = OrderItem()
         order_item.order = order
-        order_item.content_type = content_type
+        order_item.ticket = ticket
         order_item.quantity = quantity
-        order_item.total = order_item.content_type.price * quantity
+        order_item.total = order_item.ticket.price * quantity
         order_item.save()
         return order_item

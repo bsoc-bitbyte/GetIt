@@ -207,7 +207,7 @@ const submitForm = async (e) => {
 const createUPIGateway = async (requestData) => {
   try {
     // Your logic to make a request to the backend to get gateway
-    const response = await $fetch('http://localhost:8000/tickets/create-upi-gateway/', {method: 'POST', body: {requestData}});
+    const response = await $fetch('http://localhost:8000/api/tickets/create-upi-gateway/', {method: 'POST', body: {requestData}});
     const redirect_url = response['data']['data']['payment_url'];
     window.location.href = redirect_url;
   } catch (error) {
@@ -230,16 +230,24 @@ const formValue = ref({
   prod_id: "2",
 });
 
+const prepareOrderItems = () => {
+  const orderItem = cartStore.cart.map(item => ({
+    id : item.id,
+    title : item.title,
+    price : item.ticket_price,
+    quantity : item.quantity
+  }));
+  return orderItem;
+};
 
 const prepareRequestData = () => {
   // Your logic to prepare request data
   const formData = formValue.value;
-  console.log(formData)
   return {
     "first_name": formData.firstName,
     "last_name": formData.lastName,
-    "email": "userEmail",
-    "hostel_address": formData.hostel_address,
+    "email": authStore.userEmail,
+    "address": formData.hostel_address,
     "roll": formData.roll,
     "branch": formData.branch,
     "club_member": formData.club_member,
@@ -247,8 +255,7 @@ const prepareRequestData = () => {
     "consent": formData.consent,
     "price": cartStore.getPrice,
     "prod_name": cartStore.cart[0].title,
-    "prod_type": "ticket",
-    "prod_id": "2", // either the event id or the product id not the ticket id
+    "order_items": prepareOrderItems()
   };
 };
 
@@ -333,3 +340,6 @@ if (!authStore.isAuthenticated) {
 .rotate-180 {
   transform: rotate(180deg);}
 </style>
+
+
+
