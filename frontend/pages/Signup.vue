@@ -28,16 +28,23 @@
               <p
                 class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
               >
-                Username
+                Full Name
               </p>
               <input
                 type="text"
                 class="px-[1rem] border-2 h-[2.69rem] border-black-300 w-full items-center rounded-lg min-[1120px]:w-[35rem]"
                 v-model.trim.lazy="credentials.username"
-                placeholder="Username"
+                placeholder="John Doe"
                 required
               />
             </div>
+            <div class ="phone-number py-[0.5rem]">
+              <p class = "font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800">Phone Number</p>
+              <input type="tel" class = "px-[1rem] border-2 h-[2.69rem] border-black-300 w-full items-center rounded-lg min-[1120px]:w-[35rem]" 
+              v-model.trim.lazy = "credentials.phone_number" 
+              placeholder="Enter your phone number" required/>
+            </div>
+
             <div class="email py-[0.5rem]">
               <p
                 class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
@@ -96,7 +103,7 @@
               </button>
             </a>
           </div>
-          <div class="sign-up-google py-[0.5rem]">
+          <!-- <div class="sign-up-google py-[0.5rem]">
             <button
               type="submit"
               id="submit-google"
@@ -113,7 +120,7 @@
                 >
               </div>
             </button>
-          </div>
+          </div> -->
           <div class="optional-sign-in mt-[0.7rem] hi">
             <p class="flex justify-center hi">
               <span class="account-text tracking-wider dha"
@@ -137,6 +144,7 @@ export default {
       credentials: {
         username: "",
         email: "",
+        phone_number: "",
         password: "",
         password_check: "",
         
@@ -157,6 +165,16 @@ export default {
           .catch((err) => {
             console.log(err);
           });
+      }
+      else {
+        this.$toast.show("Passwords do not match", {
+          theme: "toasted-primary",
+          position: "bottom-center",
+          duration: 2000,
+          type: "error",
+          iconPack: "material",
+          icon: "error",
+        });
       }
     },
     checker() {
