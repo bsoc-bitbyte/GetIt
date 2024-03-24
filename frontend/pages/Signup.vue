@@ -36,7 +36,6 @@
                 class="px-[1rem] border-2 h-[2.69rem] border-black-300 w-full items-center rounded-lg min-[1120px]:w-[35rem]"
                 v-model.trim.lazy="credentials.username"
                 placeholder="John Doe"
-                placeholder="John Doe"
                 required
               />
             </div>

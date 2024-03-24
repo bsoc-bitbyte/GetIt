@@ -194,5 +194,5 @@ export const useAuthStore = defineStore('auth', {
       return this.user
     }
   },
-  persist: true
+  persist: true,
 });
