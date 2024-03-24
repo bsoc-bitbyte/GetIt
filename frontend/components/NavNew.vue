@@ -27,14 +27,14 @@
                                 class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-[#ea454c] opacity-75"></span>
                             <span
                                 class="relative rounded-full h-5 w-5 p-2 bg-[#ea454c] flex items-center justify-center text-gray-200">{{
-                                $store.getters['getQty'] }}
+                            $store.getters['getQty'] }}
                             </span>
                         </span>
                         Cart
                     </nuxt-link>
 
-                    <nuxt-link v-if="isAuth" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
-                        @click.native="handleLogout">Sign Out</nuxt-link>
+                    <button v-if="isAuth" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
+                        @click="handleLogout">Sign Out</button>
 
                     <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
                 </div>
@@ -71,10 +71,17 @@
                                     class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
                                     <nuxt-link to="/">Events</nuxt-link>
                                 </li>
+                                <li
+                                    class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
+
+                                    <button v-if="isAuth" 
+                                        @click="handleLogout">Sign Out</button>
+                                    <nuxt-link v-else to="/Signin">Sign In</nuxt-link>
+                                </li>
                             </ul>
                         </div>
                     </aside>
-                    <nuxt-link class="text-3xl font-bold flex items-center" to="/">
+                    <nuxt-link class="text-3xl font-bold flex items-center" to="/eventlist">
                         <img class="h-9"
                             src="https://raw.githubusercontent.com/bsoc-bitbyte/GetIt/10a0fcc39d52d116428dd49505ead2f597e7a30e/assets/get_it.png"
                             alt="logo">
@@ -92,7 +99,7 @@
                                     class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-[#ea454c] opacity-75"></span>
                                 <span
                                     class="relative rounded-full h-5 w-5 p-2 bg-[#ea454c] flex items-center justify-center text-gray-200">{{
-                                    $store.getters['getQty'] }}
+                            $store.getters['getQty'] }}
                                 </span>
                             </span>
                         </nuxt-link>
@@ -122,6 +129,14 @@ export default {
     methods: {
         handleLogout() {
             this.$store.dispatch('auth/logout')
+            this.$toast.show('Logged Out Successfully', {
+                theme: "toasted-primary",
+                position: "bottom-center",
+                duration: 2000,
+                type: "success",
+                iconPack: "material",
+                icon: "logout",
+            })
         }
     },
 };

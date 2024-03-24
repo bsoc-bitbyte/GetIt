@@ -38,15 +38,6 @@
             </button>
           </a>
         </div>
-        <div class="sign-up-google  py-[0.5rem]">
-          <button type="submit" id="submit-google" class = "hover:border-blue-600 mt-[1rem] border-2 border-slate-300 w-full bg-white-500 h-[3.25rem] rounded-[1.25rem]" onclick={submitForm}>
-            <div class="google-img inline-flex items-center">
-              <img src="../assets/google-icon.png" alt="" class = "w-[1.5rem]">
-              <a href="#" class = "ml-[0.3rem] tracking-wider">Sign in with Google</a>
-            </div>
-
-          </button>
-        </div>
         <div class="optional-sign-in mt-[0.7rem] hi">
           <p class = "flex justify-center hi">
             <span class="account-text tracking-wider dha">Don't have an account?</span>
@@ -77,7 +68,7 @@
       e.preventDefault();
       this.$store.dispatch('auth/login',this.credentials)
       .then(() => {
-        this.$router.push('/')
+        this.$router.push('/eventlist')
       })
     }
     }
