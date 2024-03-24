@@ -1,30 +1,27 @@
 {
   "name": "GetIt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/postcss8": "^1.1.3",
-    "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/pwa": "^3.3.5",
-    "@nuxtjs/toast": "^3.3.1",
-    "core-js": "^3.25.3",
-    "js-cookie": "^3.0.5",
-    "nuxt": "^2.15.8",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+    "@pinia/nuxt": "^0.5.1",
+    "nuxt": "^3.11.1",
     "nuxt-material-design-icons-iconfont": "^1.0.2",
-    "nuxt-stripe-module": "^3.2.0",
-    "vue": "^2.7.10",
-    "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10",
-    "vuex-persist": "^3.1.3"
+    "pinia": "^2.1.7",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "vue3-lottie": "^3.3.0",
+    "vue3-toastify": "^0.2.1"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.10.0",
-    "postcss": "^8.4.17"
+    "@nuxtjs/tailwindcss": "^6.11.4"
   }
 }

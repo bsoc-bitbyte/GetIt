@@ -87,7 +87,7 @@
             </div>
           </div>
           <div
-            class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem] ">
+            class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem] lg:w-[30vw] w-[80vw] lg:m-0 m-auto">
             <div
               class="review-panel flex flex-col justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
               <div class="flex-col">
@@ -99,12 +99,12 @@
                 </button>
               </div></div>
                 <p class="text-slate-600 subpixel-antialiased tracking-wider">
-                  {{ $store.getters['getQty'] }}  items in cart
+                  {{ cartStore.cart.length}}  items in cart
                 </p>
               </div>
               
-              <ul v-if="isOpencart" class="" v-for="item in $store.state.cart" :key="item.pid">
-              <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+              <ul v-if="isOpencart" class="" v-for="item in cartStore.cart" :key="item.pid">
+              <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 ">
                 <div class="shrink-0">
                   <img class="h-24 w-24 max-w-full rounded-lg object-cover" :src="item.cover_image" alt="" />
                 </div>
@@ -140,10 +140,10 @@
                           <option>Standard shipping - ₹00.00</option>
                         </div>
                         <div class="block p text-gray-600 w-full text-sm">
-                          <option>Standard Discount- ₹{{ .1*$store.getters.getPrice }}</option>
+                          <option>Standard Discount- ₹{{ (.1*cartStore.getPrice).toFixed(2) }}</option>
                         </div>
                         <div class="block p text-gray-600 w-full text-sm">
-                          <option>Total Product Price- ₹{{ 1.1*$store.getters.getPrice }}</option>
+                          <option>Total Product Price- ₹{{ (1.1*cartStore.getPrice).toFixed(2)}}</option>
                         </div>
                       </div>
                     </div>
@@ -151,7 +151,7 @@
                 <hr>
                 <div class="main1 flex justify-between">
                   <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased py-[1rem] tracking-wider">Grand Total</h3>
-                  <h3 class="py-[1rem] tracking-wider">₹{{ $store.getters['getPrice'] }}</h3>
+                  <h3 class="py-[1rem] tracking-wider">₹{{cartStore.getPrice}}</h3>
                 </div>
                 
                 <div class="pt-[1rem] invisible ">
@@ -174,114 +174,94 @@
     </div>
   </div>
 </template>
-<script>
-import checkoutComp from '@/components/checkoutComp.vue';
-import { mapGetters } from 'vuex'; // Import mapGetters from Vuex
-import { ref } from 'vue';
+<script setup>
+import { useCartStore } from '../store/index'; 
+import { useAuthStore } from '../store/auth'; 
+import { useRouter } from 'vue-router';
 
-// const isOpen = ref(false);
-// const isOpencart = ref(false); 
 
-// const toggleDropdown = () => {
-//   isOpen.value = !isOpen.value;
-// };
 
-// const toggleDropdowncart = () => {
-//   isOpencart.value = !isOpencart.value;
-// };
+const isOpen = ref(false);
+const isOpencart = ref(false);
 
-export default {
-  name: 'checkOut',
-  data() {
-    return {
-      formValue: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        hostel_address: '',
-        roll: '',
-        branch: '',
-        club_member: '',
-        phone: null,
-        checked: '',
-        consent: 'no'
-      },
-      count: 0,
-      price: this.$store.getters['getPrice'],
-      isCheckoutVisible: false,
-      laoding: false
-    };
-  },
-  setup() {
-    const isOpen = ref(false);
-  const isOpencart = ref(false); 
+const toggleDropdown = () => {
+  isOpen.value = !isOpen.value;
+};
 
-  const toggleDropdown = () => {
-    isOpen.value = !isOpen.value;
-  };
+const toggleDropdowncart = () => {
+  isOpencart.value = !isOpencart.value;
+};
 
-  const toggleDropdowncart = () => {
-    isOpencart.value = !isOpencart.value;
-  };
-    return { isOpen, toggleDropdown , isOpencart,toggleDropdowncart};
-  },
-  methods: {
-    submitForm(e) {
-      e.preventDefault();
-      this.loading = true;
-      let email = this.$store.getters['auth/userEmail'];
-      console.log(this.$store.state.cart[0])
-      const data = {
-        "first_name": this.formValue.firstName,
-        "last_name": this.formValue.lastName,
-        "email": email,
-        "hostel_address": this.formValue.hostel_address,
-        "roll": this.formValue.roll,
-        "branch": this.formValue.branch,
-        "club_member": this.formValue.club_member,
-        "phone": this.formValue.phone,
-        "consent": this.formValue.consent,
-        "price": this.$store.getters['getPrice'],
-        "prod_name": this.$store.state.cart[0].title,
-        "prod_type": "ticket",
-        "prod_id": "2", // either the event id or the product id not the ticket id
+// Use your Pinia store
+const cartStore = useCartStore();
+const authStore = useAuthStore();
+const router = useRouter();
+const submitForm = async (e) => {
+  e.preventDefault();
+  const requestData = prepareRequestData(); 
 
-      }
-      this.createUPIGateway(data);
+  console.log(requestData);
+  await createUPIGateway(requestData); 
+  
+};
 
-    },
-
-    async createUPIGateway(requestData) {
-      
-      // make a request to the backend to get gateway 
-      try {
-        const response = await this.$axios.post('/tickets/create-upi-gateway/', requestData);
-        const redirect_url = response['data']['data']['payment_url']
-        window.location.href = redirect_url;
-      } catch (error) {
-        console.error('Error:', error);
-      }
-      
-    },
-    increase() {
-      this.count++;
-    }
-  },
-  components: { checkoutComp },
-  computed: {
-    ...mapGetters('auth', ['isAuthenticated']), // Map isAuthenticated getter from auth module
-  },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      // Check if user is authenticated
-      if (!vm.isAuthenticated) {
-        // If not authenticated, redirect to login page
-        next('/signin');
-      }
-    });
+const createUPIGateway = async (requestData) => {
+  try {
+    // Your logic to make a request to the backend to get gateway
+    const response = await $fetch('http://localhost:8000/tickets/create-upi-gateway/', {method: 'POST', body: {requestData}});
+    const redirect_url = response['data']['data']['payment_url'];
+    window.location.href = redirect_url;
+  } catch (error) {
+    console.error('Error:', error);
   }
+};
+const formValue = ref({
+  firstName: '',
+  lastName: '',
+  email: "userEmail",
+  hostel_address: '',
+  roll: '',
+  branch: '',
+  club_member: '',
+  phone: '',
+  consent: false,
+  price: cartStore.getPrice,
+  prod_name: "",
+  prod_type: "ticket",
+  prod_id: "2",
+});
+
+
+const prepareRequestData = () => {
+  // Your logic to prepare request data
+  const formData = formValue.value;
+  console.log(formData)
+  return {
+    "first_name": formData.firstName,
+    "last_name": formData.lastName,
+    "email": "userEmail",
+    "hostel_address": formData.hostel_address,
+    "roll": formData.roll,
+    "branch": formData.branch,
+    "club_member": formData.club_member,
+    "phone": formData.phone,
+    "consent": formData.consent,
+    "price": cartStore.getPrice,
+    "prod_name": cartStore.cart[0].title,
+    "prod_type": "ticket",
+    "prod_id": "2", // either the event id or the product id not the ticket id
+  };
+};
+
+const increase = () => {
+  // Your logic to increase count
+};
+
+if (!authStore.isAuthenticated) {
+  router.push('/Signin');
 }
 </script>
+
 <style scoped>
 .TEXT1 {
   font-family: poppins, sans-serif;
