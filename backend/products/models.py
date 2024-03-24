@@ -56,7 +56,8 @@ class ProductSize(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, 
                                 on_delete=models.CASCADE,
-                                related_name='product_images')
+                                related_name='product_images',
+                                default=None,)
     image = models.ImageField(upload_to='product_images')
 
     required = ['image']

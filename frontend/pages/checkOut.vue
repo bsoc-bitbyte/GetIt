@@ -13,7 +13,7 @@
       </h2>
     </div>
     <div class="parent pr-[0rem]">
-      <form @submit="submitForm" class="pb-[2rem] pt-[0rem] max-[1239px]:pt-[3rem]">
+      <form  class="pb-[2rem] pt-[0rem] max-[1239px]:pt-[3rem]" @submit.prevent>
         <div
           class="flex-items max-[1239px]:flex-col max-[1239px]:items-center min-[1240px]:flex min-[1240px]:justify-start min-[1240px]:mt-[2rem]">
           <div class="main1 min-[1240px]:shadow-lg min-[1240px]:mr-[10rem] min-[1240px]:ml-[2rem]">
@@ -87,52 +87,74 @@
             </div>
           </div>
           <div
-            class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem]">
+            class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem] ">
             <div
-              class="review-panel flex justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
+              class="review-panel flex flex-col justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
               <div class="flex-col">
-                <h3 class="TEXT2 tracking-wider font-bold items-center">
+                <div class="flex justify-between"><h3 class="TEXT2 tracking-wider font-bold items-center">
                   Order Review
-                </h3>
-                <p class="text-slate-600 subpixel-antialiased tracking-wider">
-                  {{ count }} items in cart
-                </p>
-              </div>
-              <div class="dropdown-btn">
-                <button class="drop-btn">
+                </h3><div class="dropdown-btn">
+                <button class="drop-btn" @click="toggleDropdowncart" :class="{'rotate-180': isOpencart}">
                   <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
                 </button>
+              </div></div>
+                <p class="text-slate-600 subpixel-antialiased tracking-wider">
+                  {{ $store.getters['getQty'] }}  items in cart
+                </p>
               </div>
+              
+              <ul v-if="isOpencart" class="" v-for="item in $store.state.cart" :key="item.pid">
+              <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+                <div class="shrink-0">
+                  <img class="h-24 w-24 max-w-full rounded-lg object-cover" :src="item.cover_image" alt="" />
+                </div>
+                <div class="relative flex flex-1 flex-col justify-between">
+                  <div class="sm:col-gap-5 sm:grid sm:grid-cols-2">
+                    <div class="pr-8 sm:pr-5">
+                      <p class="text-base font-semibold text-gray-700">{{ item.title }}</p>
+                      <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">{{ item.location }}</p>
+                    </div>
+                    <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                      <p class="shrink-0 w-20 text-base font-semibold text-gray-700 sm:order-2 sm:ml-8 sm:text-right">₹{{ item.totalPrice }}</p>
+                    </div>
+                  </div>
+                </div>
+              </li> 
+            </ul>
             </div>
             <div
               class="main3 min-[1240px]:shadow-lg pt-[2rem] mt-[1rem] pb-[1rem] min-[1240px]:px-[2rem] max-[1239px]:pt-[0rem]">
               <div class="my-[2.5rem] divide-gray-400/[.4]">
-                <div class="billing-summary-dropdown flex justify-between">
-                  <div>
-                    <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
+                <div class="billing-summary-dropdown flex justify-between flex-col">
+                    <div class="flex justify-between">
+                      <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased tracking-wider">Billing Summary</h3>
+                      <div class="dropdown-btn">
+                        <button class="drop-btn" @click="toggleDropdown" :class="{'rotate-180': isOpen}">
+                          <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" class="inline-block w-4 h-4 ml-1 transform transition"/>
+                        </button>
+                      </div>
+                    </div>
+                    <div v-if="isOpen" class="dropdown-content" style="">
+                      <div class="px-2">
+                        <div class="block p text-gray-600 w-full text-sm">
+                          <option>Standard shipping - ₹00.00</option>
+                        </div>
+                        <div class="block p text-gray-600 w-full text-sm">
+                          <option>Standard Discount- ₹{{ .1*$store.getters.getPrice }}</option>
+                        </div>
+                        <div class="block p text-gray-600 w-full text-sm">
+                          <option>Total Product Price- ₹{{ 1.1*$store.getters.getPrice }}</option>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="dropdown-btn">
-                    <button class="drop-btn">
-                      <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
-                    </button>
-                  </div>
-                </div>
                 <hr>
                 <div class="main1 flex justify-between">
                   <h3 class="TEXT2 text-[1rem] font-bold subpixel antialiased py-[1rem] tracking-wider">Grand Total</h3>
-                  <h3 class="py-[1rem] tracking-wider">Rs. {{ price }}</h3>
+                  <h3 class="py-[1rem] tracking-wider">₹{{ $store.getters['getPrice'] }}</h3>
                 </div>
-                <div class="max-[1239px]:py-[0rem] min-[1240px]:py-[1rem]">
-                  <div>
-                    <label for="comment" class="comment tracking-wider heading text-gray-200">Order Comment
-                    </label>
-                  </div>
-                  <div class="max-[1239px]:pb-[0.5rem] min-[1240px]:pb-[1.5rem]">
-                    <textarea id="order-comment" placeholder="Type here..." v-model.trim.lazy="formValue.comment"
-                      class="border-2 border-gray-300 pl-[0.69rem] rounded-[0.25rem] w-full h-[6rem]" />
-                  </div>
-                </div>
-                <div class="pt-[1rem]">
+                
+                <div class="pt-[1rem] invisible ">
                   <input type="checkbox" id="checked" v-model.trim.lazy="formValue.checked" true-value="yes"
                     false-value="no" class="box">
                   <label for="checked" class="text-s text-slate-600 tracking-wider">Please check to acknowledge our
@@ -140,7 +162,8 @@
                 </div>
                 <div class="submit-button pt-[1rem] flex  justify-center ">
                   <button type="submit" class="btn bg-#ea454c py-[1rem] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full"
-                    @click="submitForm">Checkout
+                    @click="submitForm"
+                    >Checkout
                   </button>
                 </div>
               </div>
@@ -154,6 +177,18 @@
 <script>
 import checkoutComp from '@/components/checkoutComp.vue';
 import { mapGetters } from 'vuex'; // Import mapGetters from Vuex
+import { ref } from 'vue';
+
+// const isOpen = ref(false);
+// const isOpencart = ref(false); 
+
+// const toggleDropdown = () => {
+//   isOpen.value = !isOpen.value;
+// };
+
+// const toggleDropdowncart = () => {
+//   isOpencart.value = !isOpencart.value;
+// };
 
 export default {
   name: 'checkOut',
@@ -169,36 +204,47 @@ export default {
         club_member: '',
         phone: null,
         checked: '',
-        comment: "",
         consent: 'no'
       },
       count: 0,
-      price: 1,
+      price: this.$store.getters['getPrice'],
       isCheckoutVisible: false,
       laoding: false
     };
+  },
+  setup() {
+    const isOpen = ref(false);
+  const isOpencart = ref(false); 
+
+  const toggleDropdown = () => {
+    isOpen.value = !isOpen.value;
+  };
+
+  const toggleDropdowncart = () => {
+    isOpencart.value = !isOpencart.value;
+  };
+    return { isOpen, toggleDropdown , isOpencart,toggleDropdowncart};
   },
   methods: {
     submitForm(e) {
       e.preventDefault();
       this.loading = true;
       let email = this.$store.getters['auth/userEmail'];
-      console.log("email", email)
+      console.log(this.$store.state.cart[0])
       const data = {
         "first_name": this.formValue.firstName,
         "last_name": this.formValue.lastName,
-        "email": "priyanshmehta61@gmail.com",
+        "email": email,
         "hostel_address": this.formValue.hostel_address,
         "roll": this.formValue.roll,
         "branch": this.formValue.branch,
         "club_member": this.formValue.club_member,
         "phone": this.formValue.phone,
         "consent": this.formValue.consent,
-        "comment": this.formValue.comment,
-        "price": this.price,
-        "prod_name": "needs to be added dynamically",
+        "price": this.$store.getters['getPrice'],
+        "prod_name": this.$store.state.cart[0].title,
         "prod_type": "ticket",
-        "prod_id": "1", // either the event id or the product id not the ticket id
+        "prod_id": "2", // either the event id or the product id not the ticket id
 
       }
       this.createUPIGateway(data);
@@ -295,4 +341,10 @@ export default {
 .box {
   accent-color: rgb(35, 162, 63);
 }
+.dropdown-title svg {
+  transition: transform 0.3s;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);}
 </style>
