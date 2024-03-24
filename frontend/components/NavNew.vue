@@ -1,5 +1,6 @@
-<template>
-    <section class="relative mx-auto">
+
+  <template>
+    <section class="sticky top-0 bg-white z-50 mx-auto w-full">
         <!-- navbar -->
         <nav class="flex justify-between max-lg:hidden border-b border-gray-400 ">
             <div class="px-5 xl:px-12 py-4 flex w-full items-center">
@@ -22,18 +23,17 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span class="flex absolute -mt-5 ml-4" v-if="$store.getters['getQty'] >= 1">
+                        <span class="flex absolute -mt-5 ml-4" v-if="cartQuantity >= 1">
                             <span
                                 class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-[#ea454c] opacity-75"></span>
                             <span
-                                class="relative rounded-full h-5 w-5 p-2 bg-[#ea454c] flex items-center justify-center text-gray-200">{{
-                            $store.getters['getQty'] }}
+                                class="relative rounded-full h-5 w-5 p-2 bg-[#ea454c] flex items-center justify-center text-gray-200">{{ cartQuantity }}
                             </span>
                         </span>
                         Cart
                     </nuxt-link>
 
-                    <button v-if="isAuth" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
+                    <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
                         @click="handleLogout">Sign Out</button>
 
                     <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
@@ -44,23 +44,14 @@
             <div class="fixed top-0 w-full bg-white mt-0 shadow-md z-[9999] px-2">
                 <div class="flex flex-row justify-between px-3 py-2">
                     <div> <span class="sr-only">Open sidebar</span>
-                        <svg class="h-8 w-8 text-black mt-2" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            v-on:click="isShow = !isShow">
-                            <line x1="3" y1="12" x2="21" y2="12" />
-                            <line x1="3" y1="6" x2="21" y2="6" />
-                            <line x1="3" y1="18" x2="21" y2="18" />
-                        </svg>
+                        <div class="hamburger-menu" @click="toggle" :class="{ open: isShow}">
+                            <span class="line line-1"></span>
+                            <span class="line line-2"></span>
+                            <span class="line line-3"></span>
+                        </div>
                     </div>
-                    <aside v-show="isShow" class="fixed top-0 left-0 shadow-xl z-40 w-60 h-full">
+                    <aside  class="fixed mt-10 shadow-xl z-40 w-60 h-full"  :class="{open:isShow}">
                         <div class="h-full px-3 py-4 overflow-y-auto bg-white ">
-                            <svg class="h-6 w-6 text-black" width="30" height="30" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                v-on:click="isShow = !isShow">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
                             <ul class="flex flex-col gap-4 w-full justify-center text-xl font-medium mt-5">
 
                                 <li
@@ -94,15 +85,19 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <span class="flex absolute -mt-5 ml-4" v-if="$store.getters['getQty'] >= 1">
+                            <span class="flex absolute -mt-5 ml-4" v-if="cartQuantity >= 1">
                                 <span
                                     class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-[#ea454c] opacity-75"></span>
                                 <span
                                     class="relative rounded-full h-5 w-5 p-2 bg-[#ea454c] flex items-center justify-center text-gray-200">{{
-                            $store.getters['getQty'] }}
+                                    cartQuantity}}
                                 </span>
                             </span>
                         </nuxt-link>
+                        <nuxt-link v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
+                        @click="handleLogout">Sign Out</nuxt-link>
+
+                    <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
                     </div>
                 </div>
             </div>
@@ -112,32 +107,91 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            isShow: false,
-            qty: 0,
+  import { computed,ref } from 'vue'
+  import { useCartStore } from '../store/index'
+  import { useAuthStore } from '../store/auth'
+import { toast } from 'vue3-toastify';
+  
+  export default {
+    setup() {
+      const cartStore = useCartStore()
+      const authStore = useAuthStore()
+  
+      const cartQuantity = computed(() => cartStore.getQty)
+      const isShow = ref(false);
+      const isAuthenticated = computed(() => authStore.isAuthenticated)
+      
+  
+      const handleLogout = () => {
+        authStore.logout();
+        toast.error("Logged out",{
+            autoClose: 2000,
+            position:  toast.POSITION.BOTTOM_CENTERAL
+        })
+      }
 
-        };
-    },
-    computed: {
-        isAuth() {
-            return this.$store.getters['auth/isAuthenticated']
-        }
+      const toggle = () => {
+        isShow.value = !isShow.value;
+      }
 
-    },
-    methods: {
-        handleLogout() {
-            this.$store.dispatch('auth/logout')
-            this.$toast.show('Logged Out Successfully', {
-                theme: "toasted-primary",
-                position: "bottom-center",
-                duration: 2000,
-                type: "success",
-                iconPack: "material",
-                icon: "logout",
-            })
-        }
-    },
-};
+      
+  
+      return {
+        cartQuantity,
+        isAuthenticated,
+        handleLogout,
+        isShow,
+        toggle
+      }
+    }
+
+    
+  };
 </script>
+  
+
+  <style>
+
+
+aside {
+
+  position: fixed;
+  left: -100%; 
+  transition: left 0.3s ease-in-out; 
+}
+aside.open {
+  left: 0;
+}
+  .hamburger-menu {
+  width: 25px; 
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+}
+.hamburger-menu.open {
+  z-index: 100; 
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: #363131; 
+  display: block;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+
+.line-1 { top: 5px; }
+.line-2 { top: 12px; }
+.line-3 { top: 19px; }
+.hamburger-menu.open .line-1 {
+  transform: rotate(45deg) translate(4px, 6px); 
+}
+
+.hamburger-menu.open .line-2 {
+  opacity: 0;
+}
+
+.hamburger-menu.open .line-3 {
+  transform: rotate(-45deg) translate(4px, -6px);
+}</style>
