@@ -14,6 +14,7 @@
     </div>
     <div class="parent pr-[0rem]">
       <form  class="pb-[2rem] pt-[0rem] max-[1239px]:pt-[3rem]" @submit.prevent>
+      <form  class="pb-[2rem] pt-[0rem] max-[1239px]:pt-[3rem]" @submit.prevent>
         <div
           class="flex-items max-[1239px]:flex-col max-[1239px]:items-center min-[1240px]:flex min-[1240px]:justify-start min-[1240px]:mt-[2rem]">
           <div class="main1 min-[1240px]:shadow-lg min-[1240px]:mr-[10rem] min-[1240px]:ml-[2rem]">
@@ -90,9 +91,16 @@
             class="right-panel min-[1240px]:ml-[3rem] max-[1239px]:pt-[0.25rem] min-[1240px]:pt-[1rem] min-[1240px]:pr-[2rem] lg:w-[30vw] w-[80vw] lg:m-0 m-auto">
             <div
               class="review-panel flex flex-col justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
+              class="review-panel flex flex-col justify-between min-[1240px]:shadow-lg min-[1240px]:px-[2rem] min-[1240px]:pb-[2rem] max-[1239px]:py-[1rem] min-[1240px]:mt-[2rem]">
               <div class="flex-col">
                 <div class="flex justify-between"><h3 class="TEXT2 tracking-wider font-bold items-center">
+                <div class="flex justify-between"><h3 class="TEXT2 tracking-wider font-bold items-center">
                   Order Review
+                </h3><div class="dropdown-btn">
+                <button class="drop-btn" @click="toggleDropdowncart" :class="{'rotate-180': isOpencart}">
+                  <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
+                </button>
+              </div></div>
                 </h3><div class="dropdown-btn">
                 <button class="drop-btn" @click="toggleDropdowncart" :class="{'rotate-180': isOpencart}">
                   <img src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png" />
@@ -155,6 +163,8 @@
                 </div>
                 
                 <div class="pt-[1rem] invisible ">
+                
+                <div class="pt-[1rem] invisible ">
                   <input type="checkbox" id="checked" v-model.trim.lazy="formValue.checked" true-value="yes"
                     false-value="no" class="box">
                   <label for="checked" class="text-s text-slate-600 tracking-wider">Please check to acknowledge our
@@ -162,6 +172,8 @@
                 </div>
                 <div class="submit-button pt-[1rem] flex  justify-center ">
                   <button type="submit" class="btn bg-#ea454c py-[1rem] min-[1240px]:px-[6rem] rounded-3xl max-[1239px]:w-full"
+                    @click="submitForm"
+                    >Checkout
                     @click="submitForm"
                     >Checkout
                   </button>
@@ -321,6 +333,12 @@ if (!authStore.isAuthenticated) {
 .box {
   accent-color: rgb(35, 162, 63);
 }
+.dropdown-title svg {
+  transition: transform 0.3s;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);}
 .dropdown-title svg {
   transition: transform 0.3s;
 }

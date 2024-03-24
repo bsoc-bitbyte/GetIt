@@ -14,6 +14,7 @@
                 <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                     <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/">Home</nuxt-link></li>
                     <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/eventList">Events</nuxt-link></li>
+                    <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/eventList">Events</nuxt-link></li>
                 </ul>
 
                 <div class="flex gap-6 font-semibold font-heading items-center">
@@ -62,10 +63,17 @@
                                     class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
                                     <nuxt-link to="/">Events</nuxt-link>
                                 </li>
+                                <li
+                                    class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
+
+                                    <button v-if="isAuth" 
+                                        @click="handleLogout">Sign Out</button>
+                                    <nuxt-link v-else to="/Signin">Sign In</nuxt-link>
+                                </li>
                             </ul>
                         </div>
                     </aside>
-                    <nuxt-link class="text-3xl font-bold flex items-center" to="/">
+                    <nuxt-link class="text-3xl font-bold flex items-center" to="/eventlist">
                         <img class="h-9"
                             src="https://raw.githubusercontent.com/bsoc-bitbyte/GetIt/10a0fcc39d52d116428dd49505ead2f597e7a30e/assets/get_it.png"
                             alt="logo">
