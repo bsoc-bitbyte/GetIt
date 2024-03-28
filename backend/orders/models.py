@@ -48,6 +48,5 @@ class OrderItem(models.Model):
         order_item.order = order
         order_item.ticket = ticket
         order_item.quantity = quantity
-        order_item.total = order_item.ticket.price * quantity
         order_item.save()
         return order_item
