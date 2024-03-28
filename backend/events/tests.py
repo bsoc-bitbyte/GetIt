@@ -118,7 +118,8 @@ def testEventRetrieval_withValidEventId_byAuthenticatedUser_shouldRetrieveEvent(
     response.data.pop('created_at')
     response.data.pop('updated_at')
     response.data.pop('cover_image')
-    assert response.data == {'title': event_data['title'],
+    assert response.data == {'id': test_event.id,
+                             'title': event_data['title'],
                              'organizer': test_user.id,
                              'description': event_data['description'],
                              'date': event_data['date'],
@@ -157,7 +158,8 @@ def testListEventsView_shouldListEvents(test_event):
     response.data[0].pop('created_at')
     response.data[0].pop('updated_at')
     response.data[0].pop('cover_image')
-    assert response.data[0] == {'title': event_data['title'],
+    assert response.data[0] == {'id': test_event.id,
+                                'title': event_data['title'],
                                 'organizer': test_event.organizer.id,
                                 'description': event_data['description'],
                                 'date': event_data['date'],

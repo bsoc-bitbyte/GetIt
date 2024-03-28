@@ -31,6 +31,7 @@ ticket_data = {
     "response": "{}",
     "purchase_date": "2021-01-01",
     "status": "pending",
+    "price": 100
 }
 
 @pytest.fixture
@@ -55,7 +56,7 @@ def authenticated_client(test_user):
 
 
 @pytest.mark.django_db
-def testTicketCreation_byUnauthenticatedUser_shouldThrowForbidden(test_user, test_event):
+def testTicketCreation_byUnauthenticatedUser_shouldThrowUnauthorized(test_user, test_event):
     # Arrange
     unauthenticated_client = APIClient()
     ticket_data_copy = ticket_data.copy()
@@ -66,7 +67,7 @@ def testTicketCreation_byUnauthenticatedUser_shouldThrowForbidden(test_user, tes
     response = unauthenticated_client.post("/api/tickets/", ticket_data);
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
     assert Ticket.objects.count() == 0
 
 
@@ -119,7 +120,7 @@ def testTicketCreation_byAuthenticatedUser_whenBuyerNotEqualsRequestUser_shouldT
 
 
 @pytest.mark.django_db
-def testListTicket_byUnauthenticatedUser_shouldThrowForbidden():
+def testListTicket_byUnauthenticatedUser_shouldThrowUnauthorized():
     # Arrange
     unauthenticated_client = APIClient()
 
@@ -127,7 +128,7 @@ def testListTicket_byUnauthenticatedUser_shouldThrowForbidden():
     response = unauthenticated_client.get("/api/tickets/")
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
 @pytest.mark.django_db
@@ -195,7 +196,7 @@ def testRetrieveTicket_notByTicketOwner_shouldThrowForbidden(authenticated_clien
 
 
 @pytest.mark.django_db
-def testRetrieveTicket_byUnauthenticatedUser_shouldThrowForbidden():
+def testRetrieveTicket_byUnauthenticatedUser_shouldThrowUnauthorized():
     # Arrange
     unauthenticated_client = APIClient()
 
@@ -203,4 +204,4 @@ def testRetrieveTicket_byUnauthenticatedUser_shouldThrowForbidden():
     response = unauthenticated_client.get("/api/tickets/1/")
 
     # Assert
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED

@@ -11,6 +11,7 @@ class TicketSerializer(serializers.ModelSerializer) :
             'response',
             'purchase_date',
             'status',
+            'price',
         ]
 
         extra_kwargs = {
