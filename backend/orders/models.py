@@ -37,7 +37,10 @@ class OrderItem(models.Model):
     # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
+
+    @property
+    def total(self):
+        return self.ticket.price * self.quantity
 
     @staticmethod
     def create_order_item(order, ticket, quantity):

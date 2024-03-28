@@ -72,7 +72,7 @@ class CreateUPIGateway(APIView):
             txn_id = generate_txn_id()
             address = request.get('address')
             email = request.get('email')
-            orderItems = request.get('order_items')
+            order_items = request.get('order_items')
             phone_number = request.get('phone')
 
             amount = request.get('price')
@@ -82,10 +82,8 @@ class CreateUPIGateway(APIView):
 
             account = get_account(email)
             order = Order.create_order(account, address)
-            add_order_item(orderItems, order, account)
+            add_order_item(order_items, order, account)
             data = create_upi_data(account, txn_id, amount, phone_number, order.id)
-
-            
 
             response_data = create_upi_gateway(data)
 
@@ -149,4 +147,4 @@ def add_order_item(order_items, order, account):
         
     except (TypeError, ValueError) as e:
         logger.error(f"Failed to create order item: {e}")
-        return None   
+        return None
