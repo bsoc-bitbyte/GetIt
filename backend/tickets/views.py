@@ -1,12 +1,10 @@
 import os
 from django.conf import settings
 import requests
-from accounts.models import Account
 from accounts.views import get_account
 from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.request import Request
 import stripe
 from .models import Ticket
 from .serializers import TicketSerializer
@@ -20,7 +18,6 @@ from django.db import transaction
 import logging
 
 logger = logging.getLogger(__name__)
-
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -68,7 +65,6 @@ class CreateUPIGateway(APIView):
         @transaction.atomic
         def post(self, request, *args, **kwargs):
             request =request.data.get('requestData')
-            print(request)
             txn_id = generate_txn_id()
             address = request.get('address')
             email = request.get('email')
@@ -88,13 +84,15 @@ class CreateUPIGateway(APIView):
             response_data = create_upi_gateway(data)
 
             if response_data.get("status") == True:
+                order.payment_url = response_data['data']['payment_url']
+                order.save()
                 return Response(response_data, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Failed to create UPI gateway", "data": response_data}, status=status.HTTP_400_BAD_REQUEST)
                 
 def create_upi_data(account, txn_id, amount, phone_number, order_id):
     return {
-        "key": UPI_API_KEY,  # Your API Key
+        "key": os.environ.get('UPI_API_KEY'),
         "client_txn_id": txn_id,  # Unique transaction ID
         "amount": amount,  # Amount
         "p_info": order_id,  # Product Information

@@ -13,6 +13,7 @@ ORDER_STATUS = (
 class Order(models.Model):
     buyer = models.ForeignKey(Account, on_delete=models.PROTECT)
     status = models.CharField(max_length=10, choices=ORDER_STATUS, default='PENDING')
+    payment_url = models.CharField(max_length=512, blank=True, null=True)
     address = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

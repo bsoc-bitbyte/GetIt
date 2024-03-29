@@ -8,14 +8,6 @@ from django.conf import settings
 from tickets.models import Ticket
 from orders.models import Order
 
-import time
-import datetime
-
-TIMEOUT = 60 * 15 # 15 minutes
-
-# date format that matches 2023-05-14T08:54:40.647Z
-DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
-
 @csrf_exempt
 def stripe_webhook(request) :
     payload = request.body
@@ -53,31 +45,26 @@ def upi_webhook(request) :
     data = request.POST
 
     status = data.get('status')
-    created_at = data.get('created_at')
-    # convert to datetime
-    created_at = datetime.datetime.strptime(created_at, DATE_FORMAT)
     order_id = data.get('order_id')
 
     order = get_object_or_404(Order, id=order_id)
 
     order_items = order.order_items.all()
 
-    # need to determine txn timeout due to irregularities in UPI service
-    txn_timeout = False
-    if created_at + datetime.timedelta(seconds=TIMEOUT) < datetime.datetime.now():
-        txn_timeout = True
-
     # WARNING: Assuming to be a ticket purchase
     for item in order_items:
         ticket = item.ticket
         assert isinstance(ticket, Ticket)
 
-        if status == 'success' and not txn_timeout:
+        if status == 'success':
             ticket.status = 'purchased'
             ticket.save()
-        elif status == 'failure' or status == 'close' or txn_timeout:
+        elif status == 'failure' or status == 'close':
             if ticket.status == 'pending':
                 ticket.status = 'failed'
                 ticket.save()
+
+    if status == 'success':
+        order.status = 'COMPLETED'
 
     return HttpResponse(status=200)
