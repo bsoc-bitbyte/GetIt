@@ -102,7 +102,7 @@
                   {{ cartStore.cart.length}}  items in cart
                 </p>
               </div>
-              
+
               <ul v-if="isOpencart" class="" v-for="item in cartStore.cart" :key="item.pid">
               <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 ">
                 <div class="shrink-0">
@@ -119,7 +119,7 @@
                     </div>
                   </div>
                 </div>
-              </li> 
+              </li>
             </ul>
             </div>
             <div
@@ -174,11 +174,12 @@
   </div>
 </template>
 <script setup>
-import { useCartStore } from '../store/index'; 
-import { useAuthStore } from '../store/auth'; 
+import { useCartStore } from '../store/index';
+import { useAuthStore } from '../store/auth';
 import { useRouter } from 'vue-router';
 
 
+const config = useRuntimeConfig();
 
 const isOpen = ref(false);
 const isOpencart = ref(false);
@@ -197,18 +198,18 @@ const authStore = useAuthStore();
 const router = useRouter();
 const submitForm = async (e) => {
   e.preventDefault();
-  const requestData = prepareRequestData(); 
+  const requestData = prepareRequestData();
 
   console.log(requestData);
-  await createUPIGateway(requestData); 
-  
+  await createUPIGateway(requestData);
+
 };
 
 const createUPIGateway = async (requestData) => {
   try {
     // Your logic to make a request to the backend to get gateway
-    const response = await $fetch('http://localhost:8000/api/tickets/create-upi-gateway/', {method: 'POST', body: {requestData}});
-    const redirect_url = response['data']['data']['payment_url'];
+    const response = await $fetch(`${config.public.API_BASE_URL}/api/tickets/create-upi-gateway/`, {method: 'POST', body: {requestData}});
+    const redirect_url = response['data']['payment_url'];
     window.location.href = redirect_url;
   } catch (error) {
     console.error('Error:', error);
@@ -217,7 +218,7 @@ const createUPIGateway = async (requestData) => {
 const formValue = ref({
   firstName: '',
   lastName: '',
-  email: "userEmail",
+  email: '',
   hostel_address: '',
   roll: '',
   branch: '',
