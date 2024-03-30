@@ -1,11 +1,11 @@
 <template>
   <div
-    class="main min-[1120px]:-mt-4 min-[1120px]:flex bg-white min-[1120px]:justify-evenly py-[2rem] px-[0.1rem] mt-[3rem] max-[1119px]:pb-[2rem]"
+    class="main min-[1120px]:flex min-[1120px]:justify-evenly py-[2rem] md:py-[0rem] px-[0.1rem] md:mt-[2rem] mt-[1rem]"
   >
     <div class="left-panel mt-[5.5rem] max-[1119px]:hidden min-[1120px]:block">
       <img
         src="../assets/37.order-delivered-3.png"
-        class="w-[34rem] h-[32rem] border-1 border-gray-400 min-[1120px]:order-1"
+        class=" border-1 border-gray-400 min-[1120px]:order-1 h-[50vh]"
         alt="delivery-img"
       />
     </div>
@@ -29,6 +29,7 @@
                 class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
               >
                 Full Name
+                Full Name
               </p>
               <input
                 type="text"
@@ -44,7 +45,6 @@
               v-model.trim.lazy = "credentials.phone_number" 
               placeholder="Enter your phone number" required/>
             </div>
-
             <div class="email py-[0.5rem]">
               <p
                 class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
@@ -103,31 +103,13 @@
               </button>
             </a>
           </div>
-          <!-- <div class="sign-up-google py-[0.5rem]">
-            <button
-              type="submit"
-              id="submit-google"
-              class="hover:border-blue-600 mt-[1rem] border-2 border-slate-300 w-full bg-white-500 h-[3.25rem] rounded-[1.25rem]"
-            >
-              <div class="google-img inline-flex items-center">
-                <img
-                  src="../assets/google-icon.png"
-                  alt=""
-                  class="w-[1.5rem]"
-                />
-                <a href="#" class="ml-[0.3rem] tracking-wider"
-                  >Sign up with Google</a
-                >
-              </div>
-            </button>
-          </div> -->
+      
           <div class="optional-sign-in mt-[0.7rem] hi">
             <p class="flex justify-center hi">
               <span class="account-text tracking-wider dha"
                 >Already have an account?
               </span>
               <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wider suf">Sign up for free</nuxt-link>
-              
             </p>
           </div>
         </div>
@@ -137,57 +119,55 @@
 </template>
 
 <script>
+import { toast } from 'vue3-toastify'
+import { useAuthStore } from '../store/auth'
+import { useRouter } from 'vue-router'
+
 export default {
-  name: "Signup",
-  data() {
-    return {
-      credentials: {
-        username: "",
-        email: "",
-        phone_number: "",
-        password: "",
-        password_check: "",
-        
-      },
-      errorMessage: "",
-    };
-  },
-  methods: {
-    submitForm(e) {
+  name: 'Signup',
+  setup() {
+    const credentials = {
+      username: '',
+      phone_number: "",
+      email: '',
+      password: '',
+      password_check: '',
+    }
+    const store = useAuthStore()
+    const router = useRouter()
+
+    const submitForm = async (e) => {
       e.preventDefault();
-      console.log(this.credentials);
-      if (this.checker()) {
-        this.$store
-          .dispatch("auth/register", this.credentials)
-          .then(() => {
-            this.$router.push("/Signin");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+
+      if (checker()){
+        
+        store.register(credentials);
       }
-      else {
-        this.$toast.show("Passwords do not match", {
-          theme: "toasted-primary",
-          position: "bottom-center",
-          duration: 2000,
-          type: "error",
-          iconPack: "material",
-          icon: "error",
-        });
+      else{
+        toast.error("Passwords do not match",{
+          autoClose: 2000,
+          position:  toast.POSITION.BOTTOM_CENTER
+        })
       }
-    },
-    checker() {
-      if (this.credentials.password_check !== this.credentials.password) {
-        this.credentials.errorMessage = "Passwords do not match";
+      
+    }
+
+    const checker = () => {
+      if (credentials.password !== credentials.password_check) {
         return false;
       }
-      this.credentials.errorMessage = "";
       return true;
-    },
-  },
-};
+    }
+
+    return {
+      credentials,
+      submitForm,
+      checker
+    }
+  }
+}
 </script>
+
 
 <style scoped>
 .main {
@@ -205,21 +185,11 @@ export default {
 }
 
 @media (max-width: 325px) {
-  /* .hil{
-    margin-left: -20px !important;
-  }
-  .hir
-  {
-    margin-right: -40px !important;
-  } */
   .hi {
     display: flex;
     flex-direction: column !important;
     gap: 5px;
-    /* margin-left: 25px !important; */
     margin-left: 16px !important;
-    /* justify-content: center;
-    text-align: center; */
   }
   .dha {
     display: inline-block;
@@ -236,8 +206,6 @@ export default {
     margin-right: 5px !important;
     text-align: center !important;
   }
-  /* .hil{
-    margin-left: 16px !important;
-  } */
+
 }
 </style>

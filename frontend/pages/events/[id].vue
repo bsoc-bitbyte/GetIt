@@ -37,9 +37,9 @@
               <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{{ qty }}</div>
             <button :disabled="qty >= 1" :class="{ 'opacity-50': qty === 1 }"  @click="increase" class="flex items-center justify-center bg-gray-100 rounded-r-md  px-4 text-[#fa4750] transition hover:bg-[#EA454C]  hover:text-white">+</button>
           </div>
-          <button :disabled="qty===0" :class="{ 'opacity-50': qty === 0 }" @click="addToCartClick(event)" class="bg-[#EA454C] font-semibold  py-3 text-sm text-white lg:w-full rounded-3xl w-1/2">Add to cart</button>
+          <button  :disabled="qty===0" :class="{ 'opacity-50': qty === 0 }" @click="addToCartClick(event)" class="bg-[#EA454C] font-semibold  py-3 text-sm text-white lg:w-full rounded-3xl w-1/2">Add to cart</button>
     </div>
-    <div class="faq-container max-w-md lg:mx-auto mt-4 ">
+    <div class="faq-container max-w-md lg:mx-auto mt-4 "> 
     <div class="dropdown mb-2">
       <div class="dropdown-title cursor-pointer" @click="toggleEventDetails">
         Event Details
@@ -51,8 +51,7 @@
         <p>Location: {{ event.location }}</p>
         <p>Date: {{ event.date }}</p>
         <p>Time: {{ event.time.slice(0,5)}}</p>
-        <p>Event-Type: {{ event.event_type}}</p>
-        <!-- Add more event details as needed -->
+        <p>Event-Type: {{ event.event_type}}</p>  
       </div>
     </div>
 
@@ -75,57 +74,53 @@
 </section>
   </template>
   
-  <script>
-  import { ref } from 'vue';
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import { useRoute } from 'vue-router';
+  import { useCartStore } from '../../store/index.js'; // Assuming your store is located here
   
-  export default {
-    data() {
-      return {
-        event: {}, 
-        eventId: null,
-        qty: 1,
-      };
-    },
-    mounted() {
-      this.eventId = this.$route.params.id;
-      this.fetchEventData();
-    },
-    setup() {
-      const showEventDetails = ref(false);
-      const showContact = ref(false);
+  const route = useRoute();
+  const event = ref({});
+  const showEventDetails = ref(false);
+  const showContact = ref(false);
+  const qty = ref(1);
+  const cartStore = useCartStore();
   
-      const toggleEventDetails = () => {
-        showEventDetails.value = !showEventDetails.value;
-        
-      };
+  const toggleEventDetails = () => {
+    showEventDetails.value = !showEventDetails.value;
+  };
   
-      const toggleContact = () => {
-        showContact.value = !showContact.value;
-      };
+  const toggleContact = () => {
+    showContact.value = !showContact.value;
+  };
   
-      return { showEventDetails, toggleEventDetails, showContact, toggleContact };
-    },
-    methods: {
-      async fetchEventData() {
-        try {
-          const response = await this.$axios.get(`events/${this.eventId}`);
-          this.event = response.data;
-        } catch (error) {
-          console.error('Error fetching event data', error);
-        }
-      },
-      addToCartClick(item) {
-        this.$store.commit('addToCart',item);
-      },
-      increase(){
-        this.qty+=1;
-      },
-      decrease(){
-        if(this.qty>0){
-          this.qty-=1;
-        }
-      }
-            
+  onMounted(async () => {
+    try {
+      const eventId = route.params.id; 
+      const response = await $fetch(`http://localhost:8000/api/events/${eventId}`); // Example API endpoint
+      console.log(response);
+  
+      event.value = response;
+      console.log(event.value); 
+    } catch (error) {
+      console.error('Error fetching event data', error);
+    }
+  });
+  
+  const addToCartClick = (item) => {
+    console.log("dfvd");
+    cartStore.addToCart(item);
+    console.log("fcadscascasdcasdcascdasc"); // Check if the item is added to the cart
+
+  };
+  
+  const increase = () => { 
+    qty.value++; 
+  };
+  
+  const decrease = () => {
+    if (qty.value > 0) {
+      qty.value--;
     }
   };
   </script>

@@ -1,138 +1,198 @@
-// reusable aliases for mutations
-export const AUTH_MUTATIONS = {
-  SET_USER: "SET_USER",
-  SET_PAYLOAD: "SET_PAYLOAD",
-  LOGOUT: "LOGOUT",
-};
+import { defineStore } from 'pinia';
+import { navigateTo } from '#app'; 
+import { toast } from 'vue3-toastify';
 
-export const state = () => ({
-  access: null, // JWT access token
-  refresh: null, // JWT refresh token
-  user: null, // user object
-});
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    access: null, 
+    refresh: null, 
+    user: null, 
+  }),
+  // export const actions = {
+  //   async login({ commit, dispatch }, { email, password }) {
+  //     // make an API call to login the user with an email address and password
+  //     console.log("inside login")
+  //     let response = null;
+  //     try {
+  //       response = await this.$axios.post("token/", { email, password });
+  //       if (response.status == 200) {
+  //         commit(AUTH_MUTATIONS.SET_PAYLOAD, {
+  //           access: response.data.access,
+  //           refresh: response.data.refresh,
+  //           user: {
+  //             email: email,
+  //           }
+  //         }
+  //         );
+  //         this.$toast.show("Logged In Successfully", {
+  //           theme: "toasted-primary",
+  //           position: "bottom-center",
+  //           duration: 2000,
+  //           type: "success",
+  //           iconPack: "material",
+  //           icon: "login",
+  //         });
+  //       }
+  
+  //     }
+  //     catch (error) {
+  //       this.$toast.show(error.response.data.detail, {
+  //         theme: "toasted-primary",
+  //         position: "bottom-center",
+  //         duration: 2000,
+  //         type: "error",
+  //         iconPack: "material",
+  //         icon: "login",
+  //       });
+  //       throw error;
+  //     }
+  //   },
+  
+  //   async register({ commit }, { username, phone_number, email, password }) {
+  //     let first_name = username.split(" ")[0];
+  //     let last_name = username.split(" ")[1];
+  //     try {
+  //       const response = await this.$axios.post("accounts/", {
+  //         first_name,
+  //         last_name,
+  //         phone_number,
+  //         email,
+  //         password,
+  //       });
+  //       if (response.status == 201 || response.status == 200) {
+  //         this.$toast.show("Registered Successfully", {
+  //           theme: "toasted-primary",
+  //           position: "bottom-center",
+  //           duration: 2000,
+  //           type: "success",
+  //           iconPack: "material",
+  //           icon: "login",
+  //         });
+  //       }
+  //     }
+  //     catch (error) {
+  //       this.$toast.show(error.response.data.detail, {
+  //         theme: "toasted-primary",
+  //         position: "bottom-center",
+  //         duration: 2000,
+  //         type: "error",
+  //         iconPack: "material",
+  //         icon: "login",
+  //       });
+  //       throw error;
+  //     }
+  //     if (process.env.NODE_ENV == "production") {
+  //       console.log(response);
+  //     }
 
-export const mutations = {
-  // store new or updated token fields in the state
-  [AUTH_MUTATIONS.SET_PAYLOAD](state, { access, refresh = null, user = null }) {
-    state.access = access;
+  actions: {
+    async login({ email, password }) {
+      console.log("inside login")
+      let response = null;
+      try {
+        console.log(email,password,response);
+        const {data,status} = await useFetch("http://localhost:8000/api/token/", {
+          method: 'POST', 
+          body: { email, password }
+        }); 
+        if(status.value === "success") {
+          this.access = data.value.access;
+          this.refresh = data.value.refresh || null; 
+          this.user = email || null;
+          await navigateTo('/'); 
+          toast.success("Login successful", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
 
-    // refresh token is optional, only set it if present
-    if (refresh) {
-      state.refresh = refresh;
-    }
-
-    if (user) {
-      state.user = user;
-    }
-  },
-
-  // clear out the state, essentially logging out the user
-  [AUTH_MUTATIONS.LOGOUT](state) {
-    state.access = null;
-    state.refresh = null;
-  },
-};
-
-export const actions = {
-  async login({ commit, dispatch }, { email, password }) {
-    // make an API call to login the user with an email address and password
-    console.log("inside login")
-    let response = null;
-    try {
-      response = await this.$axios.post("token/", { email, password });
-      if (response.status == 200) {
-        commit(AUTH_MUTATIONS.SET_PAYLOAD, {
-          access: response.data.access,
-          refresh: response.data.refresh,
-          user: {
-            email: email,
-          }
         }
-        );
-        this.$toast.show("Logged In Successfully", {
-          theme: "toasted-primary",
-          position: "bottom-center",
-          duration: 2000,
-          type: "success",
-          iconPack: "material",
-          icon: "login",
+      else{
+        toast.error("Invalid Credential", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }}
+        catch (error) {
+          toast.error("Invalid Credential/Account does not Exist", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+          throw error;
+      }
+    },
+
+    async register({ username, phone_number, email, password }) {
+      let first_name = username.split(" ")[0];
+      let last_name = username.split(" ")[1];
+      console.log(first_name, last_name,phone_number, email, password);
+      try{
+      const {data,status,error} = await useFetch("http://localhost:8000/api/accounts/", { method:'POST', body: {
+              first_name,
+              last_name,
+              phone_number,
+              email,
+              password,
+      }});
+
+      if(status.value === 'success'){
+        toast.success("Register successful", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        await navigateTo('/Signin')
+      }
+      else{
+        Object.entries(error.value.data).forEach(([field, errorMessages]) => {
+          toast.error(`$${errorMessages[0]}`,
+          {
+            autoClose: 3000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          
+          })
         });
       }
 
-    }
-    catch (error) {
-      this.$toast.show(error.response.data.detail, {
-        theme: "toasted-primary",
-        position: "bottom-center",
-        duration: 2000,
-        type: "error",
-        iconPack: "material",
-        icon: "login",
-      });
-      throw error;
-    }
-  },
 
-  async register({ commit }, { username, phone_number, email, password }) {
-    let first_name = username.split(" ")[0];
-    let last_name = username.split(" ")[1];
-    try {
-      const response = await this.$axios.post("accounts/", {
-        first_name,
-        last_name,
-        phone_number,
-        email,
-        password,
-      });
-      if (response.status == 201 || response.status == 200) {
-        this.$toast.show("Registered Successfully", {
-          theme: "toasted-primary",
-          position: "bottom-center",
-          duration: 2000,
-          type: "success",
-          iconPack: "material",
-          icon: "login",
+
+    
+    }catch(error){
+        toast.error(error.response.data.detail, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
         });
+      
+
+      if (process.env.NODE_ENV == "production") {
+        console.log(response);
       }
+    }},
+
+    async refresh() {
+      if (!this.refresh) return;
+      const { data } = await $fetch("http://localhost:8000/api/token/refresh", { method:'POST', body: { refresh: this.refresh }});
+      this.SET_PAYLOAD(data);
+    },
+
+    logout() {
+      this.access = null;
+      this.refresh = null;
+      this.user = null;
+    },
+
+    SET_PAYLOAD(payload) {
+      this.access = payload.access;
+      this.refresh = payload.refresh || null; 
+      this.user = payload.user || null;
+    },
+  },
+
+  getters: {
+    isAuthenticated(){
+      return this.access && this.access !== ""} ,
+
+    userEmail(){
+      return this.user
     }
-    catch (error) {
-      this.$toast.show(error.response.data.detail, {
-        theme: "toasted-primary",
-        position: "bottom-center",
-        duration: 2000,
-        type: "error",
-        iconPack: "material",
-        icon: "login",
-      });
-      throw error;
-    }
-    if (process.env.NODE_ENV == "production") {
-      console.log(response);
-    }
   },
-
-  // given the current refresh token, refresh the user's access token to prevent expiry
-  async refresh({ commit, state }) {
-    const { refresh } = state;
-
-    // make an API call using the refresh token to generate a new access token
-    const { data } = await this.$axios.post("token/refresh", { refresh });
-
-    commit(AUTH_MUTATIONS.SET_PAYLOAD, payload);
-  },
-
-  // logout the user
-  logout({ commit, state }) {
-    commit(AUTH_MUTATIONS.LOGOUT);
-  },
-};
-
-export const getters = {
-  // determine if the user is authenticated based on the presence of the access token
-  isAuthenticated: (state) => {
-    return state.access && state.access !== "";
-  },
-  userEmail: (state) => {
-    return state.user ? state.user.email : null;
-  },
-};
+  persist: true,
+});

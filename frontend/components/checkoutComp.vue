@@ -12,84 +12,76 @@
     </main>
 </template>
 
-<script>
-export default {
-    name: 'CheckoutComp',
-    props: {
-        ticket_price: {
-            type: Number,
-            required: true,
-        },
-    },
-    data() {
-        return {
-            stripe: null,
-            elements: null,
-            isLoading: false,
-            messages: [],
-        }
-    },
-    async mounted() {
-        this.stripe = Stripe('pk_test_51OK0jxSCqTflNj8ZV0Ia9yT26uoVr6bopgfSrnlkhpUTZsBX8oyUTXg4YbYlbOOjdcXqraA71vtKPbOpMyIGeNF800MpWzhMHB'); // Use environment variable in production
+<script setup>
+import { ref, onMounted } from 'vue'; 
 
-        const { clientSecret, error: backendError } = await this.createPaymentIntent({
-            payment_method_types: ['card'],
-            ticket_id: 1,
-            amount: 10000,
-            currency: 'inr',
-        });
-        console.log("clientSecret", clientSecret);
-        if (backendError) {
-            this.messages.push(backendError.message);
-        }
-        this.messages.push(`Client secret returned.`);
+const isLoading = ref(false);
+const messages = ref([]); 
+let stripe = null, elements = null;
 
-        this.elements = this.stripe.elements({ clientSecret })
-        const paymentElement = this.elements.create('payment');
-        paymentElement.mount("#payment-element");
-        const linkAuthenticationElement = this.elements.create("linkAuthentication");
-        linkAuthenticationElement.mount("#link-authentication-element");
-        this.isLoading = false;
-    },
-    methods: {
+onMounted(async () => {
+  // Load Stripe.js dynamically
+  stripe = await Stripe(process.env.STRIPE_PUBLIC_KEY); 
 
-        async createPaymentIntent(requestData) {
-            console.log("requestData", requestData);
-            let clientSecret, backendError;
+  const { data, error } = await createPaymentIntent();
 
-            try {
-                const response = await this.$axios.post('/api/tickets/create-payment-intent/', requestData);
-                console.log("response", response);
-                clientSecret = response.data.clientSecret;
-            }
-            catch (error) {
-                backendError = error.response;
-                console.log("error", error)
-            }
-            return { clientSecret, backendError };
-        },
-        async handleSubmit() {
-            if (this.isLoading) {
-                return;
-            }
+  if (data) {
+    elements = stripe.elements({ clientSecret: data.clientSecret }); 
+    // ... mount paymentElement and linkAuthenticationElement ...
+  } else if (error) {
+    messages.value.push(error.message);
+  }
 
-            this.isLoading = true;
+  isLoading.value = false; 
+});
 
-            const { error } = await this.stripe.confirmPayment({
-                elements: this.elements,
-                confirmParams: {
-                    return_url: `${window.location.origin}/return`
-                }
-            });
+const createPaymentIntent = async () => {
+  try {
+    const requestData = {
+      payment_method_types: ['card'],
+      ticket_id: 1, // Replace with dynamic ticket ID (if needed) 
+      amount: 10000, 
+      currency: 'inr',
+    };
 
-            if (error.type === "card_error" || error.type === "validation_error") {
-                this.messages.push(error.message);
-            } else {
-                this.messages.push("An unexpected error occured.");
-            }
+    const response = await $fetch('/api/tickets/create-payment-intent/', {
+      method: 'POST',
+      body: requestData,
+    });
+    
+    // Since $fetch directly returns the parsed response...
+    return { data: response, error: null }; 
 
-            this.isLoading = false;
-        }
-    }
+  } catch (error) {
+     console.error(error);
+     // Handle error gracefully (display to user, etc.)
+     return { data: null, error }; 
+  }
+};
+
+const handleSubmit = async (event) => {
+  if (isLoading.value) return;
+
+  isLoading.value = true;
+
+  try {
+    const { error } = await stripe.confirmPayment({
+      elements: elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/return`
+      }
+    });
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      messages.value.push(error.message);
+    } else {
+      messages.value.push("An unexpected error occured.");
+    } 
+
+  } catch (error) {
+    // Handle unexpected errors
+  } finally {
+    isLoading.value = false;
+  }
 }
 </script>
