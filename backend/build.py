@@ -30,6 +30,7 @@ try:
     subprocess.run(['python3', 'manage.py', 'makemigrations', 'products'])
     subprocess.run(['python3', 'manage.py', 'makemigrations', 'events'])
     subprocess.run(['python3', 'manage.py', 'makemigrations', 'tickets'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'orders'])
     subprocess.run(['python3', 'manage.py', 'makemigrations'])
     print("Migrations made!")
 

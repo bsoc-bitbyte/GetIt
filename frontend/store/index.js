@@ -20,7 +20,7 @@ export const useCartStore = defineStore({
   },
   actions: {
     addToCart(item) {
-      const found = this.cart.find(product => product.title === item.title);
+      const found = this.cart.find(product => product.id === item.id);
       if (found) {
         console.log("found")
         toast.error("Item already added", {
@@ -31,7 +31,6 @@ export const useCartStore = defineStore({
       } else {
         this.cart.push({
           ...item,
-          pid: item.title,
           quantity: 1,
           totalPrice: item.ticket_price
         });
@@ -54,8 +53,8 @@ export const useCartStore = defineStore({
       });
     },
     increaseQuantity(item) {
-      if (!item.pid) {
-        const found = this.cart.find(product => product.title === item.title);
+      if (!item.id) {
+        const found = this.cart.find(product => product.id === item.id);
         if (found) {
           toast.error("Item already added", {
             autoClose: 2000,
@@ -64,7 +63,6 @@ export const useCartStore = defineStore({
         } else {
           this.cart.push({
             ...item,
-            pid: item.title,
             quantity: 1,
             totalPrice: item.ticket_price,
           });
@@ -75,7 +73,7 @@ export const useCartStore = defineStore({
         }
         this.saveCart();
       } else {
-        const found = this.cart.find(product => product.pid === item.pid);
+        const found = this.cart.find(product => product.id === item.id);
         if (found) {
           found.quantity++;
           found.totalPrice = found.quantity * found.ticket_price;
@@ -88,7 +86,7 @@ export const useCartStore = defineStore({
       }
     },
     decreaseQuantity(item) {
-      const found = this.cart.find(product => product.pid === item.pid);
+      const found = this.cart.find(product => product.id === item.id);
       if (found && found.quantity > 1) {
         found.quantity--;
         found.totalPrice = found.quantity * found.ticket_price;
