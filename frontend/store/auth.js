@@ -3,7 +3,7 @@ import { navigateTo } from '#app';
 import { toast } from 'vue3-toastify';
 
 const config = {
-  API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:8000',
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000',
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -92,6 +92,8 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login({ email, password }) {
       console.log("inside login")
+      console.log(process.env)
+
       let response = null;
       try {
         console.log(email,password,response);
