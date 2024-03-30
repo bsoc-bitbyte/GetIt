@@ -19,13 +19,15 @@
   </div>
 </template>
 
-  
+
 <script setup>
 import eventList from '@/components/eventList.vue';
+
+const config = useRuntimeConfig();
 const eventLists = ref([]);
 async function fetchEventData() {
   try {
-    const response = await $fetch('http://localhost:8000/api/events/');
+    const response = await $fetch(`${config.public.API_BASE_URL}/api/events/`);
     eventLists.value = response;
   } catch (error) {
     console.error('Error fetching event data', error);
@@ -38,7 +40,7 @@ onMounted(() => fetchEventData());
 ::-webkit-scrollbar {
   margin-top: 10px;
   width: 3px; /* Example width */
-  background-color: #F5F5F5; 
+  background-color: #F5F5F5;
 }
 
 /* Scrollbar track */
@@ -48,13 +50,13 @@ onMounted(() => fetchEventData());
 
 /* Scrollbar handle */
 ::-webkit-scrollbar-thumb {
-  background-color: #ec4a52; 
+  background-color: #ec4a52;
   border-radius: 5px;  /* Example rounding */
 }
 
 /* Optional: Scrollbar Corner */
 ::-webkit-scrollbar-corner {
-  background-color: #F5F5F5; 
+  background-color: #F5F5F5;
 }
 </style>
 

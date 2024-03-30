@@ -102,7 +102,6 @@
                   {{ cartStore.cart.length}}  items in cart
                 </p>
               </div>
-              
               <ul v-if="isOpencart" class="" v-for="item in cartStore.cart" :key="item.pid">
               <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 ">
                 <div class="shrink-0">
@@ -119,7 +118,7 @@
                     </div>
                   </div>
                 </div>
-              </li> 
+              </li>
             </ul>
             </div>
             <div
@@ -174,11 +173,12 @@
   </div>
 </template>
 <script setup>
-import { useCartStore } from '../store/index'; 
-import { useAuthStore } from '../store/auth'; 
+import { useCartStore } from '../store/index';
+import { useAuthStore } from '../store/auth';
 import { useRouter } from 'vue-router';
 
 
+const config = useRuntimeConfig();
 
 const isOpen = ref(false);
 const isOpencart = ref(false);
@@ -197,18 +197,18 @@ const authStore = useAuthStore();
 const router = useRouter();
 const submitForm = async (e) => {
   e.preventDefault();
-  const requestData = prepareRequestData(); 
+  const requestData = prepareRequestData();
 
   console.log(requestData);
-  await createUPIGateway(requestData); 
-  
+  await createUPIGateway(requestData);
+
 };
 
 const createUPIGateway = async (requestData) => {
   try {
     // Your logic to make a request to the backend to get gateway
-    const response = await $fetch('http://localhost:8000/tickets/create-upi-gateway/', {method: 'POST', body: {requestData}});
-    const redirect_url = response['data']['data']['payment_url'];
+    const response = await $fetch(`${config.public.API_BASE_URL}/api/tickets/create-upi-gateway/`, {method: 'POST', body: {requestData}});
+    const redirect_url = response['data']['payment_url'];
     window.location.href = redirect_url;
   } catch (error) {
     console.error('Error:', error);
@@ -217,7 +217,7 @@ const createUPIGateway = async (requestData) => {
 const formValue = ref({
   firstName: '',
   lastName: '',
-  email: "userEmail",
+  email: '',
   hostel_address: '',
   roll: '',
   branch: '',
@@ -230,16 +230,24 @@ const formValue = ref({
   prod_id: "2",
 });
 
+const prepareOrderItems = () => {
+  const orderItem = cartStore.cart.map(item => ({
+    id : item.id,
+    title : item.title,
+    price : item.ticket_price,
+    quantity : item.quantity
+  }));
+  return orderItem;
+};
 
 const prepareRequestData = () => {
   // Your logic to prepare request data
   const formData = formValue.value;
-  console.log(formData)
   return {
     "first_name": formData.firstName,
     "last_name": formData.lastName,
-    "email": "userEmail",
-    "hostel_address": formData.hostel_address,
+    "email": authStore.userEmail,
+    "address": formData.hostel_address,
     "roll": formData.roll,
     "branch": formData.branch,
     "club_member": formData.club_member,
@@ -247,8 +255,7 @@ const prepareRequestData = () => {
     "consent": formData.consent,
     "price": cartStore.getPrice,
     "prod_name": cartStore.cart[0].title,
-    "prod_type": "ticket",
-    "prod_id": "2", // either the event id or the product id not the ticket id
+    "order_items": prepareOrderItems()
   };
 };
 
@@ -333,3 +340,6 @@ if (!authStore.isAuthenticated) {
 .rotate-180 {
   transform: rotate(180deg);}
 </style>
+
+
+

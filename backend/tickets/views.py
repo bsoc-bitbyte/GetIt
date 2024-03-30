@@ -1,24 +1,23 @@
 import os
 from django.conf import settings
 import requests
-from accounts.models import Account
 from accounts.views import get_account
 from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.request import Request
 import stripe
 from .models import Ticket
 from .serializers import TicketSerializer
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from orders.models import Order, OrderItem
+from tickets.models import Ticket
 from .permissions import IsTicketOwner
 import uuid
 from django.db import transaction
 import logging
 
 logger = logging.getLogger(__name__)
-
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -65,42 +64,42 @@ class CreateUPIGateway(APIView):
 
         @transaction.atomic
         def post(self, request, *args, **kwargs):
-
+            request =request.data.get('requestData')
             txn_id = generate_txn_id()
-            amount = request.data.get('price')
-            prod_name = request.data.get('prod_name')
-            prod_type = request.data.get('prod_type')
-            prod_id = request.data.get("prod_id")
-            email = request.data.get('email')
+            address = request.get('address')
+            email = request.get('email')
+            order_items = request.get('order_items')
+            phone_number = request.get('phone')
 
-            if not all([txn_id, amount, prod_name, prod_type, prod_id, email]):
+            amount = request.get('price')
+
+            if not all([txn_id, amount, email, phone_number]):
                 return Response({"error": "Missing required data."}, status=status.HTTP_400_BAD_REQUEST)
 
             account = get_account(email)
-            ticket = create_ticket(prod_id, account.id ,response = {}, status = "pending")
-            data = create_upi_data(account, txn_id, amount, prod_name, prod_type, ticket.id)
-
-            
+            order = Order.create_order(account, address)
+            add_order_item(order_items, order, account)
+            data = create_upi_data(account, txn_id, amount, phone_number, order.id)
 
             response_data = create_upi_gateway(data)
 
             if response_data.get("status") == True:
+                order.payment_url = response_data['data']['payment_url']
+                order.save()
                 return Response(response_data, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Failed to create UPI gateway", "data": response_data}, status=status.HTTP_400_BAD_REQUEST)
                 
-def create_upi_data(account, txn_id, amount, prod_name, prod_type, ticket_id):
+def create_upi_data(account, txn_id, amount, phone_number, order_id):
     return {
-        "key": UPI_API_KEY,  # Your API Key
+        "key": os.environ.get('UPI_API_KEY'),
         "client_txn_id": txn_id,  # Unique transaction ID
         "amount": amount,  # Amount
-        "p_info": prod_name,  # Product Information
+        "p_info": order_id,  # Product Information
         "customer_name": f"{account.first_name} {account.last_name}",  # Customer Name
         "customer_email": account.email,
-        "customer_mobile": account.phone_number,
+        "customer_mobile": phone_number if phone_number else account.phone_number,  # Customer Mobile
         "redirect_url": "http://google.com/",  # Your redirect URL after payment
-        "prod_type": prod_type,
-        "ticket_id" : ticket_id # ticket id
     }
 
 
@@ -108,7 +107,6 @@ def create_upi_gateway(data):
     ## get url from the env
     url = os.environ.get('UPIServer')
     url = url + 'create_order/'
-
     try :
         response = requests.post(url, data)
         return response.json()
@@ -127,26 +125,24 @@ def generate_txn_id():
     """
     return str(uuid.uuid4())
 
-def create_ticket(event_id, buyer_id, response, status):
+
+def add_order_item(order_items, order, account):
     """
-    Create a new ticket.
+    Add a new order item to an order.
 
     Args:
-        event_id (int): The ID of the event.
-        buyer_id (int): The ID of the buyer.
-        response (dict): The response data.
-        status (str): The status of the ticket.
+        order_id (int): The ID of the order.
+        ticket_id (int): The ID of the ticket.
+        quantity (int): The quantity of the ticket.
 
     Returns:
-        Ticket: The created ticket object, or None if creation failed.
+        OrderItem: The created order item object, or None if creation failed.
     """
     try:
-        return Ticket.objects.create(
-            event_id=event_id,
-            buyer_id=buyer_id,
-            response=response,
-            status=status
-        )
-    except (TypeError, ValueError) as e:  
-        logger.error(f"Failed to create ticket: {e}")
+        for order_item in order_items:
+            ticket = Ticket.create_ticket(order_item['id'], account, response = {})
+            order_item = OrderItem.create_order_item(order, ticket, order_item['quantity'])
+        
+    except (TypeError, ValueError) as e:
+        logger.error(f"Failed to create order item: {e}")
         return None

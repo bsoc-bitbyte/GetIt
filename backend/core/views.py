@@ -2,10 +2,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 import stripe
+from django.shortcuts import get_object_or_404
 
 from django.conf import settings
 from tickets.models import Ticket
-
+from orders.models import Order
 
 @csrf_exempt
 def stripe_webhook(request) :
@@ -41,31 +42,29 @@ def stripe_webhook(request) :
 @csrf_exempt
 @require_POST
 def upi_webhook(request) :
-
     data = request.POST
 
-    amount = data.get('amount')
-    txn_id = data.get('txn_id')
     status = data.get('status')
-    created_at = data.get('created_at')
+    order_id = data.get('order_id')
 
-    prod_type = data.get('prod_type')
+    order = get_object_or_404(Order, id=order_id)
 
-    if prod_type == 'ticket' :
-        ticket_id = data.get('ticket_id')
-        try :
-            ticket = Ticket.objects.get(id=ticket_id)
-            
-            if status == 'success' :
-                ticket.status = 'purchased'
-                ticket.save()
-            else :
+    order_items = order.order_items.all()
+
+    # WARNING: Assuming to be a ticket purchase
+    for item in order_items:
+        ticket = item.ticket
+        assert isinstance(ticket, Ticket)
+
+        if status == 'success':
+            ticket.status = 'purchased'
+            ticket.save()
+        elif status == 'failure' or status == 'close':
+            if ticket.status == 'pending':
                 ticket.status = 'failed'
                 ticket.save()
-        except Exception as e:
-            return HttpResponse(status=400)
-    
+
+    if status == 'success':
+        order.status = 'COMPLETED'
+
     return HttpResponse(status=200)
-
-
-    

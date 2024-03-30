@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia';
-import { navigateTo } from '#app'; 
+import { navigateTo } from '#app';
 import { toast } from 'vue3-toastify';
+
+const config = {
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000',
+}
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    access: null, 
-    refresh: null, 
-    user: null, 
+    access: null,
+    refresh: null,
+    user: null,
   }),
   // export const actions = {
   //   async login({ commit, dispatch }, { email, password }) {
@@ -33,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
   //           icon: "login",
   //         });
   //       }
-  
+
   //     }
   //     catch (error) {
   //       this.$toast.show(error.response.data.detail, {
@@ -47,7 +51,7 @@ export const useAuthStore = defineStore('auth', {
   //       throw error;
   //     }
   //   },
-  
+
   //   async register({ commit }, { username, phone_number, email, password }) {
   //     let first_name = username.split(" ")[0];
   //     let last_name = username.split(" ")[1];
@@ -88,18 +92,20 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login({ email, password }) {
       console.log("inside login")
+      console.log(process.env)
+
       let response = null;
       try {
         console.log(email,password,response);
-        const {data,status} = await useFetch("http://localhost:8000/api/token/", {
-          method: 'POST', 
+        const {data,status} = await useFetch(`${config.API_BASE_URL}/api/token/`, {
+          method: 'POST',
           body: { email, password }
-        }); 
+        });
         if(status.value === "success") {
           this.access = data.value.access;
-          this.refresh = data.value.refresh || null; 
+          this.refresh = data.value.refresh || null;
           this.user = email || null;
-          await navigateTo('/'); 
+          await navigateTo('/');
           toast.success("Login successful", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
@@ -126,7 +132,7 @@ export const useAuthStore = defineStore('auth', {
       let last_name = username.split(" ")[1];
       console.log(first_name, last_name,phone_number, email, password);
       try{
-      const {data,status,error} = await useFetch("http://localhost:8000/api/accounts/", { method:'POST', body: {
+      const {data,status,error} = await useFetch(`${config.API_BASE_URL}/api/accounts/`, { method:'POST', body: {
               first_name,
               last_name,
               phone_number,
@@ -147,20 +153,17 @@ export const useAuthStore = defineStore('auth', {
           {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_CENTER,
-          
           })
         });
       }
 
 
 
-    
     }catch(error){
         toast.error(error.response.data.detail, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER,
         });
-      
 
       if (process.env.NODE_ENV == "production") {
         console.log(response);
@@ -169,7 +172,7 @@ export const useAuthStore = defineStore('auth', {
 
     async refresh() {
       if (!this.refresh) return;
-      const { data } = await $fetch("http://localhost:8000/api/token/refresh", { method:'POST', body: { refresh: this.refresh }});
+      const { data } = await $fetch(`${config.API_BASE_URL}/api/token/refresh`, { method:'POST', body: { refresh: this.refresh }});
       this.SET_PAYLOAD(data);
     },
 
@@ -181,7 +184,7 @@ export const useAuthStore = defineStore('auth', {
 
     SET_PAYLOAD(payload) {
       this.access = payload.access;
-      this.refresh = payload.refresh || null; 
+      this.refresh = payload.refresh || null;
       this.user = payload.user || null;
     },
   },
