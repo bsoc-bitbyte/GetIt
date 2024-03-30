@@ -1,16 +1,43 @@
-version: "3.8"
+version: '1.1'
 services:
-  backend:
-    # restart: always
-    container_name: django
-    build:
-      context: ./backend
-    command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - 8000:8000
-    volumes:
-      - ./backend/:/usr/src/app/
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=35%fnl)_3v67^9os3%5bo+vv)$l&a6k#_&21i-xl7%_%#sa5(v
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+    web:
+        build: ./backend
+        command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+        volumes:
+            - ./backend/:/usr/src/backend/
+            - static_volume:/home/getit/backend/static
+            - media_volume:/home/getit/backend/media
+        expose:
+            - 8000
+        env_file:
+            - ./backend/.env
+        depends_on:
+            - db
+    db:
+        image: postgres:15
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        env_file:
+            - ./backend/.env.prod.db
+    frontend:
+        build: ./frontend
+        command: node .output/server/index.mjs
+        expose:
+            - 3030
+        env_file:
+            - ./frontend/.env.prod
+
+    nginx:
+        build: ./nginx
+        ports:
+            - 1337:8080
+        volumes:
+            - static_volume:/home/getit/backend/static
+            - media_volume:/home/getit/backend/media
+        depends_on:
+            - web
+            - frontend
+volumes:
+    postgres_data:
+    static_volume:
+    media_volume:
