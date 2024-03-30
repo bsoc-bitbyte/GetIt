@@ -39,7 +39,7 @@
           </div>
           <button  :disabled="qty===0" :class="{ 'opacity-50': qty === 0 }" @click="addToCartClick(event)" class="bg-[#EA454C] font-semibold  py-3 text-sm text-white lg:w-full rounded-3xl w-1/2">Add to cart</button>
     </div>
-    <div class="faq-container max-w-md lg:mx-auto mt-4 ">
+    <div class="faq-container max-w-md lg:mx-auto mt-4 "> 
     <div class="dropdown mb-2">
       <div class="dropdown-title cursor-pointer" @click="toggleEventDetails">
         Event Details
@@ -73,7 +73,6 @@
 
 </section>
   </template>
-
   <script setup>
   import { ref, onMounted } from 'vue';
   import { useRoute } from 'vue-router';
@@ -107,7 +106,6 @@
       console.error('Error fetching event data', error);
     }
   });
-
   const addToCartClick = (item) => {
     console.log("dfvd");
     cartStore.addToCart(item);

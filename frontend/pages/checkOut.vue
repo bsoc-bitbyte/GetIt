@@ -102,7 +102,6 @@
                   {{ cartStore.cart.length}}  items in cart
                 </p>
               </div>
-
               <ul v-if="isOpencart" class="" v-for="item in cartStore.cart" :key="item.pid">
               <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 ">
                 <div class="shrink-0">

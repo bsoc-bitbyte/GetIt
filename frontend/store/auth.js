@@ -153,11 +153,9 @@ export const useAuthStore = defineStore('auth', {
           {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_CENTER,
-
           })
         });
       }
-
 
 
 
@@ -166,7 +164,6 @@ export const useAuthStore = defineStore('auth', {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER,
         });
-
 
       if (process.env.NODE_ENV == "production") {
         console.log(response);
