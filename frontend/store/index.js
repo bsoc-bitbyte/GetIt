@@ -1,162 +1,113 @@
-if (process.browser) {
-  var cart = window.localStorage.getItem("cart");
-}
-export const state = () => ({
-  cart: cart ? JSON.parse(cart) : [],
-});
-export const getters = {
-  cartCount(state) {
-    return state.cart.length;
-  },
-  getQty(state){
-    var qty = 0;
-    state.cart.forEach((item) => {
-      qty += item.quantity;
-    });
+import { defineStore } from 'pinia';
+import { toast } from 'vue3-toastify';
 
-    return qty;
-  },
-  getPrice(state){
-    var price = 0;
-    state.cart.forEach((item) => {
-      price += item.quantity*item.ticket_price;
-    });
 
-    return price;
-  },
-};
-export const mutations = {
-  addToCart(state, item) {
-    let found = state.cart.find((product) => {
-      return product.title === item.title;
-    });
-    if (found) {
-      this.$toast.show("Item already added to Cart", {
-        theme: "toasted-primary",
-        position: "bottom-center",
-        duration: 2000,
-        type: "error",
-        iconPack: "material",
-        icon: "add_shopping_cart",
-      });
-    } else {
-      let temp = item.title;
-      let totalP = item.ticket_price;
-      state.cart.push({
-        ...item,
-        pid: temp,
-        quantity: 1,
-        totalPrice: totalP,
-      });
-      this.$toast.show("Added to Cart", {
-        theme: "toasted-primary",
-        position: "bottom-center",
-        duration: 2000,
-        type: "success",
-        iconPack: "material",
-        icon: "add_shopping_cart",
-      });
+export const useCartStore = defineStore({
+  id: 'cart',
+  state: () => ({
+    cart: process.browser ? JSON.parse(window.localStorage.getItem("cart")) || [] : []
+  }),
+  getters: {
+    cartCount() {
+      return this.cart.length;
+    },
+    getQty() {
+      return this.cart.reduce((qty, item) => qty + item.quantity, 0);
+    },
+    getPrice() {
+      return this.cart.reduce((price, item) => price + item.quantity * item.ticket_price, 0);
     }
-    this.commit("saveCart");
-    
   },
-
-
-  removeFromCart(state, item) {
-    let index = state.cart.indexOf(item);
-    if (index > -1) {
-      state.cart.splice(index, 1);
-    }
-    this.commit("saveCart");
-    this.$toast.show("Removed from Cart", {
-      theme: "toasted-primary",
-      position: "bottom-center",
-      duration: 2000,
-      type: "error",
-      iconPack: "material",
-      icon: "remove_shopping_cart",
-    });
-  },
- 
-  increaseQuantity(state, item) {
-    if(!item.pid){
-          let found = state.cart.find((product) => {
-            return product.title === item.title;
-          });
-          if (found) {
-                this.$toast.show("Item already added to Cart", {
-                  theme: "toasted-primary",
-                  position: "bottom-center",
-                  duration: 2000,
-                  type: "error",
-                  iconPack: "material",
-                  icon: "add_shopping_cart",
-                });
-          } 
-          else {
-                let temp = item.title;
-                let totalP = item.ticket_price;
-                state.cart.push({
-                  ...item,
-                  pid: temp,
-                  quantity: 1,
-                  totalPrice: totalP,
-                });
-                this.$toast.show("Added to Cart", {
-                  theme: "toasted-primary",
-                  position: "bottom-center",
-                  duration: 2000,
-                  type: "success",
-                  iconPack: "material",
-                  icon: "add_shopping_cart",
-                });
-          }
-          this.commit("saveCart");
-
-    }
-    else{
-      let found = state.cart.find((product) => product.pid == item.pid);
+  actions: {
+    addToCart(item) {
+      const found = this.cart.find(product => product.title === item.title);
       if (found) {
+        console.log("found")
+        toast.error("Item already added", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+
+        });
+      } else {
+        this.cart.push({
+          ...item,
+          pid: item.title,
+          quantity: 1,
+          totalPrice: item.ticket_price
+        });
+        toast.success("Added to Cart", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+      this.saveCart();
+    },
+    removeFromCart(item) {
+      const index = this.cart.indexOf(item);
+      if (index > -1) {
+        this.cart.splice(index, 1);
+      }
+      this.saveCart();
+      toast.error("Removed from cart", {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    },
+    increaseQuantity(item) {
+      if (!item.pid) {
+        const found = this.cart.find(product => product.title === item.title);
+        if (found) {
+          toast.error("Item already added", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+        } else {
+          this.cart.push({
+            ...item,
+            pid: item.title,
+            quantity: 1,
+            totalPrice: item.ticket_price,
+          });
+          toast.success("Added to Cart", {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+        }
+        this.saveCart();
+      } else {
+        const found = this.cart.find(product => product.pid === item.pid);
+        if (found) {
           found.quantity++;
           found.totalPrice = found.quantity * found.ticket_price;
-          console.log(found.ticket_price, found.quantity);
-          
-          this.commit("saveCart");
-          this.$toast.show("Increased the Quantity", {
-            theme: "toasted-primary",
-            position: "bottom-center",
-            duration: 2000,
-            type: "success",
-            iconPack: "material",
-            icon: "check",
-          });
-    }
-    }
-    
+          this.saveCart();
+          toast.success("Increased the quantity", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        }
+      }
+    },
+    decreaseQuantity(item) {
+      const found = this.cart.find(product => product.pid === item.pid);
+      if (found && found.quantity > 1) {
+        found.quantity--;
+        found.totalPrice = found.quantity * found.ticket_price;
+        this.saveCart();
+        toast.error("Decreased the Quantity", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    },
+    saveCart() {
+      if (process.browser) {
+        window.localStorage.setItem("cart", JSON.stringify(this.cart));
+      }
+    },
+    setCart(cartData) {
+      this.cart = cartData;
+    },
   },
-  decreaseQuantity(state, item) {
-    let found = state.cart.find((product) => product.pid == item.pid);
-    if (found.quantity > 1) {
-      found.quantity--;
-      found.totalPrice = found.quantity * found.ticket_price;
-      this.commit("saveCart");
-      this.$toast.show("Decreased the Quantity", {
-        theme: "toasted-primary",
-        position: "bottom-center",
-        duration: 2000,
-        type: "success",
-        iconPack: "material",
-        icon: "check",
-      });
-    }
-  },
-  saveCart(state) {
-    if (process.browser) {
-      window.localStorage.setItem("cart", JSON.stringify(state.cart));
-    }
-  },
-  setCart(state, cartData) {
-    state.cart = cartData;
-  },
-};
-export const persistent = true;
+  persist: true,
+});
+
