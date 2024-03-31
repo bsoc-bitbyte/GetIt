@@ -96,15 +96,15 @@ export const useAuthStore = defineStore('auth', {
 
       let response = null;
       try {
-        console.log(email,password,response);
-        const {data,status} = await useFetch(`${config.API_BASE_URL}/api/token/`, {
+        console.log(email, password, response);
+        const { data, status } = await useFetch(`${config.API_BASE_URL}/api/token/`, {
           method: 'POST',
           body: { email, password }
         });
-        if(status.value === "success") {
+        if (status.value === "success") {
           this.access = data.value.access;
-          this.refresh = data.value.refresh || null;
-          this.user = email || null;
+          this.refresh = data.value.refresh; value
+          this.user = email;
           await navigateTo('/');
           toast.success("Login successful", {
             autoClose: 2000,
@@ -112,68 +112,88 @@ export const useAuthStore = defineStore('auth', {
           });
 
         }
-      else{
-        toast.error("Invalid Credential", {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER,
-        });
-      }}
-        catch (error) {
-          toast.error("Invalid Credential/Account does not Exist", {
+        else {
+          toast.error("Invalid Credential", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
-          throw error;
+        }
+      }
+      catch (error) {
+        toast.error("Invalid Credential/Account does not Exist", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        throw error;
       }
     },
 
     async register({ username, phone_number, email, password }) {
       let first_name = username.split(" ")[0];
       let last_name = username.split(" ")[1];
-      console.log(first_name, last_name,phone_number, email, password);
-      try{
-      const {data,status,error} = await useFetch(`${config.API_BASE_URL}/api/accounts/`, { method:'POST', body: {
-              first_name,
-              last_name,
-              phone_number,
-              email,
-              password,
-      }});
-
-      if(status.value === 'success'){
-        toast.success("Register successful", {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER,
+      console.log(first_name, last_name, phone_number, email, password);
+      try {
+        const { data, status, error } = await useFetch(`${config.API_BASE_URL}/api/accounts/`, {
+          method: 'POST', body: {
+            first_name,
+            last_name,
+            phone_number,
+            email,
+            password,
+          }
         });
-        await navigateTo('/Signin')
-      }
-      else{
-        Object.entries(error.value.data).forEach(([field, errorMessages]) => {
-          toast.error(`$${errorMessages[0]}`,
-          {
-            autoClose: 3000,
+
+        if (status.value === 'success') {
+          toast.success("Register successful", {
+            autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
-          })
-        });
-      }
+          });
+          await navigateTo('/Signin')
+        }
+        else {
+          Object.entries(error.value.data).forEach(([field, errorMessages]) => {
+            toast.error(`$${errorMessages[0]}`,
+              {
+                autoClose: 3000,
+                position: toast.POSITION.BOTTOM_CENTER,
+              })
+          });
+        }
 
 
 
-    }catch(error){
+      } catch (error) {
         toast.error(error.response.data.detail, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER,
         });
 
-      if (process.env.NODE_ENV == "production") {
-        console.log(response);
+        if (process.env.NODE_ENV == "production") {
+          console.log(response);
+        }
       }
-    }},
+    },
 
-    async refresh() {
+    async refreshToken() {
       if (!this.refresh) return;
-      const { data } = await $fetch(`${config.API_BASE_URL}/api/token/refresh`, { method:'POST', body: { refresh: this.refresh }});
-      this.SET_PAYLOAD(data);
+      console.log("refresh", this.refresh, this.access, this.user)
+      try {
+        const response = await fetch(`${config.API_BASE_URL}/api/token/refresh`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ refresh: this.refresh })
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("data refresh", data)
+        this.access = data.access;
+      } catch (error) {
+        console.error("An error occurred while refreshing the token: ", error);
+      }
     },
 
     logout() {
@@ -190,11 +210,16 @@ export const useAuthStore = defineStore('auth', {
   },
 
   getters: {
-    isAuthenticated(){
-      return this.access && this.access !== ""} ,
+    isAuthenticated() {
+      return this.access && this.access !== ""
+    },
 
-    userEmail(){
+    userEmail() {
       return this.user
+    },
+
+    authToken() {
+      return this.access
     }
   },
   persist: true,
