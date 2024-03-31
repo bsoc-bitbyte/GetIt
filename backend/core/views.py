@@ -45,7 +45,7 @@ def upi_webhook(request) :
     data = request.POST
 
     status = data.get('status')
-    order_id = data.get('order_id')
+    order_id = data.get('p_info')
 
     order = get_object_or_404(Order, id=order_id)
 
@@ -66,5 +66,9 @@ def upi_webhook(request) :
 
     if status == 'success':
         order.status = 'COMPLETED'
+    elif status == 'failure' or status == 'close':
+        order.status = 'CANCELLED'
+
+    order.save()
 
     return HttpResponse(status=200)
