@@ -103,7 +103,7 @@ export const useAuthStore = defineStore('auth', {
         });
         if (status.value === "success") {
           this.access = data.value.access;
-          this.refresh = data.value.refresh; value
+          this.refresh = data.value.refresh;
           this.user = email;
           await navigateTo('/');
           toast.success("Login successful", {
