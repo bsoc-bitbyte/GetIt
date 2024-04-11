@@ -99,7 +99,7 @@ def create_upi_data(account, txn_id, amount, phone_number, order_id):
         "customer_name": f"{account.first_name} {account.last_name}",  # Customer Name
         "customer_email": account.email,
         "customer_mobile": phone_number if phone_number else account.phone_number,  # Customer Mobile
-        "redirect_url": "http://google.com/",  # Your redirect URL after payment
+        "redirect_url": "http://getit.iiitdmj.ac.in/payment/" + str(order_id),  # Your redirect URL after payment
     }
 
 
