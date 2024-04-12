@@ -64,6 +64,7 @@ class CreateUPIGateway(APIView):
 
         @transaction.atomic
         def post(self, request, *args, **kwargs):
+            print(request.data)
             request =request.data.get('requestData')
             txn_id = generate_txn_id()
             address = request.get('address')
@@ -73,12 +74,25 @@ class CreateUPIGateway(APIView):
 
             amount = request.get('price')
 
+            form_response = {
+                "txn_id": txn_id,
+                "first_name": request.get('first_name'),
+                "last_name": request.get('last_name'),
+                "address": address,
+                "roll": request.get('roll'),
+                "amount": amount,
+                "Club Member": request.get('club_member'),
+                "email": email,
+                "phone_number": phone_number,
+                "order_items": order_items
+            }
+
             if not all([txn_id, amount, email, phone_number]):
                 return Response({"error": "Missing required data."}, status=status.HTTP_400_BAD_REQUEST)
 
             account = get_account(email)
             order = Order.create_order(account, address)
-            add_order_item(order_items, order, account)
+            add_order_item(order_items, order, account, form_response)
             data = create_upi_data(account, txn_id, amount, phone_number, order.id)
 
             response_data = create_upi_gateway(data)
@@ -126,7 +140,7 @@ def generate_txn_id():
     return str(uuid.uuid4())
 
 
-def add_order_item(order_items, order, account):
+def add_order_item(order_items, order, account, response):
     """
     Add a new order item to an order.
 
