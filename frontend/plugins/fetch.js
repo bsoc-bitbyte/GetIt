@@ -8,13 +8,13 @@ export default defineNuxtPlugin(nuxtApp => {
     if (authStore.tokenNeedsRefresh()) {
       try {
         await authStore.refreshToken();
-        options.headers = { ...options.headers, Authorization: `Bearer ${authStore.authToken}` };
+        options.headers = { ...options.headers, Authorization: `Bearer ${authStore.access}` };
       } catch (error) {
         authStore.logout();
         return { error: 'Authentication failed, please login again.' };
       }
     } else {
-      options.headers = { ...options.headers, Authorization: `Bearer ${authStore.accessToken}` };
+      options.headers = { ...options.headers, Authorization: `Bearer ${authStore.access}` };
     }
 
     return await $fetch(url, options);
