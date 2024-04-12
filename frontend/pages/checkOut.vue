@@ -38,7 +38,7 @@
                 <h2
                   class="TEXT2 text-[1.69rem] font-bold subpixel antialiased divide-gray-400/[.6]] py-[1rem] tracking-wider"
                 >
-                  Billing Address
+                  Registration Details
                 </h2>
                 <hr />
               </div>
@@ -54,6 +54,7 @@
                       type="text"
                       placeholder="First Name"
                       id="fn"
+                      required
                       v-model.trim.lazy="formValue.firstName"
                       class="pl-[0.69rem] min-[1240px]:mr-[0.5rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                     />
@@ -68,13 +69,15 @@
                       type="text"
                       placeholder="Last Name"
                       id="ln"
+                      required
                       v-model.trim.lazy="formValue.lastName"
                       class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                     />
                   </div>
                 </div>
-                <div class="remaining-credentials">
-                  <div class="TEXT py-[0.7rem] px-[0.1rem]">
+
+                <div class="name min-[1240px]:flex">
+                  <div class="TEXT py-[0.5rem] px-[0.1rem]">
                     <label
                       for="email"
                       class="min-[1240px]:block subpixel-antialiased tracking-wider"
@@ -85,10 +88,29 @@
                       disabled
                       placeholder="Email"
                       id="email"
+                      required
                       v-model.trim.lazy="formValue.email"
-                      class="pl-[0.69rem] w-full h-[2.5rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
+                      class="pl-[0.69rem] min-[1240px]:mr-[0.5rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                     />
                   </div>
+                  <div class="TEXT py-[0.5rem] px-[0.1rem]">
+                    <label
+                      for="phone"
+                      class="min-[1240px]:block subpixel-antialiased tracking-wider"
+                      >Phone</label
+                    >
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      id="phone"
+                      required
+                      v-model.trim.number.lazy="formValue.phone"
+                      class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
+                    />
+                  </div>
+                </div>
+
+                <div class="remaining-credentials">
                   <div class="TEXT py-[0.7rem] px-[0.1rem]">
                     <label
                       for="hostel-address"
@@ -98,6 +120,7 @@
                     <textarea
                       id="address"
                       placeholder="Address"
+                      required
                       v-model.trim.lazy="formValue.hostel_address"
                       class="border-2 border-gray-300 pl-[0.69rem] rounded-[0.4rem] w-full h-[4rem]"
                     />
@@ -113,6 +136,7 @@
                         type="text"
                         placeholder="Roll"
                         id="roll"
+                        required
                         v-model.trim.lazy="formValue.roll"
                         class="pl-[0.69rem] min-[1240px]:mr-[0.5rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                       />
@@ -127,6 +151,7 @@
                         type="text"
                         placeholder="Branch"
                         id="branch"
+                        required
                         v-model.trim.lazy="formValue.branch"
                         class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                       />
@@ -142,26 +167,38 @@
                       <select
                         id="gender"
                         v-model.trim.lazy="formValue.gender"
+                        required
                         class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
-                        >
-                        </select>
+                      >
+                        <option value="" disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="prefer_not_to_say">
+                          Prefer Not to Say
+                        </option>
+                      </select>
                     </div>
                     <div class="TEXT py-[0.7rem] px-[0.1rem]">
                       <label
-                        for="phone"
+                        for="checked"
                         class="min-[1240px]:block subpixel-antialiased tracking-wider"
-                        >Phone</label
+                        >Batch</label
                       >
-                      <input
-                        type="tel"
-                        placeholder="Phone Number"
-                        id="phone"
-                        v-model.trim.number.lazy="formValue.phone"
+                      <select
+                        id="batch"
+                        v-model.trim.lazy="formValue.batch"
+                        required
                         class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
-                      />
+                      >
+                        <option value="" disabled>Select Batch</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="check2 pt-[1rem]">
+                  <!-- <div class="check2 pt-[1rem]">
                     <input
                       type="checkbox"
                       id="check2"
@@ -173,7 +210,7 @@
                     <label for="check2" class="check2 text-s tracking-wider"
                       >Save the data for future use</label
                     >
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -363,6 +400,7 @@ const formValue = reactive({
   roll: "",
   branch: "",
   gender: "",
+  batch: "",
   phone: "",
   consent: false,
   price: cartStore.getPrice,
@@ -403,6 +441,20 @@ const toggleDropdowncart = () => {
 };
 
 const submitForm = async (e) => {
+  if (
+    !(
+      formValue.firstName &&
+      formValue.lastName &&
+      formValue.email &&
+      formValue.hostel_address &&
+      formValue.roll &&
+      formValue.branch &&
+      formValue.gender &&
+      formValue.batch &&
+      formValue.phone
+    )
+  )
+    return;
   e.preventDefault();
   const requestData = prepareRequestData();
 
