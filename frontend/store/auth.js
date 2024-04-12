@@ -131,7 +131,7 @@ export const useAuthStore = defineStore("auth", {
         return decoded.exp < currentTime;
       }
       catch (error) {
-        console.log(error)
+        console.error("Error Decoding JWT",error)
         return true
       }
     },
