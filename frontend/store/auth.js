@@ -126,7 +126,7 @@ export const useAuthStore = defineStore("auth", {
     tokenNeedsRefresh() {
       // Assuming you have a way to decode JWTs
       try {
-        const decoded = jwtDecode(this.accessToken); // Define jwtDecode or use a package
+        const decoded = jwtDecode(this.access); // Define jwtDecode or use a package
         const currentTime = Date.now() / 1000;
         return decoded.exp < currentTime;
       }
