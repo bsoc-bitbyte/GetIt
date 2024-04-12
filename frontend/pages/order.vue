@@ -107,15 +107,17 @@
     </div>
   </div> -->
 </template>
-<script>
-import { useAttrs } from 'vue';
-import { useAuthStore } from '../store/auth';
+<script >
+import { useAttrs } from "vue";
+import { useAuthStore } from "../store/auth";
+import { useNuxtApp } from "#app";
+
 const config = useRuntimeConfig();
 export default {
   data() {
     return {
       orders: [],
-    }
+    };
   },
   async mounted() {
     await this.fetchOrders();
@@ -123,18 +125,16 @@ export default {
   methods: {
     async fetchOrders() {
       const authStore = useAuthStore();
+      const nuxtApp = useNuxtApp();
+
       try {
-        const token = authStore.authToken;
-        const setup = {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        const response = await await nuxtApp.$authenticatedFetch(
+          `${config.public.API_BASE_URL}/api/orders/`
+        );
 
-        const response = await $fetch(`${config.public.API_BASE_URL}/api/orders/`, setup);
-
-        console.log("responsoe", response)
+        console.log("responsoe", response);
         this.orders = response;
-      }
-      catch (error) {
+      } catch (error) {
         console.log("Error", error);
         if (error.response && error.response.status === 401) {
           await authStore.refreshToken();
@@ -142,17 +142,19 @@ export default {
           const token = authStore.authToken;
           const setup = {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          };
           try {
-            const response = await $fetch(`${config.public.API_BASE_URL}/api/orders/`, setup);
-            console.log("response after refresh", response)
-          }
-          catch (error) {
-            console.error("Error fetching orders after refresh", error)
+            const response = await $fetch(
+              `${config.public.API_BASE_URL}/api/orders/`,
+              setup
+            );
+            console.log("response after refresh", response);
+          } catch (error) {
+            console.error("Error fetching orders after refresh", error);
           }
         }
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
