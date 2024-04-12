@@ -82,6 +82,7 @@
                     >
                     <input
                       type="email"
+                      disabled
                       placeholder="Email"
                       id="email"
                       v-model.trim.lazy="formValue.email"
@@ -136,15 +137,14 @@
                       <label
                         for="checked"
                         class="min-[1240px]:block subpixel-antialiased tracking-wider"
-                        >Club Member</label
+                        >Gender</label
                       >
-                      <input
-                        type="text"
-                        placeholder="Club Member"
-                        id="branch"
-                        v-model.trim.lazy="formValue.club_member"
-                        class="pl-[0.69rem] min-[1240px]:mr-[0.5rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
-                      />
+                      <select
+                        id="gender"
+                        v-model.trim.lazy="formValue.gender"
+                        class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
+                        >
+                        </select>
                     </div>
                     <div class="TEXT py-[0.7rem] px-[0.1rem]">
                       <label
@@ -358,11 +358,11 @@ const router = useRouter();
 const formValue = reactive({
   firstName: "",
   lastName: "",
-  email: "",
+  email: authStore.userEmail,
   hostel_address: "",
   roll: "",
   branch: "",
-  club_member: "",
+  gender: "",
   phone: "",
   consent: false,
   price: cartStore.getPrice,
@@ -436,17 +436,17 @@ const prepareOrderItems = () => {
 
 const prepareRequestData = () => {
   // Your logic to prepare request data
-  const formData = formValue.value;
+  console.log("formValue", formValue);
   return {
-    first_name: formData.firstName,
-    last_name: formData.lastName,
+    first_name: formValue.firstName,
+    last_name: formValue.lastName,
     email: authStore.userEmail,
-    address: formData.hostel_address,
-    roll: formData.roll,
-    branch: formData.branch,
-    club_member: formData.club_member,
-    phone: formData.phone,
-    consent: formData.consent,
+    address: formValue.hostel_address,
+    roll: formValue.roll,
+    branch: formValue.branch,
+    club_member: formValue.club_member,
+    phone: formValue.phone,
+    consent: formValue.consent,
     price: cartStore.getPrice,
     prod_name: cartStore.cart[0].title,
     order_items: prepareOrderItems(),
