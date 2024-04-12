@@ -81,7 +81,8 @@ class CreateUPIGateway(APIView):
                 "phone_number": phone_number,
                 "address": address,
                 "roll": request.get('roll'),
-                "gender": request.get('gender')
+                "gender": request.get('gender'),
+                "batch" : request.get('batch')
             }
 
             if not all([txn_id, amount, email, phone_number]):
