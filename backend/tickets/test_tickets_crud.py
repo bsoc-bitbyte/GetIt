@@ -26,7 +26,7 @@ event_data = {
 }
 
 ticket_data = {
-    "event": 1,
+    "event_id": 1,
     "buyer": 1,
     "response": "{}",
     "purchase_date": "2021-01-01",
@@ -60,7 +60,7 @@ def testTicketCreation_byUnauthenticatedUser_shouldThrowUnauthorized(test_user, 
     # Arrange
     unauthenticated_client = APIClient()
     ticket_data_copy = ticket_data.copy()
-    ticket_data_copy['event'] = test_event.id
+    ticket_data_copy['event_id'] = test_event.id
     ticket_data_copy['buyer'] = test_user.id
 
     # Act
@@ -75,8 +75,10 @@ def testTicketCreation_byUnauthenticatedUser_shouldThrowUnauthorized(test_user, 
 def testTicketCreation_byAuthenticatedUser_withValidDetails_shouldCreateTicket(authenticated_client, test_event, test_user):
     # Arrange
     ticket_data_copy = ticket_data.copy() 
-    ticket_data_copy['event'] = test_event.id
+    ticket_data_copy['event_id'] = test_event.id
     ticket_data_copy['buyer'] = test_user.id
+
+    print(ticket_data_copy)
 
     # Act
     response = authenticated_client.post("/api/tickets/", ticket_data_copy)
@@ -93,7 +95,7 @@ def testTicketCreation_byAuthenticatedUser_withValidDetails_shouldCreateTicket(a
 def testTicketCreation_byAuthenticatedUser_withInvalidEventId_shouldThrowBadRequest(authenticated_client, test_user):
     # Arrange
     ticket_data_copy = ticket_data.copy()
-    ticket_data_copy['event'] = 1
+    ticket_data_copy['event_id'] = 1
     ticket_data_copy['buyer'] = test_user.id
 
     # Act
@@ -108,7 +110,7 @@ def testTicketCreation_byAuthenticatedUser_withInvalidEventId_shouldThrowBadRequ
 def testTicketCreation_byAuthenticatedUser_whenBuyerNotEqualsRequestUser_shouldThrowBadRequest(authenticated_client, test_event):
     # Arrange
     ticket_data_copy = ticket_data.copy()
-    ticket_data_copy['event'] = test_event.id
+    ticket_data_copy['event_id'] = test_event.id
     ticket_data_copy['buyer'] = 2
 
     # Act
@@ -135,7 +137,7 @@ def testListTicket_byUnauthenticatedUser_shouldThrowUnauthorized():
 def testListTicket_byAuthenticatedUser_listsOnlyUsersTickets(authenticated_client, test_user, test_event):
     # Arrange
     ticket_data_copy = ticket_data.copy()
-    ticket_data_copy['event'] = test_event
+    ticket_data_copy['event_id'] = test_event.id
     ticket_data_copy['buyer'] = test_user
 
     account_data_copy = account_data.copy()
@@ -143,7 +145,7 @@ def testListTicket_byAuthenticatedUser_listsOnlyUsersTickets(authenticated_clien
     test_user2 = Account.objects.create(**account_data_copy)
 
     ticket_data_copy2 = ticket_data.copy()
-    ticket_data_copy2['event'] = test_event
+    ticket_data_copy2['event_id'] = test_event.id
     ticket_data_copy2['buyer'] = test_user2
 
     Ticket.objects.create(**ticket_data_copy)
@@ -162,7 +164,7 @@ def testListTicket_byAuthenticatedUser_listsOnlyUsersTickets(authenticated_clien
 def testRetrieveTicket_byTicketOwner_shouldReturnSuccessfully(authenticated_client, test_user, test_event):
     # Arrange
     ticket_data_copy = ticket_data.copy()
-    ticket_data_copy['event'] = test_event
+    ticket_data_copy['event_id'] = test_event.id
     ticket_data_copy['buyer'] = test_user
 
     ticket = Ticket.objects.create(**ticket_data_copy)
@@ -183,7 +185,7 @@ def testRetrieveTicket_notByTicketOwner_shouldThrowForbidden(authenticated_clien
     test_user2 = Account.objects.create(**account_data_copy)
 
     ticket_data_copy = ticket_data.copy()
-    ticket_data_copy['event'] = test_event
+    ticket_data_copy['event_id'] = test_event.id
     ticket_data_copy['buyer'] = test_user2
 
     ticket = Ticket.objects.create(**ticket_data_copy)
