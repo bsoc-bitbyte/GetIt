@@ -9,11 +9,6 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-RUN chown -R node: .nuxt
-RUN chown -R node: .output
-RUN chmod -R u+rwx .nuxt
-RUN chmod -R u+rwx .output
-
 #### FINAL ####
 FROM node:18-bullseye
 
