@@ -31,6 +31,7 @@ class OrderSerializer(ModelSerializer):
                   'buyer_name',
                   'address',
                   'total',
+                  'transaction_id',
                   'payment_url',
                   'status',
                   'order_name',
