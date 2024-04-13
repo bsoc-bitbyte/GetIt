@@ -58,22 +58,22 @@
 
                               <li
                                   class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
-                                  <nuxt-link to="/">Home</nuxt-link>
+                                  <nuxt-link to="/" @click="toggle">Home</nuxt-link>
                               </li>
                               <li
                                   class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
-                                  <nuxt-link to="/eventList">Events</nuxt-link>
+                                  <nuxt-link to="/eventList" @click="toggle">Events</nuxt-link>
                               </li>
                               <li
                                   class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
-                                  <nuxt-link to="/order">My Orders</nuxt-link>
+                                  <nuxt-link to="/order" @click="toggle">My Orders</nuxt-link>
                               </li>
                               <li
                                   class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
 
                                   <button v-if="isAuthenticated"
                                       @click="handleLogout">Sign Out</button>
-                                  <nuxt-link v-else to="/Signin">Sign In</nuxt-link>
+                                  <nuxt-link v-else to="/Signin" @click="toggle">Sign In</nuxt-link>
                               </li>
                           </ul>
                       </div>
@@ -131,9 +131,10 @@ export default {
     const handleLogout = () => {
       authStore.logout();
       toast.error("Logged out",{
-          autoClose: 2000,
-          position:  toast.POSITION.BOTTOM_CENTERAL
+        autoClose: 2000,
+        position:  toast.POSITION.BOTTOM_CENTER
       })
+      toggle();
     }
 
     const toggle = () => {
