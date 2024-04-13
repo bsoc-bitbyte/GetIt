@@ -7,11 +7,6 @@
       class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
       @click="isCheckoutVisible = false"
     ></div>
-    <div
-      v-if="isCheckoutVisible"
-      class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
-      @click="isCheckoutVisible = false"
-    ></div>
 
     <!-- Checkout Component -->
     <transition name="modal">

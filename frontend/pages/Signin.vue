@@ -15,11 +15,11 @@
             <div class="credentials">
               <div class="email py-[1.0rem]">
                 <p class="font-bold subpixel-antialiased text-slate-500/[.98] py-[0.1rem] tracking-wide text-slate-800 ">Email</p>
-                <input type="email" class="px-[1rem] border-2 h-[2.69rem] border-black-300 max-[1119px]:w-full min-[1120px]:w-[35rem] rounded-lg" v-model.trim.lazy="credentials.email" placeholder="Enter your email"/>
+                <input type="email" required class="px-[1rem] border-2 h-[2.69rem] border-black-300 max-[1119px]:w-full min-[1120px]:w-[35rem] rounded-lg" v-model.trim.lazy="credentials.email" placeholder="Enter your email"/>
               </div>
               <div class="password  py-[1.0rem]">
                 <p class="font-bold subpixel-antialiased text-slate-500/[.98] tracking-wide py-[0.1rem] text-slate-800">Password</p>
-                <input type="password" class="px-[1rem] border-2 h-[2.69rem] border-black-300 max-[1119px]:w-full min-[1120px]:w-[35rem] rounded-lg" v-model.trim.lazy="credentials.password" placeholder="***********"/>
+                <input type="password" required class="px-[1rem] border-2 h-[2.69rem] border-black-300 max-[1119px]:w-full min-[1120px]:w-[35rem] rounded-lg" v-model.trim.lazy="credentials.password" placeholder="***********"/>
               </div>
             </div>
             <!-- <div class="remember-forgot py-[1.0rem] flex justify-between hi"> -->
@@ -37,7 +37,7 @@
               </button>
             </div>
             <div class="optional-sign-in mt-[0.7rem] hi">
-              <p class="flex justify-center hi">
+              <p class="flex justify-center hi gap-1">
                 <span class="account-text tracking-wider dha">Don't have an account?</span>
                 <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wider suf">Sign up </nuxt-link>
               </p>
