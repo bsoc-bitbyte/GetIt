@@ -60,8 +60,8 @@
           </button>
         </div>
         <button
-          :disabled="qty === 0"
-          :class="{ 'opacity-50': qty === 0 }"
+          :disabled="qty === 0 || !loaded"
+          :class="{ 'opacity-50': qty === 0 || !loaded}"
           @click="addToCartClick(event)"
           class="bg-[#EA454C] font-semibold py-3 text-sm text-white lg:w-full rounded-3xl w-1/2"
         >
@@ -122,6 +122,7 @@ const event = ref({});
 const showEventDetails = ref(false);
 const showContact = ref(false);
 const qty = ref(1);
+const loaded= ref(false)
 const cartStore = useCartStore();
 
 const toggleEventDetails = () => {
@@ -135,11 +136,12 @@ const toggleContact = () => {
 onMounted(async () => {
   try {
     const eventId = route.params.id;
-    const response = await $fetch(`${config.public.API_BASE_URL}/api/events/${eventId}`); // Example API endpoint
+    const response = await $fetch(`${config.public.API_BASE_URL}/api/events/${eventId}`);
     console.log(response);
 
     event.value = response;
     console.log(event.value);
+    loaded.value=true
   } catch (error) {
     console.error("Error fetching event data", error);
   }
