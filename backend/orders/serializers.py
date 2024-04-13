@@ -22,12 +22,15 @@ class OrderSerializer(ModelSerializer):
     order_items = OrderItemmSerializer(many = True, read_only = True)
     order_name = SerializerMethodField()
     buyer = SerializerMethodField()
+    buyer_name = SerializerMethodField()
     class Meta:
         model = Order
         
         fields = ('id',
                   'buyer',
+                  'buyer_name',
                   'address',
+                  'total',
                   'payment_url',
                   'status',
                   'order_name',
@@ -37,6 +40,7 @@ class OrderSerializer(ModelSerializer):
                   'updated_at')
         kwargs = {
             'buyer': {'read_only': True},
+            'buyer_name': {'read_only': True},
             'total': {'read_only': True},
             'payment_url': {'read_only': True},
             'created_at': {'read_only': True},
@@ -54,6 +58,9 @@ class OrderSerializer(ModelSerializer):
     
     def get_buyer(self, obj):
         return obj.buyer.email
+    
+    def get_buyer_name(self, obj):
+        return obj.buyer.first_name + " " + obj.buyer.last_name
 
     # in the create method, we will override the create method to add the buyer to the order and calculate the total
     def create(self, validated_data):

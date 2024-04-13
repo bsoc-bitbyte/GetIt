@@ -49,6 +49,10 @@ def upi_webhook(request) :
 
     order = get_object_or_404(Order, id=order_id)
 
+    order.webhook_response = data
+    order.transaction_id = data.get('upi_txn_id')
+    order.save()
+
     order_items = order.order_items.all()
 
     # WARNING: Assuming to be a ticket purchase
