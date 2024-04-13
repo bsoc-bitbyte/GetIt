@@ -37,7 +37,7 @@
               </button>
             </div>
             <div class="optional-sign-in mt-[0.7rem] hi">
-              <p class="flex justify-center hi">
+              <p class="flex justify-center hi gap-1">
                 <span class="account-text tracking-wider dha">Don't have an account?</span>
                 <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wider suf">Sign up </nuxt-link>
               </p>

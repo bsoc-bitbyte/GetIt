@@ -114,7 +114,7 @@ export default {
         console.log("Error", error);
         toast.error("Error fetching orders", {
           autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTERAL,
+          position: toast.POSITION.BOTTOM_CENTER,
         });
 
       }

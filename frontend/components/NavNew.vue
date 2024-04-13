@@ -19,7 +19,7 @@
               </ul>
 
               <div class="flex gap-6 font-semibold font-heading items-center">
-                  <nuxt-link class="flex items-center border-b-2 border-white hover:border-[#ea454c]" to="/cart">
+                  <nuxt-link class="flex items-center border-b-2 border-white hover:border-[#ea454c] gap-3" to="/cart">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                           stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
