@@ -119,7 +119,7 @@
             </div>
             <div class="mt-6 flex items-center justify-between">
               <p class="text-sm font-medium text-gray-700">Total</p>
-              <p class="text-2xl font-semibold text-gray-700"><span class="text-xs font-normal text-gray-400">RS</span>{{ cartStore.getPrice }}</p>
+              <p class="text-2xl font-semibold text-gray-700"><span class="text-xs font-normal text-gray-400">₹</span>{{ cartStore.getPrice }}</p>
             </div>
             <!-- Checkout Button -->
             <div class="mt-6 text-center">

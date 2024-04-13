@@ -64,7 +64,6 @@ class CreateUPIGateway(APIView):
 
         @transaction.atomic
         def post(self, request, *args, **kwargs):
-            print(request.data)
             request =request.data.get('requestData')
             txn_id = generate_txn_id()
             address = request.get('address')
@@ -78,13 +77,12 @@ class CreateUPIGateway(APIView):
                 "txn_id": txn_id,
                 "first_name": request.get('first_name'),
                 "last_name": request.get('last_name'),
-                "address": address,
-                "roll": request.get('roll'),
-                "amount": amount,
-                "Club Member": request.get('club_member'),
                 "email": email,
                 "phone_number": phone_number,
-                "order_items": order_items
+                "address": address,
+                "roll": request.get('roll'),
+                "gender": request.get('gender'),
+                "batch" : request.get('batch')
             }
 
             if not all([txn_id, amount, email, phone_number]):
@@ -103,7 +101,7 @@ class CreateUPIGateway(APIView):
                 return Response(response_data, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Failed to create UPI gateway", "data": response_data}, status=status.HTTP_400_BAD_REQUEST)
-                
+
 def create_upi_data(account, txn_id, amount, phone_number, order_id):
     return {
         "key": os.environ.get('UPI_API_KEY'),
@@ -113,7 +111,7 @@ def create_upi_data(account, txn_id, amount, phone_number, order_id):
         "customer_name": f"{account.first_name} {account.last_name}",  # Customer Name
         "customer_email": account.email,
         "customer_mobile": phone_number if phone_number else account.phone_number,  # Customer Mobile
-        "redirect_url": "http://google.com/",  # Your redirect URL after payment
+        "redirect_url": "http://getit.iiitdmj.ac.in/payment/" + str(order_id),  # Your redirect URL after payment
     }
 
 
@@ -154,7 +152,7 @@ def add_order_item(order_items, order, account, response):
     """
     try:
         for order_item in order_items:
-            ticket = Ticket.create_ticket(order_item['id'], account, response = {})
+            ticket = Ticket.create_ticket(order_item['id'], account, response)
             order_item = OrderItem.create_order_item(order, ticket, order_item['quantity'])
         
     except (TypeError, ValueError) as e:

@@ -21,11 +21,15 @@ class OrderSerializer(ModelSerializer):
     
     order_items = OrderItemmSerializer(many = True, read_only = True)
     order_name = SerializerMethodField()
+    buyer = SerializerMethodField()
     class Meta:
         model = Order
         
         fields = ('id',
                   'buyer',
+                  'address',
+                  'payment_url',
+                  'status',
                   'order_name',
                   'order_items',
                   'payment_url',
@@ -47,6 +51,9 @@ class OrderSerializer(ModelSerializer):
                 order_name += f" + {additional_items}"
             return order_name
         return ""
+    
+    def get_buyer(self, obj):
+        return obj.buyer.email
 
     # in the create method, we will override the create method to add the buyer to the order and calculate the total
     def create(self, validated_data):
