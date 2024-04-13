@@ -7,8 +7,6 @@
       class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
       @click="isCheckoutVisible = false"
     ></div>
-    class="main mt-[2rem] justify-start pr-[0rem] flex-col min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]"
-  >
     <div
       v-if="isCheckoutVisible"
       class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
@@ -433,7 +431,7 @@ onMounted(async () => {
     formValue.firstName = response.first_name;
     formValue.lastName = response.last_name;
     formValue.email = response.email;
-    formValue.phone = response.phone;
+    formValue.phone = response.phone_number;
     formValue.hostel_address = response.address;
   } catch (error) {
     // use the toast here

@@ -16,8 +16,6 @@ export const useAuthStore = defineStore("auth", {
 
   actions: {
     async login({ email, password }) {
-      console.log("inside login");
-      console.log(process.env);
 
       let response = null;
       try {
