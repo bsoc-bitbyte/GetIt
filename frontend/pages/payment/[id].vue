@@ -89,6 +89,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAuthStore } from "../../store/auth";
+import { useNuxtApp } from "#app";
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -96,21 +97,14 @@ const orderDetails = ref({});
 let subTotal = 0;
 
 onMounted(async () => {
-  const authStore = useAuthStore();
+  const nuxtApp = useNuxtApp();
   try {
     const orderId = route.params.id;
-    const token = authStore.authToken;
-    const setup = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    const response = await $fetch(
-      `${config.public.API_BASE_URL}/api/orders/${orderId}`,
-      setup
+    const response = await nuxtApp.$authenticatedFetch(
+      `${config.public.API_BASE_URL}/api/orders/${orderId}`
     );
 
-    console.log(response);
     orderDetails.value = response;
-    console.log(orderDetails.value);
 
     if(orderDetails.value.order_items.length > 0) {
       orderDetails.value.order_items.forEach((item) => {

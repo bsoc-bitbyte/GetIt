@@ -31,6 +31,9 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.id}"
     
+    @property
+    def total(self):
+        return sum([item.total for item in self.order_items.all()])
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
