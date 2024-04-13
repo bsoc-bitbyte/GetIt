@@ -44,6 +44,8 @@
                   <p class="text-gray-500">
                     quantity : {{ orderItem.quantity }}
                   </p>
+                  <p v-if="order.status==='PENDING'" class="flex text-gray-500">Payment : <img src="../assets/warning.png" class="size-5 mt-0.5 ml-1"/> Pending </p>
+                  <p v-if="order.status==='COMPLETED'" class="flex text-gray-500">Payment : <img src="../assets/check.png" class="size-5 mt-0.5 ml-1"/> Completed </p>
                   <p class="mt-4 font-bold">{{ order.price }}</p>
                 </div>
                 <div>
@@ -62,6 +64,10 @@
               <p class="font-bold text-black-700 mb-1">Billing Address</p>
               <p class="mb-2">{{ order.buyer_name }}</p>
               <p>{{ order.address }}</p>
+              <button v-if="order.status==='PENDING'" class="text-white  bg-[#ea454c] mt-3 -ml-1 rounded-2xl w-64 h-10">
+                <p class="font-bold">Retry Payment</p>
+              </button>
+
             </div>
             <hr />
 
@@ -77,6 +83,9 @@
               <div class="flex gap-20 justify-between font-bold">
                 <p>Total</p>
                 <p>₹ {{ order.total }}</p>
+              </div>
+              <div class="flex gap-20 justify-between font-bold">
+
               </div>
             </div>
           </div>
@@ -101,6 +110,7 @@ export default {
   data() {
     return {
       orders: [],
+      status: ""
     }
   },
   async mounted() {
@@ -114,6 +124,9 @@ export default {
         const response = await nuxtApp.$authenticatedFetch(
           `${config.public.API_BASE_URL}/api/orders/`
         );
+
+        this.status = response.status;
+        console.log(response);
 
         this.orders = response;
       } catch (error) {

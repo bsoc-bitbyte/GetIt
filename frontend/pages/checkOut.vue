@@ -1,4 +1,8 @@
 <template>
+  <div v-if="loading" class="fixed  z-50 backdrop-blur-[2px] h-[100vh] w-[100vw]">
+  <img  src="../assets/loader.gif"  class= "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"  >
+  </div>
+  <!--  -->
   <div
     class="main mt-[2rem] justify-start pr-[0rem] flex-col min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]"
   >
@@ -388,6 +392,8 @@ import { reactive } from "vue";
 import { toast } from "vue3-toastify";
 import { useNuxtApp } from "#app";
 
+const loading = ref(false);
+
 const config = useRuntimeConfig();
 
 const isOpen = ref(false);
@@ -471,11 +477,14 @@ const submitForm = async (e) => {
 const createUPIGateway = async (requestData) => {
   try {
     // Your logic to make a request to the backend to get gateway
+    loading.value = true;
     const response = await $fetch(
       `${config.public.API_BASE_URL}/api/tickets/create-upi-gateway/`,
       { method: "POST", body: { requestData } }
     );
     const redirect_url = response["data"]["payment_url"];
+    loading.value=false;
+    console.log("fgdfgdgsgl");
     window.location.href = redirect_url;
   } catch (error) {
     console.error("Error:", error);
