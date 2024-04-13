@@ -110,7 +110,7 @@
             <div class="mt-6 border-t border-b py-2">
               <div class="flex items-center justify-between">
                 <p class="text-sm text-gray-400">Subtotal</p>
-                <p class="text-lg font-semibold text-gray-700">₹{{ cartStore.getPrice }}</p>
+                <p class="text-lg font-semibold text-gray-700">₹ {{ cartStore.getPrice }}</p>
               </div>
               <div class="flex items-center justify-between">
                 <p class="text-sm text-gray-400">Shipping</p>
@@ -119,7 +119,8 @@
             </div>
             <div class="mt-6 flex items-center justify-between">
               <p class="text-sm font-medium text-gray-700">Total</p>
-              <p class="text-2xl font-semibold text-gray-700"><span class="text-xs font-normal text-gray-400">RS</span>{{ cartStore.getPrice }}</p>
+              <p class="text-2xl font-semibold text-gray-700"><span class="text-xs font-semibold text-gray-700" style="font-size: 22px ; ">₹ </span>{{ cartStore.getPrice }}</p>
+
             </div>
             <!-- Checkout Button -->
             <div class="mt-6 text-center">

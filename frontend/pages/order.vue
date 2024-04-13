@@ -86,8 +86,7 @@
   </div>
 </template>
 <script>
-import { useAttrs } from "vue";
-import { useAuthStore } from "../store/auth";
+
 import { useNuxtApp } from "#app";
 import { toast } from "vue3-toastify";
 
@@ -96,7 +95,7 @@ export default {
   data() {
     return {
       orders: [],
-    };
+    }
   },
   async mounted() {
     await this.fetchOrders();
@@ -112,11 +111,12 @@ export default {
 
         this.orders = response;
       } catch (error) {
-        console.error("Error fetching orders", error);
+        console.log("Error", error);
         toast.error("Error fetching orders", {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTERAL,
         });
+
       }
     },
   },

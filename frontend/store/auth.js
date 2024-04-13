@@ -53,9 +53,7 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    async register({ username, phone_number, email, password }) {
-      let first_name = username.split(" ")[0];
-      let last_name = username.split(" ")[1];
+    async register({ first_name, last_name, phone_number, email, password }) {
       console.log(first_name, last_name, phone_number, email, password);
       try {
         const { data, status, error } = await useFetch(
@@ -80,7 +78,8 @@ export const useAuthStore = defineStore("auth", {
           await navigateTo("/Signin");
         } else {
           Object.entries(error.value.data).forEach(([field, errorMessages]) => {
-            toast.error(`$${errorMessages[0]}`, {
+            console.log(field, errorMessages);
+            toast.error(`${errorMessages[0]}`, {
               autoClose: 3000,
               position: toast.POSITION.BOTTOM_CENTER,
             });
@@ -129,10 +128,9 @@ export const useAuthStore = defineStore("auth", {
         const decoded = jwtDecode(this.access); // Define jwtDecode or use a package
         const currentTime = Date.now() / 1000;
         return decoded.exp < currentTime;
-      }
-      catch (error) {
-        console.error("Error Decoding JWT",error)
-        return true
+      } catch (error) {
+        console.error("Error Decoding JWT", error);
+        return true;
       }
     },
 
