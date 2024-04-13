@@ -143,18 +143,24 @@
                     </div>
                     <div class="TEXT py-[0.7rem] px-[0.1rem]">
                       <label
-                        for="branch"
+                        for="checked"
                         class="min-[1240px]:block subpixel-antialiased tracking-wider"
                         >Branch</label
                       >
-                      <input
-                        type="text"
-                        placeholder="Branch"
+                      <select
                         id="branch"
-                        required
                         v-model.trim.lazy="formValue.branch"
+                        required
                         class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
-                      />
+                      >
+                        <option value="" disabled>Select Branch</option>
+                        <option value="Computer Science and Engineering">CSE</option>
+                        <option value="Electronics and Communications Engineering">ECE</option>
+                        <option value="Mechanical Engineering">ME</option>
+                        <option value="Smart Manufacturing">SM</option>
+                        <option value="Design">Design</option>
+
+                      </select>
                     </div>
                   </div>
                   <div class="w-full min-[1240px]:flex">

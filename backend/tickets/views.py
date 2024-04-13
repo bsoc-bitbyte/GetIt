@@ -64,7 +64,6 @@ class CreateUPIGateway(APIView):
 
         @transaction.atomic
         def post(self, request, *args, **kwargs):
-            print(request.data)
             request =request.data.get('requestData')
             txn_id = generate_txn_id()
             address = request.get('address')

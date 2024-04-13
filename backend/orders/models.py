@@ -17,6 +17,8 @@ class Order(models.Model):
     address = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    webhook_response = models.JSONField(blank=True, null=True)
+    transaction_id = models.CharField(max_length=255, blank=True, null=True)
 
     @staticmethod
     def create_order(buyer, address):
