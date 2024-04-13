@@ -317,19 +317,12 @@
                   <div v-if="isOpen" class="dropdown-content" style="">
                     <div class="px-2">
                       <div class="block p text-gray-600 w-full text-sm">
-                        <option>Standard shipping - ₹00.00</option>
-                      </div>
-                      <div class="block p text-gray-600 w-full text-sm">
-                        <option>
-                          Standard Discount- ₹{{
-                            (0.1 * cartStore.getPrice).toFixed(2)
-                          }}
-                        </option>
+                        <option>Standard shipping - ₹0.00</option>
                       </div>
                       <div class="block p text-gray-600 w-full text-sm">
                         <option>
                           Total Product Price- ₹{{
-                            (1.1 * cartStore.getPrice).toFixed(2)
+                            (cartStore.getPrice).toFixed(2)
                           }}
                         </option>
                       </div>
@@ -432,7 +425,7 @@ onMounted(async () => {
     // use the toast here
     toast.error("Error fetching User Data", {
       autoClose: 2000,
-      position: toast.POSITION.BOTTOM_CENTERAL,
+      position: toast.POSITION.BOTTOM_CENTER,
     });
     console.error("Error fetching User Data", error);
   }
