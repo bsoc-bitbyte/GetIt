@@ -426,7 +426,7 @@ onMounted(async () => {
     formValue.firstName = response.first_name;
     formValue.lastName = response.last_name;
     formValue.email = response.email;
-    formValue.phone = response.phone;
+    formValue.phone = response.phone_number;
     formValue.hostel_address = response.address;
   } catch (error) {
     // use the toast here
