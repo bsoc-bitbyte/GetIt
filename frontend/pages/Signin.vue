@@ -9,7 +9,7 @@
           <div class="credentials - container min-[1120px]:order-2 min-[1120px]:mt-[3rem]">
             <div class="catch-line-outer">
               <div class="catch-line-inner">
-                <p class="text-slate-500 font-semibold py-[2rem]">"Welcome back! Please enter your details"</p>
+                <p class="text-slate-500 font-semibold py-[2rem]">Welcome back! Please enter your details</p>
               </div>
             </div>
             <div class="credentials">
@@ -22,15 +22,15 @@
                 <input type="password" class="px-[1rem] border-2 h-[2.69rem] border-black-300 max-[1119px]:w-full min-[1120px]:w-[35rem] rounded-lg" v-model.trim.lazy="credentials.password" placeholder="***********"/>
               </div>
             </div>
-            <div class="remember-forgot py-[1.0rem] flex justify-between hi">
-              <div class="remember-me hil">
-                <input type="checkbox" name="check" id="checkbox" v-model.trim.lazy="credentials.rememberMe">
-                <label for="checkbox" class="subpixel-antialiased font-bold text-slate-800 cursor-pointer">Remember me</label>
-              </div>
-              <div class="forgot-password hir">
-                <a href="#" class="font-bold subpixel-antialiased tracking-wide text-slate-800 fp">Forgot password ?</a>
-              </div>
-            </div>
+            <!-- <div class="remember-forgot py-[1.0rem] flex justify-between hi"> -->
+            <!--   <div class="remember-me hil"> -->
+            <!--     <input type="checkbox" name="check" id="checkbox" v-model.trim.lazy="credentials.rememberMe"> -->
+            <!--     <label for="checkbox" class="subpixel-antialiased font-bold text-slate-800 cursor-pointer">Remember me</label> -->
+            <!--   </div> -->
+            <!--   <div class="forgot-password hir"> -->
+            <!--     <a href="#" class="font-bold subpixel-antialiased tracking-wide text-slate-800 fp">Forgot password ?</a> -->
+            <!--   </div> -->
+            <!-- </div> -->
             <div class="sign-in  pt-[1rem] pb-[0rem]">
               <button type="submit" class="signin w-full h-[3.25rem] rounded-[1.25rem]">
                 <p class="text-white hover:border-slate-500 py-[0rem]">Sign in</p>
@@ -39,7 +39,7 @@
             <div class="optional-sign-in mt-[0.7rem] hi">
               <p class="flex justify-center hi">
                 <span class="account-text tracking-wider dha">Don't have an account?</span>
-                <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wider suf">Sign up for free</nuxt-link>
+                <nuxt-link to="/Signup" class="text-red-500 hover:underlined tracking-wider suf">Sign up </nuxt-link>
               </p>
             </div>
           </div>
