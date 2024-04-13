@@ -103,7 +103,6 @@ export default {
   },
   methods: {
     async fetchOrders() {
-      const authStore = useAuthStore();
       const nuxtApp = useNuxtApp();
 
       try {
