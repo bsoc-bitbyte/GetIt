@@ -90,11 +90,14 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAuthStore } from "../../store/auth";
 import { useNuxtApp } from "#app";
+import { useRouter } from "vue-router";
+
 
 const config = useRuntimeConfig();
-const route = useRoute();
+const router = useRouter();
 const orderDetails = ref({});
 let subTotal = 0;
+const authStore = useAuthStore();
 
 onMounted(async () => {
   const nuxtApp = useNuxtApp();
@@ -116,6 +119,10 @@ onMounted(async () => {
     console.error("Error fetching order data", error);
   }
 });
+
+if (!authStore.isAuthenticated) {
+  router.push("/Signin");
+}
 
 </script>
 
