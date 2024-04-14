@@ -1,5 +1,5 @@
 <template>
-  <section class="flex justify-center flex-col md:flex-row items-center mt-10">
+  <section v-if="loading &&!error" class="flex justify-center flex-col md:flex-row items-center mt-10">
     <div class="h-[50vh] lg:h-[70vh]">
       <img
         :src="event.cover_image"
@@ -130,6 +130,7 @@ const showContact = ref(false);
 const qty = ref(1);
 const loaded = ref(false);
 const cartStore = useCartStore();
+const router = useRouter();
 
 const toggleEventDetails = () => {
   showEventDetails.value = !showEventDetails.value;
@@ -139,21 +140,26 @@ const toggleContact = () => {
   showContact.value = !showContact.value;
 };
 
+
 onMounted(async () => {
   try {
     const eventId = route.params.id;
     const response = await $fetch(
       `${config.public.API_BASE_URL}/api/events/${eventId}`
     );
-    console.log(response);
-
     event.value = response;
-    console.log(event.value);
     loaded.value = true;
   } catch (error) {
-    console.error("Error fetching event data", error);
+    if (error.response && error.response.status === 404) {
+      router.push('/404');
+    } else {
+      console.error('Error fetching event data:', error);
+    }
   }
 });
+
+
+
 const addToCartClick = (item) => {
   console.log("dfvd");
   cartStore.addToCart(item);
