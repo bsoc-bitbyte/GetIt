@@ -1,7 +1,11 @@
 <template>
   <section class="flex justify-center flex-col md:flex-row items-center mt-10">
-    <div class="h-[70vh]">
-      <img :src="event.cover_image" alt="hero image" class="h-[70vh] px-5" />
+    <div class="h-[50vh] lg:h-[70vh]">
+      <img
+        :src="event.cover_image"
+        alt="hero image"
+        class="object-cover h-[50vh] lg:h-[70vh] px-5"
+      />
     </div>
     <div class="px-6 py-4 pb-20 lg:max-w-lg mt-5 h-[75vh]">
       <span
@@ -24,10 +28,11 @@
             >₹{{ event.ticket_price }}</span
           >
         </div>
-
       </div>
 
-      <div class="space-y-4 md:flex md:items-center md:gap-16 md:space-y-0 flex gap-16">
+      <div
+        class="space-y-4 md:flex md:items-center md:gap-16 md:space-y-0 flex gap-16"
+      >
         <div class="flex justify-center w-1/4 lg:w-1/2 h-[4vh] mt-5 lg:mt-0">
           <button
             :disabled="qty === 0"
@@ -53,7 +58,7 @@
         </div>
         <button
           :disabled="qty === 0 || !loaded"
-          :class="{ 'opacity-50': qty === 0 || !loaded}"
+          :class="{ 'opacity-50': qty === 0 || !loaded }"
           @click="addToCartClick(event)"
           class="bg-[#EA454C] font-semibold py-3 text-sm text-white lg:w-full rounded-3xl w-1/2"
         >
@@ -62,16 +67,25 @@
       </div>
       <div class="faq-container max-w-md lg:mx-auto mt-4">
         <div class="dropdown mb-2">
-          <div class="dropdown-title cursor-pointer" @click="toggleEventDetails">
+          <div
+            class="dropdown-title cursor-pointer"
+            @click="toggleEventDetails"
+          >
             Event Details
-            <button class="drop-btn" :class="{ 'rotate-180': showEventDetails }">
+            <button
+              class="drop-btn"
+              :class="{ 'rotate-180': showEventDetails }"
+            >
               <img
                 class="inline-block w-4 h-4 ml-1 transform transition"
                 src="https://img.icons8.com/ios-glyphs/30/000000/chevron-down.png"
               />
             </button>
           </div>
-          <div v-if="showEventDetails" class="dropdown-content text-[#635e5f] px-5">
+          <div
+            v-if="showEventDetails"
+            class="dropdown-content text-[#635e5f] px-5"
+          >
             <p>Location: {{ event.location }}</p>
             <p>Date: {{ event.date }}</p>
             <p>Time: {{ event.time.slice(0, 5) }}</p>
@@ -114,7 +128,7 @@ const event = ref({});
 const showEventDetails = ref(false);
 const showContact = ref(false);
 const qty = ref(1);
-const loaded= ref(false)
+const loaded = ref(false);
 const cartStore = useCartStore();
 
 const toggleEventDetails = () => {
@@ -128,12 +142,14 @@ const toggleContact = () => {
 onMounted(async () => {
   try {
     const eventId = route.params.id;
-    const response = await $fetch(`${config.public.API_BASE_URL}/api/events/${eventId}`);
+    const response = await $fetch(
+      `${config.public.API_BASE_URL}/api/events/${eventId}`
+    );
     console.log(response);
 
     event.value = response;
     console.log(event.value);
-    loaded.value=true
+    loaded.value = true;
   } catch (error) {
     console.error("Error fetching event data", error);
   }
