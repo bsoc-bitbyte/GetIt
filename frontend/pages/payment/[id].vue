@@ -24,7 +24,7 @@
           <div class="mt-5 flex flex-col gap-3">
             <span class="text-sm">{{ orderDetails.buyer }}</span>
             <span class="text-sm"
-              >4517 Washington Ave. Manchester, Kentucky 39495, USA</span
+              >{{ orderDetails.address }}</span
             >
           </div>
         </div>
@@ -33,8 +33,8 @@
             >Payment Info</span
           >
           <div class="mt-5 flex flex-col gap-1">
-            <span class="text-sm">Credit Card VISA</span>
-            <span class="text-sm">**** 4660</span>
+            <span class="text-sm">UPI Gateway</span>
+            <span class="text-sm">{{ orderDetails.transaction_id }}</span>
           </div>
         </div>
       </div>
@@ -75,26 +75,34 @@
       <hr />
       <div class="flex flex-col gap-3">
         <div class="flex justify-between text-gray-600">
-          <span>Sub Total</span><span>₹ {{ subTotal }}</span>
+          <span>Sub Total</span><span>₹ {{ orderDetails.total }}</span>
         </div>
         <div class="flex justify-between font-bold">
-          <span>Total</span><span>₹ {{subTotal}}</span>
+          <span>Total</span><span>₹ {{ orderDetails.total }}</span>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="flex h-10 justify-center items-center ">
+    <nuxt-link class=" bg-[#ea454c] py-2 px-3 rounded-xl text-white" to="/order">
+      My Orders
+    </nuxt-link>
+  </div>
+
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
 import { useAuthStore } from "../../store/auth";
 import { useNuxtApp } from "#app";
+import { useRouter,useRoute } from "vue-router";
 
 const config = useRuntimeConfig();
+const router = useRouter();
 const route = useRoute();
 const orderDetails = ref({});
-let subTotal = 0;
+const authStore = useAuthStore();
 
 onMounted(async () => {
   const nuxtApp = useNuxtApp();
@@ -103,20 +111,16 @@ onMounted(async () => {
     const response = await nuxtApp.$authenticatedFetch(
       `${config.public.API_BASE_URL}/api/orders/${orderId}`
     );
-
     orderDetails.value = response;
 
-    if(orderDetails.value.order_items.length > 0) {
-      orderDetails.value.order_items.forEach((item) => {
-        subTotal += item.ticket.event.ticket_price * item.quantity;
-      });
-    }
-    console.log(subTotal);
   } catch (error) {
     console.error("Error fetching order data", error);
   }
 });
 
+if (!authStore.isAuthenticated) {
+  router.push("/Signin");
+}
 </script>
 
 <style scoped>

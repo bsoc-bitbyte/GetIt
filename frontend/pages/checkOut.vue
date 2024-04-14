@@ -7,13 +7,6 @@
       class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
       @click="isCheckoutVisible = false"
     ></div>
-    class="main mt-[2rem] justify-start pr-[0rem] flex-col min-[1240px]:items-center min-[1240px]:pl-[7.69rem] max-[1239px]:px-[0.8rem]"
-  >
-    <div
-      v-if="isCheckoutVisible"
-      class="fixed inset-0 bg-white bg-opacity-75 backdrop-blur-sm z-40"
-      @click="isCheckoutVisible = false"
-    ></div>
 
     <!-- Checkout Component -->
     <transition name="modal">
@@ -324,19 +317,12 @@
                   <div v-if="isOpen" class="dropdown-content" style="">
                     <div class="px-2">
                       <div class="block p text-gray-600 w-full text-sm">
-                        <option>Standard shipping - ₹00.00</option>
-                      </div>
-                      <div class="block p text-gray-600 w-full text-sm">
-                        <option>
-                          Standard Discount- ₹{{
-                            (0.1 * cartStore.getPrice).toFixed(2)
-                          }}
-                        </option>
+                        <option>Standard shipping - ₹0.00</option>
                       </div>
                       <div class="block p text-gray-600 w-full text-sm">
                         <option>
                           Total Product Price- ₹{{
-                            (1.1 * cartStore.getPrice).toFixed(2)
+                            (cartStore.getPrice).toFixed(2)
                           }}
                         </option>
                       </div>
@@ -433,13 +419,13 @@ onMounted(async () => {
     formValue.firstName = response.first_name;
     formValue.lastName = response.last_name;
     formValue.email = response.email;
-    formValue.phone = response.phone;
+    formValue.phone = response.phone_number;
     formValue.hostel_address = response.address;
   } catch (error) {
     // use the toast here
     toast.error("Error fetching User Data", {
       autoClose: 2000,
-      position: toast.POSITION.BOTTOM_CENTERAL,
+      position: toast.POSITION.BOTTOM_CENTER,
     });
     console.error("Error fetching User Data", error);
   }

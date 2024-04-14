@@ -16,8 +16,6 @@ export const useAuthStore = defineStore("auth", {
 
   actions: {
     async login({ email, password }) {
-      console.log("inside login");
-      console.log(process.env);
 
       let response = null;
       try {
@@ -112,12 +110,14 @@ export const useAuthStore = defineStore("auth", {
           }
         );
         if (!response.ok) {
+          logout();
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         console.log("data refresh", data);
         this.access = data.access;
       } catch (error) {
+        logout();
         console.error("An error occurred while refreshing the token: ", error);
       }
     },

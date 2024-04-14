@@ -6,7 +6,7 @@
         <hr />
         <div
           class="p-4 flex flex-col gap-2 rounded-xl shadow-md"
-          v-for="(order, index) in orders.reverse()"
+          v-for="(order, index) in reversedOrders"
           :key="index"
         >
           <div class="flex justify-between max-md:flex-col gap-2">
@@ -92,6 +92,12 @@ import { toast } from "vue3-toastify";
 
 const config = useRuntimeConfig();
 export default {
+
+  computed: {
+    reversedOrders() {
+      return [...this.orders].reverse();
+    }
+  },
   data() {
     return {
       orders: [],
@@ -114,7 +120,7 @@ export default {
         console.log("Error", error);
         toast.error("Error fetching orders", {
           autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTERAL,
+          position: toast.POSITION.BOTTOM_CENTER,
         });
 
       }
