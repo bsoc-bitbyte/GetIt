@@ -42,10 +42,35 @@
                 <div>
                   <h5 class="font-bold">{{ orderItem.ticket.event.title }}</h5>
                   <p class="text-gray-500">
-                    quantity : {{ orderItem.quantity }}
+                    Quantity : {{ orderItem.quantity }}
                   </p>
-                  <p v-if="order.status==='PENDING'" class="flex text-gray-500">Payment : <img src="../assets/warning.png" class="size-5 mt-0.5 ml-1"/> Pending </p>
-                  <p v-if="order.status==='COMPLETED'" class="flex text-gray-500">Payment : <img src="../assets/check.png" class="size-5 mt-0.5 ml-1"/> Completed </p>
+                  <p
+                    v-if="order.status === 'PENDING'"
+                    class="flex text-gray-500"
+                  >
+                    Payment :
+                    <img
+                      src="../assets/warning.png"
+                      class="size-5 mt-0.5 m-2"
+                    />
+                    <span class="font-semibold">Pending</span>
+                  </p>
+                  <p
+                    v-else-if="order.status === 'COMPLETED'"
+                    class="flex text-gray-500"
+                  >
+                    Payment :
+                    <img src="../assets/check.png" class="size-5 mt-0.5 m-2" />
+                    <span class="font-semibold">Completed</span>
+                  </p>
+                  <p
+                    v-else="order.status === 'FAILED'"
+                    class="flex text-gray-500"
+                  >
+                    Payment :
+                    <img src="../assets/failed.png" class="size-5 mt-0.5 m-2" />
+                    <span class="font-semibold">Failed</span>
+                  </p>
                   <p class="mt-4 font-bold">{{ order.price }}</p>
                 </div>
                 <div>
@@ -60,34 +85,39 @@
           <div
             class="flex max-md:flex-col md:gap-10 gap-2 justify-between w-full"
           >
-            <div class="w-full">
-              <p class="font-bold text-black-700 mb-1">Billing Address</p>
-              <p class="mb-2">{{ order.buyer_name }}</p>
-              <p>{{ order.address }}</p>
-              <a :href="`${order.payment_url}`">
-                <button v-if="order.status==='PENDING'" class="text-white  bg-[#ea454c] mt-3 -ml-1 rounded-2xl w-64 h-10">
-                  <p class="font-bold">Retry Payment</p>
-                </button>
-              </a>
+            <div class="w-full flex-col">
+              <div class="flex">
+                <div class="w-full">
+                  <p class="font-bold text-black-700 mb-1">Billing Address</p>
+                  <p class="mb-2">{{ order.buyer_name }}</p>
+                  <p>{{ order.address }}</p>
+                </div>
 
-            </div>
-            <hr />
-
-            <div class="flex flex-col gap-2">
-              <div class="flex gap-20 justify-between text-gray-600">
-                <p>Subtotal</p>
-                <p>₹{{ order.total }}</p>
+                <div class="flex flex-col gap-2">
+                  <div class="flex gap-20 justify-between text-gray-600">
+                    <p>Subtotal</p>
+                    <p>₹{{ order.total }}</p>
+                  </div>
+                  <div class="flex gap-20 justify-between text-gray-600">
+                    <p>Shipping</p>
+                    <p>₹0</p>
+                  </div>
+                  <div class="flex gap-20 justify-between font-bold">
+                    <p>Total</p>
+                    <p>₹ {{ order.total }}</p>
+                  </div>
+                  <div class="flex gap-20 justify-between font-bold"></div>
+                </div>
               </div>
-              <div class="flex gap-20 justify-between text-gray-600">
-                <p>Shipping</p>
-                <p>₹0</p>
-              </div>
-              <div class="flex gap-20 justify-between font-bold">
-                <p>Total</p>
-                <p>₹ {{ order.total }}</p>
-              </div>
-              <div class="flex gap-20 justify-between font-bold">
-
+              <div class="flex flex-row-reverse">
+                <a :href="`${order.payment_url}`">
+                  <button
+                    v-if="order.status === 'PENDING'"
+                    class="text-white bg-[#ea454c] mt-3 -ml-1 rounded-2xl w-64 h-10"
+                  >
+                    <p class="font-bold">Retry Payment</p>
+                  </button>
+                </a>
               </div>
             </div>
           </div>
