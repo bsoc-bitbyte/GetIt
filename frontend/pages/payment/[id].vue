@@ -83,6 +83,13 @@
       </div>
     </div>
   </section>
+
+  <div class="flex h-10 justify-center items-center ">
+    <nuxt-link class=" bg-[#ea454c] py-2 px-3 rounded-xl text-white" to="/order">
+      My Orders
+    </nuxt-link>
+  </div>
+
 </template>
 
 <script setup>

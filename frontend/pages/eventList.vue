@@ -2,7 +2,7 @@
   <div class="m-20 owe">
     <div class="flex justify-center items-center flex-col gap-8 mt-20 lg:flex-row">
       <div class="flex flex-wrap justify-center lg:justify-start gap-8">
-        <NuxtLink v-for="(data, index) in eventLists" :to="`/events/${index + 1}`" :key="index">
+        <NuxtLink v-for="(data, index) in eventLists" :to="`/events/${data.id}`" :key="data.id">
           <eventList
             :title="data.title"
             :description="data.description"
