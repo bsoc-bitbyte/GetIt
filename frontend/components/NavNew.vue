@@ -116,7 +116,6 @@ import { useCartStore } from '../store/index'
 import { useAuthStore } from '../store/auth'
 import { toast } from 'vue3-toastify';
 
-const router=useRouter();
 export default {
   setup() {
     const cartStore = useCartStore()
@@ -134,7 +133,6 @@ export default {
         autoClose: 2000,
         position:  toast.POSITION.BOTTOM_CENTER
       })
-      router.push("/");
     }
 
     const toggle = () => {
