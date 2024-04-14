@@ -6,7 +6,7 @@
         <hr />
         <div
           class="p-4 flex flex-col gap-2 rounded-xl shadow-md"
-          v-for="(order, index) in reversedOrders"
+          v-for="(order, index) in orders"
           :key="index"
         >
           <div class="flex justify-between max-md:flex-col gap-2">
@@ -94,50 +94,37 @@
     </section>
   </div>
 </template>
-<script>
-
+<script setup>
+import { ref, onMounted } from "vue";
+import { useAuthStore } from "../../store/auth";
 import { useNuxtApp } from "#app";
-import { toast } from "vue3-toastify";
+import { useRouter } from "vue-router";
 
 const config = useRuntimeConfig();
-export default {
+const router = useRouter();
+const orders = ref({});
+const authStore = useAuthStore();
 
-  computed: {
-    reversedOrders() {
-      return [...this.orders].reverse();
-    }
-  },
-  data() {
-    return {
-      orders: [],
-      status: ""
-    }
-  },
-  async mounted() {
-    await this.fetchOrders();
-  },
-  methods: {
-    async fetchOrders() {
-      const nuxtApp = useNuxtApp();
+onMounted(async () => {
+  const nuxtApp = useNuxtApp();
 
-      try {
-        const response = await nuxtApp.$authenticatedFetch(
-          `${config.public.API_BASE_URL}/api/orders/`
-        );
+  try {
+    const response = await nuxtApp.$authenticatedFetch(
+      `${config.public.API_BASE_URL}/api/orders/`
+    );
 
-        this.status = response.status;
-        console.log(response);
+    orders.value = response;
+    orders.value.reverse();
+  } catch (error) {
+    console.log("Error", error);
+    toast.error("Error fetching orders", {
+      autoClose: 2000,
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+  }
+});
 
-        this.orders = response;
-      } catch (error) {
-        console.log("Error", error);
-        toast.error("Error fetching orders", {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER,
-        });
-
-      }
-    },
-  },
-};
+if (!authStore.isAuthenticated) {
+  router.push("/Signin");
+}
 </script>
