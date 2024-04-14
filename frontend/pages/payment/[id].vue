@@ -9,7 +9,6 @@
         >
           <img src="../../assets/tick.png" class="size-8 invert" />
         </div>
-
         <span class="mt-5 font-bold text-xl mb-3">We received your order!</span>
         <span class="text-sm">
           Your order #{{ orderDetails.id }} is completed
@@ -38,14 +37,11 @@
           </div>
         </div>
       </div>
-
       <hr />
-
       <div class="flex flex-col">
         <span class="text-gray-400 uppercase font-bold text-sm"
           >Order Items</span
         >
-
         <div
           v-for="product in orderDetails.order_items"
           :key="product.id"
@@ -58,7 +54,7 @@
                 alt=""
                 class="size-20 rounded-xl object-cover"
               />
-              <div class="flex flex-col gap-3">
+              <div class="flex flex-col gap-2">
                 <span class="font-bold">{{ product.ticket.event.title }}</span>
                 <span class="text-sm text-gray-600"
                   >Quantity: {{ product.quantity }}</span
@@ -71,7 +67,6 @@
           </div>
         </div>
       </div>
-
       <hr />
       <div class="flex flex-col gap-3">
         <div class="flex justify-between text-gray-600">
@@ -80,6 +75,8 @@
         <div class="flex justify-between font-bold">
           <span>Total</span><span>₹ {{ orderDetails.total }}</span>
         </div>
+        <p v-if="orderDetails.status==='PENDING'" class="flex text-gray-500">Payment : <img src="../../assets/warning.png" class="size-5 mt-0.5 ml-1"/> Pending </p>
+        <p v-if="orderDetails.status==='COMPLETED'" class="flex text-gray-500">Payment : <img src="../../assets/check.png" class="size-5 mt-0.5 ml-1"/> Completed </p>
       </div>
     </div>
   </section>
@@ -91,19 +88,16 @@
   </div>
 
 </template>
-
 <script setup>
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "../../store/auth";
 import { useNuxtApp } from "#app";
 import { useRouter,useRoute } from "vue-router";
-
 const config = useRuntimeConfig();
 const router = useRouter();
 const route = useRoute();
 const orderDetails = ref({});
 const authStore = useAuthStore();
-
 onMounted(async () => {
   const nuxtApp = useNuxtApp();
   try {
