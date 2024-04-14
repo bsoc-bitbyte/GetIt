@@ -64,9 +64,11 @@
               <p class="font-bold text-black-700 mb-1">Billing Address</p>
               <p class="mb-2">{{ order.buyer_name }}</p>
               <p>{{ order.address }}</p>
-              <button v-if="order.status==='PENDING'" class="text-white  bg-[#ea454c] mt-3 -ml-1 rounded-2xl w-64 h-10">
-                <p class="font-bold">Retry Payment</p>
-              </button>
+              <a :href="`${order.payment_url}`">
+                <button v-if="order.status==='PENDING'" class="text-white  bg-[#ea454c] mt-3 -ml-1 rounded-2xl w-64 h-10">
+                  <p class="font-bold">Retry Payment</p>
+                </button>
+              </a>
 
             </div>
             <hr />
