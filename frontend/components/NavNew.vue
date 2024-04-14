@@ -59,6 +59,7 @@
                               <li
                                   class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
                                   <nuxt-link to="/" @click="toggle">Home</nuxt-link>
+                                  
                               </li>
                               <li
                                   class="w-full flex justify-center border-b-2 hover:border-b-2 hover:border-[#ea454c] border-white">
@@ -74,6 +75,7 @@
                                   <button v-if="isAuthenticated"
                                       @click="handleLogout">Sign Out</button>
                                   <nuxt-link v-else to="/Signin" @click="toggle">Sign In</nuxt-link>
+                                  
                               </li>
                           </ul>
                       </div>
@@ -86,7 +88,7 @@
                   </nuxt-link>
                   <div class="flex xl:hidden items-center space-x-5 ">
                       <nuxt-link class="flex items-center hover:text-gray-500" to="/cart">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24"
                               stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -100,10 +102,6 @@
                               </span>
                           </span>
                       </nuxt-link>
-                      <nuxt-link v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
-                      @click="handleLogout">Sign Out</nuxt-link>
-
-                  <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
                   </div>
               </div>
           </div>
@@ -118,6 +116,7 @@ import { useCartStore } from '../store/index'
 import { useAuthStore } from '../store/auth'
 import { toast } from 'vue3-toastify';
 
+const router=useRouter();
 export default {
   setup() {
     const cartStore = useCartStore()
@@ -129,12 +128,13 @@ export default {
 
 
     const handleLogout = () => {
+      toggle();
       authStore.logout();
       toast.error("Logged out",{
         autoClose: 2000,
         position:  toast.POSITION.BOTTOM_CENTER
       })
-      toggle();
+      router.push("/");
     }
 
     const toggle = () => {
