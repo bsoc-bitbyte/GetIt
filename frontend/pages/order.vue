@@ -6,7 +6,7 @@
         <hr />
         <div
           class="p-4 flex flex-col gap-2 rounded-xl shadow-md"
-          v-for="(order, index) in reversedOrders"
+          v-for="(order, index) in orders"
           :key="index"
         >
           <div class="flex justify-between max-md:flex-col gap-2">
@@ -44,6 +44,8 @@
                   <p class="text-gray-500">
                     quantity : {{ orderItem.quantity }}
                   </p>
+                  <p v-if="order.status==='PENDING'" class="flex text-gray-500">Payment : <img src="../assets/warning.png" class="size-5 mt-0.5 ml-1"/> Pending </p>
+                  <p v-if="order.status==='COMPLETED'" class="flex text-gray-500">Payment : <img src="../assets/check.png" class="size-5 mt-0.5 ml-1"/> Completed </p>
                   <p class="mt-4 font-bold">{{ order.price }}</p>
                 </div>
                 <div>
@@ -62,6 +64,12 @@
               <p class="font-bold text-black-700 mb-1">Billing Address</p>
               <p class="mb-2">{{ order.buyer_name }}</p>
               <p>{{ order.address }}</p>
+              <a :href="`${order.payment_url}`">
+                <button v-if="order.status==='PENDING'" class="text-white  bg-[#ea454c] mt-3 -ml-1 rounded-2xl w-64 h-10">
+                  <p class="font-bold">Retry Payment</p>
+                </button>
+              </a>
+
             </div>
             <hr />
 
@@ -78,6 +86,9 @@
                 <p>Total</p>
                 <p>₹ {{ order.total }}</p>
               </div>
+              <div class="flex gap-20 justify-between font-bold">
+
+              </div>
             </div>
           </div>
         </div>
@@ -85,46 +96,37 @@
     </section>
   </div>
 </template>
-<script>
-
+<script setup>
+import { ref, onMounted } from "vue";
+import { useAuthStore } from "../../store/auth";
 import { useNuxtApp } from "#app";
-import { toast } from "vue3-toastify";
+import { useRouter } from "vue-router";
 
 const config = useRuntimeConfig();
-export default {
+const router = useRouter();
+const orders = ref({});
+const authStore = useAuthStore();
 
-  computed: {
-    reversedOrders() {
-      return [...this.orders].reverse();
-    }
-  },
-  data() {
-    return {
-      orders: [],
-    }
-  },
-  async mounted() {
-    await this.fetchOrders();
-  },
-  methods: {
-    async fetchOrders() {
-      const nuxtApp = useNuxtApp();
+onMounted(async () => {
+  const nuxtApp = useNuxtApp();
 
-      try {
-        const response = await nuxtApp.$authenticatedFetch(
-          `${config.public.API_BASE_URL}/api/orders/`
-        );
+  try {
+    const response = await nuxtApp.$authenticatedFetch(
+      `${config.public.API_BASE_URL}/api/orders/`
+    );
 
-        this.orders = response;
-      } catch (error) {
-        console.log("Error", error);
-        toast.error("Error fetching orders", {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER,
-        });
+    orders.value = response;
+    orders.value.reverse();
+  } catch (error) {
+    console.log("Error", error);
+    toast.error("Error fetching orders", {
+      autoClose: 2000,
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+  }
+});
 
-      }
-    },
-  },
-};
+if (!authStore.isAuthenticated) {
+  router.push("/Signin");
+}
 </script>
