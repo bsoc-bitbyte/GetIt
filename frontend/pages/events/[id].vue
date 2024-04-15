@@ -1,5 +1,5 @@
 <template>
-  <section v-if="loading &&!error" class="flex justify-center flex-col md:flex-row items-center mt-10">
+  <section v-if="loaded &&!error" class="flex justify-center flex-col md:flex-row items-center mt-10">
     <div class="h-[50vh] lg:h-[70vh]">
       <img
         :src="event.cover_image"
@@ -122,6 +122,7 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "../../store/index.js"; // Assuming your store is located here
 import { toast } from 'vue3-toastify';
+import { useRouter } from 'vue-router';
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -132,6 +133,7 @@ const qty = ref(1);
 const loaded = ref(false);
 const cartStore = useCartStore();
 const router = useRouter();
+const error = ref();
 
 const toggleEventDetails = () => {
   showEventDetails.value = !showEventDetails.value;
@@ -150,6 +152,7 @@ onMounted(async () => {
     event.value = response;
     loaded.value = true;
   } catch (error) {
+    error.value = error;
     if (error.response && error.response.status === 404) {
       router.push('/404');
     } else {
