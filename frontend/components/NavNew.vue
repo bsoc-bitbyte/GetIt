@@ -80,7 +80,7 @@
                           </ul>
                       </div>
                   </aside>
-                  <nuxt-link class="text-3xl font-bold flex items-center" to="/eventlist">
+                  <nuxt-link class="text-3xl font-bold flex items-center" to="/">
                       <img class="h-9"
                           src="https://raw.githubusercontent.com/bsoc-bitbyte/GetIt/10a0fcc39d52d116428dd49505ead2f597e7a30e/assets/get_it.png"
                           alt="logo">

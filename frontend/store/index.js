@@ -105,6 +105,10 @@ export const useCartStore = defineStore({
     setCart(cartData) {
       this.cart = cartData;
     },
+    clearCart(){
+      this.setCart([]);
+      this.saveCart();
+    },
   },
   persist: true,
 });

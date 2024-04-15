@@ -1,6 +1,12 @@
 <template>
-  <div v-if="loading" class="fixed  z-50 backdrop-blur-[2px] h-[100vh] w-[100vw]">
-  <img  src="../assets/loader.gif"  class= "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"  >
+  <div
+    v-if="loading"
+    class="fixed z-50 backdrop-blur-[2px] h-[100vh] w-[100vw]"
+  >
+    <img
+      src="../assets/loader.gif"
+      class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
+    />
   </div>
   <!--  -->
   <div
@@ -158,12 +164,17 @@
                         class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                       >
                         <option value="" disabled>Select Branch</option>
-                        <option value="Computer Science and Engineering">CSE</option>
-                        <option value="Electronics and Communications Engineering">ECE</option>
+                        <option value="Computer Science and Engineering">
+                          CSE
+                        </option>
+                        <option
+                          value="Electronics and Communications Engineering"
+                        >
+                          ECE
+                        </option>
                         <option value="Mechanical Engineering">ME</option>
                         <option value="Smart Manufacturing">SM</option>
                         <option value="Design">Design</option>
-
                       </select>
                     </div>
                   </div>
@@ -326,7 +337,7 @@
                       <div class="block p text-gray-600 w-full text-sm">
                         <option>
                           Total Product Price- ₹{{
-                            (cartStore.getPrice).toFixed(2)
+                            cartStore.getPrice.toFixed(2)
                           }}
                         </option>
                       </div>
@@ -476,8 +487,8 @@ const createUPIGateway = async (requestData) => {
       { method: "POST", body: { requestData } }
     );
     const redirect_url = response["data"]["payment_url"];
-    loading.value=false;
-    console.log("fgdfgdgsgl");
+    loading.value = false;
+    cartStore.clearCart();
     window.location.href = redirect_url;
   } catch (error) {
     console.error("Error:", error);

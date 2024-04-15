@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-96 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl p-5"
+    class="w-94 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl p-5"
   >
     <img class="w-96 h-80 object-cover" :src="img_url" />
-    <div class="px-4 py-3 w-96">
+    <div class="py-3 w-96">
       <p class="text-lg font-bold text-black truncate block capitalize">
         {{ title }}
       </p>
