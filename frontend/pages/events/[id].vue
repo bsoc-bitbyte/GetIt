@@ -1,5 +1,5 @@
 <template>
-  <section class="flex justify-center flex-col md:flex-row items-center mt-10">
+  <section v-if="loaded &&!error" class="flex justify-center flex-col md:flex-row items-center mt-10">
     <div class="h-[50vh] lg:h-[70vh]">
       <img
         :src="event.cover_image"
@@ -121,6 +121,8 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "../../store/index.js"; // Assuming your store is located here
+import { toast } from 'vue3-toastify';
+import { useRouter } from 'vue-router';
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -130,6 +132,8 @@ const showContact = ref(false);
 const qty = ref(1);
 const loaded = ref(false);
 const cartStore = useCartStore();
+const router = useRouter();
+const error = ref();
 
 const toggleEventDetails = () => {
   showEventDetails.value = !showEventDetails.value;
@@ -145,15 +149,25 @@ onMounted(async () => {
     const response = await $fetch(
       `${config.public.API_BASE_URL}/api/events/${eventId}`
     );
-    console.log(response);
-
     event.value = response;
-    console.log(event.value);
     loaded.value = true;
   } catch (error) {
-    console.error("Error fetching event data", error);
+    error.value = error;
+    if (error.response && error.response.status === 404) {
+      router.push('/404');
+    } else {
+      console.error('Error fetching event data:', error);
+      const message = `Error fetching event data (Status Code: ${error.response.status})`;
+      toast.error(message,{
+        autoClose: 2000,
+        position:  toast.POSITION.BOTTOM_CENTER
+      })
+    }
   }
 });
+
+
+
 const addToCartClick = (item) => {
   console.log("dfvd");
   cartStore.addToCart(item);

@@ -488,7 +488,6 @@ const createUPIGateway = async (requestData) => {
     );
     const redirect_url = response["data"]["payment_url"];
     loading.value = false;
-    console.log("fgdfgdgsgl");
     cartStore.clearCart();
     window.location.href = redirect_url;
   } catch (error) {
