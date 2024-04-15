@@ -121,6 +121,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "../../store/index.js"; // Assuming your store is located here
+import { toast } from 'vue3-toastify';
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -140,7 +141,6 @@ const toggleContact = () => {
   showContact.value = !showContact.value;
 };
 
-
 onMounted(async () => {
   try {
     const eventId = route.params.id;
@@ -154,6 +154,11 @@ onMounted(async () => {
       router.push('/404');
     } else {
       console.error('Error fetching event data:', error);
+      const message = `Error fetching event data (Status Code: ${error.response.status})`;
+      toast.error(message,{
+        autoClose: 2000,
+        position:  toast.POSITION.BOTTOM_CENTER
+      })
     }
   }
 });
