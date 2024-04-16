@@ -95,7 +95,6 @@ media
 # Vim swap files
 *.swp
 
-**/migrations
 **/__pycache__
 .pytest_cache
 .DS_Store
