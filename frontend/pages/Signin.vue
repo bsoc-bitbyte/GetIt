@@ -8,7 +8,6 @@
         class="border-1 border-gray-400 min-[1120px]:order-1 h-[50vh]"
         alt="delivery-img"
       />
-      
     </div>
     <div class="right-panel max-[1119px]:px-[2rem] min-[1120px]:px-[0rem]">
       <div class="form-container">
