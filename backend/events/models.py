@@ -16,7 +16,7 @@ class Event (models.Model) :
         null=True,
         blank=True,
     )
-    description = models.TextField(max_length=600,
+    description = models.TextField(max_length=3000,
                                       blank=True)
     email = models.EmailField(max_length=254,
                                 blank=True)
