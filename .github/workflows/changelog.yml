@@ -17,3 +17,4 @@ jobs:
         with:
           github-token: ${{ secrets.TOKEN }}
           output-file: 'CHANGELOG.md'
+          skip-bump: false
