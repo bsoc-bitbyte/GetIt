@@ -25,7 +25,7 @@ ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000',
                          'https://merch-site.netlify.app',
-                         'https://deploy-preview-*--merch-site.netlify.app'
+                         'https://deploy-preview-*--merch-site.netlify.app',
                          ]
 
 # Application definition
