@@ -6,7 +6,7 @@ from .permissions import IsOwnerOrReadOnly
 
 
 class EventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
+    queryset = Event.objects.filter(is_visible=True)
     serializer_class = EventSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
