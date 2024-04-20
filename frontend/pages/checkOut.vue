@@ -111,7 +111,8 @@
                     >
                     <input
                       type="tel"
-                      placeholder="Phone Number"
+                      placeholder="10-Digit Phone Number"
+                      maxlength="10"
                       id="phone"
                       required
                       v-model.trim.number.lazy="formValue.phone"
@@ -427,7 +428,6 @@ const formValue = reactive({
 onMounted(async () => {
   const nuxtApp = useNuxtApp();
   try {
-    console.log("hello");
     const response = await nuxtApp.$authenticatedFetch(
       `${config.public.API_BASE_URL}/api/accounts/me/`
     );
@@ -467,10 +467,12 @@ const submitForm = async (e) => {
       formValue.branch &&
       formValue.gender &&
       formValue.batch &&
-      formValue.phone
+      formValue.phone &&
+      formValue.phone.toString().length === 10
     )
   )
     return;
+  console.log(typeof formValue.phone);
   e.preventDefault();
   const requestData = prepareRequestData();
 
@@ -487,11 +489,21 @@ const createUPIGateway = async (requestData) => {
       { method: "POST", body: { requestData } }
     );
     const redirect_url = response["data"]["payment_url"];
-    loading.value = false;
     cartStore.clearCart();
+    loading.value = false;
     window.location.href = redirect_url;
   } catch (error) {
-    console.error("Error:", error);
+    console.log(error.response);
+    let message = error.response["_data"]["error"];
+    if (error.response.status === 500) {
+      message = "Internal Server Error";
+    }
+    console.log(message);
+    toast.error(`An error occured: ${message}`, {
+      autoClose: 3000,
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+    loading.value = false;
   }
 };
 
