@@ -6,7 +6,9 @@ from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import stripe
-from .models import Ticket from .serializers import TicketSerializer from rest_framework import status
+from .models import Ticket 
+from .serializers import TicketSerializer 
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from orders.models import Order, OrderItem
 from tickets.models import Ticket
