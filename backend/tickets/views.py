@@ -6,9 +6,7 @@ from rest_framework import mixins, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import stripe
-from .models import Ticket
-from .serializers import TicketSerializer
-from rest_framework import status
+from .models import Ticket from .serializers import TicketSerializer from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from orders.models import Order, OrderItem
 from tickets.models import Ticket
@@ -83,7 +81,8 @@ class CreateUPIGateway(APIView):
                 "address": address,
                 "roll": request.get('roll'),
                 "gender": request.get('gender'),
-                "batch" : request.get('batch')
+                "batch" : request.get('batch'),
+                "branch": request.get('branch')
             }
 
             if not all([txn_id, amount, email, phone_number]):
