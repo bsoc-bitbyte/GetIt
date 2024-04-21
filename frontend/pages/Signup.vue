@@ -5,7 +5,7 @@
     <div class="left-panel mt-[5.5rem] max-[1119px]:hidden min-[1120px]:block">
       <img
         src="../assets/37.order-delivered-3.png"
-        class=" border-1 border-gray-400 min-[1120px]:order-1 h-[50vh]"
+        class="border-1 border-gray-400 min-[1120px]:order-1 h-[50vh]"
         alt="delivery-img"
       />
     </div>
@@ -26,7 +26,9 @@
           <div class="credentials">
             <div class="flex flex-wrap">
               <div class="username py-[0.5rem] w-full md:w-1/2 md:pr-2">
-                <p class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800">
+                <p
+                  class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
+                >
                   First Name
                 </p>
                 <input
@@ -38,7 +40,9 @@
                 />
               </div>
               <div class="username py-[0.5rem] w-full md:w-1/2 md:pl-2">
-                <p class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800">
+                <p
+                  class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
+                >
                   Last Name
                 </p>
                 <input
@@ -51,11 +55,19 @@
               </div>
             </div>
 
-            <div class ="phone-number py-[0.5rem]">
-              <p class = "font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800">Phone Number</p>
-              <input type="tel" class = "px-[1rem] border-2 h-[2.69rem] border-black-300 w-full items-center rounded-lg min-[1120px]:w-[35rem]"
-              v-model.trim.lazy = "credentials.phone_number"
-              placeholder="Enter your phone number" required/>
+            <div class="phone-number py-[0.5rem]">
+              <p
+                class="font-bold text-slate-500/[.98] py-[0.1rem] tracking-wider text-slate-800"
+              >
+                Phone Number
+              </p>
+              <input
+                type="tel"
+                class="px-[1rem] border-2 h-[2.69rem] border-black-300 w-full items-center rounded-lg min-[1120px]:w-[35rem]"
+                v-model.trim.lazy="credentials.phone_number"
+                placeholder="Enter your phone number"
+                required
+              />
             </div>
             <div class="email py-[0.5rem]">
               <p
@@ -107,7 +119,8 @@
               <button
                 type="submit"
                 id="Sign-up"
-                class="signup w-full h-[3.25rem] rounded-[1.25rem] backdrop-blur-lg" onclick=(submitForm)
+                class="signup w-full h-[3.25rem] rounded-[1.25rem] backdrop-blur-lg"
+                onclick="(submitForm)"
               >
                 <p class="text-white hover:border-slate-500 tracking-wider">
                   Sign Up
@@ -115,13 +128,16 @@
               </button>
             </a>
           </div>
-
           <div class="optional-sign-in mt-[0.7rem] hi">
             <p class="flex justify-center hi">
               <span class="account-text tracking-wider dha"
                 >Already have an account?
               </span>
-              <nuxt-link to="/Signin" class="text-red-500 hover:underlined tracking-wider suf">Sign in</nuxt-link>
+              <nuxt-link
+                to="/Signin"
+                class="text-red-500 hover:underlined tracking-wider suf"
+                >Sign in</nuxt-link
+              >
             </p>
           </div>
         </div>
@@ -131,65 +147,74 @@
 </template>
 
 <script>
-import { toast } from 'vue3-toastify'
-import { useAuthStore } from '../store/auth'
-import { useRouter } from 'vue-router'
+import { toast } from "vue3-toastify";
+import { useAuthStore } from "../store/auth";
+import { useRouter } from "vue-router";
 
 export default {
-  name: 'Signup',
+  name: "Signup",
   setup() {
     const credentials = {
-      first_name: '',
-      last_name: '',
+      first_name: "",
+      last_name: "",
       phone_number: "",
-      email: '',
-      password: '',
-      password_check: '',
+      email: "",
+      password: "",
+      password_check: "",
+    };
+
+    const store = useAuthStore();
+    const router = useRouter();
+
+    if (store.isAuthenticated) {
+      router.push("/");
     }
-    const store = useAuthStore()
-    const router = useRouter()
 
     const submitForm = async (e) => {
       e.preventDefault();
 
-    const emailRegex = /[a-zA-Z0-9._%+-]+@iiitdmj\.ac\.in/;
-    if (!emailRegex.test(credentials.email)) {
-      toast.error("Please enter a valid institute email address", {
-        autoClose: 2000,
-        position: toast.POSITION.BOTTOM_CENTER
-      });
-      return;
-    }
-
-      if (checker()){
-
-        store.register(credentials);
-      }
-      else{
-        toast.error("Passwords do not match",{
+      if (credentials.phone_number.length != 10) {
+        toast.error("Please enter a valid phone number", {
           autoClose: 2000,
-          position:  toast.POSITION.BOTTOM_CENTER
-        })
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        return;
       }
 
-    }
+      const emailRegex = /[a-zA-Z0-9._%+-]+@iiitdmj\.ac\.in$/;
+      if (!emailRegex.test(credentials.email)) {
+        toast.error("Please enter a valid institute email address", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+        return;
+      }
+
+      if (checker()) {
+        store.register(credentials);
+      } else {
+        toast.error("Passwords do not match", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    };
 
     const checker = () => {
       if (credentials.password !== credentials.password_check) {
         return false;
       }
       return true;
-    }
+    };
 
     return {
       credentials,
       submitForm,
-      checker
-    }
-  }
-}
+      checker,
+    };
+  },
+};
 </script>
-
 
 <style scoped>
 .main {
@@ -228,6 +253,5 @@ export default {
     margin-right: 5px !important;
     text-align: center !important;
   }
-
 }
 </style>
