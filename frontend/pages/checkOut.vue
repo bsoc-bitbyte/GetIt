@@ -1,6 +1,12 @@
 <template>
-  <div v-if="loading" class="fixed  z-50 backdrop-blur-[2px] h-[100vh] w-[100vw]">
-  <img  src="../assets/loader.gif"  class= "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"  >
+  <div
+    v-if="loading"
+    class="fixed z-50 backdrop-blur-[2px] h-[100vh] w-[100vw]"
+  >
+    <img
+      src="../assets/loader.gif"
+      class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
+    />
   </div>
   <!--  -->
   <div
@@ -105,7 +111,8 @@
                     >
                     <input
                       type="tel"
-                      placeholder="Phone Number"
+                      placeholder="10-Digit Phone Number"
+                      maxlength="10"
                       id="phone"
                       required
                       v-model.trim.number.lazy="formValue.phone"
@@ -158,12 +165,17 @@
                         class="pl-[0.69rem] w-full h-[2.5rem] min-[1240px]:w-[17rem] rounded-[0.4rem] py-[0.25rem] border-2 border-gray-200"
                       >
                         <option value="" disabled>Select Branch</option>
-                        <option value="Computer Science and Engineering">CSE</option>
-                        <option value="Electronics and Communications Engineering">ECE</option>
+                        <option value="Computer Science and Engineering">
+                          CSE
+                        </option>
+                        <option
+                          value="Electronics and Communications Engineering"
+                        >
+                          ECE
+                        </option>
                         <option value="Mechanical Engineering">ME</option>
                         <option value="Smart Manufacturing">SM</option>
                         <option value="Design">Design</option>
-
                       </select>
                     </div>
                   </div>
@@ -326,7 +338,7 @@
                       <div class="block p text-gray-600 w-full text-sm">
                         <option>
                           Total Product Price- ₹{{
-                            (cartStore.getPrice).toFixed(2)
+                            cartStore.getPrice.toFixed(2)
                           }}
                         </option>
                       </div>
@@ -416,7 +428,6 @@ const formValue = reactive({
 onMounted(async () => {
   const nuxtApp = useNuxtApp();
   try {
-    console.log("hello");
     const response = await nuxtApp.$authenticatedFetch(
       `${config.public.API_BASE_URL}/api/accounts/me/`
     );
@@ -456,10 +467,12 @@ const submitForm = async (e) => {
       formValue.branch &&
       formValue.gender &&
       formValue.batch &&
-      formValue.phone
+      formValue.phone &&
+      formValue.phone.toString().length === 10
     )
   )
     return;
+  console.log(typeof formValue.phone);
   e.preventDefault();
   const requestData = prepareRequestData();
 
@@ -476,11 +489,21 @@ const createUPIGateway = async (requestData) => {
       { method: "POST", body: { requestData } }
     );
     const redirect_url = response["data"]["payment_url"];
-    loading.value=false;
-    console.log("fgdfgdgsgl");
+    cartStore.clearCart();
+    loading.value = false;
     window.location.href = redirect_url;
   } catch (error) {
-    console.error("Error:", error);
+    console.log(error.response);
+    let message = error.response["_data"]["error"];
+    if (error.response.status === 500) {
+      message = "Internal Server Error";
+    }
+    console.log(message);
+    toast.error(`An error occured: ${message}`, {
+      autoClose: 3000,
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+    loading.value = false;
   }
 };
 

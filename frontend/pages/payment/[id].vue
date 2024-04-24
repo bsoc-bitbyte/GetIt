@@ -1,17 +1,56 @@
 <template>
   <section class="flex h-full w-full justify-center items-center py-5 px-5">
+    <div v-if="loading" class="fixed z-50 backdrop-blur-lg h-[100vh] w-[100vw]">
+      <img
+        src="../../assets/loader.gif"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
+      />
+    </div>
     <div
       class="shadow-lg rounded-xl sm:px-8 py-10 max-sm:px-4 md:min-w-[50rem] flex flex-col gap-6 max-md:w-full"
     >
       <div class="flex flex-col justify-center items-center">
         <div
-          class="bg-[#ea454c] size-10 rounded-full text-white flex items-center justify-center"
+          class="size-12 rounded-full text-white flex items-center justify-center"
+          :class="orderDetails.status === 'COMPLETED' ? 'bg-[#ea454c]' : ''"
         >
-          <img src="../../assets/tick.png" class="size-8 invert" />
+          <img
+            v-if="orderDetails.status === 'COMPLETED'"
+            src="../../assets/tick.png"
+            class="size-12 invert"
+          />
+          <img
+            v-if="orderDetails.status === 'CANCELLED'"
+            src="../../assets/failed.png"
+            class="size-12"
+          />
+          <img
+            v-if="orderDetails.status === 'PENDING'"
+            src="../../assets/warning.png"
+            class="size-12"
+          />
         </div>
-        <span class="mt-5 font-bold text-xl mb-3">We received your order!</span>
-        <span class="text-sm">
-          Your order #{{ orderDetails.id }} is completed
+        <span
+          v-if="
+            orderDetails.status === 'COMPLETED' ||
+            orderDetails.status === 'PENDING'
+          "
+          class="mt-5 font-bold text-xl mb-3"
+          >We received your order !</span
+        >
+        <span
+          v-if="orderDetails.status === 'CANCELLED'"
+          class="mt-5 font-bold text-xl mb-3"
+          >Order Failed</span
+        >
+        <span v-if="orderDetails.status === 'COMPLETED'" class="text-sm">
+          Your order #{{ orderDetails.id }} is successful
+        </span>
+        <span v-if="orderDetails.status === 'PENDING'" class="text-semibold">
+          Your payment for order #{{ orderDetails.id }} is still pending
+        </span>
+        <span v-if="orderDetails.status === 'CANCELLED'" class="text-sm">
+          Your order #{{ orderDetails.id }} is failed
         </span>
       </div>
       <hr />
@@ -22,9 +61,7 @@
           >
           <div class="mt-5 flex flex-col gap-3">
             <span class="text-sm">{{ orderDetails.buyer }}</span>
-            <span class="text-sm"
-              >{{ orderDetails.address }}</span
-            >
+            <span class="text-sm">{{ orderDetails.address }}</span>
           </div>
         </div>
         <div>
@@ -75,24 +112,48 @@
         <div class="flex justify-between font-bold">
           <span>Total</span><span>₹ {{ orderDetails.total }}</span>
         </div>
-        <p v-if="orderDetails.status==='PENDING'" class="flex text-gray-500">Payment : <img src="../../assets/warning.png" class="size-5 mt-0.5 ml-1"/> Pending </p>
-        <p v-if="orderDetails.status==='COMPLETED'" class="flex text-gray-500">Payment : <img src="../../assets/check.png" class="size-5 mt-0.5 ml-1"/> Completed </p>
+        <div class="flex font-bold">
+          <p
+            v-if="orderDetails.status === 'PENDING'"
+            class="flex text-gray-500"
+          >
+            Payment :
+            <img src="../../assets/warning.png" class="size-5 mt-0.5 m-2" />
+            <span class="font-semibold">Pending</span>
+          </p>
+          <p
+            v-if="orderDetails.status === 'COMPLETED'"
+            class="flex text-gray-500"
+          >
+            Payment :
+            <img src="../../assets/check.png" class="size-5 mt-0.5 m-2" />
+            <span class="font-semibold">Completed</span>
+          </p>
+          <p
+            v-if="orderDetails.status === 'CANCELLED'"
+            class="flex text-gray-500"
+          >
+            Payment :
+            <img src="../../assets/failed.png" class="size-5 mt-0.5 m-2" />
+            <span class="font-semibold">Failed</span>
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="flex h-10 justify-center items-center ">
-    <nuxt-link class=" bg-[#ea454c] py-2 px-3 rounded-xl text-white" to="/order">
+  <div class="flex h-10 justify-center items-center">
+    <nuxt-link class="bg-[#ea454c] py-2 px-3 rounded-xl text-white" to="/order">
       My Orders
     </nuxt-link>
   </div>
-
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "../../store/auth";
 import { useNuxtApp } from "#app";
-import { useRouter,useRoute } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+const loading = ref(true);
 const config = useRuntimeConfig();
 const router = useRouter();
 const route = useRoute();
@@ -101,15 +162,16 @@ const authStore = useAuthStore();
 onMounted(async () => {
   const nuxtApp = useNuxtApp();
   try {
+    await new Promise((r) => setTimeout(r, 2000));
     const orderId = route.params.id;
     const response = await nuxtApp.$authenticatedFetch(
       `${config.public.API_BASE_URL}/api/orders/${orderId}`
     );
     orderDetails.value = response;
-
   } catch (error) {
     console.error("Error fetching order data", error);
   }
+  loading.value = false;
 });
 
 if (!authStore.isAuthenticated) {
