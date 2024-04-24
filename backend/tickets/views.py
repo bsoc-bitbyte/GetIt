@@ -102,6 +102,7 @@ class CreateUPIGateway(APIView):
                 order.save()
                 return Response(response_data, status=status.HTTP_200_OK)
             else:
+                transaction.set_rollback(True)
                 return Response({"error": "Failed to create UPI gateway", "data": response_data}, status=status.HTTP_400_BAD_REQUEST)
 
 def create_upi_data(account, txn_id, amount, phone_number, order_id):
