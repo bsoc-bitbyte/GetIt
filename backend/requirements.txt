@@ -5,6 +5,7 @@ Django==4.2
 django-cors-headers==4.1.0
 django-extensions==3.2.1
 django-filter==22.1
+django-request-logging==0.7.5
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 exceptiongroup==1.1.2
