@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -184,3 +185,6 @@ LOGGING = {
         },
     },
 }
+
+REQUEST_LOGGING_HTTP_4XX_LOG_LEVEL=logging.WARNING
+REQUEST_LOGGING_ENABLE_COLORIZE=False
