@@ -19,7 +19,6 @@ export const useAuthStore = defineStore("auth", {
 
       let response = null;
       try {
-        console.log(email, password, response);
         const { data, status } = await useFetch(
           `${config.API_BASE_URL}/api/token/`,
           {
