@@ -126,7 +126,7 @@ ADMINS = [(name.strip(), email.strip()) for entry in os.getenv('DJANGO_ADMINS', 
 
 # Logging
 
-LOG_DIRECTORY = os.getenv('LOG_DIRECTORY', '/var/log/getit/')
+LOG_DIRECTORY = os.getenv('LOG_DIRECTORY', '~/logs/getit/')
 if not os.path.exists(LOG_DIRECTORY):
     os.makedirs(LOG_DIRECTORY)
 
