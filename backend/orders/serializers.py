@@ -68,5 +68,3 @@ class OrderSerializer(ModelSerializer):
         order = Order.objects.create(**validated_data)
         order.save()
         return order
-    
-
