@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Event
+from django.utils.html import escape
 
 class EventSerializer(serializers.ModelSerializer) :
     class Meta:
@@ -24,6 +25,13 @@ class EventSerializer(serializers.ModelSerializer) :
             'created_at': {'read_only': True},
             'updated_at': {'read_only': True},
             }
+
+    def validate_title(self,value):
+        return escape(value)
+    
+    def validate_description(self,value):
+        return escape(value)
+
     
 class EventFormSerializer(serializers.ModelSerializer) :
     class Meta:

@@ -1,3 +1,4 @@
+from django.utils.html import escape
 from rest_framework.serializers import ModelSerializer
 
 from .models import Product, ProductImage
@@ -25,6 +26,12 @@ class ProductSerializer(ModelSerializer):
             'updated_at',
             'product_images',
         )
+
+    def validate_name(self, value):
+        return escape(value)
+    
+    def validate_description(self, value):
+        return escape(value)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
