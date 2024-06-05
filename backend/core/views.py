@@ -3,12 +3,14 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 import stripe
 from django.shortcuts import get_object_or_404
+from request_logging.decorators import no_logging
 
 from django.conf import settings
 from tickets.models import Ticket
 from orders.models import Order
 
 @csrf_exempt
+@no_logging
 def stripe_webhook(request) :
     payload = request.body
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', None)
@@ -41,6 +43,7 @@ def stripe_webhook(request) :
 
 @csrf_exempt
 @require_POST
+@no_logging
 def upi_webhook(request) :
     data = request.POST
 
