@@ -93,7 +93,6 @@
 <script>
 import { useAuthStore } from "../store/auth";
 import { useRouter } from "vue-router";
-
 export default {
   name: "Signin",
   setup() {
@@ -105,9 +104,9 @@ export default {
 
     const store = useAuthStore();
     const router = useRouter();
-    const urlParams = new URLSearchParams(window.location.search);
-    credentials.redirect = urlParams.get('lastVisitedURL');
-    const Last = urlParams.get('lastVisitedURL');
+    const NewUrl = router.currentRoute.value.query.redirect;
+    credentials.redirect = NewUrl;
+    const Last = credentials.redirect || "/";
     if (store.isAuthenticated) {
       router.push(Last);
     }

@@ -30,7 +30,7 @@ export const useAuthStore = defineStore("auth", {
           this.access = data.value.access;
           this.refresh = data.value.refresh;
           this.user = email;
-          await navigateTo({redirect});
+          await navigateTo(redirect);
           toast.success("Login successful", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
@@ -137,7 +137,7 @@ export const useAuthStore = defineStore("auth", {
       this.access = null;
       this.refresh = null;
       this.user = null;
-      await navigateTo({redirectUrl});
+      await navigateTo(redirectUrl);
     },
 
     SET_PAYLOAD(payload) {

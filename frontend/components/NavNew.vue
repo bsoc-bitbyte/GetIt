@@ -115,7 +115,7 @@ import { computed,ref } from 'vue'
 import { useCartStore } from '../store/index'
 import { useAuthStore } from '../store/auth'
 import { toast } from 'vue3-toastify';
-
+import { extractPath } from '~/utils/url';
 export default {
   setup() {
     const cartStore = useCartStore()
@@ -129,7 +129,8 @@ export default {
     const handleLogout = () => {
       toggle();
       const encodedValue = window.location.href;
-       const redirectUrl = `/Signin?lastVisitedURL=${encodedValue}`;
+        const path = extractPath(encodedValue);
+       const redirectUrl = `/Signin?redirect=${path}`;
       authStore.logout(redirectUrl);
       toast.error("Logged out",{
         autoClose: 2000,
@@ -142,7 +143,8 @@ export default {
     }
     const urlm = () => {
     const encodedValue = window.location.href;
-    const link = `/Signin?lastVisitedURL=${encodedValue}`;
+    const path = extractPath(encodedValue);
+    const link = `/Signin?redirect=${path}`;
        return link;
     }
 
