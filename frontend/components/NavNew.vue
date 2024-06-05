@@ -35,7 +35,7 @@
                       Cart
                   </nuxt-link>
 
-                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
+                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin"
                       @click="handleLogout">Sign Out</button>
 
                   <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
@@ -74,7 +74,7 @@
 
                                   <button v-if="isAuthenticated"
                                       @click="handleLogout">Sign Out</button>
-                                  <nuxt-link v-else to="/Signin" @click="toggle">Sign In</nuxt-link>
+                                  <nuxt-link v-else :to="urlm" @click="toggle">Sign In</nuxt-link>
                                   
                               </li>
                           </ul>
@@ -128,7 +128,9 @@ export default {
 
     const handleLogout = () => {
       toggle();
-      authStore.logout();
+      const encodedValue = window.location.href;
+       const redirectUrl = `/Signin?lastVisitedURL=${encodedValue}`;
+      authStore.logout(redirectUrl);
       toast.error("Logged out",{
         autoClose: 2000,
         position:  toast.POSITION.BOTTOM_CENTER
@@ -138,15 +140,19 @@ export default {
     const toggle = () => {
       isShow.value = !isShow.value;
     }
-
-
+    const urlm = () => {
+    const encodedValue = window.location.href;
+    const link = `/Signin?lastVisitedURL=${encodedValue}`;
+       return link;
+    }
 
     return {
       cartQuantity,
       isAuthenticated,
       handleLogout,
       isShow,
-      toggle
+      toggle,
+      urlm,
     }
   }
 
