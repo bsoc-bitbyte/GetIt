@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from .models import Event
 from django.utils.html import escape
+from markdown_it import MarkdownIt
+
+md = (
+    MarkdownIt('commonmark' ,{'html':False})
+    .enable('table')
+)
 
 class EventSerializer(serializers.ModelSerializer) :
     class Meta:
@@ -30,7 +36,7 @@ class EventSerializer(serializers.ModelSerializer) :
         return escape(value)
     
     def validate_description(self,value):
-        return escape(value)
+        return md.render(value)
 
     
 class EventFormSerializer(serializers.ModelSerializer) :

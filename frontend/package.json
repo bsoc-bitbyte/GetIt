@@ -23,6 +23,7 @@
     "vue3-toastify": "^0.2.1"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.11.4"
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@tailwindcss/typography": "^0.5.13"
   }
 }
