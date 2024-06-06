@@ -104,11 +104,11 @@ export default {
 
     const store = useAuthStore();
     const router = useRouter();
-    const NewUrl = router.currentRoute.value.query.redirect;
-    credentials.redirect = NewUrl;
-    const Last = credentials.redirect || "/";
+    const newUrl = router.currentRoute.value.query.redirect;
+    credentials.redirect = newUrl;
+    const last = credentials.redirect || "/";
     if (store.isAuthenticated) {
-      router.push(Last);
+      router.push(last);
     }
 
     const submitForm = async (e) => {

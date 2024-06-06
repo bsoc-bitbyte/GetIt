@@ -35,7 +35,7 @@
                       Cart
                   </nuxt-link>
 
-                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin"
+                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white"
                       @click="handleLogout">Sign Out</button>
 
                   <button v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" @click="handleLogin">Sign In</button>
@@ -116,6 +116,7 @@ import { useCartStore } from '../store/index'
 import { useAuthStore } from '../store/auth'
 import { toast } from 'vue3-toastify';
 import { extractPath } from '~/utils/url';
+import { navigateTo } from 'nuxt/app';
 export default {
   setup() {
     const cartStore = useCartStore()
@@ -141,12 +142,12 @@ export default {
     const toggle = () => {
       isShow.value = !isShow.value;
     }
-    const handleLogin = () => {
+    const handleLogin = async() => {
         toggle();
         const encodedValue = window.location.href;
         const path = extractPath(encodedValue);
         const redirectUrl = `/Signin?redirect=${path}`;
-        authStore.signinUrl(redirectUrl);
+        await navigateTo(redirectUrl);
     }
 
     return {
