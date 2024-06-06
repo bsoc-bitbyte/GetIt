@@ -139,6 +139,9 @@ export const useAuthStore = defineStore("auth", {
       this.user = null;
       await navigateTo(redirectUrl);
     },
+    async signinUrl(redirectUrl){
+      await navigateTo(redirectUrl);
+    },
 
     SET_PAYLOAD(payload) {
       this.access = payload.access;

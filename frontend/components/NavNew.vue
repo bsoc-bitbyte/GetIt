@@ -38,7 +38,7 @@
                   <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin"
                       @click="handleLogout">Sign Out</button>
 
-                  <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
+                  <button v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" @click="handleLogin">Sign In</button>
               </div>
           </div>
       </nav>
@@ -74,7 +74,7 @@
 
                                   <button v-if="isAuthenticated"
                                       @click="handleLogout">Sign Out</button>
-                                  <nuxt-link v-else :to="urlm" @click="toggle">Sign In</nuxt-link>
+                                  <button v-else @click="handleLogin">Sign In</button>
                                   
                               </li>
                           </ul>
@@ -141,11 +141,12 @@ export default {
     const toggle = () => {
       isShow.value = !isShow.value;
     }
-    const urlm = () => {
+    const handleLogin = () => {
+        toggle();
     const encodedValue = window.location.href;
     const path = extractPath(encodedValue);
-    const link = `/Signin?redirect=${path}`;
-       return link;
+    const redirectUrl = `/Signin?redirect=${path}`;
+       authStore.signinUrl(redirectUrl);
     }
 
     return {
@@ -154,7 +155,7 @@ export default {
       handleLogout,
       isShow,
       toggle,
-      urlm,
+      handleLogin,
     }
   }
 
