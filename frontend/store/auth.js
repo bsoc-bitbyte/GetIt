@@ -133,11 +133,11 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    async logout(redirectUrl) {
+    async logout() {
       this.access = null;
       this.refresh = null;
       this.user = null;
-      await navigateTo(redirectUrl);
+      await navigateTo('/');
     },
 
     SET_PAYLOAD(payload) {

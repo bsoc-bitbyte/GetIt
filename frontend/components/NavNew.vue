@@ -129,10 +129,7 @@ export default {
 
     const handleLogout = () => {
         toggle();
-        const encodedValue = window.location.href;
-        const path = extractPath(encodedValue);
-        const redirectUrl = `/Signin?redirect=${path}`;
-        authStore.logout(redirectUrl);
+        authStore.logout();
         toast.error("Logged out",{
             autoClose: 2000,
             position:  toast.POSITION.BOTTOM_CENTER
