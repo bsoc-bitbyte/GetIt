@@ -161,13 +161,17 @@ export default {
       email: "",
       password: "",
       password_check: "",
+      redirect: "",
     };
 
     const store = useAuthStore();
     const router = useRouter();
-
+    const newUrl = router.currentRoute.value.query.redirect;
+    const link = `/Signin?redirect=${newUrl}`;
+    credentials.redirect = link;
+    const last = credentials.redirect || "/";
     if (store.isAuthenticated) {
-      router.push("/");
+      router.push(last);
     }
 
     const submitForm = async (e) => {
