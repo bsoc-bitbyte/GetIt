@@ -127,15 +127,15 @@ export default {
 
 
     const handleLogout = () => {
-      toggle();
-      const encodedValue = window.location.href;
+        toggle();
+        const encodedValue = window.location.href;
         const path = extractPath(encodedValue);
-       const redirectUrl = `/Signin?redirect=${path}`;
-      authStore.logout(redirectUrl);
-      toast.error("Logged out",{
-        autoClose: 2000,
-        position:  toast.POSITION.BOTTOM_CENTER
-      })
+        const redirectUrl = `/Signin?redirect=${path}`;
+        authStore.logout(redirectUrl);
+        toast.error("Logged out",{
+            autoClose: 2000,
+            position:  toast.POSITION.BOTTOM_CENTER
+        })
     }
 
     const toggle = () => {
@@ -143,10 +143,10 @@ export default {
     }
     const handleLogin = () => {
         toggle();
-    const encodedValue = window.location.href;
-    const path = extractPath(encodedValue);
-    const redirectUrl = `/Signin?redirect=${path}`;
-       authStore.signinUrl(redirectUrl);
+        const encodedValue = window.location.href;
+        const path = extractPath(encodedValue);
+        const redirectUrl = `/Signin?redirect=${path}`;
+        authStore.signinUrl(redirectUrl);
     }
 
     return {
