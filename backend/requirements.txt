@@ -27,3 +27,4 @@ typing_extensions==4.6.3
 tzdata==2022.6
 stripe
 drf-yasg==1.21.7
+markdown-it-py==3.0.0

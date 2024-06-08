@@ -19,7 +19,7 @@
       >
         {{ event.title }}
       </h1>
-      <div id="$style.renderedDescription" v-html="event.description"></div>
+      <article class="prose prose-sm" v-html="event.description"></article>
       <div
         class="mb-2 flex items-center justify-between md:justify-start md:gap-8 lg:mb-8 lg:flex-col lg:items-start lg:gap-1"
       >
