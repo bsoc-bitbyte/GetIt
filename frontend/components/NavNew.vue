@@ -35,10 +35,10 @@
                       Cart
                   </nuxt-link>
 
-                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white" to="/"
+                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white"
                       @click="handleLogout">Sign Out</button>
 
-                  <nuxt-link v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" to="/Signin">Sign In</nuxt-link>
+                  <button v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" @click="handleLogin">Sign In</button>
               </div>
           </div>
       </nav>
@@ -74,7 +74,7 @@
 
                                   <button v-if="isAuthenticated"
                                       @click="handleLogout">Sign Out</button>
-                                  <nuxt-link v-else to="/Signin" @click="toggle">Sign In</nuxt-link>
+                                  <button v-else @click="handleLogin">Sign In</button>
                                   
                               </li>
                           </ul>
@@ -115,7 +115,8 @@ import { computed,ref } from 'vue'
 import { useCartStore } from '../store/index'
 import { useAuthStore } from '../store/auth'
 import { toast } from 'vue3-toastify';
-
+import { extractPath } from '~/utils/url';
+import { navigateTo } from 'nuxt/app';
 export default {
   setup() {
     const cartStore = useCartStore()
@@ -127,26 +128,32 @@ export default {
 
 
     const handleLogout = () => {
-      toggle();
-      authStore.logout();
-      toast.error("Logged out",{
-        autoClose: 2000,
-        position:  toast.POSITION.BOTTOM_CENTER
-      })
+        toggle();
+        authStore.logout();
+        toast.error("Logged out",{
+            autoClose: 2000,
+            position:  toast.POSITION.BOTTOM_CENTER
+        })
     }
 
     const toggle = () => {
       isShow.value = !isShow.value;
     }
-
-
+    const handleLogin = async() => {
+        toggle();
+        const encodedValue = window.location.href;
+        const path = extractPath(encodedValue);
+        const redirectUrl = `/Signin?redirect=${path}`;
+        await navigateTo(redirectUrl);
+    }
 
     return {
       cartQuantity,
       isAuthenticated,
       handleLogout,
       isShow,
-      toggle
+      toggle,
+      handleLogin,
     }
   }
 

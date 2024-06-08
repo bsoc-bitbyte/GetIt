@@ -76,11 +76,11 @@
                 <span class="account-text tracking-wider dha"
                   >Don't have an account?</span
                 >
-                <nuxt-link
-                  to="/Signup"
+                <button
+                  @click="handleSignup"
                   class="text-red-500 hover:underlined tracking-wider suf"
                   >Sign up
-                </nuxt-link>
+                </button>
               </p>
             </div>
           </div>
@@ -93,30 +93,38 @@
 <script>
 import { useAuthStore } from "../store/auth";
 import { useRouter } from "vue-router";
-
+import { extractPath } from "~/utils/url";
 export default {
   name: "Signin",
   setup() {
     const credentials = {
       email: "",
       password: "",
+      redirect:"",
     };
 
     const store = useAuthStore();
     const router = useRouter();
-
+    const newUrl = router.currentRoute.value.query.redirect;
+    credentials.redirect = newUrl;
+    const last = credentials.redirect || "/";
     if (store.isAuthenticated) {
-      router.push("/");
+      router.push(last);
     }
 
     const submitForm = async (e) => {
       e.preventDefault();
       const data = await store.login(credentials);
     };
-
+    const handleSignup = async() => {
+        const newUrl = router.currentRoute.value.query.redirect;
+        const redirectUrl = `/Signup?redirect=${newUrl}`;
+        await navigateTo(redirectUrl);
+    }
     return {
       credentials,
       submitForm,
+      handleSignup,
     };
   },
 };

@@ -15,7 +15,7 @@ export const useAuthStore = defineStore("auth", {
   }),
 
   actions: {
-    async login({ email, password }) {
+    async login({ email, password ,redirect}) {
 
       let response = null;
       try {
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore("auth", {
           this.access = data.value.access;
           this.refresh = data.value.refresh;
           this.user = email;
-          await navigateTo("/");
+          await navigateTo(redirect);
           toast.success("Login successful", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
@@ -50,7 +50,7 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    async register({ first_name, last_name, phone_number, email, password }) {
+    async register({ first_name, last_name, phone_number, email, password,redirect }) {
       console.log(first_name, last_name, phone_number, email, password);
       try {
         const { data, status, error } = await useFetch(
@@ -72,7 +72,7 @@ export const useAuthStore = defineStore("auth", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
-          await navigateTo("/Signin");
+          await navigateTo(redirect);
         } else {
           Object.entries(error.value.data).forEach(([field, errorMessages]) => {
             console.log(field, errorMessages);
