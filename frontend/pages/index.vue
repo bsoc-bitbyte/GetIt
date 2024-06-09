@@ -1,4 +1,8 @@
 <template>
+    
+  <title>GetIt</title>
+  <link rel="icon" type="image/png" href="\Favicon.svg">
+     
   <div class="justify-center items-center h-[80vh] ml-48 overflow-y-hidden hidden lg:flex">
     <div class="">
       <p class="text-xl text-gray-600 mb-2">Don't miss out on the Events! Get your tickets now.</p>
