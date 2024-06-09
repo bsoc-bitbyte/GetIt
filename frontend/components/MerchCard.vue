@@ -10,7 +10,7 @@
                     fill="#636364" fill-opacity="0.5" />
             </svg>
             <div class="absolute right-2 top-2 bg-white rounded-md py-1 px-2 text-[#9E3500] z-30">{{ type }}</div>
-            <img :src="'https://s3-alpha-sig.figma.com/img/9838/788b/17de65d98211bea5b3eed9f863fc570a?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oZBWA6vf-8Cr8OQzsop4kOVyVpuxmPcrRviebWY3gK-GUWMNPEvhd6jFLNW5~pMy6mvFK0tJ7ZZ~kU3a6UrhmKiiXiQUvwS2fBZv3F8hy8TnNAfEAtEQOlRvSDOA22ung8rhh1zsEC-CL6G28iUdmWWsbCVoPOelBH0vz2rEpfuOI~qPn0d5EuKYtONY7p3M5SWXOuS40vdeNybNASIrq2kHFawhfq-AOlowMu6FX6ad7BuTRpXQtqu18H-qiacXrsz1XsDqcAEjwpDTyTEYc4vWPwZpOkxqfzJIZ8XZQ0Hj7FMEEUs88RqJ0yuuA2wxf9qbDGvCeONxyLfsjhjVpw__'"
+            <img :src="imageUrl"
                 alt="Merch Image" class="object-cover transition-all group-hover:scale-125 rounded-t">
         </div>
         <div
@@ -53,6 +53,10 @@ export default {
             required: false
         },
         type: {
+            type: String,
+            required: true
+        },
+        imageUrl: {
             type: String,
             required: true
         },
