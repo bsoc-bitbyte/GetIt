@@ -17,7 +17,7 @@ try:
         exit()
 
     # Print the python version
-    subprocess.run(['python', '--version'])
+    subprocess.run(['python3', '--version'])
 
     # Install dependencies
     print('Installing dependencies...')
@@ -26,23 +26,23 @@ try:
 
     # Make Migrations
     print('Making migrations...')
-    subprocess.run(['python', 'manage.py', 'makemigrations', 'accounts'])
-    subprocess.run(['python', 'manage.py', 'makemigrations', 'products'])
-    subprocess.run(['python', 'manage.py', 'makemigrations', 'events'])
-    subprocess.run(['python', 'manage.py', 'makemigrations', 'tickets'])
-    subprocess.run(['python', 'manage.py', 'makemigrations', 'orders'])
-    subprocess.run(['python', 'manage.py', 'makemigrations'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'accounts'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'products'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'events'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'tickets'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations', 'orders'])
+    subprocess.run(['python3', 'manage.py', 'makemigrations'])
     print("Migrations made!")
 
     # Migrate the database
     print('Migrating the database...')
-    subprocess.run(['python', 'manage.py', 'migrate'])
+    subprocess.run(['python3', 'manage.py', 'migrate'])
     print("Database migrated!")
 
     # Run the server
 
     print('Running the server...')
-    subprocess.run(['python', 'manage.py', 'runserver'])
+    subprocess.run(['python3', 'manage.py', 'runserver'])
 
 except KeyboardInterrupt:
     print("Process interrupted!")

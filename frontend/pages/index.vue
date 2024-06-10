@@ -1,7 +1,7 @@
 <template>
     
   <title>GetIt</title>
-  <link rel="icon" type="image/png" href="\Favicon.svg">
+  <link rel="icon" type="image/png" href="\favicon.svg">
      
   <div class="justify-center items-center h-[80vh] ml-48 overflow-y-hidden hidden lg:flex">
     <div class="">
