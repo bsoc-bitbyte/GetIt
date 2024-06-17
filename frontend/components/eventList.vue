@@ -7,7 +7,7 @@
 
     <div class="py-3 w-full p-5 h-[119px] group-hover:h-[143px] transition-all duration-500 ">
       <div class="flex justify-between h-1/3 items-center poppins">
-        <p class="text-base font-semibold  text-[#9E3500] ">{{seller}}</p>
+        <p class="text-base font-semibold  text-[#9E3500] ">{{organizer}}</p>
          <p class="text-base rounded-full font-semibold cursor-auto poppins ">
           ₹{{ parseInt(ticket_price) }}
         </p>
@@ -92,7 +92,7 @@
       type: String,
       required: true,
     },
-    seller:{
+    organizer:{
       type: String,
       required: true,
     }
