@@ -1,7 +1,13 @@
 <template>
-  <div class="m-20 owe">
-    <div class="flex justify-center items-center flex-col gap-8 mt-20 lg:flex-row">
-      <div class="flex flex-wrap justify-center lg:justify-start gap-8">
+  <div class="m-14 owe">
+    <div class="flex flex-col gap-8 items-center px-8">
+      <h1 class="poppins font-bold w-full text-center text-4xl">OUR <span class="text-[#EA454C]">EVENTS</span></h1>
+      <div class="poppins text-base font-normal  flex gap-1 text-black text-center px-10"> 
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis quibusdam tempora suscipit quia voluptas, alias quos. Doloribus adipisci ipsum maiores cum hic nemo porro.
+      </div>
+    </div>
+    <div class="flex justify-center items-center flex-col gap-8 mt-16 lg:flex-row ">
+      <div class="flex flex-wrap justify-center gap-8">
         <NuxtLink v-for="(data, index) in eventLists" :to="`/events/${data.id}`" :key="data.id">
           <eventList
             :title="data.title"
@@ -27,7 +33,7 @@ const config = useRuntimeConfig();
 const eventLists = ref([]);
 async function fetchEventData() {
   try {
-    const response = await $fetch(`${config.public.API_BASE_URL}/api/events/`);
+    const response = await $fetch($`{config.public.API_BASE_URL}/api/events/`);
     eventLists.value = response;
   } catch (error) {
     console.error('Error fetching event data', error);
@@ -59,4 +65,3 @@ onMounted(() => fetchEventData());
   background-color: #F5F5F5;
 }
 </style>
-
