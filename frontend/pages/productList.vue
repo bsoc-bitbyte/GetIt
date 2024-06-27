@@ -1,13 +1,11 @@
 <template>
     <div class="m-14">
-      <div class="flex flex-col gap-5 items-center">
-        <h1 class="poppins font-bold w-full text-center text-4xl">OUR <span class="text-[#EA454C]">PRODUCTS</span></h1>
-        <div class="poppins text-base font-normal  flex gap-1 text-[#6C6C6C] ">Total <span class="font-semibold">
-            {{ productlists.length }} </span> products </div>
+      <div class="flex flex-col gap-4 items-center">
+        <h1 class="poppins font-bold w-full text-center text-[40px]">OUR <span class="text-[#EA454C]">PRODUCTS</span></h1>
+        <div class="poppins text-center text-base font-normal text-[#6C6C6C] ">Look at our wide range of products</div>
       </div>
-  
       <div class="flex justify-center items-center flex-col gap-8 mt-5 lg:flex-row ">
-        <div class="flex flex-wrap justify-center gap-8 bg-red px-10 py-5">
+      <div class="flex flex-wrap justify-center gap-8 bg-red px-10 py-8">
           <NuxtLink v-for="data in productlists" :to="`/products/${data.id}`" :key="data.id">
             <MerchCard
               :title= "data.title"
