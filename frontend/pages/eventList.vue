@@ -33,7 +33,7 @@ const config = useRuntimeConfig();
 const eventLists = ref([]);
 async function fetchEventData() {
   try {
-    const response = await $fetch($`{config.public.API_BASE_URL}/api/events/`);
+    const response = await $fetch(`${config.public.API_BASE_URL}/api/events/`);
     eventLists.value = response;
   } catch (error) {
     console.error('Error fetching event data', error);
@@ -65,3 +65,4 @@ onMounted(() => fetchEventData());
   background-color: #F5F5F5;
 }
 </style>
+<!-- EOF -->
