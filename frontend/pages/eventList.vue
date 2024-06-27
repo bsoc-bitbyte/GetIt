@@ -65,4 +65,3 @@ onMounted(() => fetchEventData());
   background-color: #F5F5F5;
 }
 </style>
-<!-- EOF -->
