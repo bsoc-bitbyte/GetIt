@@ -13,7 +13,7 @@
           <div class="h-full w-full flex items-center justify-center">
             <img
               class="object-cover h-full w-full"
-              :src="item"
+              :src="item.image"
               alt="carouselimage"
             />
             <div
@@ -23,7 +23,7 @@
                 <div
                   class="w-[60vw] h-[180px] sm:w-[50vw] sm:text-6xl/[90px] font-semibold text-5xl text-white poppins"
                 >
-                  Lorem ipsum some text about it!
+                  {{item.title}}
                 </div>
               </div>
               <div
@@ -32,10 +32,7 @@
                 <div
                   class="sm:w-[35vw] h-full w-[50vw] font-light text-sm sm:text-base text-white poppins text-right"
                 >
-                  lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur
-                  adipiscing elit. Nulla vitae ipsum sit amet velit feugiat
-                  fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit.
+                  {{item.description}}
                 </div>
               </div>
             </div>
@@ -46,7 +43,7 @@
         class="h-[15px] w-full absolute self-end bottom-[55px] flex gap-4 justify-center items-center"
       >
         <div
-          v-for="i in 4"
+          v-for="i in items.length"
           :key="i"
           class="h-[10px] w-[10px] rounded-full bg-white"
           :class="{ active: currentIndex === i - 1 }"
@@ -87,10 +84,30 @@ export default {
     return {
       currentIndex: 0,
       items: [
-        "\hackbyte2.png",
-        "\hackbyte2.png",
-        "\hackbyte2.png",
-        "\hackbyte2.png",
+        {
+          image: "\carousel_image.png",
+          title: "Lorem ipsum some text about it!",
+          description:
+            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        },
+        {
+          image: "\carousel_image.png",
+          title: "Lorem ipsum some text about it!",
+          description:
+            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        },
+        {
+          image: "\carousel_image.png",
+          title: "Lorem ipsum some text about it!",
+          description:
+            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        },
+        {
+          image: "\carousel_image.png",
+          title: "Lorem ipsum some text about it!",
+          description:
+            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        },
       ],
     };
   },
