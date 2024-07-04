@@ -1,4 +1,5 @@
 <template>
+  <link rel="icon" type="image/png" href="\favicon.png">
   <div>
     <Navbar/>
     <slot />
@@ -8,7 +9,7 @@
 
 <script>
 import Navbar from '@/components/NavNew.vue';
-import Footer from '~/components/Footer.vue';
+import Footer from '~/components/footer.vue';
 export default {
 components: {
   Navbar,
