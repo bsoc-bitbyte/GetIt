@@ -92,16 +92,16 @@
           :key="data.id"
         >
           <MerchCard
-            :title="data.title"
-            :type="data.type"
-            :imageUrl="data.product_images[0].image"
-            :seller="data.seller"
-            :price="data.price"
-            :description="data.description"
-            colors="['yellow','red','blue']"
-            sizes="['32','34','36']"
-            tags="['cotton']"
-          />
+            :title= "data.title"
+            :type= "data.type"
+            :imageUrl= "data.product_images" 
+            :seller = "data.seller"
+            :price = "data.price"
+            :description = "data.description"
+            :colors= "data.colors"
+            :sizes= "data.sizes"
+            :tags = "data.tags"
+            />
         </NuxtLink>
       </div>
     </div>
