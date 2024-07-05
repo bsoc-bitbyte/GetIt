@@ -23,7 +23,7 @@
                 <div
                   class="w-[60vw] h-[180px] sm:w-[50vw] sm:text-6xl/[90px] font-semibold text-5xl text-white poppins"
                 >
-                  {{item.title}}
+                  {{ item.title }}
                 </div>
               </div>
               <div
@@ -32,7 +32,7 @@
                 <div
                   class="sm:w-[35vw] h-full w-[50vw] font-light text-sm sm:text-base text-white poppins text-right"
                 >
-                  {{item.description}}
+                  {{ item.description }}
                 </div>
               </div>
             </div>
@@ -75,11 +75,138 @@
       </button>
     </div>
   </div>
+
+  <div class="m-14">
+    <div class="flex flex-col gap-4 items-center">
+      <h1 class="poppins font-bold w-full text-start text-[40px] px-20">
+        <span class="text-black">PRODUCTS</span>
+      </h1>
+    </div>
+    <div
+      class="flex justify-center items-center flex-col gap-8 mt-1 lg:flex-row"
+    >
+      <div class="flex flex-wrap justify-center gap-20 bg-red px-10 py-8">
+        <NuxtLink
+          v-for="data in productlists"
+          :to="`/products/${data.id}`"
+          :key="data.id"
+        >
+          <MerchCard
+            :title="data.title"
+            :type="data.type"
+            :imageUrl="data.product_images[0].image"
+            :seller="data.seller"
+            :price="data.price"
+            :description="data.description"
+            colors="['yellow','red','blue']"
+            sizes="['32','34','36']"
+            tags="['cotton']"
+          />
+        </NuxtLink>
+      </div>
+    </div>
+    <div class="w-full h-[60px] grid place-items-center">
+      <button
+        class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out"
+      >
+        <p>Check-out Merch</p>
+      </button>
+    </div>
+  </div>
+
+  <div class="m-14 owe">
+    <div class="flex flex-col gap-8 items-center px-8">
+      <h1 class="poppins font-bold w-full text-start text-4xl px-14">
+        <span class="text-black">EVENTS</span>
+      </h1>
+    </div>
+    <div
+      class="flex justify-center items-center flex-col gap-8 mt-10 lg:flex-row"
+    >
+      <div class="flex flex-wrap justify-center gap-8">
+        <NuxtLink
+          v-for="data in eventLists"
+          :to="`/events/${data.id}`"
+          :key="data.id"
+        >
+          <eventList
+            :title="data.title"
+            :description="data.description"
+            :email="data.email"
+            :date="data.date"
+            :event_type="data.event_type"
+            :location="data.location"
+            :ticket_price="data.ticket_price"
+            :img_url="data.cover_image"
+          />
+        </NuxtLink>
+      </div>
+    </div>
+    <div class="w-full h-[120px] grid place-items-center">
+      <button
+        class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out"
+      >
+        <p>Events</p>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import MerchCard from "@/components/MerchCard.vue";
+import eventList from "@/components/eventList.vue";
+
 export default {
   name: "IndexPage",
+  components: {
+    MerchCard,
+    eventList
+  },
+  setup() {
+    const config = useRuntimeConfig();
+
+    const productlists = ref([]);
+    const eventLists = ref([]);
+    
+    async function fetchProductData() {
+      try {
+        const response = await $fetch(
+          `${config.public.API_BASE_URL}/api/products/`
+        );
+        productlists.value = response.map((product) => ({
+          ...product,
+          product_images: product.product_images.map((img) => ({
+            ...img,
+            image: `${config.public.API_BASE_URL}${img.image}`,
+          })),
+        }));
+      } catch (error) {
+        console.error("Error fetching product data", error);
+      }
+    }
+
+    async function fetchEventData() {
+      try {
+        const response = await $fetch(
+          `${config.public.API_BASE_URL}/api/events/`
+        );
+        eventLists.value = response;
+      } catch (error) {
+        console.error("Error fetching event data", error);
+      }
+    }
+
+    onMounted(() => {
+      fetchProductData();
+      fetchEventData();
+    });
+
+    return {
+      productlists,
+      eventLists
+    };
+  },
   data() {
     return {
       currentIndex: 0,
@@ -88,25 +215,25 @@ export default {
           image: "\carousel_image.png",
           title: "Lorem ipsum some text about it!",
           description:
-            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         },
         {
           image: "\carousel_image.png",
           title: "Lorem ipsum some text about it!",
           description:
-            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         },
         {
           image: "\carousel_image.png",
           title: "Lorem ipsum some text about it!",
           description:
-            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         },
         {
           image: "\carousel_image.png",
           title: "Lorem ipsum some text about it!",
           description:
-            "lorem ipsum aaa Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae ipsum sit amet velit feugiat fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         },
       ],
     };
@@ -126,6 +253,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .poppins {
   font-family: "Poppins", sans-serif;
@@ -135,5 +263,9 @@ export default {
   background-color: #ea454c;
   height: 15px;
   width: 15px;
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
+  font-smooth: always;
 }
 </style>
