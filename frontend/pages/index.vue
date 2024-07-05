@@ -106,13 +106,13 @@
       </div>
     </div>
     <div class="w-full h-[120px] grid place-items-center">
-      <router-link to="/productList">
+      <nuxt-link to="/productList">
       <button
           class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom"
       >
           <p>Products</p>
       </button>
-    </router-link>
+    </nuxt-link>
   </div>
   </div>
 
@@ -145,13 +145,14 @@
       </div>
     </div>
     <div class="w-full h-[120px] grid place-items-center">
-      <router-link to="/eventList">
-      <button
+      <nuxt-link to="/eventList">
+        <button
           class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom">
           <p>Events</p>
-      </button>
-    </router-link>
-  </div>
+        </button>
+      </nuxt-link>
+    </div>
+    
   
   </div>
 </template>
