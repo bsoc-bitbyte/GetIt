@@ -46,11 +46,19 @@
 import { navigateTo, useRequestURL} from 'nuxt/app';
 export default {
     setup(){
+        const urlMapping = {
+          "/": "/index",
+          "/eventlist": "/eventList",
+          "/checkout": "/checkOut",
+          "/cart": "/cart",
+          "/order": "/order",
+          "/productList": "/productList",
+          "/Signin": "/Signin",
+          "/Signup": "/Signup",
+        };
         const handleEditPage = async()=>{
             let url = useRequestURL().pathname;
-            if(url==='/')url="/index"
-            if(url==='/eventlist')url="/eventList"
-            if(url==='/checkout')url="/checkOut"
+            url = urlMapping[url];
             const redirectUrl = `https://github.com/bsoc-bitbyte/GetIt/tree/main/frontend/pages${url}.vue`;
             await navigateTo(redirectUrl, {
                 open: {
