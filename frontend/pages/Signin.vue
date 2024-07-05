@@ -96,8 +96,10 @@ import { useRouter } from "vue-router";
 import { extractPath } from "~/utils/url";
 import { toast } from "vue3-toastify";
 
+
 export default {
   name: "Signin",
+  
   setup() {
     const credentials = {
       email: "",
@@ -112,12 +114,6 @@ export default {
     const last = credentials.redirect || "/";
     if (store.isAuthenticated) {
       router.push(last);
-    }
-    if(router.currentRoute.value.query.msg){
-      toast.success(router.currentRoute.value.query.msg, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
     }
     const submitForm = async (e) => {
       e.preventDefault();
@@ -134,6 +130,15 @@ export default {
       handleSignup,
     };
   },
+  mounted() {
+    const router = useRouter();
+    if(router.currentRoute.value.query.msg){
+      toast.success(router.currentRoute.value.query.msg,{
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  }
 };
 </script>
 <style scoped>

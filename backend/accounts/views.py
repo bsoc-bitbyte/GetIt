@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 from .models import Account
 from .serializers import AccountSerializer
 from .token import account_activation_token
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -24,12 +25,12 @@ def activateEmail(request, user, to_email):
     mail_subject = 'Activate your user account.'
     message = render_to_string('activation_mail.html', {
         'user': user.first_name,
-        'domain': get_current_site(request).domain,
-        'uid': urlsafe_base64_encode(force_bytes(user.email)),
+        'domain': "localhost:3000" if settings.DEBUG else settings.PRODUCTION_URL,
+        'uuid': urlsafe_base64_encode(force_bytes(user.email)),
         'token': account_activation_token.make_token(user),
         'protocol': 'https' if request.is_secure() else 'http'
     })
-    email = send_mail(mail_subject, message, 'theprogclubiiitdmj.ac.in',[to_email])
+    email = send_mail(mail_subject, message,settings.EMAIL_HOST_USER ,[to_email])
     logger.info(f"Email sent to {to_email} with response {email}")
 
 class CreateAccountView(CreateAPIView):
