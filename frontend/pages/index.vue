@@ -105,13 +105,13 @@
         </NuxtLink>
       </div>
     </div>
-    <div class="w-full h-[60px] grid place-items-center">
+    <div class="w-full h-[120px] grid place-items-center">
       <button
-        class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out"
+          class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom"
       >
-        <p>Check-out Merch</p>
+          <p>Products</p>
       </button>
-    </div>
+  </div>
   </div>
 
   <div class="m-14 owe">
@@ -144,11 +144,12 @@
     </div>
     <div class="w-full h-[120px] grid place-items-center">
       <button
-        class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out"
+          class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom"
       >
-        <p>Events</p>
+          <p>Events</p>
       </button>
-    </div>
+  </div>
+  
   </div>
 </template>
 
@@ -263,5 +264,8 @@ export default {
   background-color: #ea454c;
   height: 15px;
   width: 15px;
+}
+.shadow-custom {
+  box-shadow: 0px 6px 10px 1px #00000040;
 }
 </style>
