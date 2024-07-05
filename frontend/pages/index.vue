@@ -106,17 +106,19 @@
       </div>
     </div>
     <div class="w-full h-[120px] grid place-items-center">
+      <router-link to="/productList">
       <button
           class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom"
       >
           <p>Products</p>
       </button>
+    </router-link>
   </div>
   </div>
 
   <div class="m-14 owe">
     <div class="flex flex-col gap-8 items-center px-8">
-      <h1 class="poppins font-bold w-full text-start text-4xl px-14">
+      <h1 class="poppins font-bold w-full text-start text-4xl px-14"> 
         <span class="text-black">EVENTS</span>
       </h1>
     </div>
@@ -143,11 +145,12 @@
       </div>
     </div>
     <div class="w-full h-[120px] grid place-items-center">
+      <router-link to="/eventList">
       <button
-          class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom"
-      >
+          class="rounded-[20px] bg-[#EA454C] w-[249px] h-[60px] font-poppins text-base font-semibold text-white flex items-center justify-center border-4 border-transparent hover:bg-transparent hover:border-[#EA454C] hover:text-black transition duration-300 ease-in-out shadow-custom">
           <p>Events</p>
       </button>
+    </router-link>
   </div>
   
   </div>
