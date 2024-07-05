@@ -94,6 +94,8 @@
 import { useAuthStore } from "../store/auth";
 import { useRouter } from "vue-router";
 import { extractPath } from "~/utils/url";
+import { toast } from "vue3-toastify";
+
 export default {
   name: "Signin",
   setup() {
@@ -111,7 +113,12 @@ export default {
     if (store.isAuthenticated) {
       router.push(last);
     }
-
+    if(router.currentRoute.value.query.msg){
+      toast.success(router.currentRoute.value.query.msg, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER,
+          });
+    }
     const submitForm = async (e) => {
       e.preventDefault();
       const data = await store.login(credentials);
