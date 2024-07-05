@@ -264,8 +264,4 @@ export default {
   height: 15px;
   width: 15px;
 }
-.poppins {
-  font-family: "Poppins", sans-serif;
-  font-smooth: always;
-}
 </style>
