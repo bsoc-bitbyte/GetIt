@@ -1,4 +1,3 @@
-<!-- /components/footer.vue -->
 <template>
     <footer class="">
         <div class="mx-auto lg:my-0 w-4/5 p-4 py-6 lg:py-8">
@@ -17,7 +16,6 @@
                         alt="logo">
                       GetIt
                 </nuxt-link>
-                    <!-- grid-flow-col mt-4 sm:justify-center sm:mt-0 -->
                 <div class="sm:flex-col sm:items-center">
                     <div class="flex md:justify-end justify-center mb-6">
                         <a href="https://github.com/bsoc-bitbyte/GetIt/issues/new?assignees=&labels=bug&projects=&template=1_bug_report_form.yml&title=%5BBUG%5D%3A+" target="_blank" class="text-sm text-gray-500 underline hover:text-gray-900 mr-4">
