@@ -1,11 +1,11 @@
 <template>
     <footer class="">
-        <div class="mx-auto lg:my-0 w-4/5 p-4 py-6 lg:py-8">
-            <hr class="mt-8 mb-6 border-gray-500 sm:mx-auto lg:mt-6" />
+        <hr class="mt-8 border-gray-400 sm:mx-auto lg:mt-6 w-full" />
+        <div class="mx-auto lg:my-0 w-4/5 p-4 py-4 lg:py-6">
             <div class="min-[800px]:flex min-[800px]:items-center min-[800px]:justify-between">
                 <div class="flex-wrap md:justify-start md:text-start text-center">
                     <div class="inline-block mr-10 mb-6 text-sm text-gray-500"><nuxt-link  class="hover:underline" to="/productList">Products</nuxt-link></div>
-                    <div class="inline-block mb-6 text-sm text-gray-500"><nuxt-link  class="hover:underline" to="/eventlist">Events</nuxt-link></div>
+                    <div class="inline-block mb-6 text-sm text-gray-500"><nuxt-link  class="hover:underline" to="/eventList">Events</nuxt-link></div>
                     <div class="flex md:justify-start justify-center text-xs text-gray-500 items-center"><p class="text-2xl inline mr-2">©</p><nuxt-link  class="hover:underline " to="/">Getit 2024</nuxt-link>. All rights reserved
                     </div>
                 </div>
@@ -48,7 +48,7 @@ export default {
     setup(){
         const urlMapping = {
           "/": "/index",
-          "/eventlist": "/eventList",
+          "/eventList": "/eventList",
           "/checkout": "/checkOut",
           "/cart": "/cart",
           "/order": "/order",
