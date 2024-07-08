@@ -1,7 +1,7 @@
 import logging
 
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
@@ -68,7 +68,7 @@ def activate(request, uidb64, token):
     if account and account_activation_token.check_token(account, token):
         account.is_active = True
         account.save()
-        return HttpResponse('Account activated successfully',200)
+        return HttpResponse('Account activated successfully')
     else:
-        return HttpResponse('Error while activating',400)
+        return HttpResponseBadRequest('Error while activating')
 
