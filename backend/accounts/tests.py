@@ -1,7 +1,11 @@
 import pytest
-from rest_framework.test import APIClient
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from rest_framework import status
+from rest_framework.test import APIClient
+
 from .models import Account
+from .token import account_activation_token
 
 account_data = {
     "email": "test@email.com",
@@ -40,6 +44,9 @@ def testCreateAccountView_validAccountDetails_accountCreationSuccesful():
     assert 'password' not in response.data
     assert Account.objects.get().password != account_data['password']
 
+    # check that the account is inactive initially 
+    assert not Account.objects.get().is_active
+
 
 @pytest.mark.django_db
 @pytest.mark.parametrize('field', ['email', 'password', 'first_name', 'last_name'])
@@ -71,6 +78,37 @@ def testCreateAccountView_invalidOrDuplicateEmail_returnsBadRequest(new_email):
     # Assert
     assert response.status_code == status.HTTP_400_BAD_REQUEST
 
+
+@pytest.mark.django_db
+def testActivate_invalidTokenOrUid_returnsBadRequest():
+    # Arrange
+    client = APIClient()
+    account = Account.objects.create(**account_data)
+    token = account_activation_token.make_token(account)
+    uid = urlsafe_base64_encode(force_bytes(account.email))
+
+    # Act
+    response = client.post(f'/api/accounts/activate/{uid}/malformed{token}')
+    print(response.content,response)
+    # Assert
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert not Account.objects.get().is_active
+
+
+@pytest.mark.django_db
+def testActivate_validTokenAndUid_accountActivated():
+    # Arrange
+    client = APIClient()
+    account = Account.objects.create(**account_data)
+    token = account_activation_token.make_token(account)
+    uid = urlsafe_base64_encode(force_bytes(account.email))
+
+    # Act
+    response = client.post(f'/api/accounts/activate/{uid}/{token}')
+
+    # Assert
+    assert response.status_code == status.HTTP_200_OK
+    assert Account.objects.get().is_active
 
 @pytest.mark.django_db
 def testRetrieveLoggedInAccountView_userLoggedIn_returnsAccountDetails(api_client):

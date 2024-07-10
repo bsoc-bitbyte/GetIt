@@ -72,7 +72,7 @@ export const useAuthStore = defineStore("auth", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
-          await navigateTo(redirect);
+          await navigateTo({path:redirect,query:{msg:"Activation link sent to your mail"}});
         } else {
           Object.entries(error.value.data).forEach(([field, errorMessages]) => {
             console.log(field, errorMessages);

@@ -13,6 +13,8 @@ STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', 'default')
 
 DEBUG = os.environ.get('DEBUG') != 'False'
 
+FRONTEND_URL = os.environ.get('FRONTEND_URL')
+
 ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = False
