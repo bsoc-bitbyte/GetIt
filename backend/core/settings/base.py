@@ -13,7 +13,7 @@ STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', 'default')
 
 DEBUG = os.environ.get('DEBUG') != 'False'
 
-PRODUCTION_URL = 'https://getit.iiitdmj.ac.in'
+PRODUCTION_URL = os.environ('FRONTEND_URL')
 
 ALLOWED_HOSTS = ['*']
 

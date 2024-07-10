@@ -62,7 +62,7 @@ class RetrieveUpdateLoggedInAccountView(APIView):
 def get_account(email) :
     return get_object_or_404(Account, email=email)
 
-def activate(request, uidb64, token):
+def activateAccountView(request, uidb64, token):
     uid = force_str(urlsafe_base64_decode(uidb64))
     account = get_account(uid)
     if account and account_activation_token.check_token(account, token):
