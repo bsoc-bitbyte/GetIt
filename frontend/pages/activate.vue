@@ -19,14 +19,19 @@ async function activateUser() {
     const token = urlParams.get('token');
     let status = '';
     try {
-        const response = await $fetch(`${config.public.API_BASE_URL}/api/accounts/activate/${uuid}/${token}`);
-        status = await response.text();
-        if (response.type === '200') {
-            router.push({ path: '/signin', query: { msg: 'account activated' } });
-        }
-    } catch (error) {
-        console.error(error);
+      const response = await fetch(
+        `${config.public.API_BASE_URL}/api/accounts/activate/${uuid}/${token}`,
+        { method: "POST" }
+      );
+      status = await response.text();
+      if (response.status === 200) { 
+        router.push({ path: '/signin', query: { msg: 'account activated' } });
+      } else {
         status = 'Activation failed';
+      }
+    } catch (error) {
+      console.error(error);
+      status = 'Activation failed';
     }
 
     return status;
