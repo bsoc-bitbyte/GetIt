@@ -92,6 +92,7 @@ def testActivate_invalidTokenOrUid_returnsBadRequest():
     print(response.content,response)
     # Assert
     assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert not Account.objects.get().is_active
 
 
 @pytest.mark.django_db
