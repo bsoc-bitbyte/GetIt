@@ -88,7 +88,7 @@ def testActivate_invalidTokenOrUid_returnsBadRequest():
     uid = urlsafe_base64_encode(force_bytes(account.email))
 
     # Act
-    response = client.get(f'/api/accounts/activate/{uid}/malformed{token}')
+    response = client.post(f'/api/accounts/activate/{uid}/malformed{token}')
     print(response.content,response)
     # Assert
     assert response.status_code == status.HTTP_400_BAD_REQUEST
@@ -103,7 +103,7 @@ def testActivate_validTokenAndUid_accountActivated():
     uid = urlsafe_base64_encode(force_bytes(account.email))
 
     # Act
-    response = client.get(f'/api/accounts/activate/{uid}/{token}')
+    response = client.post(f'/api/accounts/activate/{uid}/{token}')
 
     # Assert
     assert response.status_code == status.HTTP_200_OK
