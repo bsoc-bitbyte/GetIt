@@ -1,30 +1,26 @@
 
 <template>
-  <section class="sticky top-0 bg-white z-50 mx-auto w-full">
+  <section class="sticky top-0 bg-white z-50 mx-auto w-full Mulish">
       <!-- navbar -->
-      <nav class="flex justify-between max-lg:hidden border-b border-gray-400 ">
+      <nav class="flex justify-between max-lg:hidden border-b border-gray-[#D9D9D9] border-b-[2.5px] h-[90px] px-6">
           <div class="px-5 xl:px-12 py-4 flex w-full items-center">
-              <nuxt-link class="text-3xl font-bold flex items-center" to="/">
-                  <img class="h-9"
+              <nuxt-link class="text-4xl font-medium flex items-center w-[124px] h-[55px] PalanquinDark" to="/">
+                  <img class="h-10"
                       src="https://raw.githubusercontent.com/bsoc-bitbyte/GetIt/10a0fcc39d52d116428dd49505ead2f597e7a30e/assets/get_it.png"
                       alt="logo">
                   GetIt
               </nuxt-link>
               <!-- Nav Links -->
-              <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                  <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/">Home</nuxt-link></li>
-                  <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/eventList">Events</nuxt-link></li>
-                  <li><nuxt-link class="hover:border-b-2 border-[#ea454c]" to="/order">My Orders</nuxt-link></li>
+              <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12 text-[#6C6C6C] Mulish flex gap-4">
+                  <li><nuxt-link class="hover:border-b-[2.5px] py-[4px] border-[#ea454c]" to="/">Home</nuxt-link></li>
+                  <li><nuxt-link class="hover:border-b-[2.5px] py-[4px] border-[#ea454c]" to="/productList">Products</nuxt-link></li>
+                  <li><nuxt-link class="hover:border-b-[2.5px] py-[4px] border-[#ea454c]" to="/eventList">Events</nuxt-link></li>
+               </ul>
 
-              </ul>
+              <div class="flex gap-8 font-semibold font-heading items-center h-[27px]">
 
-              <div class="flex gap-6 font-semibold font-heading items-center">
-                  <nuxt-link class="flex items-center border-b-2 border-white hover:border-[#ea454c] gap-3" to="/cart">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                          stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
+                  <nuxt-link class=" flex items-center" to="/cart">
+                      <img src="../assets/cart03.svg" alt="cart_icon" class="h-[27px] w-[28px]">
                       <span class="flex absolute -mt-5 ml-4 " v-if="cartQuantity >= 1">
                           <span
                               class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-[#ea454c] opacity-75"></span>
@@ -32,13 +28,40 @@
                               class="relative rounded-full h-5 w-5 p-2 bg-[#ea454c] flex items-center justify-center text-gray-200">{{ cartQuantity }}
                           </span>
                       </span>
-                      Cart
                   </nuxt-link>
 
-                  <button v-if="isAuthenticated" class=" bg-[#ea454c] p-2 rounded-2xl text-white"
-                      @click="handleLogout">Sign Out</button>
+                    <div v-if="isAuthenticated" >
+                        <button @click="toggle_profile" class="ml-1 mr-5 rounded-[1000px] h-[53px] w-[53px] flex items-center justify-center icon">                    
+                        <img src="../assets/user_icon.svg" alt="user_icon" class="h-[26px] w-[25px]">
+                        </button>
 
-                  <button v-else class="bg-[#ea454c] p-2 rounded-2xl text-white" @click="handleLogin">Sign In</button>
+                        <div :class="showprofile ? 'opacity-100': 'opacity-0'" class="transition-all duration-500" >
+                             
+                            <div v-show="showprofile" class="h-[187px] w-[182px] fixed bg-white right-28 top-[100px] rounded-md shadow-md flex flex-col px-5 poppins font-light text-base z-[9999]" >
+                            
+                                <div class="w-full min-h-[50%]  items-start justify-center flex flex-col" >
+                                    <h3 class="font-semibold">{{name}}</h3>
+                                    <p class="text-xs text-balance w-full break-words ">{{email}}</p>
+                                </div>
+                                <div @click="toggle_profile" class="h-[50%]">
+                                    <nuxt-link class="w-full h-[50%] flex items-center justify-start border-t-[1px] border-b-[1px] gap-3" to="/order" >
+                                        <img src="../assets/orders.svg" alt="orders" class="h-[22px] w-[24px] bg-white">
+                                        <p>Your orders</p>
+                                    </nuxt-link>
+                                    <button class="w-full h-[50%] flex items-center justify-center" @click="handleLogout" >
+                                        <img src="../assets/logout.svg" alt="logout_icon" class="h-[22px] w-[24px] absolute left-5">
+                                        Logout
+                                    </button>
+                                </div>
+                            </div>
+                            <div v-show="showprofile" class="h-screen w-screen bg-transparent fixed right-0 top-0 " @click="toggle_profile"></div>
+                        </div>
+                    </div>
+                     
+                    <button v-else class=" p-2 flex gap-2 text-[#6C6C6C]" @click="handleLogin">
+                        <img src="../assets/sign_in.svg" alt="signin_icon" class="h-[26px] w-[25px]">
+                        Sign In
+                    </button>
               </div>
           </div>
       </nav>
@@ -111,14 +134,20 @@
 </template>
 
 <script>
-import { computed,ref } from 'vue'
+import { computed,ref ,onMounted} from 'vue'
 import { useCartStore } from '../store/index'
 import { useAuthStore } from '../store/auth'
 import { toast } from 'vue3-toastify';
 import { extractPath } from '~/utils/url';
 import { navigateTo } from 'nuxt/app';
+import { useNuxtApp } from "#app";
+
 export default {
   setup() {
+    const name = ref()
+    const email = ref()
+    const config = useRuntimeConfig();
+    const showprofile = ref(false)
     const cartStore = useCartStore()
     const authStore = useAuthStore()
 
@@ -126,6 +155,14 @@ export default {
     const isShow = ref(false);
     const isAuthenticated = computed(() => authStore.isAuthenticated)
 
+    const fetchUserData = async () => {
+      const nuxtApp = useNuxtApp();
+        const response = await nuxtApp.$authenticatedFetch(
+          `${config.public.API_BASE_URL}/api/accounts/me/`
+        );
+        name.value = response.first_name;
+        email.value = response.email;
+    };
 
     const handleLogout = () => {
         toggle();
@@ -146,6 +183,12 @@ export default {
         const redirectUrl = `/Signin?redirect=${path}`;
         await navigateTo(redirectUrl);
     }
+    
+    const toggle_profile=()=>{
+        fetchUserData()
+        showprofile.value = !showprofile.value
+    }
+    onMounted(() => fetchUserData());
 
     return {
       cartQuantity,
@@ -154,6 +197,10 @@ export default {
       isShow,
       toggle,
       handleLogin,
+      name,
+      email,
+      showprofile,
+      toggle_profile
     }
   }
 
@@ -163,8 +210,25 @@ export default {
 
 
 <style>
-
-
+@import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+.Mulish{
+     
+    font-family: "Mulish", sans-serif;
+    font-smooth: always;
+      
+}
+.PalanquinDark{
+    font-family: "Palanquin Dark", sans-serif;
+    font-smooth: always;
+}
+.poppins {
+    font-family: "Poppins", sans-serif;
+    font-smooth: always;
+  }
+.icon:hover {
+    box-shadow: 0px 0px 6px 2px rgb(0 0 0 / 0.1);
+}
 aside {
 
 position: fixed;
