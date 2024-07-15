@@ -20,7 +20,7 @@
               <div class="flex gap-8 font-semibold font-heading items-center h-[27px]">
 
                   <nuxt-link class=" flex items-center" to="/cart">
-                      <img src="../assets/cart03.svg" alt="cart_icon" class="h-[27px] w-[28px]">
+                      <img src="../assets/cart03.svg" alt="carticon" class="h-[27px] w-[28px]">
                       <span class="flex absolute -mt-5 ml-4 " v-if="cartQuantity >= 1">
                           <span
                               class="animate-ping absolute inline-flex h-5 w-5 rounded-full bg-[#ea454c] opacity-75"></span>
@@ -32,7 +32,7 @@
 
                     <div v-if="isAuthenticated" >
                         <button @click="toggle_profile" class="ml-1 mr-5 rounded-[1000px] h-[53px] w-[53px] flex items-center justify-center icon">                    
-                        <img src="../assets/user_icon.svg" alt="user_icon" class="h-[26px] w-[25px]">
+                        <img src="../assets/user_icon.svg" alt="usericon" class="h-[26px] w-[25px]">
                         </button>
 
                         <div :class="showprofile ? 'opacity-100': 'opacity-0'" class="transition-all duration-500" >
@@ -49,7 +49,7 @@
                                         <p>Your orders</p>
                                     </nuxt-link>
                                     <button class="w-full h-[50%] flex items-center justify-center" @click="handleLogout" >
-                                        <img src="../assets/logout.svg" alt="logout_icon" class="h-[22px] w-[24px] absolute left-5">
+                                        <img src="../assets/logout.svg" alt="logouticon" class="h-[22px] w-[24px] absolute left-5">
                                         Logout
                                     </button>
                                 </div>
@@ -59,7 +59,7 @@
                     </div>
                      
                     <button v-else class=" p-2 flex gap-2 text-[#6C6C6C]" @click="handleLogin">
-                        <img src="../assets/sign_in.svg" alt="signin_icon" class="h-[26px] w-[25px]">
+                        <img src="../assets/sign_in.svg" alt="signinicon" class="h-[26px] w-[25px]">
                         Sign In
                     </button>
               </div>
