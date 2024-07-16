@@ -1,5 +1,5 @@
 <template>
-    <div class="flex group flex-col items-center bg-white rounded shadow relative transition-all overflow-clip min-w-[350px]">
+    <div class="flex group flex-col items-center bg-white rounded shadow relative transition-all overflow-clip max-w-[350px]">
         <div class="max-h-[350px] max-w-[350px] overflow-clip">
             <img width="29" height="29" src="../assets/cart.svg"
                 class="absolute z-30 left-2 top-2 opacity-0 transition-all group-hover:opacity-100" />
@@ -17,7 +17,7 @@
             class="relative flex flex-col z-20 justify-start w-full gap-2 bg-white pt-2 px-3 pb-5 transition-all group-hover:-translate-y-20">
             <div class="flex justify-between w-full text-base"><span class="text-[#9E3500] poppins font-bold">{{ seller
                     }}</span> <span class="poppins font-bold">₹{{ price }}</span></div>
-            <p class="text-black font-normal text-xs poppins">{{ description }}</p>
+            <p class="text-black font-normal text-xs poppins">{{ title }}</p>
             <div
                 class=" gap-4 bg-white w-full flex absolute opacity-0 group-hover:opacity-100 group-hover:delay-150 ease-in-out group-hover:duration-300 transition duration-75 -bottom-6 h-min">
                 <div v-for="item in colors" :key="item"
@@ -43,11 +43,11 @@ export default {
     props: {
         title: {
             type: String,
-            required: false
+            required: true
         },
         type: {
             type: String,
-            required: true
+            required: false
         },
         imageUrl: {
             type: String,

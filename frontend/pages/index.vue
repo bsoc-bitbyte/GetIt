@@ -91,10 +91,10 @@
           :to="`/products/${data.id}`"
           :key="data.id"
         >
-          <MerchCard
-            :title= "data.title"
+        <MerchCard
+            :title= "data.name"
             :type= "data.type"
-            :imageUrl= "data.product_images" 
+            :imageUrl="data.product_images[0].image" 
             :seller = "data.seller"
             :price = "data.price"
             :description = "data.description"
