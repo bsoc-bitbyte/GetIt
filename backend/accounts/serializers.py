@@ -19,7 +19,7 @@ class AccountSerializer(serializers.ModelSerializer):
             'password': {'write_only': True},
             'date_joined': {'read_only': True},
             'last_login': {'read_only': True},
-            'isadmin': {'read_only': True}
+            'is_admin': {'read_only': True}
             }
     
     def create(self, validated_data):
