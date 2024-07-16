@@ -37,20 +37,24 @@
 
                         <div :class="showprofile ? 'opacity-100': 'opacity-0'" class="transition-all duration-500" >
                              
-                            <div v-show="showprofile" class="h-[187px] w-[182px] fixed bg-white right-28 top-[100px] rounded-md shadow-md flex flex-col px-5 poppins font-light text-base z-[9999]" >
+                            <div v-show="showprofile" class=" w-[231px] fixed bg-white right-28 top-[100px] rounded-md shadow-md flex flex-col px-5 py-1 poppins font-light text-base z-[9999]" >
                             
-                                <div class="w-full min-h-[50%]  items-start justify-center flex flex-col" >
+                                <div class="w-full min-h-[95px]  items-start justify-center flex flex-col" >
                                     <h3 class="font-semibold">{{name}}</h3>
                                     <p class="text-xs text-balance w-full break-words ">{{email}}</p>
                                 </div>
-                                <div @click="toggle_profile" class="h-[50%]">
-                                    <nuxt-link class="w-full h-[50%] flex items-center justify-start border-t-[1px] border-b-[1px] gap-3" to="/order" >
+                                <div @click="toggle_profile">
+                                    <nuxt-link class="w-full h-[47px] flex items-center justify-start border-t-[1px] border-b-[1px] gap-3" to="/order" >
                                         <img src="../assets/orders.svg" alt="orders" class="h-[22px] w-[24px] bg-white">
                                         <p>Your orders</p>
                                     </nuxt-link>
-                                    <button class="w-full h-[50%] flex items-center justify-center" @click="handleLogout" >
+                                    <nuxt-link v-if="isAdmin" class="w-full h-[47px] flex items-center justify-start border-t-[1px] border-b-[1px] gap-3" to="/adminDashboard" >
+                                        <img src="../assets/admin_icon.svg" alt="adminicon" class="h-[22px] w-[24px] bg-white">
+                                        <p>Admin Dashboard</p>
+                                    </nuxt-link>
+                                    <button class="w-full h-[47px] flex items-center justify-start" @click="handleLogout" >
                                         <img src="../assets/logout.svg" alt="logouticon" class="h-[22px] w-[24px] absolute left-5">
-                                        Logout
+                                        <p class="w-full p-0 flex px-9 justify-start">Logout</p>
                                     </button>
                                 </div>
                             </div>
@@ -144,6 +148,7 @@ import { useNuxtApp } from "#app";
 
 export default {
   setup() {
+    const isAdmin = ref(false)
     const name = ref()
     const email = ref()
     const config = useRuntimeConfig();
@@ -162,6 +167,7 @@ export default {
         );
         name.value = response.first_name;
         email.value = response.email;
+        isAdmin.value = response.is_admin;
     };
 
     const handleLogout = () => {
@@ -200,7 +206,8 @@ export default {
       name,
       email,
       showprofile,
-      toggle_profile
+      toggle_profile,
+      isAdmin
     }
   }
 
