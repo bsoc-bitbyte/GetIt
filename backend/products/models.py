@@ -7,13 +7,15 @@ category_choices = [
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
+    seller = models.CharField(max_length=100, blank=True)
+    type = models.CharField(max_length=100, blank=True)
     description = models.TextField(max_length=600, 
                                    blank=True)
     category = models.CharField(max_length=100, 
                                 choices=category_choices)
-    
-    color = models.CharField(max_length=100, blank = True)
-    size = models.CharField(max_length=100, blank = True)
+    tags = models.CharField(max_length=200, blank=True)    
+    color = models.CharField(max_length=200, blank=True)
+    size = models.CharField(max_length=200, blank=True)
     price = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

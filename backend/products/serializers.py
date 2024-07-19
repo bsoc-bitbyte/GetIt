@@ -23,7 +23,10 @@ class ProductSerializer(ModelSerializer):
         fields = (
             'id',
             'name',
+            'seller',
+            'type',
             'description',
+            'tags',
             'price',
             'color',
             'size',

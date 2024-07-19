@@ -3,7 +3,7 @@
         <div class="max-h-[350px] max-w-[350px] overflow-clip">
             <img width="29" height="29" src="../assets/cart.svg"
                 class="absolute z-30 left-2 top-2 opacity-0 transition-all group-hover:opacity-100" />
-            <div class="absolute right-2 top-2 bg-white rounded-md py-1 px-2 text-[#9E3500] z-30 poppins  text-xs">{{ type }}</div>
+            <div v-if="type!=''" class="absolute right-2 top-2 bg-white rounded-md py-1 px-2 text-[#9E3500] z-30 poppins  text-xs">{{ type }}</div>
             <img :src="imageUrl"
                 alt="Merch Image" class="object-cover transition-all group-hover:scale-125 rounded-t">
         </div>

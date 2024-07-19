@@ -5,49 +5,13 @@
         class="w-4/5 md:flex justify-center border-b border-gray-300 pt-10 pb-6"
       >
         <div class="xl:w-2/5 md:w-1/2 grid gap-4">
-          <div class="flex justify-center">
-            <img
-              class="h-auto max-w-full rounded-lg"
-              :src="`${config.public.API_BASE_URL}${product.product_images[0].image}`"
-              alt=""
-            />
-          </div>
-          <div class="grid grid-cols-4 gap-4">
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                :src="`${config.public.API_BASE_URL}${product.product_images[1].image}`"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                :src="`${config.public.API_BASE_URL}${product.product_images[2].image}`"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                :src="`${config.public.API_BASE_URL}${product.product_images[3].image}`"
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                class="h-auto max-w-full rounded-lg"
-                :src="`${config.public.API_BASE_URL}${product.product_images[4].image}`"
-                alt=""
-              />
-            </div>
-          </div>
+          <productImageGallery :product="product" :config="config"></productImageGallery>
         </div>
         <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
           <div class="border-b border-gray-300 pb-4 flex justify-between">
             <div>
               <p class="text-sm font-semibold leading-none text-gray-500 pb-3">
-                {{ seller }}
+                {{ product.seller }}
               </p>
               <h1
                 class="text-2xl font-semibold lg:leading-6 leading-7 text-gray-800 mt-2 pb-3"
@@ -183,11 +147,11 @@
               :to="`/products/${data.id}`"
               :key="data.id"
             >
-              <MerchCard
+              <MerchCard v-if="data.product_images.length!=0"
                 :title="data.name"
                 :type="data.type"
                 :imageUrl="data.product_images[0].image"
-                :seller="seller"
+                :seller="data.seller"
                 :price="data.price"
                 :description="data.description"
                 :colors="data.colors"
@@ -218,6 +182,7 @@ import { useCartStore } from "../../store/index.js"; // Assuming your store is l
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
 import MerchCard from "@/components/MerchCard.vue";
+import productImageGallery from "@/components/productImageGallery.vue"
 
 const config = useRuntimeConfig();
 const route = useRoute();
@@ -225,15 +190,12 @@ const product = ref({});
 const productlists = ref([]);
 const showSizeChart = ref(false);
 const showProductDescription = ref(false);
-const qty = ref(1);
 const loaded = ref(false);
 const cartStore = useCartStore();
 const router = useRouter();
 const error = ref();
-// const seller = "TPC";
 // const colorList = ["#32a852", "blue", "green"];
 // const sizeList = ["XS", "S", "M", "L", "XL"];
-// const type = "T-shirt";
 const userInput = {
   size: ref(null),
   color: ref(null),
