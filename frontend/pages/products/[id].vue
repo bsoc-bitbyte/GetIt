@@ -5,7 +5,10 @@
         class="w-4/5 md:flex justify-center border-b border-gray-300 pt-10 pb-6"
       >
         <div class="xl:w-2/5 md:w-1/2 grid gap-4">
-          <productImageGallery :product="product" :config="config"></productImageGallery>
+          <productImageGallery
+            :product="product"
+            :config="config"
+          ></productImageGallery>
         </div>
         <div class="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
           <div class="border-b border-gray-300 pb-4 flex justify-between">
@@ -147,7 +150,8 @@
               :to="`/products/${data.id}`"
               :key="data.id"
             >
-              <MerchCard v-if="data.product_images.length!=0"
+              <MerchCard
+                v-if="data.product_images.length != 0"
                 :title="data.name"
                 :type="data.type"
                 :imageUrl="data.product_images[0].image"
@@ -182,7 +186,7 @@ import { useCartStore } from "../../store/index.js"; // Assuming your store is l
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
 import MerchCard from "@/components/MerchCard.vue";
-import productImageGallery from "@/components/productImageGallery.vue"
+import productImageGallery from "@/components/productImageGallery.vue";
 
 const config = useRuntimeConfig();
 const route = useRoute();

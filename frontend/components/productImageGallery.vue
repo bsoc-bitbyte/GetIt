@@ -8,55 +8,74 @@
       />
     </div>
     <div class="flex justify-center items-center">
-      <div>
-        <button class="w-4" @click="prev" :disabled="imageGalleryIndex === 0">
-          <img class="w-4" src="assets/prevBtn.svg" alt="left" />
-        </button>
-      </div>
-      <div v-if="product.product_images.length>=4" class="grid grid-cols-4 gap-4 mx-3">
-        <div v-for="(image, index) in visibleImages" :key="index" class="max-h-32">
-          <img
-            class="max-h-32 max-w-full rounded-lg"
-            :src="`${config.public.API_BASE_URL}${image.image}`"
-            :alt="`Product Image ${index + 1}`"
-            @click="imageSelector(index + imageGalleryIndex)"
-            :style="{
-              outline:
-                index + imageGalleryIndex === imageIdx
-                  ? '2px solid black'
-                  : 'none',
-              outlineOffset:
-                index + imageGalleryIndex === imageIdx ? '2px' : '0',
-            }"
-          />
+      <div
+        v-if="product.product_images.length >= 4"
+        class="flex justify-center items-center"
+      >
+        <div>
+          <button class="w-4" @click="prev" :disabled="imageGalleryIndex === 0">
+            <img class="w-4" src="assets/prevBtn.svg" alt="left" />
+          </button>
+        </div>
+        <div class="grid grid-cols-4 gap-4 mx-3">
+          <div
+            v-for="(image, index) in visibleImages"
+            :key="index"
+            class="max-h-32"
+          >
+            <img
+              class="max-h-32 max-w-full rounded-lg"
+              :src="`${config.public.API_BASE_URL}${image.image}`"
+              :alt="`Product Image ${index + 1}`"
+              @click="imageSelector(index + imageGalleryIndex)"
+              :style="{
+                outline:
+                  index + imageGalleryIndex === imageIdx
+                    ? '2px solid black'
+                    : 'none',
+                outlineOffset:
+                  index + imageGalleryIndex === imageIdx ? '2px' : '0',
+              }"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button
+            class="w-4"
+            @click="next"
+            :disabled="imageGalleryIndex + 4 >= product.product_images.length"
+          >
+            <img class="w-4" src="assets/nextBtn.svg" alt="right" />
+          </button>
         </div>
       </div>
-      <div v-if="product.product_images.length<4" class="grid grid-cols-{{product.product_images.length}} gap-4 mx-3">
-        <div v-for="(image, index) in visibleImages" :key="index" class="max-h-32">
-          <img
-            class="max-h-32 max-w-full rounded-lg"
-            :src="`${config.public.API_BASE_URL}${image.image}`"
-            :alt="`Product Image ${index + 1}`"
-            @click="imageSelector(index + imageGalleryIndex)"
-            :style="{
-              outline:
-                index + imageGalleryIndex === imageIdx
-                  ? '2px solid black'
-                  : 'none',
-              outlineOffset:
-                index + imageGalleryIndex === imageIdx ? '2px' : '0',
-            }"
-          />
-        </div>
-      </div>
-      <div>
-        <button
-          class="w-4"
-          @click="next"
-          :disabled="imageGalleryIndex + 4 >= product.product_images.length"
+      
+      <div
+        v-if="product.product_images.length < 4"
+        class="grid gap-4 mx-3"
+        :class="gridClass"
+      >
+        <div
+          v-for="(image, index) in visibleImages"
+          :key="index"
+          class="max-h-32"
         >
-          <img class="w-4" src="assets/nextBtn.svg" alt="right" />
-        </button>
+          <img
+            class="max-h-32 max-w-full rounded-lg"
+            :src="`${config.public.API_BASE_URL}${image.image}`"
+            :alt="`Product Image ${index + 1}`"
+            @click="imageSelector(index + imageGalleryIndex)"
+            :style="{
+              outline:
+                index + imageGalleryIndex === imageIdx
+                  ? '2px solid black'
+                  : 'none',
+              outlineOffset:
+                index + imageGalleryIndex === imageIdx ? '2px' : '0',
+            }"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -80,6 +99,10 @@ export default {
         this.imageGalleryIndex,
         this.imageGalleryIndex + 4
       );
+    },
+    gridClass() {
+      const numColumns = this.product.product_images.length;
+      return `grid-cols-${numColumns}`;
     },
   },
   methods: {
