@@ -182,7 +182,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useCartStore } from "../../store/index.js"; // Assuming your store is located here
+import { useCartStore } from "../../store/index.js";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
 import MerchCard from "@/components/MerchCard.vue";
@@ -198,8 +198,6 @@ const loaded = ref(false);
 const cartStore = useCartStore();
 const router = useRouter();
 const error = ref();
-// const colorList = ["#32a852", "blue", "green"];
-// const sizeList = ["XS", "S", "M", "L", "XL"];
 const userInput = {
   size: ref(null),
   color: ref(null),

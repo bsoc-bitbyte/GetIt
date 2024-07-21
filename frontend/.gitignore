@@ -1,5 +1,6 @@
 node_modules
 .nuxt
+tailwind.config.js
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
