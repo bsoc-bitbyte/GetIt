@@ -10,7 +10,7 @@
                     <img class="mr-3" src="assets/box.svg" alt="box">
                     Products
                 </div>
-                <img src="assets/down.svg" alt="down" class="downArrow">
+                <img src="assets/down.svg" alt="down" class="transition-transform ease-linear duration-400" id="down-arrow">
             </summary >
             <ul class="list-none">
                 <li class="mt-5 ml-8 text-[#6C6C6C] cursor-pointer"><nuxt-link to="/manageProduct" exact-active-class="text-[#EA454C]">Product Management</nuxt-link></li>
@@ -23,7 +23,7 @@
                     <img class="mr-3" src="assets/calendar-check.svg" alt="box">
                     Events
                 </div>
-                <img src="assets/down.svg" alt="down" class="downArrow">
+                <img src="assets/down.svg" alt="down" class="transition-transform ease-linear duration-400" id="down-arrow">
             </summary>
             <ul class="list-none">
                 <li class="mt-5 ml-8 text-[#6C6C6C] cursor-pointer"><nuxt-link to="/manageEvent" exact-active-class="text-[#EA454C]">Events Management</nuxt-link></li>
@@ -32,3 +32,9 @@
         </details>
     </div>
 </template>
+
+<style scoped>
+details[open] summary #down-arrow{
+    transform: rotate(180deg);
+}
+</style>
