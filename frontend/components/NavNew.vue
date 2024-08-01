@@ -48,7 +48,7 @@
                                         <img src="../assets/orders.svg" alt="orders" class="h-[22px] w-[24px] bg-white">
                                         <p>Your orders</p>
                                     </nuxt-link>
-                                    <nuxt-link v-if="isAdmin" class="w-full h-[47px] flex items-center justify-start border-t-[1px] border-b-[1px] gap-3" to="/adminDashboard" >
+                                    <nuxt-link v-if="isAdmin" class="w-full h-[47px] flex items-center justify-start border-t-[1px] border-b-[1px] gap-3" to="/addNewProduct" >
                                         <img src="../assets/admin_icon.svg" alt="adminicon" class="h-[22px] w-[24px] bg-white">
                                         <p>Admin Dashboard</p>
                                     </nuxt-link>

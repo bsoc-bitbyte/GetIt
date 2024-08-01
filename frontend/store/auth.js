@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { navigateTo } from "#app";
 import { toast } from "vue3-toastify";
 import { jwtDecode } from "jwt-decode";
+import { useNuxtApp } from "nuxt/app";
 
 const config = {
   API_BASE_URL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000",
@@ -12,6 +13,7 @@ export const useAuthStore = defineStore("auth", {
     access: null,
     refresh: null,
     user: null,
+    isAdmin: process.browser ? JSON.parse(window.localStorage.getItem("isAdmin")) : null,
   }),
 
   actions: {
@@ -30,6 +32,14 @@ export const useAuthStore = defineStore("auth", {
           this.access = data.value.access;
           this.refresh = data.value.refresh;
           this.user = email;
+
+          const nuxtApp = useNuxtApp();
+          const adminResponse = await nuxtApp.$authenticatedFetch(
+            `${config.API_BASE_URL}/api/accounts/me/`
+          );
+          this.isAdmin = adminResponse.is_admin;
+          this.saveState();
+
           await navigateTo(redirect);
           toast.success("Login successful", {
             autoClose: 2000,
@@ -137,6 +147,8 @@ export const useAuthStore = defineStore("auth", {
       this.access = null;
       this.refresh = null;
       this.user = null;
+      this.isAdmin = null;
+      this.saveState();
       await navigateTo('/');
     },
 
@@ -145,6 +157,12 @@ export const useAuthStore = defineStore("auth", {
       this.refresh = payload.refresh || null;
       this.user = payload.user || null;
     },
+
+    saveState() {
+      if (process.browser) {
+        window.localStorage.setItem("isAdmin", this.isAdmin);
+      }
+    }
   },
 
   getters: {
@@ -158,6 +176,10 @@ export const useAuthStore = defineStore("auth", {
 
     authToken() {
       return this.access;
+    },
+
+    is_Admin() {
+      return this.isAdmin;
     },
   },
   persist: true,
