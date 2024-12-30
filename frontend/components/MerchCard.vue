@@ -47,7 +47,8 @@ export default {
         },
         type: {
             type: String,
-            required: false
+            required: false,
+            default: ''
         },
         imageUrl: {
             type: String,
@@ -67,15 +68,18 @@ export default {
         },
         colors: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         },
         sizes: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         },
         tags: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         }
     },
     name: "MerchCard",
@@ -87,5 +91,4 @@ export default {
     font-family: "Poppins", sans-serif;
     font-smooth: always;
 }
-
 </style>
