@@ -25,7 +25,7 @@ class Product(models.Model):
     
 
 class ProductVariation(models.Model):
-    # Product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_variations')
+    Product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_variations')
     ProductColor = models.ForeignKey('ProductColor', 
                                      on_delete=models.CASCADE)
     ProductSize = models.ForeignKey('ProductSize', 
