@@ -21,5 +21,6 @@ admin.site.register(Product,ProductAdmin)
 admin.site.register(ProductColor,ProductColorAdmin)
 admin.site.register(ProductSize,ProductSizeAdmin)
 admin.site.register(ProductImage,ProductImageAdmin)
+admin.site.register(ProductVariation)
 
 
