@@ -93,7 +93,7 @@ Make sure you are using `python 3.10`.
 - Now just run `./run.sh`
 - Hurray! The backend is up and running!!!
 
-#### Note : Use seperate env files for backend and frontend to run the project. Need help! Let us know to help you with the .env.
+#### Note : This project requires separate .env files for the backend and the frontend. If you need help configuring them, feel free to reach out. For a step-by-step setup guide, see our [GetIt Setup Guide](https://www.notion.so/GetIt-setup-204e86063538807098b9c2df8d6b2f53).
 
 
 
