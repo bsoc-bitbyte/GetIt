@@ -152,8 +152,8 @@
         </button>
       </nuxt-link>
     </div>
+    
   
-   
   </div>
 </template>
 
