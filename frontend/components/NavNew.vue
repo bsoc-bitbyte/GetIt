@@ -210,7 +210,6 @@ export default {
       isAdmin
     }
   }
-  
 
 
 };

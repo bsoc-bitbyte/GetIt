@@ -153,23 +153,20 @@
       </nuxt-link>
     </div>
   
-  <ColorSelector :colors="['#000000','#a2d2ff','#ffddd2','#ffffff']" />
+   
   </div>
-
 </template>
 
 <script>
 import { ref, onMounted } from "vue";
 import MerchCard from "@/components/MerchCard.vue";
 import eventList from "@/components/eventList.vue";
-import ColorSelector from "@/components/ColorSelector.vue";
-
 
 export default {
   name: "IndexPage",
   components: {
     MerchCard,
-    eventList,ColorSelector
+    eventList
   },
   setup() {
     const config = useRuntimeConfig();
