@@ -43,7 +43,21 @@
             :class="['pill', 'small', getPillClass(size)]"
             @click="handleSelect(size)"
           >
-            {{ size }}
+            <span v-if="!props.selectedSizes.includes(size)">{{ size }}</span>
+            <div v-else class="selected-pill-content">
+              <span class="size-text">{{ size }}</span>
+              <svg 
+                class="cross-icon" 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="10" 
+                height="10" 
+                viewBox="0 0 10 10" 
+                fill="none"
+                @click.stop="removeSize(size)"
+              >
+                <path d="M7.5 2.5L2.5 7.5M2.5 2.5L7.5 7.5" stroke="#ea454c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -98,6 +112,11 @@ const addSizes = () => {
   tempSelected.value = []
 }
 
+const removeSize = (size) => {
+  const newSizes = props.selectedSizes.filter(s => s !== size)
+  emit('update:selectedSizes', newSizes)
+}
+
 const getPillClass = (size) => {
   if (props.selectedSizes.includes(size)) return 'disabled'
   if (tempSelected.value.includes(size)) return 'active'
@@ -139,6 +158,7 @@ const getPillClass = (size) => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .pill.small {
@@ -206,7 +226,30 @@ const getPillClass = (size) => {
 
 .pill.disabled {
   opacity: 0.3;
-  cursor: not-allowed;
+  cursor: default;
+}
+
+.selected-pill-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+  height: 100%;
+}
+
+.size-text {
+  font-size: 0.75rem;
+}
+
+.cross-icon {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.cross-icon:hover {
+  opacity: 1;
 }
 
 .add-btn {
@@ -265,4 +308,24 @@ const getPillClass = (size) => {
   fill: white;
   stroke: white;
 }
+
+.cross-icon {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+
+.pill.disabled .cross-icon {
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+
+.pill.disabled .cross-icon path {
+  stroke: #ea454c !important;
+}
+
+.pill.disabled .cross-icon:hover {
+  transform: scale(1.1);
+}
+
 </style>
