@@ -1,6 +1,12 @@
 <template>
   <div class="overflow-x-auto w-11/12 flex flex-col justify-center mt-20 p-2">
-    <table class="w-full shadow-lg rounded-xl">
+    <div v-if="pending" class="text-center text-lg text-gray-500 my-10">
+      Loading Products...
+    </div>
+    <div v-else-if="error" class="text-center text-lg text-gray-500 my-10">
+      error loading products
+    </div>
+    <table v-else class="w-full shadow-lg rounded-xl">
       <thead class="min-w-full bg-gray-50">
         <tr>
           <th class="p-5">
@@ -177,8 +183,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
-import { products as initialProducts } from "../assets/productManagement/products.js";
+import { ref, computed, watch, watchEffect } from "vue";
 import deleteIcon from "../assets/productManagement/deleteIcon.svg";
 import edit from "../assets/productManagement/edit.svg";
 import view from "../assets/productManagement/view.svg";
@@ -186,8 +191,23 @@ import correct from "../assets/productManagement/correct.svg";
 import wrong from "../assets/productManagement/wrong.svg";
 import prevBtn from "./assets/prevBtn.svg";
 import nextBtn from "./assets/nextBtn.svg";
+import { useFetch } from "#app";
 
-const products = ref([...initialProducts]);
+const config = useRuntimeConfig();
+
+const {
+  data: fetchedProducts,
+  pending,
+  error,
+} = await useFetch(`${config.public.API_BASE_URL}/api/products/`);
+
+const products = ref([]);
+watchEffect(() => {
+  if (fetchedProducts.value) {
+    products.value = fetchedProducts.value;
+  }
+});
+
 const currentPage = ref(1);
 const itemsPerPage = ref(15);
 const selectedProducts = ref([]);

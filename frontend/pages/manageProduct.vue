@@ -58,8 +58,8 @@ import ProductTable from "~/components/ProductTable.vue";
 </template>
 
 <script>
-definePageMeta({
-  layout: "admin-layout",
-  middleware: "admin-auth",
-});
+// definePageMeta({
+//   layout: "admin-layout",
+//   middleware: "admin-auth",
+// });
 </script>
