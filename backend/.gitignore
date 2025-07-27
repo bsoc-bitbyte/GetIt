@@ -104,3 +104,4 @@ db.sqlite3
 venv
 .env
 .vscode
+.python-version
